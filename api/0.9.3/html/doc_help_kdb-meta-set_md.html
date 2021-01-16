@@ -60,13 +60,13 @@ $(function() {
 <li><code>/sw/elektra/kdb/#0/current/quiet</code>: Same as <code>-q</code>: Suppress default messages.</li>
 <li><code>/sw/elektra/kdb/#0/current/namespace</code>: Specifies which default namespace should be used when setting a cascading name. By default the namespace is <code>user</code>, except <code>kdb</code> is used as root, then <code>system</code> is the default.</li>
 </ul>
-<p>To set a metakey called <code>description</code> associated with the key <code>user/example/key</code> to the value <code>Hello World!</code>:<br />
- <code>kdb meta-set spec/example/key description "Hello World!"</code></p>
-<p>To create a new key <code>spec/example/newkey</code> with a null value (if it did not exist before) and a metakey <code>namespace/#0</code> associated with it to the value <code>system</code>:<br />
+<p>To set a metakey called <code>description</code> associated with the key <code>user:/example/key</code> to the value <code>Hello World!</code>:<br />
+ <code>kdb meta-set spec:/example/key description "Hello World!"</code></p>
+<p>To create a new key <code>spec:/example/newkey</code> with a null value (if it did not exist before) and a metakey <code>namespace/#0</code> associated with it to the value <code>system</code>:<br />
  <code>kdb meta-set /example/newkey "namespace/#0" system</code></p>
 <p>To create an override link for a <code>/test</code> key:</p>
-<div class="fragment"><div class="line">kdb set /overrides/test &quot;example override&quot;</div><div class="line">sudo kdb meta-set spec/test override/#0 /overrides/test</div></div><!-- fragment --><p>To remove it:</p>
-<div class="fragment"><div class="line">sudo kdb meta-set spec/test override/#0</div></div><!-- fragment --><ul>
+<div class="fragment"><div class="line">kdb set /overrides/test &quot;example override&quot;</div><div class="line">sudo kdb meta-set spec:/test override/#0 /overrides/test</div></div><!-- fragment --><p>To remove it:</p>
+<div class="fragment"><div class="line">sudo kdb meta-set spec:/test override/#0</div></div><!-- fragment --><ul>
 <li>How to get metadata: <a class="el" href="doc_help_kdb-meta-get_md.html">kdb-meta-get(1)</a></li>
 <li><a class="el" href="doc_help_elektra-metadata_md.html">elektra-metadata(7)</a> for an explanation of the metadata concepts.</li>
 <li><a class="el" href="doc_help_elektra-key-names_md.html">elektra-key-names(7)</a> for an explanation of key names. </li>

@@ -55,26 +55,26 @@ $(function() {
 <li><code>-0</code>, <code>--null</code>: Use binary 0 termination.</li>
 </ul>
 <p>``` </p>
-<h1><a class="anchor" id="autotoc_md1824"></a>
-Backup-and-Restore: user/tests/find</h1>
-<h1><a class="anchor" id="autotoc_md1825"></a>
+<h1><a class="anchor" id="autotoc_md1796"></a>
+Backup-and-Restore: user:/tests/find</h1>
+<h1><a class="anchor" id="autotoc_md1797"></a>
 We use the `dump` plugin, since some storage plugins, e.g. INI,</h1>
-<h1><a class="anchor" id="autotoc_md1826"></a>
-create intermediate keys, such as `user/tests/find/tests/foo`</h1>
-<h1><a class="anchor" id="autotoc_md1827"></a>
+<h1><a class="anchor" id="autotoc_md1798"></a>
+create intermediate keys, such as `user:/tests/find/tests/foo`</h1>
+<h1><a class="anchor" id="autotoc_md1799"></a>
 for the following test.</h1>
-<p>sudo kdb mount find.ecf user/tests/find dump</p>
-<h1><a class="anchor" id="autotoc_md1828"></a>
+<p>sudo kdb mount find.ecf user:/tests/find dump</p>
+<h1><a class="anchor" id="autotoc_md1800"></a>
 Create the keys we use for the examples</h1>
-<p>kdb set user/tests/find/tests val1 kdb set user/tests/find/tests/foo/bar val2 kdb set user/tests/find/tests/fizz/buzz fizzbuzz kdb set user/tests/find/tostfizz val3 kdb set user/tests/find/tust/level lvl</p>
-<h1><a class="anchor" id="autotoc_md1829"></a>
+<p>kdb set user:/tests/find/tests val1 kdb set user:/tests/find/tests/foo/bar val2 kdb set user:/tests/find/tests/fizz/buzz fizzbuzz kdb set user:/tests/find/tostfizz val3 kdb set user:/tests/find/tust/level lvl</p>
+<h1><a class="anchor" id="autotoc_md1801"></a>
 list all keys containing /tests/find/t[eo]</h1>
-<p>kdb find '/tests/find/t[eo]' #&gt; user/tests/find/tests #&gt; user/tests/find/tests/fizz/buzz #&gt; user/tests/find/tests/foo/bar #&gt; user/tests/find/tostfizz</p>
-<h1><a class="anchor" id="autotoc_md1830"></a>
+<p>kdb find '/tests/find/t[eo]' #&gt; user:/tests/find/tests #&gt; user:/tests/find/tests/fizz/buzz #&gt; user:/tests/find/tests/foo/bar #&gt; user:/tests/find/tostfizz</p>
+<h1><a class="anchor" id="autotoc_md1802"></a>
 list all keys containing fizz</h1>
-<p>kdb find 'fizz' #&gt; user/tests/find/tests/fizz/buzz #&gt; user/tests/find/tostfizz</p>
-<p>kdb rm -r /tests/find sudo kdb umount user/tests/find ```</p>
-<h2><a class="anchor" id="autotoc_md1831"></a>
+<p>kdb find 'fizz' #&gt; user:/tests/find/tests/fizz/buzz #&gt; user:/tests/find/tostfizz</p>
+<p>kdb rm -r /tests/find sudo kdb umount user:/tests/find ```</p>
+<h2><a class="anchor" id="autotoc_md1803"></a>
 SEE ALSO</h2>
 <ul>
 <li>If the user would also like to see the values of the keys below <code>path</code> then you should consider the <a class="el" href="doc_help_kdb-export_md.html">kdb-export(1)</a> command.</li>

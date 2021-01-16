@@ -1,4 +1,4 @@
-.TH "doc_help_elektra-key-names_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_elektra-key-names_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,10 +13,10 @@ Examples of valid system key names:
 .PP
 .PP
 .nf
-system
-system/hosts/hostname
-system/sw/apache/httpd/#0/current/num_processes
-system/sw/apps/abc/#0/current/default-setting
+system:/
+system:/hosts/hostname
+system:/sw/apache/httpd/#0/current/num_processes
+system:/sw/apps/abc/#0/current/default-setting
 .fi
 .PP
 .PP
@@ -26,14 +26,14 @@ Examples of valid user key names:
 .PP
 .PP
 .nf
-user
-user/env/#1/LD_LIBRARY_PATH
-user/sw/apps/abc/#0/current/default-setting
-user/sw/kde/kicker/#0/current/preferred_applications/#0
+user:/
+user:/env/#1/LD_LIBRARY_PATH
+user:/sw/apps/abc/#0/current/default-setting
+user:/sw/kde/kicker/#0/current/preferred_applications/#0
 .fi
 .PP
 .PP
-The slash (\fC/\fP) separates key names and structures them hierarchically\&. If two keys start with the same key names, but one key name continues after a slash, this key is \fBbelow\fP the other and is called a \fIsubkey\fP\&. For example \fCuser/sw/apps/abc/current\fP is a subkey of the key \fCuser/sw/apps\fP\&. The key is not directly below but, for example, \fCuser/sw/apps/abc\fP is\&. Various functions in \fCkeytest\fP implement ways to determine the relationship between two keys\&.
+The slash (\fC/\fP) separates key names and structures them hierarchically\&. If two keys start with the same key names, but one key name continues after a slash, this key is \fBbelow\fP the other and is called a \fIsubkey\fP\&. For example \fCuser:/sw/apps/abc/current\fP is a subkey of the key \fCuser:/sw/apps\fP\&. The key is not directly below but, for example, \fCuser:/sw/apps/abc\fP is\&. Various functions in \fCkeytest\fP implement ways to determine the relationship between two keys\&.
 .PP
 For computers Elektra would work without any conventions, because it is possible to rename keys with plugins and link and transform any key-value to any other key-value\&. Obviously, for humans such chaos would be confusing and harder to use, thus we encourage everyone to use the following conventions:
 .PP
@@ -66,7 +66,7 @@ Avoid the usage of characters other than \fC/\fP, a-z and 0-9\&. (rationale: it 
 .IP "\(bu" 2
 The only way to separate names is using \fC/\fP (no A-Z, no \fC_\fP, no whitespaces) (rationale: there are many different opinions about this topic and having a choice which separator to choose will certainly lead to inconsistencies)
 .IP "\(bu" 2
-It is suggested to make your application look for default keys under \fC/sw/org/myapp/#/%/\fP where \fC#\fP is a major version number, e\&.g\&. \fC#3\fP for the 4th version and \fC%\fP is a profile (\fC%\fP for default profile)\&. This way, from a sysadmin perspective, it will be possible to copy the \fCsystem/sw/myapp/#3/%/\fP tree to something like \fCsystem/sw/myapp/#3/old/\fP and keep system clean and organized\&.
+It is suggested to make your application look for default keys under \fC/sw/org/myapp/#/%/\fP where \fC#\fP is a major version number, e\&.g\&. \fC#3\fP for the 4th version and \fC%\fP is a profile (\fC%\fP for default profile)\&. This way, from a sysadmin perspective, it will be possible to copy the \fCsystem:/sw/myapp/#3/%/\fP tree to something like \fCsystem:/sw/myapp/#3/old/\fP and keep system clean and organized\&.
 .PP
 .PP
 .IP "\(bu" 2

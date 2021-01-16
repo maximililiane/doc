@@ -146,7 +146,7 @@ Then we undefine the local macros we defined before and declare the three initia
 
 At the end of the file you will find the {\ttfamily elektra$\ast$} convenience macros. These macros can be used to make accessing config values look more like normal function calls and avoid the ugly double parentheses in e.\+g. {\ttfamily E\+L\+E\+K\+T\+R\+A\+\_\+\+G\+ET (...) (...)}.
 
-We start at the bottom of our {\ttfamily conf.\+h} excerpt. {\ttfamily exit\+For\+Specload} is used to initiate specload mode, if needed. This mode makes your application provide its specification to Elektra. How this works exactly is not so important (see \hyperlink{autotoc_md658_src_plugins_specload_README_md}{specload plugin}). You only need to know, that {\ttfamily exit\+For\+Specload} should be called immediately at the start of your {\ttfamily main} function and that it only returns, when your application is not in specload mode.
+We start at the bottom of our {\ttfamily conf.\+h} excerpt. {\ttfamily exit\+For\+Specload} is used to initiate specload mode, if needed. This mode makes your application provide its specification to Elektra. How this works exactly is not so important (see \hyperlink{autotoc_md618_src_plugins_specload_README_md}{specload plugin}). You only need to know, that {\ttfamily exit\+For\+Specload} should be called immediately at the start of your {\ttfamily main} function and that it only returns, when your application is not in specload mode.
 
 
 \begin{DoxyCode}
@@ -304,7 +304,7 @@ First you need to mount your specification itself into the KDB. Mounting is basi
        informing Elektra about a new part of
 the KDB, similar to how mounting an external hard drive informs the OS about a new part of the file system.
 \end{DoxyCode}
- sudo kdb mount -\/R noresolver /etc/myapp\+\_\+spec.eqd \char`\"{}spec/sw/example/myapp/\#0/current\char`\"{} specload app=\char`\"{}\$\+P\+W\+D/myapp\char`\"{} ```
+ sudo kdb mount -\/R noresolver /etc/myapp\+\_\+spec.eqd \char`\"{}spec\+:/sw/example/myapp/\#0/current\char`\"{} specload app=\char`\"{}\$\+P\+W\+D/myapp\char`\"{} ```
 
 The command above assumes that you also used the {\ttfamily kdb gen} command from \href{#invoking-the-code-generator}{\tt above} and that the {\ttfamily myapp} executable is located in {\ttfamily \$\+P\+WD}.
 

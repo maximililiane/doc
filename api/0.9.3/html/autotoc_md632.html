@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Elektra: Plugin: ruby</title>
+<title>Elektra: Plugin: timeofday</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -39,32 +39,26 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Plugin: ruby </div>  </div>
+<div class="title">Plugin: timeofday </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><ul>
-<li>infos = Information about RUBY plugin is in keys below</li>
-<li>infos/author = Bernhard Denner <a href="#" onclick="location.href='mai'+'lto:'+'ber'+'nh'+'ard'+'.d'+'enn'+'er'+'@gm'+'ai'+'l.c'+'om'; return false;">bernh<span style="display: none;">.nosp@m.</span>ard.<span style="display: none;">.nosp@m.</span>denne<span style="display: none;">.nosp@m.</span>r@gm<span style="display: none;">.nosp@m.</span>ail.c<span style="display: none;">.nosp@m.</span>om</a></li>
+<li>infos = Information about the timeofday plugin is in keys below</li>
+<li>infos/author = Markus Raab <a href="#" onclick="location.href='mai'+'lto:'+'ele'+'kt'+'ra@'+'li'+'bel'+'ek'+'tra'+'.o'+'rg'; return false;">elekt<span style="display: none;">.nosp@m.</span>ra@l<span style="display: none;">.nosp@m.</span>ibele<span style="display: none;">.nosp@m.</span>ktra<span style="display: none;">.nosp@m.</span>.org</a></li>
 <li>infos/licence = BSD</li>
+<li>infos/provides = tracing</li>
 <li>infos/needs =</li>
-<li>infos/provides = storage</li>
-<li>infos/placements = getstorage setstorage</li>
-<li>infos/recommends =</li>
-<li>infos/status = maintained reviewed tested configurable global preview memleak experimental</li>
-<li>infos/description = Ruby plugin bridge, implement Elektra plugins with Ruby</li>
+<li>infos/placements = pregetstorage procgetstorage postgetstorage presetstorage precommit postcommit prerollback postrollback</li>
+<li>infos/status = maintained tested nodep configurable global</li>
+<li>infos/description = Prints timestamps during execution of backend</li>
 </ul>
-<p>This plugin is an Elektra to Ruby bridge and makes is possible to implement Elektra plugins with Ruby. This plugin requires the <code>ruby</code> binding.</p>
-<p>The plugin has the following configuration options:</p>
-<ul>
-<li><code>script</code>: path to the Ruby plugin to use (mandatory)</li>
-</ul>
-<p>Mount a configuration file using this plugin, which specifying the concrete Ruby Elektra plugin:</p>
-<div class="fragment"><div class="line">kdb mount /.ssh/authorized_keys user/ssh/authorized_keys ruby script=&lt;path to elektra</div><div class="line">source&gt;/src/plugins/ruby/ruby/ssh_authorized_keys.rb</div><div class="line">kdb ls user/ssh/authorized_keys</div></div><!-- fragment --><p>The following example illustrates how to implement a Elektra plugin with Ruby:</p>
-<div class="fragment"><div class="line">require &#39;kdb&#39;</div><div class="line"></div><div class="line"># call the static function &#39;define&#39; to define a new Plugin. This</div><div class="line"># function expects one argument and a block, which implements the plugin</div><div class="line">Kdb::Plugin.define :somename do</div><div class="line"></div><div class="line">  # this is automatically defined</div><div class="line">  #@plugin_name = &quot;somename&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # &#39;Open&#39; method, called during Elektra plugin initialization</div><div class="line">  # parameter:</div><div class="line">  #  - errorKey: Kdb::Key, add error information if required</div><div class="line">  # returns:</div><div class="line">  #  - nil or 0: no error</div><div class="line">  #  - -1      : error during initialization</div><div class="line">  def open(errorKey)</div><div class="line"></div><div class="line">    # perform plugin initialization</div><div class="line">    # if an error occurs it is save to simply throw an exception. This has the same</div><div class="line">    # semantic as returning -1</div><div class="line">  end</div><div class="line"></div><div class="line">  # the close method is currently not supported, since this will crash the</div><div class="line">  # Ruby-VM if this method should be called during the VM.finalization !!!</div><div class="line">  #def close(errorKey)</div><div class="line">  #</div><div class="line">  #end</div><div class="line"></div><div class="line"></div><div class="line">  # &#39;check_conf&#39; method, called before this plugin is used for mounting to check</div><div class="line">  # if the supplied config is valid. Missing or invalid config settings can be</div><div class="line">  # &#39;corrected&#39; or added.</div><div class="line">  # Parameter:</div><div class="line">  #  - errorKey: Kdb::Key, to add error information</div><div class="line">  #  - config: Kdb::KeySet, holds all plugin configuration setting</div><div class="line">  # returns:</div><div class="line">  #  - nil or 1 : success and the plugin configuration was NOT changed</div><div class="line">  #  -        0 : the plugin configuration was changed and is now OK</div><div class="line">  #  -       -1 : the configuration is NOT OK</div><div class="line">  def check_conf(errorKey, config)</div><div class="line"></div><div class="line">  end</div><div class="line"></div><div class="line"></div><div class="line">  # &#39;get&#39; method, is called during a get cycle, to query all keys</div><div class="line">  #</div><div class="line">  # Parameter:</div><div class="line">  #  - returned : Kdb::KeySet, already holding keys to be manipulated or to be</div><div class="line">  #               filled by a storage plugin. All added keys have to have the same</div><div class="line">  #               key name prefix as given by parentKey.</div><div class="line">  #  - parentKey: Kdb::Key, defining the current Elektra path. The value of this key</div><div class="line">  #               holds the configuration file name to read from</div><div class="line">  # Returns:</div><div class="line">  #  - nil or 1 : on success</div><div class="line">  #  -        0 : OK but nothing was to do</div><div class="line">  #  -       -1 : failure</div><div class="line">  def get(returned, parentKey)</div><div class="line"></div><div class="line">  end</div><div class="line"></div><div class="line"></div><div class="line">  # &#39;set&#39; method, is called when writing a configuration file</div><div class="line">  #</div><div class="line">  # Parameter:</div><div class="line">  #  - returned : Kdb::KeySet, holding all keys which should be written to the</div><div class="line">  #               config file.</div><div class="line">  #  - parentKey: Kdb::Key, defining the current Elektra path. The value of this key</div><div class="line">  #               holds the configuration file name to write to</div><div class="line">  # Returns:</div><div class="line">  #  - nil or 1 : on success</div><div class="line">  #           0 : on success with no changed keys in database</div><div class="line">  #          -1 : failure</div><div class="line">  def set(returned, parentKey)</div><div class="line"></div><div class="line">  end</div><div class="line"></div><div class="line"></div><div class="line">  # &#39;error&#39; method, is called when some plugin had a problem during a write cycle</div><div class="line">  #</div><div class="line">  # Parameter:</div><div class="line">  #  - returned : Kdb::KeySet, holding all keys which should be written to the</div><div class="line">  #               config file.</div><div class="line">  #  - parentKey: Kdb::Key, defining the current Elektra path. The value of this key</div><div class="line">  #               holds the configuration file name to write to</div><div class="line">  # Returns:</div><div class="line">  #  - nil or 1 : on success</div><div class="line">  #           0 : on success with no action</div><div class="line">  #          -1 : failure</div><div class="line">  def error(returned, parentKey)</div><div class="line"></div><div class="line">  end</div><div class="line"></div><div class="line">end</div></div><!-- fragment --><ul>
-<li>The plugin might cause a SIGSEGV crash on application shutdown. This is a result of missing RubyVM de initialization, which is silently ignored as we can't determine if the Ruby VM is still needed or not (libelektra might be used by an Ruby application).</li>
-<li>The plugin does not work correctly with Ruby version managers like <code>rbenv</code> or <code>rvm</code> and is intended to be used with the Ruby ecosystem installed in system context. </li>
-</ul>
-</div></div><!-- contents -->
+<p>This plugin is a logging plugin which prints a timestamp during all placements of backend.</p>
+<p>If you want to measure how long your storage plugin needs to do the read and write you mount the plugin using:</p>
+<div class="fragment"><div class="line">kdb mount file.ysp user:/trace_point your_storage_plugin timeofday</div></div><!-- fragment --><p>Then you can benchmark your storage plugin in the get path:</p>
+<div class="fragment"><div class="line">kdb get user:/benchmark</div><div class="line">#&gt; get     0000000356      di      0000000356      pos     pregetstorage</div><div class="line">#&gt; get     0000000530      di      0000000174      pos     postgetstorage</div><div class="line">#&gt; hello</div></div><!-- fragment --><p>and in the set path:</p>
+<div class="fragment"><div class="line">kdb set user:/benchmark</div><div class="line">#&gt; get     0000000342      di      0000000342      pos     pregetstorage</div><div class="line">#&gt; get     0000000532      di      0000000190      pos     postgetstorage</div><div class="line">#&gt; Set null value</div><div class="line">#&gt; set     0000000766      di      0000000234      pos     presetstorage</div><div class="line">#&gt; set     0000001002      di      0000000236      pos     precommit</div><div class="line">#&gt; set     0000008944      di      0000007942      pos     postcommit</div></div><!-- fragment --><p>The first digit column shows the complete time passed, the second column shows the time from invocation to invocation.</p>
+<p>Will not log when loaded as module (config <code>/module</code> present), unless <code>/logmodule</code> is set:</p>
+<div class="fragment"><div class="line">kdb plugin-check -c &quot;logmodule=&quot; timeofday</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

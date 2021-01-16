@@ -4,7 +4,7 @@ Mounting of backends actually takes place at run-\/time, we will refer to it as 
 
 The contract checker revises contracts of plugins during the mount-\/time. Afterwards, at run-\/time, no such type errors can occur. {\ttfamily kdb mount} implements the contract checker. It can refuse to add a plugin to the backend because of a conflict or constraint. As long as not all contracts are satisfied {\ttfamily kdb mount} waits for more plugins to be attached.
 
-The content of the contract is well-\/specified in \href{/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}.
+The content of the contract is well-\/specified in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}.
 
 Plugins are the only place to export contracts, but they are not the only party. It is also possible that the administrator extends the requirements to every backend, for example, if notification is required. This implies that every backend has to provide a specific additional service that will be checked using contracts. Plugins are also involved in contracts with Elektra’s core. This topic will be discussed in \hyperlink{doc_dev_algorithm_md}{elektra-\/algorithm} in which the algorithm used by Elektra’s core is explained.
 
@@ -18,6 +18,6 @@ Because of the modular approach, we can have several checkers, and correcting an
 
 
 \begin{DoxyItemize}
-\item \href{/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}
+\item \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}
 \item \hyperlink{doc_dev_plugins-ordering_md}{plugins-\/ordering} 
 \end{DoxyItemize}

@@ -141,7 +141,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialises the module loading system. </p>
-<p>Most operating systems will have to do nothing here. Anyway you are required to add the key system/elektra/modules if it was successful.</p>
+<p>Most operating systems will have to do nothing here. Anyway you are required to add the key system:/elektra/modules if it was successful.</p>
 <p>On error -1 is returned and if error != 0 error information is added to it.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -193,7 +193,7 @@ Functions</h2></td></tr>
 <p>Make sure that you first lookup if this module was already loaded. If it was, just return the pointer and you are done.</p>
 <p>Otherwise load the module/library given by name. You need to take care that a proper name is used. The name does not have any path, pre- or postfixes.</p>
 <p>The next step is to fetch the symbol elektraPluginFactory.</p>
-<p>If everything was successful append all information to the keyset modules and return the pointer. Take care that you can close the module with that information. All information needs to be stored within system/elektra/modules/name You might want to use an struct and store it there as binary key.</p>
+<p>If everything was successful append all information to the keyset modules and return the pointer. Take care that you can close the module with that information. All information needs to be stored within system:/elektra/modules/name You might want to use an struct and store it there as binary key.</p>
 <p>If anything goes wrong don't append anything to modules. Instead report the error to the error key and return with 0.</p>
 <dl class="section pre"><dt>Precondition</dt><dd>the name is not null, empty and has at least one character different to /. It is suitable to be used as keyAddBaseName without any further error checking.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>

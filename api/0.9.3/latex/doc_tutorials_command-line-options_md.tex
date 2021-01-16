@@ -300,28 +300,28 @@ FILES="one.txt:other.log" VERBOSE=1 erm -fi --recursive
 \end{DoxyCode}
 
 
-The following keys will be created by {\ttfamily elektra\+Get\+Opts} (assuming the specification is mounted at {\ttfamily spec/sw/org/erm/\#0/current})\+:
+The following keys will be created by {\ttfamily elektra\+Get\+Opts} (assuming the specification is mounted at {\ttfamily spec\+:/sw/org/erm/\#0/current})\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily proc/sw/org/erm/\#0/current/force = \char`\"{}1\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/interactive = \char`\"{}always\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/recursive = \char`\"{}1\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/verbose = \char`\"{}1\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files/\#0 = \char`\"{}one.\+txt\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files/\#1 = \char`\"{}other.\+log\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/force = \char`\"{}1\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/interactive = \char`\"{}always\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/recursive = \char`\"{}1\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/verbose = \char`\"{}1\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files/\#0 = \char`\"{}one.\+txt\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files/\#1 = \char`\"{}other.\+log\char`\"{}}
 \end{DoxyItemize}
 
 Calling {\ttfamily F\+I\+L\+ES=\char`\"{}abcd.\+txt\char`\"{} erm 123.\+txt 456.\+txt} meanwhile will result in\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files/\#0 = \char`\"{}123.\+txt\char`\"{}}
-\item {\ttfamily proc/sw/org/erm/\#0/current/files/\#1 = \char`\"{}456.\+txt\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files/\#0 = \char`\"{}123.\+txt\char`\"{}}
+\item {\ttfamily proc\+:/sw/org/erm/\#0/current/files/\#1 = \char`\"{}456.\+txt\char`\"{}}
 \end{DoxyItemize}
 
-N\+O\+TE\+: {\ttfamily proc/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}} means the {\ttfamily array} metadata of {\ttfamily proc/sw/org/erm/\#0/current/files} is {\ttfamily \#1}.
+N\+O\+TE\+: {\ttfamily proc\+:/sw/org/erm/\#0/current/files \mbox{[}array\mbox{]} = \char`\"{}\#1\char`\"{}} means the {\ttfamily array} metadata of {\ttfamily proc\+:/sw/org/erm/\#0/current/files} is {\ttfamily \#1}.
 
-You can find a full working example \href{/home/jenkins/workspace/libelektra-release/examples/opts.c}{\tt here}. However, it uses a hard coded specification which is a bit harder to read. 
+You can find a full working example \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/examples/opts.c}{\tt here}. However, it uses a hard coded specification which is a bit harder to read. 

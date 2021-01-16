@@ -66,12 +66,15 @@ $(function() {
 <li>generic placements like /prerollback /rollback /postrollback /getresolver /pregetcache /pregetstorage /getstorage /postgetstorage /postgetcache /setresolver /presetstorage /setstorage /precommit /commit /postcommit which can be executed at: /init /deinit /foreach proved to be too complicated and untestable.</li>
 </ul>
 <p>Have hooks and API specific to the list of global plugins in assumptions. These hooks are not shared, so no <code>list</code> plugin is needed.</p>
+<p>Installed plugins will be used.</p>
 <ul>
 <li>allows adding more types of plugins later, also post-1.0</li>
 <li>much clearer semantics for each type, no need to compromise</li>
 <li>easier to implement</li>
 </ul>
 <ul>
+<li>remove <code>global-mount</code> command</li>
+<li>command for mmap/notification/... enable disable (like current <code>kdb cache</code> tool)</li>
 <li>remove <code>list</code> plugin</li>
 <li>remove plugins that stop working or disallow global positioning for them</li>
 <li>call <code>spec</code> as needed several times</li>

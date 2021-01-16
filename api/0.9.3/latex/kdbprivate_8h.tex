@@ -14,7 +14,6 @@ Private declarations.
 {\ttfamily \#include $<$kdbmacros.\+h$>$}\newline
 {\ttfamily \#include $<$kdbnotificationinternal.\+h$>$}\newline
 {\ttfamily \#include $<$kdbplugin.\+h$>$}\newline
-{\ttfamily \#include $<$kdbproposal.\+h$>$}\newline
 {\ttfamily \#include $<$kdbtypes.\+h$>$}\newline
 {\ttfamily \#include $<$kdbglobal.\+h$>$}\newline
 {\ttfamily \#include $<$limits.\+h$>$}\newline
@@ -57,10 +56,10 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactList}\small\item\em The maximum value of unsigned char+1, needed for iteration over trie children/values\+: \end{DoxyCompactList}\item 
 \#define \hyperlink{kdbprivate_8h_a93b6deccf1a55a100f74d2e076036f37}{M\+A\+X\+\_\+\+L\+E\+N\+\_\+\+I\+NT}~31
 \begin{DoxyCompactList}\small\item\em The maximum of how many characters an integer needs as decimal number. \end{DoxyCompactList}\item 
-\#define \hyperlink{kdbprivate_8h_a8891eaf029de761514dca775f19d6e18}{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA}~\char`\"{}system/elektra\char`\"{}
+\#define \hyperlink{kdbprivate_8h_a8891eaf029de761514dca775f19d6e18}{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA}~\char`\"{}system\+:/elektra\char`\"{}
 \begin{DoxyCompactList}\small\item\em Backend mounting information. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{kdbprivate_8h_abecff8814a02da83ec5d19d6bbac76de}\label{kdbprivate_8h_abecff8814a02da83ec5d19d6bbac76de}} 
-\#define \hyperlink{kdbprivate_8h_abecff8814a02da83ec5d19d6bbac76de}{K\+D\+B\+\_\+\+C\+A\+C\+H\+E\+\_\+\+P\+R\+E\+F\+IX}~\char`\"{}system/elektra/cache\char`\"{}
+\#define \hyperlink{kdbprivate_8h_abecff8814a02da83ec5d19d6bbac76de}{K\+D\+B\+\_\+\+C\+A\+C\+H\+E\+\_\+\+P\+R\+E\+F\+IX}~\char`\"{}system\+:/elektra/cache\char`\"{}
 \begin{DoxyCompactList}\small\item\em All keys below this are used for cache metadata in the global keyset. \end{DoxyCompactList}\item 
 \#define \hyperlink{kdbprivate_8h_a22e02bbe80b6081a6485b3f3d2caec14}{test\+\_\+bit}(var,  bit)~((var) \& (bit))
 \begin{DoxyCompactList}\small\item\em Test a bit. \end{DoxyCompactList}\item 
@@ -144,7 +143,7 @@ Plugin $\ast$ \hyperlink{kdbprivate_8h_a7b3681aca8accc06b86d25a31cc82643}{elektr
 \begin{DoxyCompactList}\small\item\em Searches the global plugins for a given plugin name. \end{DoxyCompactList}\item 
 int \hyperlink{kdbprivate_8h_a2ada1ad09f79a80df86949991dba3cb7}{trie\+Close} (Trie $\ast$trie, Key $\ast$error\+Key)
 \begin{DoxyCompactList}\small\item\em Closes the trie and all opened backends within. \end{DoxyCompactList}\item 
-Backend $\ast$ \hyperlink{kdbprivate_8h_af25ad64c6b5642f7073084045a68249a}{trie\+Lookup} (Trie $\ast$trie, const Key $\ast$key)
+Backend $\ast$ \hyperlink{kdbprivate_8h_a675eaba21b1311eb20920e6880de7052}{trie\+Lookup} (Trie $\ast$trie, const char $\ast$name)
 \begin{DoxyCompactList}\small\item\em The Trie structure. \end{DoxyCompactList}\item 
 Trie $\ast$ \hyperlink{kdbprivate_8h_ab957bbaadb387f0dd73d998e4fdb5d86}{trie\+Insert} (Trie $\ast$trie, const char $\ast$name, Backend $\ast$value)
 \begin{DoxyCompactList}\small\item\em Insert into trie. \end{DoxyCompactList}\item 
@@ -158,9 +157,9 @@ int \hyperlink{kdbprivate_8h_a23024da76a37a7d29b95d052ba17644e}{mount\+Version} 
 \begin{DoxyCompactList}\small\item\em Mount the version backend. \end{DoxyCompactList}\item 
 int \hyperlink{kdbprivate_8h_aae740f9dc4ff807f236a78a443c66524}{mount\+Backend} (K\+DB $\ast$kdb, Backend $\ast$backend, Key $\ast$error\+Key)
 \begin{DoxyCompactList}\small\item\em Mounts a backend into the trie. \end{DoxyCompactList}\item 
-Key $\ast$ \hyperlink{kdbprivate_8h_a06bb59784fce5582ee1363fdb6a59215}{mount\+Get\+Mountpoint} (K\+DB $\ast$handle, const Key $\ast$where)
+Key $\ast$ \hyperlink{kdbprivate_8h_af951e2745e17d7b716632362199f3a30}{mount\+Get\+Mountpoint} (K\+DB $\ast$handle, const char $\ast$where)
 \begin{DoxyCompactList}\small\item\em Lookup a mountpoint in a handle for a specific key. \end{DoxyCompactList}\item 
-Backend $\ast$ \hyperlink{kdbprivate_8h_a1db75a434f913420942d6896123c5a66}{mount\+Get\+Backend} (K\+DB $\ast$handle, const Key $\ast$key)
+Backend $\ast$ \hyperlink{kdbprivate_8h_af949f28a2f16cff516f8b1db88010fbe}{mount\+Get\+Backend} (K\+DB $\ast$handle, const char $\ast$where)
 \begin{DoxyCompactList}\small\item\em Lookup a backend handle for a specific key. \end{DoxyCompactList}\item 
 Key $\ast$ \hyperlink{kdbprivate_8h_a0edeebda49ef1ad7c054411a36a9bf38}{elektra\+Ks\+Pop\+At\+Cursor} (Key\+Set $\ast$ks, elektra\+Cursor pos)
 \begin{DoxyCompactList}\small\item\em Pop key at given cursor position. \end{DoxyCompactList}\item 
@@ -168,10 +167,16 @@ ssize\+\_\+t \hyperlink{kdbprivate_8h_a6360a1271f6410f25fbb9b95e346da1a}{elektra
 \begin{DoxyCompactList}\small\item\em Internal Methods for Elektra. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{kdbprivate_8h_abc60bdbe5d252a99734b0122687560be}{elektra\+Memmove} (Key $\ast$$\ast$array1, Key $\ast$$\ast$array2, size\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Copies the key array2 into where array1 points. \end{DoxyCompactList}\item 
-int \hyperlink{kdbprivate_8h_a7126bbb84c75bb98c1e3641dcdf32c6b}{elektra\+Validate\+Key\+Name} (const char $\ast$name, size\+\_\+t size)
-\begin{DoxyCompactList}\small\item\em Validates whether the supplied keyname is valid. \end{DoxyCompactList}\item 
 Key\+Set $\ast$ \hyperlink{group__kdb_ga1ba80a565f54490f362df95f401bcb29}{ks\+Rename\+Keys} (Key\+Set $\ast$config, const char $\ast$name)
 \begin{DoxyCompactList}\small\item\em Takes the first key and cuts off this common part for all other keys, instead name will be prepended. \end{DoxyCompactList}\item 
+bool \hyperlink{group__keyname_ga26bacb092ebca8f69f3fee72069733d8}{elektra\+Key\+Name\+Validate} (const char $\ast$name, bool is\+Complete)
+\begin{DoxyCompactList}\small\item\em Takes an escaped key name and validates it. \end{DoxyCompactList}\item 
+void \hyperlink{group__keyname_ga99ef3765a0ea0887c8ab72859ae2592e}{elektra\+Key\+Name\+Canonicalize} (const char $\ast$name, char $\ast$$\ast$canonical\+Name, size\+\_\+t $\ast$canonical\+Size\+Ptr, size\+\_\+t offset, size\+\_\+t $\ast$usize\+Ptr)
+\begin{DoxyCompactList}\small\item\em Takes a valid (non-\/)canonical key name and produces its canonical form. \end{DoxyCompactList}\item 
+void \hyperlink{group__keyname_ga85dd2a5169e900c6c8371c54c7944edb}{elektra\+Key\+Name\+Unescape} (const char $\ast$name, char $\ast$unescaped\+Name)
+\begin{DoxyCompactList}\small\item\em Takes a canonical key name and unescapes it. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group__keyname_ga35ac22f466de1a74ca72b05e8252980d}{elektra\+Key\+Name\+Escape\+Part} (const char $\ast$part, char $\ast$$\ast$escaped\+Part)
+\begin{DoxyCompactList}\small\item\em Takes a single key name part and produces its escaped form. \end{DoxyCompactList}\item 
 Elektra\+Error $\ast$ \hyperlink{kdbprivate_8h_a0affd2cf7caf29441bf7cdf1d7cbb351}{elektra\+Error\+Create} (const char $\ast$code, const char $\ast$description, const char $\ast$module, const char $\ast$file, kdb\+\_\+long\+\_\+t line)
 \begin{DoxyCompactList}\small\item\em Creates a new Elektra\+Error using the provided values. \end{DoxyCompactList}\item 
 void \hyperlink{kdbprivate_8h_a5b397979459c52ed2031d7b997679fca}{elektra\+Error\+Add\+Warning} (Elektra\+Error $\ast$error, Elektra\+Error $\ast$warning)
@@ -226,7 +231,7 @@ for (i=0; i$<$K\+D\+B\+\_\+\+M\+A\+X\+\_\+\+U\+C\+H\+AR; ++i) \mbox{\Hypertarget
 \index{kdbprivate.\+h@{kdbprivate.\+h}!K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA@{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA}}
 \index{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA@{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA}!kdbprivate.\+h@{kdbprivate.\+h}}
 \subsubsection{\texorpdfstring{K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA}{KDB\_SYSTEM\_ELEKTRA}}
-{\footnotesize\ttfamily \#define K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA~\char`\"{}system/elektra\char`\"{}}
+{\footnotesize\ttfamily \#define K\+D\+B\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+E\+L\+E\+K\+T\+RA~\char`\"{}system\+:/elektra\char`\"{}}
 
 
 
@@ -384,7 +389,7 @@ S\+P\+L\+I\+T\+\_\+\+F\+L\+A\+G\+\_\+\+C\+A\+S\+C\+A\+D\+I\+NG&Do we need relati
 
 Builds a backend out of the configuration supplied from\+: 
 
-\begin{DoxyVerb}system/elektra/mountpoints/<name>
+\begin{DoxyVerb}system:/elektra/mountpoints/<name>
 \end{DoxyVerb}
 
 
@@ -688,8 +693,8 @@ Pop key at given cursor position.
 \end{DoxyParams}
 The internal cursor will be rewinded using \hyperlink{group__keyset_gabe793ff51f1728e3429c84a8a9086b70}{ks\+Rewind()}. You can use \hyperlink{group__keyset_gace0444eb8ec958a429794f8586fc72e7}{ks\+Get\+Cursor()} and \hyperlink{group__keyset_ga28b2a7d13c620b3c9d4815a0608c738f}{ks\+Set\+Cursor()} jump back to the previous position. e.\+g. to pop at current position within \hyperlink{group__keyset_ga317321c9065b5a4b3e33fe1c399bcec9}{ks\+Next()} loop\+: 
 \begin{DoxyCode}
-elektraCursor c = \hyperlink{group__keyset_gace0444eb8ec958a429794f8586fc72e7}{ksGetCursor}(ks);
-\hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (\hyperlink{group__api_ga144904407e2014d5d597c10f4041738e}{ksPopAtCursor}(ks, c));
+cursor\_t c = \hyperlink{group__keyset_gace0444eb8ec958a429794f8586fc72e7}{ksGetCursor}(ks);
+\hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (\hyperlink{proposal_8c_a0edeebda49ef1ad7c054411a36a9bf38}{elektraKsPopAtCursor}(ks, c));
 \hyperlink{group__keyset_ga28b2a7d13c620b3c9d4815a0608c738f}{ksSetCursor}(ks, c);
 ksPrev(ks); \textcolor{comment}{// to have correct key after next ksNext()}
 \end{DoxyCode}
@@ -880,37 +885,6 @@ system\+Config will only be used, not deleted.
 {\em -\/1} & on failure \\
 \hline
 \end{DoxyRetVals}
-\mbox{\Hypertarget{kdbprivate_8h_a7126bbb84c75bb98c1e3641dcdf32c6b}\label{kdbprivate_8h_a7126bbb84c75bb98c1e3641dcdf32c6b}} 
-\index{kdbprivate.\+h@{kdbprivate.\+h}!elektra\+Validate\+Key\+Name@{elektra\+Validate\+Key\+Name}}
-\index{elektra\+Validate\+Key\+Name@{elektra\+Validate\+Key\+Name}!kdbprivate.\+h@{kdbprivate.\+h}}
-\subsubsection{\texorpdfstring{elektra\+Validate\+Key\+Name()}{elektraValidateKeyName()}}
-{\footnotesize\ttfamily int elektra\+Validate\+Key\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
-
-
-
-Validates whether the supplied keyname is valid. 
-
-The function looks for tangling escape characters in the end and for a minimum length.
-
-Does not check for valid namespaces
-
-\begin{DoxyPrecond}{Precondition}
-size must be at least 2
-\end{DoxyPrecond}
-
-\begin{DoxyParams}{Parameters}
-{\em name} & the key name that is to be checked \\
-\hline
-{\em size} & a elektra\+Str\+Len of the key name \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyRetVals}{Return values}
-{\em true} & if the supplied keyname part is valid \\
-\hline
-{\em false} & if its invalid \\
-\hline
-\end{DoxyRetVals}
 \mbox{\Hypertarget{kdbprivate_8h_aae740f9dc4ff807f236a78a443c66524}\label{kdbprivate_8h_aae740f9dc4ff807f236a78a443c66524}} 
 \index{kdbprivate.\+h@{kdbprivate.\+h}!mount\+Backend@{mount\+Backend}}
 \index{mount\+Backend@{mount\+Backend}!kdbprivate.\+h@{kdbprivate.\+h}}
@@ -975,11 +949,11 @@ Default Backend is closed. mount\+Open was executed before.
 {\em 0} & on success \\
 \hline
 \end{DoxyRetVals}
-\mbox{\Hypertarget{kdbprivate_8h_a1db75a434f913420942d6896123c5a66}\label{kdbprivate_8h_a1db75a434f913420942d6896123c5a66}} 
+\mbox{\Hypertarget{kdbprivate_8h_af949f28a2f16cff516f8b1db88010fbe}\label{kdbprivate_8h_af949f28a2f16cff516f8b1db88010fbe}} 
 \index{kdbprivate.\+h@{kdbprivate.\+h}!mount\+Get\+Backend@{mount\+Get\+Backend}}
 \index{mount\+Get\+Backend@{mount\+Get\+Backend}!kdbprivate.\+h@{kdbprivate.\+h}}
 \subsubsection{\texorpdfstring{mount\+Get\+Backend()}{mountGetBackend()}}
-{\footnotesize\ttfamily Backend$\ast$ mount\+Get\+Backend (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const Key $\ast$}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Backend$\ast$ mount\+Get\+Backend (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const char $\ast$}]{where }\end{DoxyParamCaption})}
 
 
 
@@ -995,17 +969,17 @@ If key is 0 or invalid the default backend will be returned.
 \begin{DoxyParams}{Parameters}
 {\em handle} & is the data structure, where the mounted directories are saved. \\
 \hline
-{\em key} & the key, that should be looked up. \\
+{\em where} & the key name, that should be looked up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the backend handle associated with the key 
 \end{DoxyReturn}
-\mbox{\Hypertarget{kdbprivate_8h_a06bb59784fce5582ee1363fdb6a59215}\label{kdbprivate_8h_a06bb59784fce5582ee1363fdb6a59215}} 
+\mbox{\Hypertarget{kdbprivate_8h_af951e2745e17d7b716632362199f3a30}\label{kdbprivate_8h_af951e2745e17d7b716632362199f3a30}} 
 \index{kdbprivate.\+h@{kdbprivate.\+h}!mount\+Get\+Mountpoint@{mount\+Get\+Mountpoint}}
 \index{mount\+Get\+Mountpoint@{mount\+Get\+Mountpoint}!kdbprivate.\+h@{kdbprivate.\+h}}
 \subsubsection{\texorpdfstring{mount\+Get\+Mountpoint()}{mountGetMountpoint()}}
-{\footnotesize\ttfamily Key$\ast$ mount\+Get\+Mountpoint (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const Key $\ast$}]{where }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Key$\ast$ mount\+Get\+Mountpoint (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const char $\ast$}]{where }\end{DoxyParamCaption})}
 
 
 
@@ -1016,16 +990,14 @@ Will return a key representing the mountpoint or null if there is no appropriate
 \begin{DoxyParagraph}{Example\+:}
 
 \begin{DoxyCode}
-Key * key = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/template"});
 KDB * handle = \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdbOpen}();
 Key *mountpoint=0;
-mountpoint=kdbGetMountpoint(handle, key);
+mountpoint=kdbGetMountpoint(handle, \textcolor{stringliteral}{"system:/template"});
 
 printf(\textcolor{stringliteral}{"The backend I am using is %s mounted in %s\(\backslash\)n"},
         \hyperlink{group__keyvalue_ga6f29609c5da53c6dc26a98678d5752af}{keyValue}(mountpoint),
         \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName}(mountpoint));
 \hyperlink{group__kdb_gadb54dc9fda17ee07deb9444df745c96f}{kdbClose} (handle);
-\hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (key);
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -1033,7 +1005,7 @@ printf(\textcolor{stringliteral}{"The backend I am using is %s mounted in %s\(\b
 \begin{DoxyParams}{Parameters}
 {\em handle} & is the data structure, where the mounted directories are saved. \\
 \hline
-{\em where} & the key, that should be looked up. \\
+{\em where} & the key name, that should be looked up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1452,7 +1424,7 @@ split needs to be processed with \hyperlink{split_8c_ae4fcdbb3d58fb0baba1459e0d8
 \hline
 \end{DoxyRetVals}
 \begin{DoxyPrecond}{Precondition}
-user/system was split before. 
+user\+:/system was split before. 
 \end{DoxyPrecond}
 
 \begin{DoxyParams}{Parameters}
@@ -1537,11 +1509,11 @@ Insert into trie.
 {\em trie} & on success \\
 \hline
 \end{DoxyRetVals}
-\mbox{\Hypertarget{kdbprivate_8h_af25ad64c6b5642f7073084045a68249a}\label{kdbprivate_8h_af25ad64c6b5642f7073084045a68249a}} 
+\mbox{\Hypertarget{kdbprivate_8h_a675eaba21b1311eb20920e6880de7052}\label{kdbprivate_8h_a675eaba21b1311eb20920e6880de7052}} 
 \index{kdbprivate.\+h@{kdbprivate.\+h}!trie\+Lookup@{trie\+Lookup}}
 \index{trie\+Lookup@{trie\+Lookup}!kdbprivate.\+h@{kdbprivate.\+h}}
 \subsubsection{\texorpdfstring{trie\+Lookup()}{trieLookup()}}
-{\footnotesize\ttfamily Backend$\ast$ trie\+Lookup (\begin{DoxyParamCaption}\item[{Trie $\ast$}]{trie,  }\item[{const Key $\ast$}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Backend$\ast$ trie\+Lookup (\begin{DoxyParamCaption}\item[{Trie $\ast$}]{trie,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
 
 
 

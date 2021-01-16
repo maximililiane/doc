@@ -2,7 +2,7 @@ To create different variants of the same feature, but avoid code duplications wi
 
 
 \begin{DoxyItemize}
-\item Define a needs clause in a \href{/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini}{\tt contract} and reuse another plugin as it is. This should be preferred for filter and validation tasks.
+\item Define a needs clause in a \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini}{\tt contract} and reuse another plugin as it is. This should be preferred for filter and validation tasks.
 \item Have common code together in a helper library (or core library), see the C\+Make function {\ttfamily add\+\_\+lib} for creating such a library (in the folder libs). This should be used for rather common functionality that might be useful for many plugins or even applications.
 \item Have configuration for plugins (See \href{https://doc.libelektra.org/api/latest/html/group__plugin.html}{\tt elektra\+Plugin\+Get\+Config()} and dynamically switch with {\ttfamily if} according to the configuration. This should be preferred when you want to (de)activate some features of a plugin at run-\/time.
 \item Or use compilation variants to compile the plugin code multiple times with different {\ttfamily C\+O\+M\+P\+I\+L\+E\+\_\+\+D\+E\+F\+I\+N\+I\+T\+I\+O\+NS} (that are Macro definitions). This should be preferred when different macro definitions lead to different plugins. It should especially be used when the resulting plugins have different dependencies\+: it is possible to have different {\ttfamily L\+I\+N\+K\+\_\+\+L\+I\+B\+R\+A\+R\+I\+ES}.

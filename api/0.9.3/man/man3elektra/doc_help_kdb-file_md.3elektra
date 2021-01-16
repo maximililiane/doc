@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-file_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-file_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -41,7 +41,7 @@ This command prints which file a given key is stored in\&.
 .PP
 To find which file a key is stored in:
 .br
- \fCkdb file user/example/key\fP
+ \fCkdb file user:/example/key\fP
 .br
 .PP
 .IP "\(bu" 2

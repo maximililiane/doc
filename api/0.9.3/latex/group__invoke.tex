@@ -33,7 +33,7 @@ int \hyperlink{group__invoke_ga0c1fe2bab1f3a465106d6585363787a1}{elektra\+Invoke
 void \hyperlink{group__invoke_ga933ae8c38aadef6af1462297fcfb5041}{elektra\+Invoke\+Execute\+Deferred\+Calls} (Elektra\+Invoke\+Handle $\ast$handle, Elektra\+Deferred\+Call\+List $\ast$list)
 \begin{DoxyCompactList}\small\item\em Execute deferred calls from list on given invoke handle. \end{DoxyCompactList}\item 
 int \hyperlink{group__invoke_ga80328407d9d418af04c54ab5f10a63c0}{elektra\+Deferred\+Call} (Plugin $\ast$handle, const char $\ast$elektra\+Plugin\+Function\+Name, Key\+Set $\ast$parameters)
-\begin{DoxyCompactList}\small\item\em Call a deferable function on a plugin handle. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Call a deferrable function on a plugin handle. \end{DoxyCompactList}\item 
 int \hyperlink{group__invoke_gaa6200aa148a20b58d62cd8cc73f293ce}{elektra\+Deferred\+Call\+Add} (Elektra\+Deferred\+Call\+List $\ast$list, const char $\ast$name, Key\+Set $\ast$parameters)
 \begin{DoxyCompactList}\small\item\em Add a new deferred call to the deferred call list. \end{DoxyCompactList}\item 
 Elektra\+Deferred\+Call\+List $\ast$ \hyperlink{group__invoke_gacff96e795f6fc2fad61ed2f8a5cd80cb}{elektra\+Deferred\+Call\+Create\+List} (void)
@@ -76,7 +76,7 @@ ElektraInvokeHandle * handle = \hyperlink{group__invoke_ga3eb20131e9a8fc9a6cebf1
 
 
 
-Call a deferable function on a plugin handle. 
+Call a deferrable function on a plugin handle. 
 
 If the function is exported by the plugin it is directly invoked, if the plugin supports deferring calls, the call is deferred. If both is possible (function is exported and deferred calls are supported), the function is directly called and the call is deferred (i.\+e. for nested plugins).
 
@@ -433,7 +433,7 @@ the name of the plugin
 {\footnotesize\ttfamily Elektra\+Invoke\+Handle$\ast$ elektra\+Invoke\+Initialize (\begin{DoxyParamCaption}\item[{const char $\ast$}]{elektra\+Plugin\+Name }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000013}{Deprecated}]Do not use.\end{DoxyRefDesc}
+\item[\hyperlink{deprecated__deprecated000005}{Deprecated}]Do not use.\end{DoxyRefDesc}
 
 
 Use {\ttfamily elektra\+Invoke\+Open (name, 0, 0)} instead.

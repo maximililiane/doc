@@ -1,4 +1,4 @@
-.TH "doc_decisions_plugin_variants_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_decisions_plugin_variants_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -50,7 +50,7 @@ Best implementation candidate was:
 .IP "1." 4
 Provide a function \fCint genconf (KeySet * ks, Key * errorKey)\fP where \fCks\fP is filled with a list of all variants with the essential configuration (subkeys \fCconfig\fP) and the changed parts of the contract (subkeys \fCinfos\fP)\&.
 .IP "2." 4
-Keys defined in \fCsystem/elektra/plugins/<plugin>/variants/<variantname>\fP have the same content, but take precedence\&. If a variant with the same name is defined, only \fCconfig\fP or \fCinfos\fP from \fCgenconf\fP are considered if they are not mentioned in \fCsystem/elektra/plugins/variants\fP\&.
+Keys defined in \fCsystem:/elektra/plugins/<plugin>/variants/<variantname>\fP have the same content, but take precedence\&. If a variant with the same name is defined, only \fCconfig\fP or \fCinfos\fP from \fCgenconf\fP are considered if they are not mentioned in \fCsystem:/elektra/plugins/variants\fP\&.
 .IP "3." 4
 If the bool key \fCoverride\fP (for a plugin or a variant) is true, it will be overwritten (content of \fCgenconf\fP ignored, but instead a plugin or variant as given is created)\&.
 .IP "4." 4
@@ -69,16 +69,16 @@ Empty \fCconfig\fP and \fCinfos\fP mean:
 .PP
 .PP
 .nf
-system/access
-system/access/config
-system/access/config/lens = Access\&.lns
-system/access/infos
-system/access/infos/provides = storage/access
-system/aliases
-system/aliases/config
-system/aliases/config/lens = Aliases\&.lns
-system/aliases/infos
-system/aliases/infos/provides = storage/aliases
+system:/access
+system:/access/config
+system:/access/config/lens = Access\&.lns
+system:/access/infos
+system:/access/infos/provides = storage/access
+system:/aliases
+system:/aliases/config
+system:/aliases/config/lens = Aliases\&.lns
+system:/aliases/infos
+system:/aliases/infos/provides = storage/aliases
 .fi
 .PP
 .PP
@@ -86,25 +86,25 @@ system/aliases/infos/provides = storage/aliases
 .PP
 .PP
 .nf
-user/configparser/config
-user/configparser/config/script = python_configparser\&.py
+user:/configparser/config
+user:/configparser/config/script = python_configparser\&.py
 .fi
 .PP
 .PP
-The user/admin specifies:
+The user:/admin specifies:
 .PP
 .PP
 .nf
-system/elektra/plugins/jni/disable = 1
-system/elektra/plugins/augeas/variants/access
-system/elektra/plugins/augeas/variants/access/disable = 1
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/infos
-system/elektra/plugins/augeas/variants/aliases/infos/status = 10000
-system/elektra/plugins/python/variants/configparser
-system/elektra/plugins/python/variants/configparser/override = 1
-system/elektra/plugins/python/variants/configparser/config
-system/elektra/plugins/python/variants/configparser/config/script = mybetter_configparser\&.py
+system:/elektra/plugins/jni/disable = 1
+system:/elektra/plugins/augeas/variants/access
+system:/elektra/plugins/augeas/variants/access/disable = 1
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/infos
+system:/elektra/plugins/augeas/variants/aliases/infos/status = 10000
+system:/elektra/plugins/python/variants/configparser
+system:/elektra/plugins/python/variants/configparser/override = 1
+system:/elektra/plugins/python/variants/configparser/config
+system:/elektra/plugins/python/variants/configparser/config/script = mybetter_configparser\&.py
 .fi
 .PP
 .PP
@@ -124,9 +124,9 @@ To have a space-separated simpleini one would use:
 .PP
 .PP
 .nf
-system/elektra/plugins/simpleini/variants/spacesep
-system/elektra/plugins/simpleini/variants/spacesep/config
-system/elektra/plugins/simpleini/variants/spacesep/config/format = "% %"
+system:/elektra/plugins/simpleini/variants/spacesep
+system:/elektra/plugins/simpleini/variants/spacesep/config
+system:/elektra/plugins/simpleini/variants/spacesep/config/format = "% %"
 .fi
 .PP
 .PP
@@ -160,11 +160,11 @@ It is also not possible to add additional information to a variant, only overrid
 .PP
 .PP
 .nf
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/override = 1
-system/elektra/plugins/augeas/variants/aliases/config
-system/elektra/plugins/augeas/variants/aliases/config/lens = Aliases\&.lns
-system/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/override = 1
+system:/elektra/plugins/augeas/variants/aliases/config
+system:/elektra/plugins/augeas/variants/aliases/config/lens = Aliases\&.lns
+system:/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
 .fi
 .PP
 .PP
@@ -172,9 +172,9 @@ works, while
 .PP
 .PP
 .nf
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/config
-system/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/config
+system:/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
 .fi
 .PP
 .PP

@@ -1,4 +1,4 @@
-.TH "org.libelektra.KeySet" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "org.libelektra.KeySet" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -245,7 +245,7 @@ Basic constructor for key set\&. Example: \fBKeySet\fP keySet = \fBKeySet\&.crea
 .PP
 \fBParameters:\fP
 .RS 4
-\fIalloc\fP Length of key set (key count) to be allocated 
+\fIalloc\fP Hint indicating the expected size of the key set 
 .br
 \fIargs\fP List of initial arguments for the key set\&. Example:
 .br

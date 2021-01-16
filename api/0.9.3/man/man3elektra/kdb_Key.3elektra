@@ -1,4 +1,4 @@
-.TH "kdb::Key" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdb::Key" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -132,14 +132,6 @@ kdb::Key \- \fBKey\fP is an essential class that encapsulates key \fBname \fP, \
 .br
 .RI "Delete the baseName of a key\&. "
 .ti -1c
-.RI "ssize_t \fBgetFullNameSize\fP () const"
-.br
-.RI "Bytes needed to store the key name including user domain and ending NULL\&. "
-.ti -1c
-.RI "std::string \fBgetFullName\fP () const"
-.br
-.RI "Get key full name, including the user domain name\&. "
-.ti -1c
 .RI "bool \fBoperator==\fP (const \fBKey\fP &k) const"
 .br
 .RI "Compare the name of two keys\&. "
@@ -253,8 +245,12 @@ kdb::Key \- \fBKey\fP is an essential class that encapsulates key \fBname \fP, \
 .RI "bool \fBisValid\fP () const"
 .br
 .ti -1c
-.RI "std::string \fBgetNamespace\fP () const"
+.RI "ElektraNamespace \fBgetNamespace\fP () const"
 .br
+.ti -1c
+.RI "ssize_t \fBsetNamespace\fP (ElektraNamespace ns) const"
+.br
+.RI "Set the namespace of the key\&. "
 .ti -1c
 .RI "bool \fBisCascading\fP () const"
 .br
@@ -287,10 +283,6 @@ kdb::Key \- \fBKey\fP is an essential class that encapsulates key \fBname \fP, \
 .RI "bool \fBisBinary\fP () const"
 .br
 .RI "Check if a key is binary type\&. "
-.ti -1c
-.RI "bool \fBisInactive\fP () const"
-.br
-.RI "Check whether a key is inactive\&. "
 .ti -1c
 .RI "bool \fBisBelow\fP (const \fBKey\fP &k) const"
 .br
@@ -476,7 +468,7 @@ keyDel (k);
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/some/example", KEY_END);
+Key *k=keyNew("user:/some/example", KEY_END);
 // work with it
 keyDel (k);
 .fi
@@ -496,7 +488,7 @@ You can call \fBkeyNew()\fP in many different ways depending on the attribute ta
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex0",
+Key *k=keyNew("user:/tmp/ex0",
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
 
@@ -510,7 +502,7 @@ Key *k=keyNew("user/tmp/ex0",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex1",
+Key *k=keyNew("user:/tmp/ex1",
         KEY_SIZE, 4,               // has no effect on strings
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
@@ -524,7 +516,7 @@ Key *k=keyNew("user/tmp/ex1",
  Next two parameter is a metaname and a metavalue\&. See \fBkeySetMeta()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
+Key *k=keyNew("user:/tmp/ex3",
         KEY_META, "comment", "a comment",  // with a comment
         KEY_META, "owner", "root",         // and an owner
         KEY_META, "special", "yes",        // and any other metadata
@@ -543,8 +535,8 @@ Key *k=keyNew("user/tmp/ex3",
  Bitwise disjunction of flags, which don't require one or more values\&. recommended way to set multiple flags\&. overrides previously defined flags\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_FLAGS, KEY_BINARY | KEY_CASCADING_NAME, // flags
+Key *k=keyNew("user:/tmp/ex3",
+        KEY_BINARY,                     // binary key
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_END);                       // end of args
@@ -559,7 +551,7 @@ Key *k=keyNew("user/tmp/ex3",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex2",
+Key *k=keyNew("user:/tmp/ex2",
         KEY_BINARY,
         KEY_SIZE, 4,               // now the size is important
         KEY_VALUE, "some data",    // sets the binary value ("some")
@@ -568,54 +560,27 @@ Key *k=keyNew("user/tmp/ex2",
 .fi
 .PP
 
-.IP "\(bu" 2
-\fBKEY_CASCADING_NAME\fP allow the name to start with / useful for \fBksLookup()\fP and \fBkdbGet()\fP parent/lookup keys
-.IP "\(bu" 2
-\fBKEY_META_NAME\fP allow the name to start with arbitrary namespaces useful to compare with metakeys
 .PP
 .PP
 \fBDeprecated\fP
 .RS 4
-The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility:
-.IP "\(bu" 2
-\fBKEY_DIR\fP 
-.br
- Define that the key is a directory rather than an ordinary key\&. This means its executable bits in its mode are set\&. But even without this option the key can have subkeys\&. See \fBkeySetDir()\fP\&.
-.IP "\(bu" 2
-\fBKEY_OWNER\fP 
-.br
- Next parameter is the owner\&. See \fBkeySetOwner()\fP\&.
-.IP "\(bu" 2
-\fBKEY_UID\fP, \fBKEY_GID\fP 
-.br
- Next parameter is taken as the UID (uid_t) or GID (gid_t) that will be defined on the key\&. See \fBkeySetUID()\fP and \fBkeySetGID()\fP\&.
-.IP "\(bu" 2
-\fBKEY_MODE\fP 
-.br
- Next parameter is taken as mode permissions (int) to the key\&. See \fBkeySetMode()\fP\&. 
+The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility: 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_VALUE, "some data",    // with a simple value
-        KEY_MODE, 0777,            // permissions
-        KEY_END);                  // end of args
 
 .fi
 .PP
-
 .IP "\(bu" 2
 \fBKEY_COMMENT\fP 
 .br
  Next parameter is a comment\&. See \fBkeySetComment()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex4",
+Key *k=keyNew("user:/tmp/ex4",
         KEY_BINARY,                     // key type
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_COMMENT, "value is truncated",
-        KEY_OWNER, "root",              // owner (not uid) is root
-        KEY_UID, 0,                     // root uid
         KEY_END);                       // end of args
 
 .fi
@@ -684,7 +649,7 @@ keyDel (k);
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/some/example", KEY_END);
+Key *k=keyNew("user:/some/example", KEY_END);
 // work with it
 keyDel (k);
 .fi
@@ -704,7 +669,7 @@ You can call \fBkeyNew()\fP in many different ways depending on the attribute ta
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex0",
+Key *k=keyNew("user:/tmp/ex0",
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
 
@@ -718,7 +683,7 @@ Key *k=keyNew("user/tmp/ex0",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex1",
+Key *k=keyNew("user:/tmp/ex1",
         KEY_SIZE, 4,               // has no effect on strings
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
@@ -732,7 +697,7 @@ Key *k=keyNew("user/tmp/ex1",
  Next two parameter is a metaname and a metavalue\&. See \fBkeySetMeta()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
+Key *k=keyNew("user:/tmp/ex3",
         KEY_META, "comment", "a comment",  // with a comment
         KEY_META, "owner", "root",         // and an owner
         KEY_META, "special", "yes",        // and any other metadata
@@ -751,8 +716,8 @@ Key *k=keyNew("user/tmp/ex3",
  Bitwise disjunction of flags, which don't require one or more values\&. recommended way to set multiple flags\&. overrides previously defined flags\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_FLAGS, KEY_BINARY | KEY_CASCADING_NAME, // flags
+Key *k=keyNew("user:/tmp/ex3",
+        KEY_BINARY,                     // binary key
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_END);                       // end of args
@@ -767,7 +732,7 @@ Key *k=keyNew("user/tmp/ex3",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex2",
+Key *k=keyNew("user:/tmp/ex2",
         KEY_BINARY,
         KEY_SIZE, 4,               // now the size is important
         KEY_VALUE, "some data",    // sets the binary value ("some")
@@ -776,54 +741,27 @@ Key *k=keyNew("user/tmp/ex2",
 .fi
 .PP
 
-.IP "\(bu" 2
-\fBKEY_CASCADING_NAME\fP allow the name to start with / useful for \fBksLookup()\fP and \fBkdbGet()\fP parent/lookup keys
-.IP "\(bu" 2
-\fBKEY_META_NAME\fP allow the name to start with arbitrary namespaces useful to compare with metakeys
 .PP
 .PP
 \fBDeprecated\fP
 .RS 4
-The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility:
-.IP "\(bu" 2
-\fBKEY_DIR\fP 
-.br
- Define that the key is a directory rather than an ordinary key\&. This means its executable bits in its mode are set\&. But even without this option the key can have subkeys\&. See \fBkeySetDir()\fP\&.
-.IP "\(bu" 2
-\fBKEY_OWNER\fP 
-.br
- Next parameter is the owner\&. See \fBkeySetOwner()\fP\&.
-.IP "\(bu" 2
-\fBKEY_UID\fP, \fBKEY_GID\fP 
-.br
- Next parameter is taken as the UID (uid_t) or GID (gid_t) that will be defined on the key\&. See \fBkeySetUID()\fP and \fBkeySetGID()\fP\&.
-.IP "\(bu" 2
-\fBKEY_MODE\fP 
-.br
- Next parameter is taken as mode permissions (int) to the key\&. See \fBkeySetMode()\fP\&. 
+The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility: 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_VALUE, "some data",    // with a simple value
-        KEY_MODE, 0777,            // permissions
-        KEY_END);                  // end of args
 
 .fi
 .PP
-
 .IP "\(bu" 2
 \fBKEY_COMMENT\fP 
 .br
  Next parameter is a comment\&. See \fBkeySetComment()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex4",
+Key *k=keyNew("user:/tmp/ex4",
         KEY_BINARY,                     // key type
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_COMMENT, "value is truncated",
-        KEY_OWNER, "root",              // owner (not uid) is root
-        KEY_UID, 0,                     // root uid
         KEY_END);                       // end of args
 
 .fi
@@ -897,7 +835,7 @@ keyDel (k);
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/some/example", KEY_END);
+Key *k=keyNew("user:/some/example", KEY_END);
 // work with it
 keyDel (k);
 .fi
@@ -917,7 +855,7 @@ You can call \fBkeyNew()\fP in many different ways depending on the attribute ta
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex0",
+Key *k=keyNew("user:/tmp/ex0",
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
 
@@ -931,7 +869,7 @@ Key *k=keyNew("user/tmp/ex0",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex1",
+Key *k=keyNew("user:/tmp/ex1",
         KEY_SIZE, 4,               // has no effect on strings
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
@@ -945,7 +883,7 @@ Key *k=keyNew("user/tmp/ex1",
  Next two parameter is a metaname and a metavalue\&. See \fBkeySetMeta()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
+Key *k=keyNew("user:/tmp/ex3",
         KEY_META, "comment", "a comment",  // with a comment
         KEY_META, "owner", "root",         // and an owner
         KEY_META, "special", "yes",        // and any other metadata
@@ -964,8 +902,8 @@ Key *k=keyNew("user/tmp/ex3",
  Bitwise disjunction of flags, which don't require one or more values\&. recommended way to set multiple flags\&. overrides previously defined flags\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_FLAGS, KEY_BINARY | KEY_CASCADING_NAME, // flags
+Key *k=keyNew("user:/tmp/ex3",
+        KEY_BINARY,                     // binary key
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_END);                       // end of args
@@ -980,7 +918,7 @@ Key *k=keyNew("user/tmp/ex3",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex2",
+Key *k=keyNew("user:/tmp/ex2",
         KEY_BINARY,
         KEY_SIZE, 4,               // now the size is important
         KEY_VALUE, "some data",    // sets the binary value ("some")
@@ -989,54 +927,27 @@ Key *k=keyNew("user/tmp/ex2",
 .fi
 .PP
 
-.IP "\(bu" 2
-\fBKEY_CASCADING_NAME\fP allow the name to start with / useful for \fBksLookup()\fP and \fBkdbGet()\fP parent/lookup keys
-.IP "\(bu" 2
-\fBKEY_META_NAME\fP allow the name to start with arbitrary namespaces useful to compare with metakeys
 .PP
 .PP
 \fBDeprecated\fP
 .RS 4
-The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility:
-.IP "\(bu" 2
-\fBKEY_DIR\fP 
-.br
- Define that the key is a directory rather than an ordinary key\&. This means its executable bits in its mode are set\&. But even without this option the key can have subkeys\&. See \fBkeySetDir()\fP\&.
-.IP "\(bu" 2
-\fBKEY_OWNER\fP 
-.br
- Next parameter is the owner\&. See \fBkeySetOwner()\fP\&.
-.IP "\(bu" 2
-\fBKEY_UID\fP, \fBKEY_GID\fP 
-.br
- Next parameter is taken as the UID (uid_t) or GID (gid_t) that will be defined on the key\&. See \fBkeySetUID()\fP and \fBkeySetGID()\fP\&.
-.IP "\(bu" 2
-\fBKEY_MODE\fP 
-.br
- Next parameter is taken as mode permissions (int) to the key\&. See \fBkeySetMode()\fP\&. 
+The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility: 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_VALUE, "some data",    // with a simple value
-        KEY_MODE, 0777,            // permissions
-        KEY_END);                  // end of args
 
 .fi
 .PP
-
 .IP "\(bu" 2
 \fBKEY_COMMENT\fP 
 .br
  Next parameter is a comment\&. See \fBkeySetComment()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex4",
+Key *k=keyNew("user:/tmp/ex4",
         KEY_BINARY,                     // key type
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_COMMENT, "value is truncated",
-        KEY_OWNER, "root",              // owner (not uid) is root
-        KEY_UID, 0,                     // root uid
         KEY_END);                       // end of args
 
 .fi
@@ -1099,7 +1010,7 @@ Adds a base name for a key\&. Adds \fCbaseName\fP (that will be escaped) to the 
 .PP
 Assumes that \fCkey\fP is a directory and will append \fCbaseName\fP to it\&. The function adds the path separator for concatenating\&.
 .PP
-So if \fCkey\fP has name \fC'system/dir1/dir2'\fP and this method is called with \fCbaseName\fP \fC'mykey'\fP, the resulting key will have the name \fC'system/dir1/dir2/mykey'\fP\&.
+So if \fCkey\fP has name \fC'system:/dir1/dir2'\fP and this method is called with \fCbaseName\fP \fC'mykey'\fP, the resulting key will have the name \fC'system:/dir1/dir2/mykey'\fP\&.
 .PP
 When \fCbaseName\fP is 0 nothing will happen and the size of the name is returned\&.
 .PP
@@ -1108,9 +1019,9 @@ The escaping rules apply as in \fBabove \fP\&.
 A simple example is: 
 .PP
 .nf
-Key * k = keyNew ("user/my/long", KEY_END);
+Key * k = keyNew ("user:/my/long", KEY_END);
 keyAddBaseName (k, "myname");
-printf ("%s\n", keyName (k)); // will print user/my/long/myname
+printf ("%s\n", keyName (k)); // will print user:/my/long/myname
 keyDel (k);
 
 .fi
@@ -1118,9 +1029,9 @@ keyDel (k);
  E\&.g\&. if you add \&. it will be escaped: 
 .PP
 .nf
-        keySetName (k, "system/valid");
+        keySetName (k, "system:/valid");
         succeed_if (keyAddBaseName (k, "\&.") >= 0, "could not add a base name");
-        succeed_if_same_string (keyName (k), "system/valid/\\\&.");
+        succeed_if_same_string (keyName (k), "system:/valid/\\\&.");
         succeed_if_same_string (keyBaseName (k), "\&.");
 
 .fi
@@ -1336,7 +1247,7 @@ To avoid that problem you can use \fBkeyCopyAllMeta()\fP or \fBkeyCopyMeta()\fP:
 void o (KeySet * ks)
 {
         Key * current;
-        Key * shared = keyNew (0);
+        Key * shared = keyNew ("/", KEY_END);
         keySetMeta (shared, "shared1", "this metadata should be shared among many keys");
         keySetMeta (shared, "shared2", "this metadata should be shared among many keys also");
         keySetMeta (shared, "shared3", "this metadata should be shared among many keys too");
@@ -1410,7 +1321,7 @@ To avoid that problem you can use \fBkeyCopyAllMeta()\fP or \fBkeyCopyMeta()\fP\
 void o(KeySet *ks)
 {
         Key *current;
-        Key *shared = keyNew (0);
+        Key *shared = keyNew ("/", KEY_END);
         keySetMeta(shared, "shared", "this metadata should be shared among many keys");
 
         ksRewind(ks);
@@ -1648,7 +1559,7 @@ Returns a pointer to the internal unescaped key name where the \fCbasename\fP st
 .nf
       keySetName (k, "");
         succeed_if_same_string (keyBaseName (k), "");
-        keySetName (k, "user");
+        keySetName (k, "user:/");
         succeed_if_same_string (keyBaseName (k), "");
 
 .fi
@@ -1656,9 +1567,9 @@ Returns a pointer to the internal unescaped key name where the \fCbasename\fP st
  And there is also support for really empty basenames: 
 .PP
 .nf
-        keySetName (k, "system/valid");
+        keySetName (k, "system:/valid");
         succeed_if (keyAddBaseName (k, "") >= 0, "could not add a base name");
-        succeed_if_same_string (keyName (k), "system/valid/%");
+        succeed_if_same_string (keyName (k), "system:/valid/%");
         succeed_if_same_string (keyBaseName (k), "");
 
 .fi
@@ -1694,19 +1605,17 @@ a pointer to the basename
 \fBkeyGetBaseName()\fP, \fBkeyGetBaseNameSize()\fP 
 .PP
 \fBkeyName()\fP to \fBget\fP a pointer to the name 
-.PP
-\fBkeyOwner()\fP to \fBget\fP a pointer to the owner 
 .RE
 .PP
 
 .SS "ssize_t kdb::Key::getBaseNameSize () const\fC [inline]\fP"
 
 .PP
-Calculates number of bytes needed to store basename of \fCkey\fP\&. \fBKey\fP names that have only root names (e\&.g\&. \fC'system'\fP or \fC'user'\fP or \fC'user:domain'\fP ) does not have basenames, thus the function will return 1 bytes to store ''\&.
+Calculates number of bytes needed to store basename of \fCkey\fP\&. \fBKey\fP names that have only root names (e\&.g\&. \fC'system:/'\fP or \fC'user:/'\fP or \fC'user:domain'\fP ) does not have basenames, thus the function will return 1 bytes to store ''\&.
 .PP
 Basenames are denoted as:
 .IP "\(bu" 2
-\fCsystem/some/thing/basename\fP -> \fCbasename\fP 
+\fCsystem:/some/thing/basename\fP -> \fCbasename\fP 
 .IP "\(bu" 2
 \fCuser:domain/some/thing/base\\/name\fP > \fCbase\\/name\fP 
 .PP
@@ -1769,7 +1678,7 @@ When the returnedBinary is to small to hold the data (its maximum size is given 
 
 .PP
 .nf
-Key *key = keyNew ("user/keyname", KEY_TYPE, KEY_TYPE_BINARY, KEY_END);
+Key *key = keyNew ("user:/keyname", KEY_BINARY, KEY_END);
 char buffer[300];
 
 if (keyGetBinary(key,buffer,sizeof(buffer)) == -1)
@@ -1867,68 +1776,6 @@ the number of bytes needed to store the key value
 .RE
 .PP
 
-.SS "std::string kdb::Key::getFullName () const\fC [inline]\fP"
-
-.PP
-Get key full name, including the user domain name\&. 
-.PP
-\fBReturns:\fP
-.RS 4
-number of bytes written 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fI1\fP on empty name 
-.br
-\fI-1\fP on NULL pointers 
-.br
-\fI-1\fP if maxSize is 0 or larger than SSIZE_MAX 
-.RE
-.PP
-\fBParameters:\fP
-.RS 4
-\fIkey\fP the key object 
-.br
-\fIreturnedName\fP pre-allocated memory to write the key name 
-.br
-\fImaxSize\fP maximum number of bytes that will fit in returnedName, including the final NULL
-.RE
-.PP
-\fBExceptions:\fP
-.RS 4
-\fIKeyException\fP if key is null 
-.RE
-.PP
-
-.SS "ssize_t kdb::Key::getFullNameSize () const\fC [inline]\fP"
-
-.PP
-Bytes needed to store the key name including user domain and ending NULL\&. 
-.PP
-\fBParameters:\fP
-.RS 4
-\fIkey\fP the key object to work with 
-.RE
-.PP
-\fBReturns:\fP
-.RS 4
-number of bytes needed to store key name including user domain 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fI1\fP on empty name 
-.br
-\fI-1\fP on NULL pointer 
-.RE
-.PP
-\fBSee also:\fP
-.RS 4
-\fBkeyGetFullName()\fP, \fBkeyGetNameSize()\fP 
-.RE
-.PP
-
 .SS "Key::func_t kdb::Key::getFunc () const\fC [inline]\fP"
 
 .PP
@@ -1982,7 +1829,7 @@ You must not delete or change the returned key, use \fBkeySetMeta()\fP if you wa
 .RS 4
 \fIkey\fP the key object to work with 
 .br
-\fImetaName\fP the name of the meta information you want the value from 
+\fImetaName\fP the name of the meta information you want the value from If the name does not start with 'meta:/', we will prefix it with 'meta:/'\&. 
 .RE
 .PP
 \fBReturn values:\fP
@@ -2056,8 +1903,6 @@ otherwise the default constructed type will be returned
 .PP
 Returns a pointer to the abbreviated real internal \fCkey\fP name\&. This is a much more efficient version of \fBkeyGetName()\fP and can use it if you are responsible enough to not mess up things\&. You are not allowed to change anything in the returned array\&. The content of that string may change after \fBkeySetName()\fP and similar functions\&. If you need a copy of the name, consider using \fBkeyGetName()\fP\&.
 .PP
-The name will be without owner, see \fBkeyGetFullName()\fP if you need the name with its owner\&.
-.PP
 \fBReturn values:\fP
 .RS 4
 \fI''\fP when there is no keyName\&. The reason is 
@@ -2075,15 +1920,15 @@ keyDel(key);
 Valid key names are:
 .PP
 .IP "\(bu" 2
-\fCspec/something\fP for specification of other keys\&.
+\fCspec:/something\fP for specification of other keys\&.
 .IP "\(bu" 2
-\fCproc/something\fP for in-memory keys, e\&.g\&. commandline\&.
+\fCproc:/something\fP for in-memory keys, e\&.g\&. commandline\&.
 .IP "\(bu" 2
-\fCdir/something\fP for dir keys in current working directory
+\fCdir:/something\fP for dir keys in current working directory
 .IP "\(bu" 2
-\fCsystem/something\fP for system keys in /etc or /
+\fCsystem:/something\fP for system keys in /etc or /
 .IP "\(bu" 2
-\fCuser/something\fP for user keys in home directory
+\fCuser:/something\fP for user keys in home directory
 .IP "\(bu" 2
 \fCuser:username/something\fP for other users (deprecated: \fBkdbGet()\fP + \fBkdbSet()\fP currently unsupported)
 .IP "\(bu" 2
@@ -2115,11 +1960,7 @@ a pointer to the keyname which must not be changed\&.
 .RS 4
 \fBkeyGetNameSize()\fP for the string length 
 .PP
-\fBkeyGetFullName()\fP, \fBkeyGetFullNameSize()\fP to \fBget\fP the full name 
-.PP
 \fBkeyGetName()\fP as alternative to \fBget\fP a \fBcopy\fP 
-.PP
-\fBkeyOwner()\fP to \fBget\fP a pointer to owner 
 .PP
 \fBkeyUnescapedName\fP to \fBget\fP an unescaped \fBKey\fP name
 .RE
@@ -2161,25 +2002,23 @@ number of bytes needed, including ending NULL, to store key name without owner
 .PP
 \fBSee also:\fP
 .RS 4
-\fBkeyGetName()\fP, \fBkeyGetFullNameSize()\fP 
+\fBkeyGetName()\fP 
 .PP
 \fBkeyGetUnescapedNameSize\fP to \fBget\fP size of unescaped name 
 .RE
 .PP
 
-.SS "std::string kdb::Key::getNamespace () const\fC [inline]\fP"
+.SS "ElektraNamespace kdb::Key::getNamespace () const\fC [inline]\fP"
 
 .PP
 \fBReturns:\fP
 .RS 4
-namespace as string
+namespace of the key
 .RE
-.PP
-Will return slash for cascading names\&.
 .PP
 \fBSee also:\fP
 .RS 4
-\fBgetName()\fP, \fBisUser()\fP, \fBisSystem()\fP 
+ElektraNamespace, \fBkeyGetNamespace\fP 
 .RE
 .PP
 
@@ -2190,7 +2029,7 @@ Return how many references the key has\&. The reference counting is the essentia
 .PP
 .PP
 .nf
-Key *k = keyNew("user/proper_name", KEY_END); // ref counter = 0
+Key *k = keyNew("user:/proper_name", KEY_END); // ref counter = 0
 KeySet *ks = ksNew (1, k, KS_END);
 keyDel(k); // key will not be deleted, because its in the keyset
 ksDel(ks); // now the key will be deleted
@@ -2200,7 +2039,7 @@ ksDel(ks); // now the key will be deleted
 .PP
 .PP
 .nf
-Key *k = keyNew("user/proper_name", KEY_END); // ref counter 0
+Key *k = keyNew("user:/proper_name", KEY_END); // ref counter 0
 KeySet *ks1 = ksNew(1, k, KS_END); // ref counter of k 1
 KeySet *ks2 = ksNew(1, k, KS_END); // ref counter of k 2
 ksDel(ks1); // ref counter of k 1
@@ -2390,7 +2229,7 @@ Note that the \fBKey\fP structure keeps its own size field that is calculated by
 .PP
 \fBWarning:\fP
 .RS 4
-Binary keys will return a NULL pointer when there is no data in contrast to \fBkeyName()\fP, \fBkeyBaseName()\fP, \fBkeyOwner()\fP and \fBkeyComment()\fP\&. For string value the behaviour is the same\&.
+Binary keys will return a NULL pointer when there is no data in contrast to \fBkeyName()\fP, \fBkeyBaseName()\fP and \fBkeyComment()\fP\&. For string value the behaviour is the same\&.
 .RE
 .PP
 \fBExample:\fP
@@ -2402,7 +2241,7 @@ KDB *handle = kdbOpen();
 KeySet *ks=ksNew(0, KS_END);
 Key *current=0;
 
-kdbGetByName(handle,ks,"system/sw/my",KDB_O_SORT|KDB_O_RECURSIVE);
+kdbGetByName(handle,ks,"system:/sw/my",KDB_O_SORT|KDB_O_RECURSIVE);
 
 ksRewind(ks);
 while (current=ksNext(ks)) {
@@ -2500,8 +2339,8 @@ true if our key is below k
 Example: 
 .PP
 .nf
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 .fi
 .PP
@@ -2511,8 +2350,8 @@ returns true because check is below key
 Example: 
 .PP
 .nf
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 .fi
 .PP
@@ -2647,14 +2486,14 @@ true if our key is direct below k
 .PP
 .nf
 Example:
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 returns true because check is below key
 
 Example:
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 does not return true, because there is only an indirect relation
 .fi
@@ -2679,28 +2518,6 @@ does not return true, because there is only an indirect relation
 \fBSee also:\fP
 .RS 4
 \fBkeyIsBelow()\fP, \fBkeySetName()\fP, \fBkeyGetName()\fP 
-.RE
-.PP
-
-.SS "bool kdb::Key::isInactive () const\fC [inline]\fP"
-
-.PP
-Check whether a key is inactive\&. In Elektra terminology a hierarchy of keys is inactive if the rootkey's basename starts with '\&.'\&. So a key is also inactive if it is below an inactive key\&. For example, user/key/\&.hidden is inactive and so is user/\&.hidden/below\&.
-.PP
-Inactive keys should not have any meaning to applications, they are only a convention reserved for users and administrators\&. To automatically remove all inactive keys for an application, consider to use the hidden plugin\&.
-.PP
-\fBParameters:\fP
-.RS 4
-\fIkey\fP the key object to work with 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fI1\fP if the key is inactive 
-.br
-\fI0\fP if the key is active 
-.br
-\fI-1\fP on NULL pointer or when key has no name 
 .RE
 .PP
 
@@ -2990,7 +2807,7 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
 .PP
 .PP
 .nf
- succeed_if (keyCmp (0, 0) == 0, "all null pointers same");
+   succeed_if (keyCmp (0, 0) == 0, "all null pointers same");
         succeed_if (keyCmp (k1, 0) == 1, "null pointer is smaller");
         succeed_if (keyCmp (0, k2) == -1, "null pointer is smaller");
 .fi
@@ -2998,20 +2815,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3258,20 +3063,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3346,20 +3139,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3442,20 +3223,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3530,20 +3299,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3618,20 +3375,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -3726,11 +3471,6 @@ Set a key value\&. Set the value for \fCkey\fP as \fCnewStringValue\fP\&. The fu
 .PP
 String values will be saved in backend storage, when kdbSetKey() will be called, in UTF-8 universal encoding, regardless of the program's current encoding, when iconv plugin is present\&.
 .PP
-\fBNote:\fP
-.RS 4
-The type will be set to KEY_TYPE_STRING\&. When the type of the key is already a string type it won't be changed\&.
-.RE
-.PP
 \fBParameters:\fP
 .RS 4
 \fIkey\fP the key to set the string value 
@@ -3764,22 +3504,22 @@ Sets a base name for a key\&. Sets \fCbaseName\fP as the new basename for \fCkey
 A simple example is: 
 .PP
 .nf
-Key * k = keyNew ("user/my/long/name", KEY_END);
+Key * k = keyNew ("user:/my/long/name", KEY_END);
 keySetBaseName (k, "myname");
-printf ("%s\n", keyName (k)); // will print user/my/long/myname
+printf ("%s\n", keyName (k)); // will print user:/my/long/myname
 keyDel (k);
 
 .fi
 .PP
  All text after the last \fC'/'\fP in the \fCkey\fP keyname is erased and \fCbaseName\fP is appended\&. If \fCbaseName\fP is 0 (NULL), then the last part of the keyname is removed without replacement\&.
 .PP
-Let us suppose \fCkey\fP has name \fC'system/dir1/dir2/key1'\fP\&. If \fCbaseName\fP is \fC'key2'\fP, the resulting key name will be \fC'system/dir1/dir2/key2'\fP\&. If \fCbaseName\fP is 0 (NULL), the resulting key name will be \fC'system/dir1/dir2'\fP\&. If \fCbaseName\fP is empty, the resulting key name will be \fC'system/dir1/dir2/%'\fP, where \fC'%'\fP denotes an empty base name, as also shown in the following code:
+Let us suppose \fCkey\fP has name \fC'system:/dir1/dir2/key1'\fP\&. If \fCbaseName\fP is \fC'key2'\fP, the resulting key name will be \fC'system:/dir1/dir2/key2'\fP\&. If \fCbaseName\fP is 0 (NULL), the resulting key name will be \fC'system:/dir1/dir2'\fP\&. If \fCbaseName\fP is empty, the resulting key name will be \fC'system:/dir1/dir2/%'\fP, where \fC'%'\fP denotes an empty base name, as also shown in the following code:
 .PP
 .PP
 .nf
-        keySetName (k, "system/valid");
+        keySetName (k, "system:/valid");
         keySetBaseName (k, "");
-        succeed_if_same_string (keyName (k), "system/%");
+        succeed_if_same_string (keyName (k), "system:/%");
         succeed_if_same_string (keyBaseName (k), "");
 .fi
 .PP
@@ -3802,18 +3542,6 @@ If you want to add and not change the basename, use \fBkeyAddBaseName()\fP inste
 .PP
 \fBkeySetName()\fP to \fBset\fP a completely new name
 .RE
-.PP
-To add an inactive key name, use: 
-.PP
-.nf
-        keySetName (k, "system/valid");
-        keySetBaseName (k, "\&.hiddenkey");
-        succeed_if_same_string (keyName (k), "system/\&.hiddenkey");
-        succeed_if_same_string (keyBaseName (k), "\&.hiddenkey");
-
-.fi
-.PP
- 
 .PP
 \fBParameters:\fP
 .RS 4
@@ -3904,7 +3632,7 @@ It will remove a meta information if newMetaString is 0\&.
 .RS 4
 \fIkey\fP the key object to work with 
 .br
-\fImetaName\fP the name of the meta information where you want to change the value 
+\fImetaName\fP the name of the meta information where you want to change the value If the name does not start with 'meta:/', we will prefix it with 'meta:/'\&. 
 .br
 \fInewMetaString\fP the new value for the meta information 
 .RE
@@ -3944,15 +3672,15 @@ Use \fBdelMeta()\fP to avoid these issues\&.
 .PP
 Set a new name to a key\&. A valid name is one of the forms:
 .IP "\(bu" 2
-\fCspec/something\fP for specification of other keys\&.
+\fCspec:/something\fP for specification of other keys\&.
 .IP "\(bu" 2
-\fCproc/something\fP for in-memory keys, e\&.g\&. commandline\&.
+\fCproc:/something\fP for in-memory keys, e\&.g\&. commandline\&.
 .IP "\(bu" 2
-\fCdir/something\fP for dir keys in current working directory
+\fCdir:/something\fP for dir keys in current working directory
 .IP "\(bu" 2
-\fCsystem/something\fP for system keys in /etc or /
+\fCsystem:/something\fP for system keys in /etc or /
 .IP "\(bu" 2
-\fCuser/something\fP for user keys in home directory
+\fCuser:/something\fP for user keys in home directory
 .IP "\(bu" 2
 \fCuser:username/something\fP for other users (deprecated: \fBkdbGet()\fP + \fBkdbSet()\fP currently unsupported)
 .IP "\(bu" 2
@@ -3969,7 +3697,7 @@ You should always follow the guidelines for key tree structure creation\&.
 .PP
 A private copy of the key name will be stored, and the \fCnewName\fP parameter can be freed after this call\&.
 .PP
-\&.\&., \&. and / will be handled as in filesystem paths\&. A valid name will be build out of the (valid) name what you pass, e\&.g\&. user///sw/\&.\&./sw//\&./\&./MyApp -> user/sw/MyApp
+\&.\&., \&. and / will be handled as in filesystem paths\&. A valid name will be build out of the (valid) name what you pass, e\&.g\&. user:///sw/\&.\&./sw//\&./\&./MyApp -> user:/sw/MyApp
 .PP
 On invalid names, NULL or '' the name will be '' afterwards\&.
 .PP
@@ -3993,9 +3721,9 @@ On invalid names, NULL or '' the name will be '' afterwards\&.
 .PP
 \fBSee also:\fP
 .RS 4
-\fBkeyNew()\fP, \fBkeySetOwner()\fP 
+\fBkeyNew()\fP 
 .PP
-\fBkeyGetName()\fP, \fBkeyGetFullName()\fP, \fBkeyName()\fP 
+\fBkeyGetName()\fP, \fBkeyName()\fP 
 .PP
 \fBkeySetBaseName()\fP, \fBkeyAddBaseName()\fP to manipulate a name
 .RE
@@ -4006,17 +3734,23 @@ On invalid names, NULL or '' the name will be '' afterwards\&.
 .RE
 .PP
 
+.SS "ssize_t kdb::Key::setNamespace (ElektraNamespace ns) const\fC [inline]\fP"
+
+.PP
+Set the namespace of the key\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+ElektraNamespace, \fBkeySetNamespace\fP 
+.RE
+.PP
+
 .SS "void kdb::Key::setString (const char * newString)\fC [inline]\fP"
 
 .PP
 Set the value for \fCkey\fP as \fCnewStringValue\fP\&. The function will allocate and save a private copy of \fCnewStringValue\fP, so the parameter can be freed after the call\&.
 .PP
 String values will be saved in backend storage, when kdbSetKey() will be called, in UTF-8 universal encoding, regardless of the program's current encoding, when iconv plugin is present\&.
-.PP
-\fBNote:\fP
-.RS 4
-The type will be set to KEY_TYPE_STRING\&. When the type of the key is already a string type it won't be changed\&.
-.RE
 .PP
 \fBParameters:\fP
 .RS 4

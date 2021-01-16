@@ -1,4 +1,4 @@
-.TH "kdbenum.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbenum.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -47,7 +47,7 @@ kdbenum.c \- dummy file do document the enums which have no name in the header f
 
 .in +1c
 .ti -1c
-.RI "enum \fBelektraKeyFlags\fP { \fBKEY_NAME\fP =1, \fBKEY_VALUE\fP =1<<1, \fBKEY_FLAGS\fP =3, \fBKEY_OWNER\fP =1<<2, \fBKEY_COMMENT\fP =1<<3, \fBKEY_BINARY\fP =1<<4, \fBKEY_UID\fP =1<<5, \fBKEY_GID\fP =1<<6, \fBKEY_MODE\fP =1<<7, \fBKEY_ATIME\fP =1<<8, \fBKEY_MTIME\fP =1<<9, \fBKEY_CTIME\fP =1<<10, \fBKEY_SIZE\fP =1<<11, \fBKEY_DIR\fP =1<<14, \fBKEY_META\fP =1<<15, \fBKEY_NULL\fP =1<<16, \fBKEY_CASCADING_NAME\fP =1<<20, \fBKEY_META_NAME\fP =1<<21, \fBKEY_END\fP =0 }
+.RI "enum \fBelektraKeyFlags\fP { \fBKEY_NAME\fP =1, \fBKEY_VALUE\fP =1<<1, \fBKEY_FLAGS\fP =3, \fBKEY_COMMENT\fP =1<<3, \fBKEY_BINARY\fP =1<<4, \fBKEY_SIZE\fP =1<<11, \fBKEY_META\fP =1<<15, \fBKEY_NULL\fP =1<<16, \fBKEY_END\fP =0 }
 .RI "Allows \fBkeyNew()\fP to determine which information comes next\&. ""
 .br
 .ti -1c
@@ -55,7 +55,7 @@ kdbenum.c \- dummy file do document the enums which have no name in the header f
 .RI "Lock options\&. ""
 .br
 .ti -1c
-.RI "enum \fBelektraNamespace\fP { \fBKEY_NS_NONE\fP =0, \fBKEY_NS_EMPTY\fP =1, \fBKEY_NS_META\fP =2, \fBKEY_NS_CASCADING\fP =3, \fBKEY_NS_FIRST\fP =4, \fBKEY_NS_SPEC\fP =4, \fBKEY_NS_PROC\fP =5, \fBKEY_NS_DIR\fP =6, \fBKEY_NS_USER\fP =7, \fBKEY_NS_SYSTEM\fP =8, \fBKEY_NS_LAST\fP =8 }
+.RI "enum \fBelektraNamespace\fP { \fBKEY_NS_NONE\fP =0, \fBKEY_NS_CASCADING\fP =1, \fBKEY_NS_META\fP =2, \fBKEY_NS_SPEC\fP =3, \fBKEY_NS_PROC\fP =4, \fBKEY_NS_DIR\fP =5, \fBKEY_NS_USER\fP =6, \fBKEY_NS_SYSTEM\fP =7, \fBKEY_NS_DEFAULT\fP =8 }
 .RI "Elektra currently supported Key namespaces\&. ""
 .br
 .ti -1c

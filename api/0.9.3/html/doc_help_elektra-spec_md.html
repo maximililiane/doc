@@ -62,8 +62,8 @@ $(function() {
 </ul>
 <p>E.g.</p>
 <div class="fragment"><div class="line">[promise]</div><div class="line">default=20</div><div class="line">fallback/#0=/somewhere/else</div><div class="line">namespace/#0=user</div></div><!-- fragment --><ol type="1">
-<li>When this file is mounted to <code>spec/sw/app/#0</code> we specify, that for the key <code>/sw/app/#0/promise</code> only the namespace <code>user</code> should be used.</li>
-<li>If this key was not found, but <code>/somewhere/else</code> is present, we will use this key instead. The <code>fallback</code> technique is very powerful: it allows us to have (recursive) links between applications. In the example above, the application is tricked in receiving e.g. the key <code>user/somewhere/else</code> when <code>promise</code> was not available.</li>
+<li>When this file is mounted to <code>spec:/sw/app/#0</code> we specify, that for the key <code>/sw/app/#0/promise</code> only the namespace <code>user</code> should be used.</li>
+<li>If this key was not found, but <code>/somewhere/else</code> is present, we will use this key instead. The <code>fallback</code> technique is very powerful: it allows us to have (recursive) links between applications. In the example above, the application is tricked in receiving e.g. the key <code>user:/somewhere/else</code> when <code>promise</code> was not available.</li>
 <li>The value <code>20</code> will be used as default, even if no configuration file is found.</li>
 </ol>
 <p>Note that the fallback, override and cascading works on <em>key level</em>, and not like most other systems have implemented, on configuration <em>file level</em>.</p>

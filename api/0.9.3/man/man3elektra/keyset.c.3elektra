@@ -1,4 +1,4 @@
-.TH "keyset.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "keyset.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,10 @@ keyset.c \- Methods for key sets\&.
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'kdbprivate\&.h'\fP
+.br
+\fC#include <kdb\&.h>\fP
+.br
 \fC#include <kdbtypes\&.h>\fP
 .br
 \fC#include 'kdbinternal\&.h'\fP

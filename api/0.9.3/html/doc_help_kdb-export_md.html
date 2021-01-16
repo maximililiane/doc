@@ -56,7 +56,7 @@ $(function() {
 <li><code>-V</code>, <code>--version</code>: Print version info.</li>
 <li><code>-p</code>, <code>--profile &lt;profile&gt;</code>: Use a different kdb profile.</li>
 <li><code>-C</code>, <code>--color &lt;when&gt;</code>: Print never/auto(default)/always colored output.</li>
-<li><code>-E</code>, <code>--without-elektra</code>: Omit the <code>system/elektra</code> directory.</li>
+<li><code>-E</code>, <code>--without-elektra</code>: Omit the <code>system:/elektra</code> directory.</li>
 <li><code>-c</code>, <code>--plugins-config &lt;plugins-config&gt;</code>: Add a configuration to the format plugin.</li>
 <li><code>-v</code>, <code>--verbose</code>: Explain what is happening. Prints additional information in case of errors/warnings.</li>
 <li><code>-d</code>, <code>--debug</code>: Give debug information. Prints additional debug information in case of errors/warnings.</li>
@@ -70,14 +70,14 @@ $(function() {
 <p>To backup your full key database in Elektra’s <code>storage</code> format to a file called <code>full-backup.ecf</code>:<br />
  <code>kdb export / &gt; full-backup.ecf</code><br />
 </p>
-<p>To backup a keyset stored in <code>user/keyset</code> in the <code>ini</code> format to a file called <code>keyset.ini</code>:<br />
- <code>kdb export user/keyset ini &gt; keyset.ini</code><br />
+<p>To backup a keyset stored in <code>user:/keyset</code> in the <code>ini</code> format to a file called <code>keyset.ini</code>:<br />
+ <code>kdb export user:/keyset ini &gt; keyset.ini</code><br />
 </p>
 <p>Change default format to <code>simpleini</code>:<br />
  <code>kdb set /sw/elektra/kdb/#0/current/format simpleini</code></p>
 <p>Create two key values and export them as <code>xml</code>:</p>
-<div class="fragment"><div class="line">kdb set user/tests/kdb-export/one one</div><div class="line">kdb set user/tests/kdb-export/two two</div><div class="line"></div><div class="line">kdb export user/tests/kdb-export/ xml</div><div class="line">#&gt; &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">#&gt; &lt;kdb-export&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;one&gt;one&lt;/one&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;two&gt;two&lt;/two&gt;</div><div class="line">#&gt;</div><div class="line">#&gt; &lt;/kdb-export&gt;</div><div class="line"></div><div class="line"></div><div class="line">kdb rm -r user/tests</div><div class="line"># cleanup</div></div><!-- fragment --><p>Create two key values and export them with the <code>xerces</code> plugin:</p>
-<div class="fragment"><div class="line">kdb set user/tests/kdb-export/one one</div><div class="line">kdb set user/tests/kdb-export/two two</div><div class="line"></div><div class="line">kdb export user/tests/kdb-export/ xerces</div><div class="line">#&gt; &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">#&gt; &lt;kdb-export&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;one&gt;one&lt;/one&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;two&gt;two&lt;/two&gt;</div><div class="line">#&gt;</div><div class="line">#&gt; &lt;/kdb-export&gt;</div><div class="line"></div><div class="line">kdb rm -r user/tests</div><div class="line"># cleanup</div></div><!-- fragment --><ul>
+<div class="fragment"><div class="line">kdb set user:/tests/kdb-export/one one</div><div class="line">kdb set user:/tests/kdb-export/two two</div><div class="line"></div><div class="line">kdb export user:/tests/kdb-export/ xml</div><div class="line">#&gt; &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">#&gt; &lt;kdb-export&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;one&gt;one&lt;/one&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;two&gt;two&lt;/two&gt;</div><div class="line">#&gt;</div><div class="line">#&gt; &lt;/kdb-export&gt;</div><div class="line"></div><div class="line"></div><div class="line">kdb rm -r user:/tests</div><div class="line"># cleanup</div></div><!-- fragment --><p>Create two key values and export them with the <code>xerces</code> plugin:</p>
+<div class="fragment"><div class="line">kdb set user:/tests/kdb-export/one one</div><div class="line">kdb set user:/tests/kdb-export/two two</div><div class="line"></div><div class="line">kdb export user:/tests/kdb-export/ xerces</div><div class="line">#&gt; &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot; ?&gt;</div><div class="line">#&gt; &lt;kdb-export&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;one&gt;one&lt;/one&gt;</div><div class="line">#&gt;</div><div class="line">#&gt;   &lt;two&gt;two&lt;/two&gt;</div><div class="line">#&gt;</div><div class="line">#&gt; &lt;/kdb-export&gt;</div><div class="line"></div><div class="line">kdb rm -r user:/tests</div><div class="line"># cleanup</div></div><!-- fragment --><ul>
 <li>Only storage plugins can be used for formatting. </li>
 </ul>
 </div></div><!-- contents -->

@@ -42,13 +42,13 @@ $(function() {
 <div class="title">Error Code Implementation </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>In the previous error concept it was very useful to generate macros as we often added new errors. The code generation itself, however, is quite complicated (C++ code that prints the code; which is also not ideal for cross compilation, see also <a href="https://github.com/ElektraInitiative/libelektra/issues/2814">https://github.com/ElektraInitiative/libelektra/issues/2814</a>).</p>
+<div class="textblock"><p>In the previous error concept it was very useful to generate macros as we often added new errors. The code generation itself, however, was not ideal for cross compilation.</p>
 <ul>
 <li>Error codes do not change very often</li>
 </ul>
 <ul>
 <li>Migrate to a more modern and easier way to generate code with our mustache system, and let this generate the (mapping) code for all compiled languages (C, C++, Java, Rust, Go). All we get out of this is the removal of <code>std::cout &lt;&lt; ...</code> code from C++ but not much more.</li>
-<li>Migrate to CMake code that generates such macros/classes (see also <a href="https://github.com/ElektraInitiative/libelektra/issues/2814">https://github.com/ElektraInitiative/libelektra/issues/2814</a>) Mustache templates have to be supplied with the input data somehow. Either we have to use a custom executable that is compiled at build time. In that case we would just get rid of the std::cout &lt;&lt; ... in the C++ code, but not much else would change. The other option is to use the default mustache executable, which is a Ruby script and therefore requires Ruby to be installed. Also kdb gen cannot be reused, since that would require compiling kdb first, which needs <a class="el" href="kdberrors_8h.html" title="Provides all macros and definitions which are used for emitting error or warnings. ">kdberrors.h</a>.</li>
+<li>Migrate to CMake code that generates such macros/classes. Mustache templates have to be supplied with the input data somehow. Either we have to use a custom executable that is compiled at build time. In that case we would just get rid of the <code>std::cout &lt;&lt; ...</code> in the C++ code, but not much else would change. The other option is to use the default mustache executable, which is a Ruby script and therefore requires Ruby to be installed. Also kdb gen cannot be reused, since that would require compiling kdb first, which needs <a class="el" href="kdberrors_8h.html" title="Provides all macros and definitions which are used for emitting error or warnings. ">kdberrors.h</a>.</li>
 </ul>
 <p>Write down the few macros manually, and also manually write down exceptions for the language bindings (and also the mappings from Elektra's internal errors to nice errors specific for the languages)</p>
 <p>Since error codes and crucial parts Elektra's core implementation will not change often this is the best approach with minimal effort.</p>
@@ -62,8 +62,8 @@ $(function() {
 <li>Tutorial on how to write a binding should be written</li>
 </ul>
 <ul>
-<li><a href="https://github.com/ElektraInitiative/libelektra/issues/2871">https://github.com/ElektraInitiative/libelektra/issues/2871</a></li>
-<li><a href="https://github.com/ElektraInitiative/libelektra/issues/2814">https://github.com/ElektraInitiative/libelektra/issues/2814</a> </li>
+<li>See also <a href="https://issues.libelektra.org/2814">Issue #2814</a></li>
+<li>See also <a href="https://issues.libelektra.org/2871">Issue #2871</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

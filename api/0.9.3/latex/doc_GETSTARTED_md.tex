@@ -67,11 +67,18 @@ mkdir build  && cd build  #create and navigate to the build directory
 cmake ..  # watch output to see if everything needed is included
 #  optionally run "ccmake .." to get an overview of the available build settings (needs cmake-curses-gui)
 cmake --build build -- -j5
-cmake --build build --target run\_nokdbtests #optional: run tests
 \end{DoxyCode}
 
 
-With these commands you will be able to run the \char`\"{}\+Hello World!\char`\"{} example but usually you will need to use some of the \hyperlink{src_plugins_README_md}{plugins}, tools and bindings of Elektra. Please take a look to the more detailed \hyperlink{doc_COMPILE_md}{compiling documentation}. After you completed building Elektra on your own, you can execute these commands to install Elektra (please check the \hyperlink{doc_INSTALL_md}{installation documentation} if you are using Debian)\+:
+Optionally you can also run tests, see \hyperlink{doc_TESTING_md}{here for more information}\+:
+
+
+\begin{DoxyCode}
+cmake --build build --target run\_nokdbtests
+\end{DoxyCode}
+
+
+With these commands you will be able to run the \char`\"{}\+Hello World!\char`\"{} example but usually you will need to use some of the \hyperlink{src_plugins_README_md}{plugins}, tools and bindings of Elektra. Please take a look at the more detailed \hyperlink{doc_COMPILE_md}{compiling documentation}. After you completed building Elektra on your own, you can execute these commands to install Elektra (please check the \hyperlink{doc_INSTALL_md}{installation documentation} for the many available packages)\+:
 
 
 \begin{DoxyCode}
@@ -82,9 +89,17 @@ sudo ldconfig #optional: check installation documentation for more information
 
 \hyperlink{doc_INSTALL_md}{Installation documentation} contains further information about available packages.
 
+Optionally you can also run tests to verify the installed Elektra, see \hyperlink{doc_TESTING_md}{here for more information}\+:
+
+
+\begin{DoxyCode}
+kdb run\_nokdbtests
+\end{DoxyCode}
+
+
 
 \begin{DoxyItemize}
 \item Hello World!
 
-Start with your very first Elektra application and follow these steps\+: \hyperlink{doc_tutorials_hello-elektra_md}{Hello World!} 
+Start with your very first Elektra application in C and follow these steps\+: \hyperlink{doc_tutorials_hello-elektra_md}{Hello World!} 
 \end{DoxyItemize}

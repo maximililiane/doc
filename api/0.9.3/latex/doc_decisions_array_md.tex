@@ -15,7 +15,9 @@ Currently it is inefficient to detect the length of an array and it is impossibl
 \item use metadata on all children
 \end{DoxyItemize}
 
-Store length in metadata {\ttfamily array} of key, or keep metadata {\ttfamily array} empty if empty array. For example ({\ttfamily ni syntax}, sections used for metadata)\+:
+Store length in metadata {\ttfamily array} of key, or keep metadata {\ttfamily array} empty if empty array. Only children that have {\ttfamily \#} syntax are allowed in a valid array. The index start with {\ttfamily \#0}. Both {\ttfamily key\+Add\+Name(\char`\"{}\#12\char`\"{})} or {\ttfamily key\+Add\+Base\+Name(\char`\"{}\#\+\_\+12\char`\"{})} is allowed to add the 13th index.
+
+For example ({\ttfamily ni syntax}, sections used for metadata)\+:
 
 
 \begin{DoxyCode}
@@ -32,7 +34,7 @@ myarray/#5 = value5
 
 It is not allowed to have anything else than {\ttfamily \#5} in the metadata {\ttfamily array}, e.\+g. even {\ttfamily \#4} would be a malformed array.
 
-The metadata {\ttfamily array} preferable should be in {\ttfamily spec} (specified configuration). Then the {\ttfamily spec} plugin will add the {\ttfamily array} marker with the correct length. This needs to be happen early, so that plugins can rely on having correct arrays.
+With the metadata {\ttfamily array} in {\ttfamily spec\+:/} the {\ttfamily spec} plugin will add the {\ttfamily array} marker with the correct length. This needs to be happen early, so that plugins can rely on having correct arrays.
 
 For example\+:
 
@@ -66,14 +68,14 @@ system:/myarray  # <- not found in cascading lookup, as user:/myarray exists
 \end{DoxyCode}
 
 
-Guarantees we want from the spec plugin\+:
+The {\ttfamily spec} plugin should check if it is a valid array, i.\+e.\+:
 
 
 \begin{DoxyItemize}
-\item that the parent key always contain {\ttfamily array}.
-\item that the correct length is in {\ttfamily array}
-\item that the array only contains {\ttfamily \#} children
-\item that the children are numbered from 0 to n, without holes
+\item that the parent key always contains the metadata {\ttfamily array},
+\item that the correct length is in {\ttfamily array},
+\item that the array only contains {\ttfamily \#} children, and
+\item that the children are numbered from {\ttfamily \#0} to {\ttfamily \#n}, without holes.
 \end{DoxyItemize}
 
 
@@ -89,12 +91,17 @@ Guarantees we want from the spec plugin\+:
 \item metadata library needs to be adapted
 \item spec plugin needs to be fixed, a lot of work needed there. Most amount of work is to detect misstructured nested arrays ({\ttfamily \#} intermixed with non {\ttfamily \#} keys) which is a possibility also in all the alternatives of this decision.
 \item A {\ttfamily user\+:/} or {\ttfamily dir\+:/} key can change the semantics of a {\ttfamily system\+:/} array, if not avoided by {\ttfamily spec}.
+\item user-\/facing documentation should contain a note like\+: \char`\"{}\+Mixing array and non-\/array keys in arrays is not supported.
+  In many cases the trivial solution is to move the array part into a separate child-\/key.\char`\"{}
 \end{DoxyItemize}
 
 
 \begin{DoxyItemize}
 \item \hyperlink{doc_decisions_global_plugins_md}{Global Plugins}
 \item \hyperlink{doc_decisions_global_validation_md}{Global Validation}
+\item \hyperlink{doc_decisions_base_name_md}{Base Names}
+\item \hyperlink{doc_decisions_spec_metadata_md}{Metadata in Spec Namespace}
+\item \hyperlink{doc_decisions_spec_expressiveness_md}{Spec Expressiveness}
 \end{DoxyItemize}
 
 \href{https://github.com/ElektraInitiative/libelektra/issues/182}{\tt https\+://github.\+com/\+Elektra\+Initiative/libelektra/issues/182} 

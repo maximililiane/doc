@@ -113,7 +113,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Decrement the name of an array key by one. </p>
-<p>The alphabetical order will remain intact. For example, <code>user/abc/\#_10</code> will be changed to <code>user/abc/\#9</code>.</p>
+<p>The alphabetical order will remain intact. For example, <code>user:/abc/\#_10</code> will be changed to <code>user:/abc/\#9</code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">This</td><td>parameter determines the key name this function decrements.</td></tr>
@@ -157,7 +157,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return all the array keys below the given array parent. </p>
-<p>The array parent itself is not returned. For example, if <code>user/config/#</code> is an array, <code>user/config</code> is the array parent. Only the direct array keys will be returned. This means that for example <code>user/config/#1/key</code> will not be included, but only <code>user/config/#1</code>.</p>
+<p>The array parent itself is not returned. For example, if <code>user:/config/#</code> is an array, <code>user:/config</code> is the array parent. Only the direct array keys will be returned. This means that for example <code>user:/config/#1/key</code> will not be included, but only <code>user:/config/#1</code>.</p>
 <p>A new keyset will be allocated for the resulting keys. This means that the caller must <code>ksDel</code> the resulting keyset.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -231,8 +231,8 @@ Functions</h2></td></tr>
 
 <p>Increment the name of the key by one. </p>
 <p>Alphabetical order will remain</p>
-<p>e.g. user/abc/#9 will be changed to user/abc/#_10</p>
-<p>For the start: user/abc/# will be changed to user/abc/#0</p>
+<p>e.g. user:/abc/#9 will be changed to user:/abc/#_10</p>
+<p>For the start: user:/abc/# will be changed to user:/abc/#0</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>which base name will be incremented</td></tr>

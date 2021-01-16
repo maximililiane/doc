@@ -32,6 +32,8 @@ These problems can be traced back to the placement of the plugins. We need to cl
 
 Have hooks and A\+PI specific to the list of global plugins in assumptions. These hooks are not shared, so no {\ttfamily list} plugin is needed.
 
+Installed plugins will be used.
+
 
 \begin{DoxyItemize}
 \item allows adding more types of plugins later, also post-\/1.\+0
@@ -41,6 +43,8 @@ Have hooks and A\+PI specific to the list of global plugins in assumptions. Thes
 
 
 \begin{DoxyItemize}
+\item remove {\ttfamily global-\/mount} command
+\item command for mmap/notification/... enable disable (like current {\ttfamily kdb cache} tool)
 \item remove {\ttfamily list} plugin
 \item remove plugins that stop working or disallow global positioning for them
 \item call {\ttfamily spec} as needed several times

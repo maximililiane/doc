@@ -1,4 +1,4 @@
-.TH "keyset" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "keyset" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -164,9 +164,9 @@ You can easily create and iterate keys:
 .nf
 // create a new keyset with 3 keys
 // with a hint that about 20 keys will be inside
-KeySet * myConfig = ksNew (20, keyNew ("user/name1", 0), keyNew ("user/name2", 0), keyNew ("user/name3", 0), KS_END);
+KeySet * myConfig = ksNew (20, keyNew ("user:/name1", 0), keyNew ("user:/name2", 0), keyNew ("user:/name3", 0), KS_END);
 // append a key in the keyset
-ksAppendKey (myConfig, keyNew ("user/name4", 0));
+ksAppendKey (myConfig, keyNew ("user:/name4", 0));
 
 Key * current;
 ksRewind (myConfig);
@@ -306,7 +306,7 @@ It is safe to directly append newly created keys:
 .PP
 .nf
 KeySet * ks = ksNew (1, KS_END);
-ksAppendKey (ks, keyNew ("user/my/new/key", KEY_END));
+ksAppendKey (ks, keyNew ("user:/my/new/key", KEY_END));
 ksDel (ks);
 // key deleted, too!
 
@@ -316,7 +316,7 @@ ksDel (ks);
 .PP
 .nf
 KeySet * ks = ksNew (1, KS_END);
-Key * k = keyNew ("user/ref/key", KEY_END);
+Key * k = keyNew ("user:/ref/key", KEY_END);
 keyIncRef (k);
 ksAppendKey (ks, k);
 ksDel (ks);
@@ -330,7 +330,7 @@ keyDel (k);
 .PP
 .nf
 KeySet * ks = ksNew (1, KS_END);
-Key * k = keyNew ("user/ref/key", KEY_END);
+Key * k = keyNew ("user:/ref/key", KEY_END);
 ksAppendKey (ks, keyDup (k));
 ksDel (ks);
 // now we still can work with the key k!
@@ -495,21 +495,21 @@ If you use \fBksCut()\fP on a keyset you got from \fBkdbGet()\fP and plan to mak
 .PP
 You have the keyset \fCks:\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest\fP 
+\fCsystem:/mountpoint/interest\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder\fP 
+\fCsystem:/mountpoint/interest/folder\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder/key1\fP 
+\fCsystem:/mountpoint/interest/folder/key1\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder/key2\fP 
+\fCsystem:/mountpoint/interest/folder/key2\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/other/key1\fP 
+\fCsystem:/mountpoint/other/key1\fP 
 .PP
 .PP
 When you use 
 .PP
 .nf
-     Key * parentKey = keyNew ("system/mountpoint/interest", KEY_END);
+     Key * parentKey = keyNew ("system:/mountpoint/interest", KEY_END);
         KDB * kdb = kdbOpen (parentKey);
         KeySet * ks = ksNew (0, KS_END);
         kdbGet (kdb, ks, parentKey);
@@ -521,21 +521,21 @@ When you use
 .PP
  Then in \fCreturned\fP are:
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest\fP 
+\fCsystem:/mountpoint/interest\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder\fP 
+\fCsystem:/mountpoint/interest/folder\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder/key1\fP 
+\fCsystem:/mountpoint/interest/folder/key1\fP 
 .IP "\(bu" 2
-\fCsystem/mountpoint/interest/folder/key2\fP 
+\fCsystem:/mountpoint/interest/folder/key2\fP 
 .PP
 .PP
 And in \fCks\fP are:
 .IP "\(bu" 2
-\fCsystem/mountpoint/other/key1\fP 
+\fCsystem:/mountpoint/other/key1\fP 
 .PP
 .PP
-So \fBkdbSet()\fP permanently removes all keys below \fCsystem/mountpoint/interest\fP\&.
+So \fBkdbSet()\fP permanently removes all keys below \fCsystem:/mountpoint/interest\fP\&.
 .PP
 \fBSee also:\fP
 .RS 4
@@ -803,7 +803,7 @@ Key * result = ksLookupByName (myConfig, "/sw/tests/myapp/#0/current/testkey1", 
 .PP
 If found, \fCks\fP internal cursor will be positioned in the matched key (also accessible by \fBksCurrent()\fP), and a pointer to the Key is returned\&. If not found, \fCks\fP internal cursor will not move, and a NULL pointer is returned\&.
 .PP
-Cascading lookups will by default search in all namespaces (proc/, dir/, user/ and system/), but will also correctly consider the specification (=metadata) in spec/:
+Cascading lookups will by default search in all namespaces (proc:/, dir:/, user:/ and system:/), but will also correctly consider the specification (=metadata) in spec:/:
 .PP
 .IP "\(bu" 2
 \fCoverride/#\fP will make sure that another key is considered before
@@ -1007,7 +1007,7 @@ You can defer the allocation of the internal array that holds the keys, by passi
 // Create KeySet without allocating memory for keys
 KeySet * keys = ksNew (0, KS_END);
 // The first allocation will happen in ksAppendKey
-ksAppendKey(keys, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0));
+ksAppendKey(keys, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0));
 // work with the KeySet
 ksDel (keys);
 .fi
@@ -1018,11 +1018,11 @@ If you want a keyset with length 15 (because you know of your application that y
 .PP
 .PP
 .nf
-KeySet * keys = ksNew (15, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key01", KEY_VALUE, "value01", 0),
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0),
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key03", KEY_VALUE, "value03", 0),
+KeySet * keys = ksNew (15, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key01", KEY_VALUE, "value01", 0),
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0),
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key03", KEY_VALUE, "value03", 0),
                        // \&.\&.\&.
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key15", KEY_VALUE, "value15", 0), KS_END);
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key15", KEY_VALUE, "value15", 0), KS_END);
 // work with it
 ksDel (keys);
 .fi
@@ -1031,9 +1031,9 @@ ksDel (keys);
 .PP
 .PP
 .nf
-KeySet * config = ksNew (500, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key1", KEY_VALUE, "value1", 0),
-                         keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key2", KEY_VALUE, "value2", 0),
-                         keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key3", KEY_VALUE, "value3", 0),
+KeySet * config = ksNew (500, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key1", KEY_VALUE, "value1", 0),
+                         keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key2", KEY_VALUE, "value2", 0),
+                         keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key3", KEY_VALUE, "value3", 0),
                          KS_END); // don't forget the KS_END at the end!
 // work with it
 ksDel (config);
@@ -1131,7 +1131,7 @@ You need to \fBkeyDel()\fP the key afterwards, if you don't append it to another
 ks1=ksNew(0, KS_END);
 ks2=ksNew(0, KS_END);
 
-k1=keyNew("user/name", KEY_END); // ref counter 0
+k1=keyNew("user:/name", KEY_END); // ref counter 0
 ksAppendKey(ks1, k1); // ref counter 1
 ksAppendKey(ks2, k1); // ref counter 2
 
@@ -1310,7 +1310,7 @@ You can defer the allocation of the internal array that holds the keys, by passi
 // Create KeySet without allocating memory for keys
 KeySet * keys = ksNew (0, KS_END);
 // The first allocation will happen in ksAppendKey
-ksAppendKey(keys, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0));
+ksAppendKey(keys, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0));
 // work with the KeySet
 ksDel (keys);
 .fi
@@ -1321,11 +1321,11 @@ If you want a keyset with length 15 (because you know of your application that y
 .PP
 .PP
 .nf
-KeySet * keys = ksNew (15, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key01", KEY_VALUE, "value01", 0),
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0),
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key03", KEY_VALUE, "value03", 0),
+KeySet * keys = ksNew (15, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key01", KEY_VALUE, "value01", 0),
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key02", KEY_VALUE, "value02", 0),
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key03", KEY_VALUE, "value03", 0),
                        // \&.\&.\&.
-                       keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key15", KEY_VALUE, "value15", 0), KS_END);
+                       keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key15", KEY_VALUE, "value15", 0), KS_END);
 // work with it
 ksDel (keys);
 .fi
@@ -1334,9 +1334,9 @@ ksDel (keys);
 .PP
 .PP
 .nf
-KeySet * config = ksNew (500, keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key1", KEY_VALUE, "value1", 0),
-                         keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key2", KEY_VALUE, "value2", 0),
-                         keyNew ("user/sw/org/app/#0/current/fixedConfiguration/key3", KEY_VALUE, "value3", 0),
+KeySet * config = ksNew (500, keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key1", KEY_VALUE, "value1", 0),
+                         keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key2", KEY_VALUE, "value2", 0),
+                         keyNew ("user:/sw/org/app/#0/current/fixedConfiguration/key3", KEY_VALUE, "value3", 0),
                          KS_END); // don't forget the KS_END at the end!
 // work with it
 ksDel (config);

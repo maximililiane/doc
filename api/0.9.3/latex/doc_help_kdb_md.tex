@@ -15,13 +15,13 @@ External commands can be listed via\+:~\newline
  {\ttfamily kdb list-\/tools}
 
 Only a few commands are enough for daily use. We can retrieve a key by\+:~\newline
- {\ttfamily kdb get user/key}
+ {\ttfamily kdb get user\+:/key}
 
 We store a key permanently with a value given by\+:~\newline
- {\ttfamily kdb set user/key value}
+ {\ttfamily kdb set user\+:/key value}
 
 We list all available keys arranged below a key by\+:~\newline
- {\ttfamily kdb ls user/key}
+ {\ttfamily kdb ls user\+:/key}
 
 Documentation of plugins is available using the \hyperlink{doc_help_kdb-plugin-info_md}{kdb-\/plugin-\/info(1)} tool\+:~\newline
  {\ttfamily kdb plugin-\/info}
@@ -88,7 +88,7 @@ It will read its format configuration from {\ttfamily /sw/elektra/kdb/\#0/admin/
 If you want different configuration per user or directories, you should prefer to use the {\ttfamily user} and {\ttfamily dir} namespaces. Then the correct configuration will be chosen automatically according to the current user or current working directory.
 
 Sometimes it is useful to start with default options, for example it is not possible to invert the {\ttfamily -\/q} option. In such situations one can simply select a non-\/existing profile, then {\ttfamily -\/q} works as usual\+:~\newline
- {\ttfamily kdb mount -\/p nonexist -\/q /abc dir/abc}
+ {\ttfamily kdb mount -\/p nonexist -\/q /abc dir\+:/abc}
 
 If {\ttfamily \%} is used as profile name for {\ttfamily -\/p}, the {\ttfamily kdb} tools disables reading from {\ttfamily K\+DB} for their own configuration settings. Then, they only use command-\/line arguments.
 
@@ -117,8 +117,8 @@ For example, if you set the bookmark kdb\+:
 
 
 \begin{DoxyCode}
-kdb set user/sw/elektra/kdb/#0/current/bookmarks
-kdb set user/sw/elektra/kdb/#0/current/bookmarks/kdb user/sw/elektra/kdb/#0/current
+kdb set user:/sw/elektra/kdb/#0/current/bookmarks
+kdb set user:/sw/elektra/kdb/#0/current/bookmarks/kdb user:/sw/elektra/kdb/#0/current
 \end{DoxyCode}
 
 

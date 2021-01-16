@@ -48,8 +48,8 @@ namespace/#0=user
 
 
 \begin{DoxyEnumerate}
-\item When this file is mounted to {\ttfamily spec/sw/app/\#0} we specify, that for the key {\ttfamily /sw/app/\#0/promise} only the namespace {\ttfamily user} should be used.
-\item If this key was not found, but {\ttfamily /somewhere/else} is present, we will use this key instead. The {\ttfamily fallback} technique is very powerful\+: it allows us to have (recursive) links between applications. In the example above, the application is tricked in receiving e.\+g. the key {\ttfamily user/somewhere/else} when {\ttfamily promise} was not available.
+\item When this file is mounted to {\ttfamily spec\+:/sw/app/\#0} we specify, that for the key {\ttfamily /sw/app/\#0/promise} only the namespace {\ttfamily user} should be used.
+\item If this key was not found, but {\ttfamily /somewhere/else} is present, we will use this key instead. The {\ttfamily fallback} technique is very powerful\+: it allows us to have (recursive) links between applications. In the example above, the application is tricked in receiving e.\+g. the key {\ttfamily user\+:/somewhere/else} when {\ttfamily promise} was not available.
 \item The value {\ttfamily 20} will be used as default, even if no configuration file is found.
 \end{DoxyEnumerate}
 

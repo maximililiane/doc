@@ -76,11 +76,11 @@ $(function() {
 <li>[error/file] yields the source file from where the error information comes.</li>
 <li>[error/line] represents the exact line of that source file.</li>
 </ul>
-<p>Beside errors, Elektra can also emit warnings metadata. While only a single error can be set on a specific error key, warnings can be up to 100 entries (#00 - #99):</p>
+<p>Beside errors, Elektra can also emit warnings metadata. While only a single error can be set on a specific error key, warnings can be up to 100 entries (#0 - #_99):</p>
 <ul>
 <li>[warnings] indicate that at least one warning is present. The value of the metakey contains the number of warnings which can be accessed.</li>
 </ul>
-<p>Additional metakeys yield all the details. The warnings are stored in a special array format which range from 00 to 99. E.g., the first warning number can be accessed by getting the key <code>warnings/#00/number</code>. The following metadatas are available and have the same semantics as the error metadata: <code>[warnings/&lt;number&gt;/number]</code>, <code>[warnings/&lt;number&gt;/description]</code>, <code>[warnings/&lt;number&gt;/reason]</code>, <code>[warnings/&lt;number&gt;/module]</code>, <code>[warnings/&lt;number&gt;/file]</code>, <code>[warnings/&lt;number&gt;/line]</code></p>
+<p>Additional metakeys yield all the details. The warnings are stored in a special array format which range from 0 to _99. E.g., the first warning number can be accessed by getting the key <code>warnings/#0/number</code>. The following metadatas are available and have the same semantics as the error metadata: <code>[warnings/&lt;number&gt;/number]</code>, <code>[warnings/&lt;number&gt;/description]</code>, <code>[warnings/&lt;number&gt;/reason]</code>, <code>[warnings/&lt;number&gt;/module]</code>, <code>[warnings/&lt;number&gt;/file]</code>, <code>[warnings/&lt;number&gt;/line]</code></p>
 <p>If there are more than 100 warnings, the information will be overwritten from the start again.</p>
 <p>As we see, the system is powerful because any other text or information can be added in a flexible manner by using additional metakeys.</p>
 <p>The error specification in Elektra is written in simple colon-separated text files. Each entry has a unique identifier and all the information we already discussed above. No part of Elektra ever reads this file directly. Instead it is used to generate source code which contains everything needed to add a particular error or warning information. With that file we achieved a central place for error-related information. All other locations are automatically generated instead of having error-prone duplicated code. This principle is called “Don't repeat yourself”.</p>

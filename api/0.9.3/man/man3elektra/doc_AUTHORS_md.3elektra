@@ -1,4 +1,4 @@
-.TH "doc_AUTHORS_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_AUTHORS_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -236,6 +236,16 @@ email: mail@dardan.im
 .IP "\(bu" 2
 github user: \fCdarddan\fP
 .IP "\(bu" 2
-devel/test on: Arch Linux 
+devel/test on: Arch Linux
+.PP
+.PP
+debian packaging, release automation
+.PP
+.IP "\(bu" 2
+email: robert@sowula.at
+.IP "\(bu" 2
+github user: \fCrobaerd\fP
+.IP "\(bu" 2
+devel/test on: Debian, Ubuntu 
 .PP
 

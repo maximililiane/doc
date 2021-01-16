@@ -122,7 +122,7 @@ $(function() {
 <li>C-Files have extension <code>.c</code>, Header files <code>.h</code>.</li>
 <li>Use internal functions: prefer to use <code>elektraMalloc</code>, <code>elektraFree</code>.</li>
 </ul>
-<p><b>Example:</b> <a href="/home/jenkins/workspace/libelektra-release/src/libs/elektra/kdb.c">src/libs/elektra/kdb.c</a></p>
+<p><b>Example:</b> <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/src/libs/elektra/kdb.c">src/libs/elektra/kdb.c</a></p>
 <p>To guarantee consistent formatting we use <a href="https://clang.llvm.org/docs/ClangFormat.html"><code>clang-format</code></a> (version <code>9</code>) to format all C and C++ code in the repository. Since our build servers also check the style for every pull request you might want to make sure you reformat your C/C++ code changes with this tool.</p>
 <p>To find out which version of <code>clang-format</code> a certain build server uses please check:</p>
 <ul>
@@ -166,7 +166,7 @@ $(function() {
 <li>Write everything within namespaces and do not prefix names.</li>
 <li>Oriented towards https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md "more safe and modern usage".</li>
 </ul>
-<p><b>Example:</b> <a href="/home/jenkins/workspace/libelektra-release/src/bindings/cpp/include/kdb.hpp">src/bindings/cpp/include/kdb.hpp</a></p>
+<p><b>Example:</b> <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/src/bindings/cpp/include/kdb.hpp">src/bindings/cpp/include/kdb.hpp</a></p>
 <p>We use a similar style for CMake as we do for other code:</p>
 <ul>
 <li>The length of a functions should not exceed 100 lines.</li>

@@ -1,11 +1,11 @@
-.TH "doc_help_kdb-reset-elektra_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-reset-elektra_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-doc_help_kdb-reset-elektra_mdkdb-reset-elektra(1) - Resets system/elektra 
+doc_help_kdb-reset-elektra_mdkdb-reset-elektra(1) - Resets system:/elektra 
  \- \fCkdb reset-elektra -f\fP
 .PP
-Resets all configuration changes that influence Elektra's core, i\&.e\&., keys in \fCsystem/elektra\fP\&.
+Resets all configuration changes that influence Elektra's core, i\&.e\&., keys in \fCsystem:/elektra\fP\&.
 .PP
 These changes cannot be undone, please use with care! This command writes into the \fC/etc\fP directory and as such it requires root permissions\&.
 .PP

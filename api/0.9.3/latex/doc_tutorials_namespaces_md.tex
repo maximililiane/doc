@@ -13,11 +13,11 @@ Now add the the key $\ast$$\ast$/a$\ast$$\ast$ with the Value {\bfseries Value 1
 
 \begin{DoxyCode}
 kdb set /a 'Value 1'
-#> Using name user/a
-#> Create a new key user/a with string "Value 1"
+#> Using name user:/a
+#> Create a new key user:/a with string "Value 1"
 kdb set /b/c 'Value 2'
-#> Using name user/b/c
-#> Create a new key user/b/c with string "Value 2"
+#> Using name user:/b/c
+#> Create a new key user:/b/c with string "Value 2"
 \end{DoxyCode}
 
 
@@ -58,13 +58,13 @@ But when we set the keys $\ast$$\ast$/a$\ast$$\ast$ and $\ast$$\ast$/b/c$\ast$$\
 
 
 \begin{DoxyCode}
-kdb ls user | grep -E '(/a|/b/c)'
-#> user/a
-#> user/b/c
+kdb ls user:/ | grep -E '(/a|/b/c)'
+#> user:/a
+#> user:/b/c
 \end{DoxyCode}
 
 
-When we don\textquotesingle{}t provide a namespace Elektra assumes a default namespace, which should be {\bfseries user} for non-\/root users. So if you are a normal user the command {\ttfamily kdb set /b/c \textquotesingle{}Value 2\textquotesingle{}} was synonymous to {\ttfamily kdb set user/b/c \textquotesingle{}Value 2\textquotesingle{}}.
+When we don\textquotesingle{}t provide a namespace Elektra assumes a default namespace, which should be {\bfseries user} for non-\/root users. So if you are a normal user the command {\ttfamily kdb set /b/c \textquotesingle{}Value 2\textquotesingle{}} was synonymous to {\ttfamily kdb set user\+:/b/c \textquotesingle{}Value 2\textquotesingle{}}.
 
 At this point the key database should have this structure\+: 
 
@@ -74,18 +74,18 @@ Another question you may ask yourself now is, what happens if we lookup a key wi
 \begin{DoxyCode}
 kdb get -v /b/c
 # STDOUT-REGEX: got \(\backslash\)d+ keys
-#>  searching spec/b/c, found: <nothing>, options: KDB\_O\_CALLBACK
-#>  searching proc/b/c, found: <nothing>, options:
-#>  searching dir/b/c, found: <nothing>, options:
-#>  searching user/b/c, found: user/b/c, options:
-#> The resulting key name is user/b/c
+#>  searching spec:/b/c, found: <nothing>, options: KDB\_O\_CALLBACK
+#>  searching proc:/b/c, found: <nothing>, options:
+#>  searching dir:/b/c, found: <nothing>, options:
+#>  searching user:/b/c, found: user:/b/c, options:
+#> The resulting key name is user:/b/c
 #> Value 2
 \end{DoxyCode}
 
 
 Here you see how Elektra searches all namespaces for matching keys in this order\+: {\bfseries spec}, {\bfseries proc}, {\bfseries dir}, {\bfseries user} and finally {\bfseries system}
 
-If a key is found in a namespace, it masks the key in all subsequent namespaces, which is the reason why the system namespace isn\textquotesingle{}t searched. Finally the virtual key $\ast$$\ast$/b/c$\ast$$\ast$ gets resolved to the real key {\bfseries user/b/c}. Because of the way a key without a namespace is retrieved, we call keys, that start with \textquotesingle{}$\ast$$\ast$/$\ast$$\ast$\textquotesingle{} {\bfseries cascading keys}. You can find out more about cascading lookups in the \hyperlink{doc_tutorials_cascading_md}{cascading tutorial}.
+If a key is found in a namespace, it masks the key in all subsequent namespaces, which is the reason why the system namespace isn\textquotesingle{}t searched. Finally the virtual key $\ast$$\ast$/b/c$\ast$$\ast$ gets resolved to the real key {\bfseries user\+:/b/c}. Because of the way a key without a namespace is retrieved, we call keys, that start with \textquotesingle{}$\ast$$\ast$/$\ast$$\ast$\textquotesingle{} {\bfseries cascading keys}. You can find out more about cascading lookups in the \hyperlink{doc_tutorials_cascading_md}{cascading tutorial}.
 
 Having namespaces enables both admins and users to set specific parts of the application\textquotesingle{}s configuration, as you will see in the following example.
 
@@ -108,15 +108,15 @@ Say we want to set {\ttfamily kdb} to be more verbose when it is used in the cur
 
 
 \begin{DoxyCode}
-kdb set "dir/sw/elektra/kdb/#0/%/verbose" 1
-#> Create a new key dir/sw/elektra/kdb/#0/%/verbose with string "1"
+kdb set "dir:/sw/elektra/kdb/#0/%/verbose" 1
+#> Create a new key dir:/sw/elektra/kdb/#0/%/verbose with string "1"
 \end{DoxyCode}
 
 
 \begin{quote}
-The configuration for a directory is actually stored in this directory. By default the configuration is contained in a folder named {\ttfamily .dir}, as you can verify with {\ttfamily kdb file dir} ({\itshape kdb file} tells you the file where a key is stored in).
+The configuration for a directory is actually stored in this directory. By default the configuration is contained in a folder named {\ttfamily .dir}, as you can verify with {\ttfamily kdb file dir\+:/} ({\itshape kdb file} tells you the file where a key is stored in).
 
-For the purpose of demonstration we chose to only manipulate the verbosity of kdb. Note that setting {\ttfamily dir/sw/elektra/kdb/\#0/\%/namespace} to {\ttfamily dir} can be handy if you want to work with configuration of an application in a certain directory. \end{quote}
+For the purpose of demonstration we chose to only manipulate the verbosity of kdb. Note that setting {\ttfamily dir\+:/sw/elektra/kdb/\#0/\%/namespace} to {\ttfamily dir} can be handy if you want to work with configuration of an application in a certain directory. \end{quote}
 
 
 If we now search for some key, {\ttfamily kdb} will behave just as if we have called it with the {\ttfamily -\/v} option.
@@ -125,12 +125,12 @@ If we now search for some key, {\ttfamily kdb} will behave just as if we have ca
 \begin{DoxyCode}
 kdb get /some/key
 # STDOUT-REGEX: got \(\backslash\)d+ keys
-#> searching spec/some/key, found: <nothing>, options: KDB\_O\_CALLBACK
-#>     searching proc/some/key, found: <nothing>, options:
-#>     searching dir/some/key, found: <nothing>, options:
-#>     searching user/some/key, found: <nothing>, options:
-#>     searching system/some/key, found: <nothing>, options:
-#>     searching default of spec/some/key, found: <nothing>, options: KDB\_O\_NOCASCADING
+#> searching spec:/some/key, found: <nothing>, options: KDB\_O\_CALLBACK
+#>     searching proc:/some/key, found: <nothing>, options:
+#>     searching dir:/some/key, found: <nothing>, options:
+#>     searching user:/some/key, found: <nothing>, options:
+#>     searching system:/some/key, found: <nothing>, options:
+#>     searching default of spec:/some/key, found: <nothing>, options: KDB\_O\_NOCASCADING
 #> Did not find key
 \end{DoxyCode}
 
@@ -139,11 +139,11 @@ Verbosity is not always useful because it distracts from the essential. So we ma
 
 
 \begin{DoxyCode}
-kdb mv -r "dir/sw/elektra/kdb/#0/%" "dir/sw/elektra/kdb/#0/debug"
-#> using common basename: dir/sw/elektra/kdb/#0
-#> key: dir/sw/elektra/kdb/#0/%/verbose will be renamed to: dir/sw/elektra/kdb/#0/debug/verbose
+kdb mv -r "dir:/sw/elektra/kdb/#0/%" "dir:/sw/elektra/kdb/#0/debug"
+#> using common basename: dir:/sw/elektra/kdb/#0
+#> key: dir:/sw/elektra/kdb/#0/%/verbose will be renamed to: dir:/sw/elektra/kdb/#0/debug/verbose
 #> Will write out:
-#> dir/sw/elektra/kdb/#0/debug/verbose
+#> dir:/sw/elektra/kdb/#0/debug/verbose
 \end{DoxyCode}
 
 
@@ -153,11 +153,11 @@ We configured kdb only for the current directory. If we like this configuration 
 
 
 \begin{DoxyCode}
-sudo kdb mv -r "dir/sw/elektra/kdb" "system/sw/elektra/kdb"
+sudo kdb mv -r "dir:/sw/elektra/kdb" "system:/sw/elektra/kdb"
 #> using common basename: /sw/elektra/kdb
-#> key: dir/sw/elektra/kdb/#0/%/verbose will be renamed to: system/sw/elektra/kdb/#0/%/verbose
+#> key: dir:/sw/elektra/kdb/#0/%/verbose will be renamed to: system:/sw/elektra/kdb/#0/%/verbose
 #> Will write out:
-#> system/sw/elektra/kdb/#0/%/verbose
+#> system:/sw/elektra/kdb/#0/%/verbose
 \end{DoxyCode}
 
 
@@ -176,7 +176,7 @@ When using cascading key the best key will be searched at run-\/time. If you are
 
 
 \begin{DoxyCode}
-kdb get "system/sw/elektra/kdb/#0/debug/verbose"
+kdb get "system:/sw/elektra/kdb/#0/debug/verbose"
 #> 1
 \end{DoxyCode}
 
@@ -185,8 +185,8 @@ Because of {\itshape cascading keys} a user can override the behavior of the {\i
 
 
 \begin{DoxyCode}
-kdb set "user/sw/elektra/kdb/#0/debug/verbose" 0
-#> Create a new key user/sw/elektra/kdb/#0/debug/verbose with string "0"
+kdb set "user:/sw/elektra/kdb/#0/debug/verbose" 0
+#> Create a new key user:/sw/elektra/kdb/#0/debug/verbose with string "0"
 kdb get "/sw/elektra/kdb/#0/debug/verbose"
 #> 0
 \end{DoxyCode}

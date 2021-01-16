@@ -1,4 +1,4 @@
-.TH "doc_help_elektra-cascading_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_elektra-cascading_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,7 +26,7 @@ They can be used like this:
 .PP
 .nf
 kdb set /overrides/test "example override"
-sudo kdb meta-set spec/test override/#0 /overrides/test
+sudo kdb meta-set spec:/test override/#0 /overrides/test
 .fi
 .PP
 .PP

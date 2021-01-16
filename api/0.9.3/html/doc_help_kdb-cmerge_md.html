@@ -92,7 +92,7 @@ $(function() {
 </p>
 <p>To complete a simple merge of three KeySets:<br />
 </p>
-<p>````ssh kdb set user/base "A" #&gt; Create a new key user/base with string "A" kdb set user/their "A" #&gt; Create a new key user/their with string "A" kdb set user/our "B" #&gt; Create a new key user/our with string "B" kdb cmerge user/our user/their user/base user/result kdb get user/result #&gt;B</p>
+<p>````ssh kdb set user:/base "A" #&gt; Create a new key user:/base with string "A" kdb set user:/their "A" #&gt; Create a new key user:/their with string "A" kdb set user:/our "B" #&gt; Create a new key user:/our with string "B" kdb cmerge user:/our user:/their user:/base user:/result kdb get user:/result #&gt;B</p>
 <p>```<br />
 </p>
 <ul>

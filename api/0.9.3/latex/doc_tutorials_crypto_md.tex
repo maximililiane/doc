@@ -49,23 +49,23 @@ The {\ttfamily fcrypt} plugin and the {\ttfamily crypto} plugin support both ver
 
 In this tutorial we explain the use of the {\ttfamily crypto} plugin and the {\ttfamily fcrypt} plugin by a simple example\+: We want to protect a password that is contained in an I\+N\+I-\/file.
 
-The following example demonstrates how the I\+N\+I-\/file is mounted without encryption enabled. We create the password at {\ttfamily user/tests/password} and display the contents of {\ttfamily test.\+ini}.
+The following example demonstrates how the I\+N\+I-\/file is mounted without encryption enabled. We create the password at {\ttfamily user\+:/tests/password} and display the contents of {\ttfamily test.\+ini}.
 
 {\itshape Step 1\+:} Mount {\ttfamily test.\+ini}
 
 
 \begin{DoxyCode}
-kdb mount test.ini user/tests ini
+kdb mount test.ini user:/tests ini
 \end{DoxyCode}
 
 
-{\itshape Step 2\+:} Set the password at {\ttfamily user/tests/password} and display the contents of {\ttfamily test.\+ini}
+{\itshape Step 2\+:} Set the password at {\ttfamily user\+:/tests/password} and display the contents of {\ttfamily test.\+ini}
 
 
 \begin{DoxyCode}
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
-#> password=1234
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat | tail -n1
+#> password = 1234
 \end{DoxyCode}
 
 
@@ -73,8 +73,8 @@ kdb file user/tests/password | xargs cat
 
 
 \begin{DoxyCode}
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 \end{DoxyCode}
 
 
@@ -92,7 +92,7 @@ The {\ttfamily fcrypt} plugin enables the encryption and decryption of entire co
 
 
 \begin{DoxyCode}
-sudo kdb mount test.ini user/tests fcrypt "encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
+sudo kdb mount test.ini user:/tests fcrypt "encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 \end{DoxyCode}
 
 
@@ -118,9 +118,9 @@ The complete procedure looks like this\+:
 
 
 \begin{DoxyCode}
-kdb mount test.ini user/tests fcrypt "encrypt/key=$(kdb gen-gpg-testkey)" ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb mount test.ini user:/tests fcrypt "encrypt/key=$(kdb gen-gpg-testkey)" ini
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 \end{DoxyCode}
 
 
@@ -128,8 +128,8 @@ To clean up the environment we run\+:
 
 
 \begin{DoxyCode}
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 \end{DoxyCode}
 
 
@@ -139,7 +139,7 @@ An example backend configuration is given as follows\+:
 
 
 \begin{DoxyCode}
-sudo kdb mount test.ini user/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
+sudo kdb mount test.ini user:/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 \end{DoxyCode}
 
 
@@ -158,9 +158,9 @@ The complete example looks like this\+:
 
 
 \begin{DoxyCode}
-kdb mount test.ini user/tests fcrypt "sign/key=$(kdb gen-gpg-testkey)" ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb mount test.ini user:/tests fcrypt "sign/key=$(kdb gen-gpg-testkey)" ini
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 \end{DoxyCode}
 
 
@@ -168,8 +168,8 @@ To clean up the environment we run\+:
 
 
 \begin{DoxyCode}
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 \end{DoxyCode}
 
 
@@ -179,7 +179,7 @@ Mounting {\ttfamily test.\+ini} with signatures and encryption enabled can be do
 
 
 \begin{DoxyCode}
-sudo kdb mount test.ini user/tests fcrypt
+sudo kdb mount test.ini user:/tests fcrypt
        "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D,encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 \end{DoxyCode}
 
@@ -188,10 +188,10 @@ The complete example looks like this\+:
 
 
 \begin{DoxyCode}
-kdb mount test.ini user/tests fcrypt "sign/key=$(kdb gen-gpg-testkey),encrypt/key=$(kdb gen-gpg-testkey)"
+kdb mount test.ini user:/tests fcrypt "sign/key=$(kdb gen-gpg-testkey),encrypt/key=$(kdb gen-gpg-testkey)"
        ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 \end{DoxyCode}
 
 
@@ -199,8 +199,8 @@ To clean up the environment we run\+:
 
 
 \begin{DoxyCode}
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 \end{DoxyCode}
 
 
@@ -214,7 +214,7 @@ To follow our example of an encrypted password in {\ttfamily test.\+ini}, we fir
 
 
 \begin{DoxyCode}
-sudo kdb mount test.ini user/tests crypto "crypto/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" base64 ini
+sudo kdb mount test.ini user:/tests crypto "crypto/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" base64 ini
 \end{DoxyCode}
 
 
@@ -222,11 +222,11 @@ We recommend adding the {\ttfamily base64} plugin to the backend, because {\ttfa
 
 To tell the {\ttfamily crypto} plugin which Keys it should process, the metakey {\ttfamily crypto/encrypt} is used. The {\ttfamily crypto} plugin searches for the metakey {\ttfamily crypto/encrypt}. If the value is equal to {\ttfamily 1}, the value of the Key will be encrypted.
 
-We want to protect the password, that is stored under {\ttfamily user/test/password}. So we set the metakey as follows\+:
+We want to protect the password, that is stored under {\ttfamily user\+:/test/password}. So we set the metakey as follows\+:
 
 
 \begin{DoxyCode}
-kdb meta-set user/tests/password crypto/encrypt 1
+kdb meta-set user:/tests/password crypto/encrypt 1
 \end{DoxyCode}
 
 
@@ -234,7 +234,7 @@ Now we are safe to set the actual password\+:
 
 
 \begin{DoxyCode}
-kdb set user/tests/password "1234"
+kdb set user:/tests/password "1234"
 \end{DoxyCode}
 
 
@@ -251,7 +251,7 @@ You can access the password as usual with {\ttfamily kdb get}\+:
 
 
 \begin{DoxyCode}
-kdb get user/tests/password
+kdb get user:/tests/password
 \end{DoxyCode}
 
 
@@ -261,7 +261,7 @@ You can disable the encryption by setting {\ttfamily crypto/encrypt} to a value 
 
 
 \begin{DoxyCode}
-kdb meta-set user/tests/password crypto/encrypt 0
+kdb meta-set user:/tests/password crypto/encrypt 0
 \end{DoxyCode}
 
 
@@ -269,20 +269,20 @@ The complete example looks like this\+:
 
 
 \begin{DoxyCode}
-kdb mount test.ini user/tests crypto "crypto/key=$(kdb gen-gpg-testkey)" base64 ini
-kdb meta-set user/tests/password crypto/encrypt 1
-kdb set user/tests/password 1234
-kdb set user/tests/unencrypted "I am not encrypted"
-kdb file user/tests/password | xargs cat
+kdb mount test.ini user:/tests crypto "crypto/key=$(kdb gen-gpg-testkey)" base64 ini
+kdb meta-set user:/tests/password crypto/encrypt 1
+kdb set user:/tests/password 1234
+kdb set user:/tests/unencrypted "I am not encrypted"
+kdb file user:/tests/password | xargs cat
 \end{DoxyCode}
 
 
-To disable encryption on {\ttfamily user/tests/password}, we can run\+:
+To disable encryption on {\ttfamily user\+:/tests/password}, we can run\+:
 
 
 \begin{DoxyCode}
-kdb meta-set user/tests/password crypto/encrypt 0
-kdb file user/tests/password | xargs cat
+kdb meta-set user:/tests/password crypto/encrypt 0
+kdb file user:/tests/password | xargs cat
 \end{DoxyCode}
 
 
@@ -290,9 +290,9 @@ To clean up the environment we run\+:
 
 
 \begin{DoxyCode}
-kdb rm user/tests/unencrypted
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/unencrypted
+kdb rm user:/tests/password
+kdb umount user:/tests
 \end{DoxyCode}
 
 

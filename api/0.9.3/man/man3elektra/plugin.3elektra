@@ -1,4 +1,4 @@
-.TH "plugin" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "plugin" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -201,7 +201,7 @@ Obtain a handle to the global keyset and work with it:
         KeySet * globalKS = elektraPluginGetGlobalKeySet (plugin);
         // now we can read something from the global keyset
         // or add something for us or others to read
-        Key * important = keyNew ("user/global/myDocKey", KEY_VALUE, "global plugins can see me", KEY_END);
+        Key * important = keyNew ("user:/global/myDocKey", KEY_VALUE, "global plugins can see me", KEY_END);
         ksAppendKey (globalKS, important);
 .fi
 .PP
@@ -210,7 +210,7 @@ Obtain a handle to the global keyset and work with it:
 .PP
 .nf
         // clean up parts of the global keyset which we do not need
-        Key * cutKey = keyNew ("user/global/myDocKey", KEY_END);
+        Key * cutKey = keyNew ("user:/global/myDocKey", KEY_END);
         KeySet * notNeeded = ksCut (globalKS, cutKey);
         ksDel (notNeeded);
 .fi
@@ -554,7 +554,7 @@ Get data from storage to application\&. Retrieve information from a permanent st
 .PP
 The \fBelektraDocGet()\fP function handle everything related to receiving keys\&.
 .SS "Contract Handling"
-The contract is a keyset that needs to be returned if the parentKey is system/elektra/modules/yourpluginname\&.
+The contract is a keyset that needs to be returned if the parentKey is system:/elektra/modules/yourpluginname\&.
 .PP
 Which keys and their meaning is specified in doc/CONTRACT\&.ini
 .PP
@@ -564,20 +564,20 @@ Here is an example for our doc plugin:
 .nf
 int elektraDocGet (Plugin * plugin ELEKTRA_UNUSED, KeySet * returned, Key * parentKey)
 {
-        if (!strcmp (keyName (parentKey), "system/elektra/modules/doc"))
+        if (!strcmp (keyName (parentKey), "system:/elektra/modules/doc"))
         {
                 KeySet * contract =
-                        ksNew (30, keyNew ("system/elektra/modules/doc", KEY_VALUE, "doc plugin waits for your orders", KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports", KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/open", KEY_FUNC, elektraDocOpen, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/close", KEY_FUNC, elektraDocClose, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/get", KEY_FUNC, elektraDocGet, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/set", KEY_FUNC, elektraDocSet, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/commit", KEY_FUNC, elektraDocCommit, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/error", KEY_FUNC, elektraDocError, KEY_END),
-                               keyNew ("system/elektra/modules/doc/exports/checkconf", KEY_FUNC, elektraDocCheckConf, KEY_END),
+                        ksNew (30, keyNew ("system:/elektra/modules/doc", KEY_VALUE, "doc plugin waits for your orders", KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports", KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/open", KEY_FUNC, elektraDocOpen, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/close", KEY_FUNC, elektraDocClose, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/get", KEY_FUNC, elektraDocGet, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/set", KEY_FUNC, elektraDocSet, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/commit", KEY_FUNC, elektraDocCommit, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/error", KEY_FUNC, elektraDocError, KEY_END),
+                               keyNew ("system:/elektra/modules/doc/exports/checkconf", KEY_FUNC, elektraDocCheckConf, KEY_END),
 #include ELEKTRA_README
-                               keyNew ("system/elektra/modules/doc/infos/version", KEY_VALUE, PLUGINVERSION, KEY_END), KS_END);
+                               keyNew ("system:/elektra/modules/doc/infos/version", KEY_VALUE, PLUGINVERSION, KEY_END), KS_END);
                 ksAppend (returned, contract);
                 ksDel (contract);
 
@@ -794,7 +794,7 @@ int elektraDocOpen (Plugin * handle, Key * warningsKey ELEKTRA_UNUSED)
 .PP
 If your plugin has no useful way to startup without config, the module loader would not be able to load the module\&. We need, however, to still load the plugin to get the contract\&.
 .PP
-To solve that problem the module loader adds the configuration key /module\&. Even if your plugin is basically not able to startup successfully, it should still provide a fallback when /module is present, so that \fBelektraDocGet()\fP on system/elektra/modules can be called successfully later on\&.
+To solve that problem the module loader adds the configuration key /module\&. Even if your plugin is basically not able to startup successfully, it should still provide a fallback when /module is present, so that \fBelektraDocGet()\fP on system:/elektra/modules can be called successfully later on\&.
 .PP
 .PP
 .nf
@@ -973,9 +973,9 @@ an object that contains all plugin information needed by libelektra\&.so
 .PP
 Returns the configuration of that plugin\&. 
 .IP "\(bu" 2
-The user/ config holds plugin specific configuration
+The user:/ config holds plugin specific configuration
 .IP "\(bu" 2
-The system/ config holds backend specific configuration
+The system:/ config holds backend specific configuration
 .PP
 .PP
 So prefer cascading lookups to honor both\&.

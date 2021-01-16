@@ -1,4 +1,4 @@
-.TH "array.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "array.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -73,7 +73,7 @@ BSD License (see LICENSE\&.md or https://www.libelektra.org)
 .SS "int elektraArrayDecName (Key * key)"
 
 .PP
-Decrement the name of an array key by one\&. The alphabetical order will remain intact\&. For example, \fCuser/abc/\\#_10\fP will be changed to \fCuser/abc/\\#9\fP\&.
+Decrement the name of an array key by one\&. The alphabetical order will remain intact\&. For example, \fCuser:/abc/\\#_10\fP will be changed to \fCuser:/abc/\\#9\fP\&.
 .PP
 \fBParameters:\fP
 .RS 4
@@ -91,7 +91,7 @@ Decrement the name of an array key by one\&. The alphabetical order will remain 
 .SS "KeySet* elektraArrayGet (const Key * arrayParent, KeySet * keys)"
 
 .PP
-Return all the array keys below the given array parent\&. The array parent itself is not returned\&. For example, if \fCuser/config/#\fP is an array, \fCuser/config\fP is the array parent\&. Only the direct array keys will be returned\&. This means that for example \fCuser/config/#1/key\fP will not be included, but only \fCuser/config/#1\fP\&.
+Return all the array keys below the given array parent\&. The array parent itself is not returned\&. For example, if \fCuser:/config/#\fP is an array, \fCuser:/config\fP is the array parent\&. Only the direct array keys will be returned\&. This means that for example \fCuser:/config/#1/key\fP will not be included, but only \fCuser:/config/#1\fP\&.
 .PP
 A new keyset will be allocated for the resulting keys\&. This means that the caller must \fCksDel\fP the resulting keyset\&.
 .PP
@@ -148,9 +148,9 @@ the new array key on success
 .PP
 Increment the name of the key by one\&. Alphabetical order will remain
 .PP
-e\&.g\&. user/abc/#9 will be changed to user/abc/#_10
+e\&.g\&. user:/abc/#9 will be changed to user:/abc/#_10
 .PP
-For the start: user/abc/# will be changed to user/abc/#0
+For the start: user:/abc/# will be changed to user:/abc/#0
 .PP
 \fBParameters:\fP
 .RS 4

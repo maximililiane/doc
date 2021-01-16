@@ -1,4 +1,4 @@
-.TH "kdbhelper.h" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbhelper.h" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -92,6 +92,39 @@ BSD License (see LICENSE\&.md or https://www.libelektra.org)
 .RE
 .PP
 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBelektraLookupOptions\fP"
+
+.PP
+More lookup options\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIKDB_O_SPEC \fP\fP
+Use the passed key as specification, instead of looking up the specification first\&. 
+.TP
+\fB\fIKDB_O_CREATE \fP\fP
+Create the key if it was not found\&. 
+.TP
+\fB\fIKDB_O_NOCASCADING \fP\fP
+Disable cascading search for keys starting with /\&. 
+.TP
+\fB\fIKDB_O_NOSPEC \fP\fP
+Do not use specification for cascading keys (internal) 
+.TP
+\fB\fIKDB_O_NODEFAULT \fP\fP
+Do not honor the default spec (internal) 
+.TP
+\fB\fIKDB_O_CALLBACK \fP\fP
+For spec:/ lookups that traverse deeper into hierarchy (callback in \fBksLookup()\fP) 
+.TP
+\fB\fIKDB_O_OPMPHM \fP\fP
+Overrule ksLookup search predictor to use OPMPHM, make sure to set ENABLE_OPTIMIZATIONS=ON at cmake\&. 
+.TP
+\fB\fIKDB_O_BINSEARCH \fP\fP
+Overrule ksLookup search predictor to use Binary search for lookup\&. 
 .SH "Function Documentation"
 .PP 
 .SS "void* elektraCalloc (size_t size)"

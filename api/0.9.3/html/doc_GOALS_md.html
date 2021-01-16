@@ -95,41 +95,41 @@ $(function() {
 <blockquote class="doxtable">
 <p>Only pay for what you need. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1663"></a>
+<h1><a class="anchor" id="autotoc_md1635"></a>
 Users</h1>
 <p>These goals are about Elektra's users, again in order of importance. Again, lower goals need to be ignored if goals are in conflict.</p>
-<h2><a class="anchor" id="autotoc_md1664"></a>
+<h2><a class="anchor" id="autotoc_md1636"></a>
 1. Application Developers</h2>
 <p>Elektra must be easy and robust for application developers to store any configuration settings referable by keys they need to store. After writing configuration settings (<code>kdbSet</code>) and reading them again (<code>kdbGet</code>) they get the same KeySet (aka "round-trip").</p>
 <blockquote class="doxtable">
 <p>This means, they must be able to store keys with any name, any string or any binary data as needed for their purpose. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1665"></a>
+<h2><a class="anchor" id="autotoc_md1637"></a>
 2. Administrators</h2>
 <p>Administrators should be empowered by good error messages and validation capabilities. Furthermore, they should be able to use their favorite tools and configuration file formats.</p>
 <blockquote class="doxtable">
 <p>There are principal limitations of nearly all configuration file formats, so Elektra cannot enable that any configuration file format can be used with any application. If maintainers or administrators want to change the configuration file format of some application, they need to carefully test if it works. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1666"></a>
+<h2><a class="anchor" id="autotoc_md1638"></a>
 3. Maintainers</h2>
 <p>Elektra must be available everywhere and flexible enough, so that maintainers can integrate different applications by specifying and mounting.</p>
 <blockquote class="doxtable">
 <p>There might be some restrictions that some applications require some plugins to be mounted for their configuration settings. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md1667"></a>
+<h2><a class="anchor" id="autotoc_md1639"></a>
 4. Possibility to Represent any Configuration File Format</h2>
 <p>Elektra must be powerful and flexible enough to be able to represent any configuration file format. We support the development of fully-conforming parsers and emitters.</p>
 <blockquote class="doxtable">
 <p>This means, that given a correctly written storage plugin, a KeySet can be found that represents the configuration settings, its metadata and the hierarchical structure of the configuration file. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md1668"></a>
+<h1><a class="anchor" id="autotoc_md1640"></a>
 Non-Goals:</h1>
 <ul>
 <li>Support semantics that do not fit into the KeySet (key-value pairs) with an <code><a class="el" href="group__kdb.html#ga28e385fd9cb7ccfe0b2f1ed2f62453a1" title="Retrieve keys in an atomic and universal way. ">kdbGet()</a></code>/<code><a class="el" href="group__kdb.html#ga11436b058408f83d303ca5e996832bcf" title="Set keys in an atomic and universal way. ">kdbSet()</a></code> interface.</li>
 <li>Support for non-configuration issues, e.g., storing key-value data unrelated to configuration settings.</li>
 <li>Elektra is not a distributed configuration management tool: use your favorite configuration management tool on top or a distributed file system below Elektra.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md1669"></a>
+<h2><a class="anchor" id="autotoc_md1641"></a>
 Further Readings</h2>
 <ul>
 <li>Continue reading: <a class="el" href="doc_WHO_md.html">Who uses Elektra?</a> </li>

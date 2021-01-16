@@ -53,7 +53,7 @@ $(function() {
 <li><code>default</code>: this value will be used if nothing else was found</li>
 </ul>
 <p>They can be used like this:</p>
-<div class="fragment"><div class="line">kdb set /overrides/test &quot;example override&quot;</div><div class="line">sudo kdb meta-set spec/test override/#0 /overrides/test</div></div><!-- fragment --><p>When cascading keys (those starting with <code>/</code>) the lookup will work in the following way (it can be debugged with <code>kdb get -v</code>):</p>
+<div class="fragment"><div class="line">kdb set /overrides/test &quot;example override&quot;</div><div class="line">sudo kdb meta-set spec:/test override/#0 /overrides/test</div></div><!-- fragment --><p>When cascading keys (those starting with <code>/</code>) the lookup will work in the following way (it can be debugged with <code>kdb get -v</code>):</p>
 <ol type="1">
 <li>In the <code>spec</code>-key the <code>override/#</code> keys will be considered.</li>
 <li>If, in the <code>spec</code>-key, a <code>namespace/#</code> exist, those namespaces will be used.</li>

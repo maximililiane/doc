@@ -1,4 +1,4 @@
-.TH "doc_tutorials_storage-plugins_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_storage-plugins_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,17 +16,17 @@ takes more work\&. Before you continue with this text, please make sure that you
 One common problem of storage plugins is, that they store too many keys\&. For example, if the user adds the keys
 .PP
 .IP "\(bu" 2
-\fCuser/tests/storage/root\fP and
+\fCuser:/tests/storage/root\fP and
 .IP "\(bu" 2
-\fCuser/tests/storage/root/level1/level2/level3\fP,
+\fCuser:/tests/storage/root/level1/level2/level3\fP,
 .PP
 .PP
 then your plugin should only store those two keys\&. \fBDo not\fP add the keys
 .PP
 .IP "\(bu" 2
-\fCuser/tests/storage/root/level1\fP, or
+\fCuser:/tests/storage/root/level1\fP, or
 .IP "\(bu" 2
-\fCuser/tests/storage/root/level1/level2\fP
+\fCuser:/tests/storage/root/level1/level2\fP
 .PP
 .PP
 to the key set\&. One plugin that handles this situation properly is \fBYAML CPP\fP, as the following \fCMarkdown Shell Recorder\fP test shows:
@@ -34,20 +34,20 @@ to the key set\&. One plugin that handles this situation properly is \fBYAML CPP
 .PP
 .nf
 # Mount plugin
-sudo kdb mount config\&.yaml user/tests/storage yamlcpp
+sudo kdb mount config\&.yaml user:/tests/storage yamlcpp
 
 # Add key-value pairs
-kdb set user/tests/storage/root 🐓
-kdb set user/tests/storage/root/level1/level2/level3 🐣
+kdb set user:/tests/storage/root 🐓
+kdb set user:/tests/storage/root/level1/level2/level3 🐣
 
 # Make sure that YAML CPP did not store any additional keys
-kdb ls user/tests/storage/root
-#> user/tests/storage/root
-#> user/tests/storage/root/level1/level2/level3
+kdb ls user:/tests/storage/root
+#> user:/tests/storage/root
+#> user:/tests/storage/root/level1/level2/level3
 
 # Undo modifications to the key database
-kdb rm -r user/tests/storage
-sudo kdb umount user/tests/storage
+kdb rm -r user:/tests/storage
+sudo kdb umount user:/tests/storage
 .fi
 .PP
 .PP
@@ -60,25 +60,25 @@ The simplest textual data is the empty string (\fC''\fP = \fC0\fP) and has lengt
 .PP
 .nf
 # Mount plugin
-sudo kdb mount config\&.yaml user/tests/storage yamlcpp
+sudo kdb mount config\&.yaml user:/tests/storage yamlcpp
 
-kdb set user/tests/storage/null
-#> Create a new key user/tests/storage/null with null value
-kdb get user/tests/storage/null
+kdb set user:/tests/storage/null
+#> Create a new key user:/tests/storage/null with null value
+kdb get user:/tests/storage/null
 #>
-kdb meta-ls user/tests/storage/null
+kdb meta-ls user:/tests/storage/null
 #> binary
 
-kdb set user/tests/storage/empty ''
-#> Create a new key user/tests/storage/empty with string ""
-kdb get user/tests/storage/empty
+kdb set user:/tests/storage/empty ''
+#> Create a new key user:/tests/storage/empty with string ""
+kdb get user:/tests/storage/empty
 #>
-kdb meta-ls user/tests/storage/empty
+kdb meta-ls user:/tests/storage/empty
 #>
 
 # Undo modifications to the key database
-kdb rm -r user/tests/storage
-sudo kdb umount user/tests/storage
+kdb rm -r user:/tests/storage
+sudo kdb umount user:/tests/storage
 .fi
 .PP
 .PP
@@ -87,30 +87,30 @@ Elektra uses \fB`0` and `1` to represent binary data\fP\&. A storage plugin that
 .PP
 .nf
 # Mount plugin
-sudo kdb mount config\&.yaml user/tests/storage yamlcpp type
+sudo kdb mount config\&.yaml user:/tests/storage yamlcpp type
 
-kdb set user/tests/storage/bool/value true
-kdb meta-set user/tests/storage/bool/value type boolean
-kdb get user/tests/storage/bool/value
+kdb set user:/tests/storage/bool/value true
+kdb meta-set user:/tests/storage/bool/value type boolean
+kdb get user:/tests/storage/bool/value
 #> 1
 
-kdb set user/tests/storage/bool/value 1
-kdb get user/tests/storage/bool/value
+kdb set user:/tests/storage/bool/value 1
+kdb get user:/tests/storage/bool/value
 #> 1
 
-kdb set user/tests/storage/bool/value false
-kdb get user/tests/storage/bool/value
+kdb set user:/tests/storage/bool/value false
+kdb get user:/tests/storage/bool/value
 #> 0
 
-kdb set user/tests/storage/bool/value 'non boolean'
+kdb set user:/tests/storage/bool/value 'non boolean'
 # RET: 5
 
-kdb get user/tests/storage/bool/value
+kdb get user:/tests/storage/bool/value
 #> 0
 
 # Undo modifications to the key database
-kdb rm -r user/tests/storage
-sudo kdb umount user/tests/storage
+kdb rm -r user:/tests/storage
+sudo kdb umount user:/tests/storage
 .fi
 .PP
 .PP
@@ -120,10 +120,10 @@ For example, in a key set that contains the keys:
 .PP
 .PP
 .nf
-user/directory
-user/directory/leaf1
-user/directory/leaf2
-user/leaf3
+user:/directory
+user:/directory/leaf1
+user:/directory/leaf2
+user:/leaf3
 .fi
 .PP
 .PP
@@ -142,39 +142,39 @@ leaf1   leaf2
 , such as
 .PP
 .IP "\(bu" 2
-\fCuser/directory/leaf1\fP
+\fCuser:/directory/leaf1\fP
 .IP "\(bu" 2
-\fCuser/directory/leaf2\fP
+\fCuser:/directory/leaf2\fP
 .IP "\(bu" 2
-\fCuser/leaf3\fP
+\fCuser:/leaf3\fP
 .PP
 .PP
-are called leaf keys, while \fCuser/directory\fP is a directory key\&. Plugins such as \fBYAJL\fP or \fBYAML CPP\fP will not be able to store data in the key with the name \fCuser/directory\fP directly\&. To work around this issue these plugin use the \fBDirectory Value plugin\fP\&. In the ReadMe of the \fCDirectory Value plugin\fP and \fCYAML CPP\fP you will find more information about this issue, and how to handle it\&.
+are called leaf keys, while \fCuser:/directory\fP is a directory key\&. Plugins such as \fBYAJL\fP or \fBYAML CPP\fP will not be able to store data in the key with the name \fCuser:/directory\fP directly\&. To work around this issue these plugin use the \fBDirectory Value plugin\fP\&. In the ReadMe of the \fCDirectory Value plugin\fP and \fCYAML CPP\fP you will find more information about this issue, and how to handle it\&.
 .PP
 The following Markdown Shell Recorder test shows \fBthe proper behavior\fP:
 .PP
 .PP
 .nf
 # Mount plugin
-sudo kdb mount config\&.yaml user/tests/storage yamlcpp
+sudo kdb mount config\&.yaml user:/tests/storage yamlcpp
 
 # Add key-value pair (leaf key)
-kdb set user/tests/storage/root 🐓
-# Since we add a key below `user/tests/storage/root`, the key
-# `user/tests/storage/root` turns from a leaf key to a directory key\&.
-kdb set user/tests/storage/root/level1/level2/level3 🐣
+kdb set user:/tests/storage/root 🐓
+# Since we add a key below `user:/tests/storage/root`, the key
+# `user:/tests/storage/root` turns from a leaf key to a directory key\&.
+kdb set user:/tests/storage/root/level1/level2/level3 🐣
 
 # Make sure that the directory key still stores the correct value
-kdb get user/tests/storage/root
+kdb get user:/tests/storage/root
 #> 🐓
 
 # Check the value of the leaf key
-kdb get user/tests/storage/root/level1/level2/level3
+kdb get user:/tests/storage/root/level1/level2/level3
 #> 🐣
 
 # Undo modifications to the key database
-kdb rm -r user/tests/storage
-sudo kdb umount user/tests/storage
+kdb rm -r user:/tests/storage
+sudo kdb umount user:/tests/storage
 .fi
 .PP
 .PP
@@ -184,29 +184,29 @@ You already learned about the array syntax and the mandatory \fCarray\fP metakey
 .PP
 .PP
 .nf
-user/tests/storage/array
-user/tests/storage/array/#0
-user/tests/storage/array/#1
-user/tests/storage/map
-user/tests/storage/map/#0
-user/tests/storage/map/#1
+user:/tests/storage/array
+user:/tests/storage/array/#0
+user:/tests/storage/array/#1
+user:/tests/storage/map
+user:/tests/storage/map/#0
+user:/tests/storage/map/#1
 .fi
 .PP
 .PP
-\&. If we assume that only \fCuser/tests/storage/array\fP stores the metakey \fCarray\fP, then the keys
+\&. If we assume that only \fCuser:/tests/storage/array\fP stores the metakey \fCarray\fP, then the keys
 .PP
 .IP "\(bu" 2
-\fCuser/tests/storage/array/#0\fP, and
+\fCuser:/tests/storage/array/#0\fP, and
 .IP "\(bu" 2
-\fCuser/tests/storage/array/#1\fP
+\fCuser:/tests/storage/array/#1\fP
 .PP
 .PP
 represent array elements, while
 .PP
 .IP "\(bu" 2
-\fCuser/tests/storage/map/#0\fP, and
+\fCuser:/tests/storage/map/#0\fP, and
 .IP "\(bu" 2
-\fCuser/tests/storage/map/#1\fP
+\fCuser:/tests/storage/map/#1\fP
 .PP
 .PP
 are normal key-value pairs\&. The following example shows that the storage plugin \fCYAML CPP\fP handles this situation properly:
@@ -214,29 +214,29 @@ are normal key-value pairs\&. The following example shows that the storage plugi
 .PP
 .nf
 # Mount plugin
-sudo kdb mount config\&.yaml user/tests/storage yamlcpp
+sudo kdb mount config\&.yaml user:/tests/storage yamlcpp
 
 # Create an array containing two elements
-kdb meta-set user/tests/storage/array array ''
-kdb set user/tests/storage/array/#0 one
-kdb set user/tests/storage/array/#1 two
+kdb meta-set user:/tests/storage/array array ''
+kdb set user:/tests/storage/array/#0 one
+kdb set user:/tests/storage/array/#1 two
 
 # The array parent key stores the basename of the last element
-kdb meta-get user/tests/storage/array array
+kdb meta-get user:/tests/storage/array array
 #> #1
 
 # If you do not add the metakey `array`, then keys
 # containing array syntax `#0`, `#1`, … will not be
 # interpreted as arrays\&.
-kdb set user/tests/storage/map
-kdb set user/tests/storage/map/#0
-kdb set user/tests/storage/map/#1
-kdb meta-get user/tests/storage/map array
+kdb set user:/tests/storage/map
+kdb set user:/tests/storage/map/#0
+kdb set user:/tests/storage/map/#1
+kdb meta-get user:/tests/storage/map array
 # RET: 2
 
 # Undo modifications to the key database
-kdb rm -r user/tests/storage
-sudo kdb umount user/tests/storage
+kdb rm -r user:/tests/storage
+sudo kdb umount user:/tests/storage
 .fi
 .PP
 

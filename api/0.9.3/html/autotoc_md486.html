@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Elektra: Plugin: network</title>
+<title>Elektra: Plugin: path</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -39,61 +39,48 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Plugin: network </div>  </div>
+<div class="title">Plugin: path </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><ul>
-<li>infos = Information about network plugin is in keys below</li>
+<li>infos = Information about path plugin is in keys below</li>
 <li>infos/author = Markus Raab <a href="#" onclick="location.href='mai'+'lto:'+'ele'+'kt'+'ra@'+'li'+'bel'+'ek'+'tra'+'.o'+'rg'; return false;">elekt<span style="display: none;">.nosp@m.</span>ra@l<span style="display: none;">.nosp@m.</span>ibele<span style="display: none;">.nosp@m.</span>ktra<span style="display: none;">.nosp@m.</span>.org</a></li>
 <li>infos/licence = BSD</li>
-<li>infos/provides = check</li>
-<li>infos/needs =</li>
 <li>infos/placements = presetstorage</li>
-<li>infos/status = maintained unittest nodep libc nodoc</li>
-<li>infos/metadata = check/ipaddr check/port check/port/listen</li>
-<li>infos/description = Checks keys if they contain a valid ip address</li>
+<li>infos/needs =</li>
+<li>infos/provides = check</li>
+<li>infos/status = maintained nodep libc nodoc</li>
+<li>infos/metadata = check/path check/path/mode check/path/user</li>
+<li>infos/description = Checks if keys enriched with appropriate metadata contain valid paths as values as well as correct permissions</li>
 </ul>
-<p>This plugin is a check plugin that checks if a key contains a valid ip address. It uses the <code>POSIX.1-2001</code> interface <code>getaddrinfo()</code> in order to check if an ip address is valid.</p>
-<p>Furthermore <code>getaddrinfo()</code> is used in <code>check/port</code> to resolve a port by its service name which is defined under <code>/etc/services</code>. The portname is translated to the respective portnumber. The plugin can be used to check for valid port numbers and if the set port is free to use.</p>
-<p>While, in theory, a regular expression can express if a string is a network address, in practice, such an attempt does not work well. The reason is that an unmanageable number of valid shortenings for IPv6 addresses makes the regular expression hard to write and understand.</p>
-<p>So the idea of building such a complicated regular expression was discarded, but instead a dedicated checker was introduced. The idea is to use the operating system facilities to resolve the network address. If this succeeds, it is guaranteed that this network address will be valid when it is resolved by the same interface afterwards.</p>
-<p>Many network address translators coexist. In <code>POSIX.1-2001</code> a powerful address translator is provided with the interface <code>getaddrinfo()</code>. It is a common network address translation for both IPv4 and IPv6. We used it to implement this plugin.</p>
-<p>Every key tagged with the metakey <code>check/ipaddr</code> will be checked using <code>getaddrinfo()</code>. If additionally the values <code>ipv4</code> or <code>ipv6</code> are supplied, the address family will be specified.</p>
-<p>``<code> @section autotoc_md490 Mount Network plugin to</code>user/tests/network` sudo kdb mount config.file user/tests/network network</p>
+<p>This plugin checks whether the value of a key is a valid file system path and optionally if correct permissions are set for a certain user.</p>
+<p>The motivation to write this plugin is given by the two paths that exist in /etc/fstab: the device file and the mountpoint. A missing file is not necessarily an error, because the device file may appear later when a device is plugged in and the mountpoint may be there when another subsequent mount was executed. So only warnings are yielded in that case. One situation, however, presents an error: Only an absolute path is allowed to occur for both device and mountpoint. When checking for relative files, it is not enough to look at the first character if it is a <code>/</code>, because remote file systems and some special names are valid, too.</p>
+<p>If <code>check/path/mode = &lt;permission&gt;</code> is also present it will check for the correct permissions of the file/directory. Optionally, you can also add <code>check/path/user = &lt;user&gt;"</code> which then checks the permissions for the given user. When calling <code>kdb set</code> on the actual key, you have to run as <code>root</code> user or the file permissions cannot be checked (you will receive an error message). It is also possible to leave the <code>check/path/user</code> empty (just provide an empty string) which then takes the executing user as target to check. So for example <code>sudo kdb set ...</code> will check if <code>root</code> can access the target file/directory whereas <code>kdb set ...</code> will take the current executing process/user. If <code>check/path/user</code> is not given at all, the plugin will check accessibility for the <code>root</code> user only (which again requires <code>sudo</code>)</p>
+<p><code>check/path/mode = rw</code> and <code>check/path/user = tomcat</code> for example will check if the user <code>tomcat</code> has read and write access to the path which was set for the key. Please note that the file has to exist already and it is not checked if the user has the right to create a file in the directory.</p>
+<p>Permissions available:</p>
+<ul>
+<li><code>r</code>: **R**ead</li>
+<li><code>w</code>: **W**rite</li>
+<li><code>x</code>: e**X**ecute</li>
+</ul>
+<p>If the metakey <code>check/path</code> is present, it is checked if the value is a valid absolute file system path. If a metavalue is present, an additional check will be done if it is a directory or device file.</p>
+<p>An example on which the user should have no permission at all for the root directory.</p>
+<div class="fragment"><div class="line">sudo kdb mount test.dump user:/tests path dump</div><div class="line">sudo kdb set user:/tests/path &quot;$HOME&quot;</div><div class="line">sudo kdb meta-set user:/tests/path check/path &quot;&quot;</div><div class="line">sudo kdb meta-set user:/tests/path check/path/user &quot;&quot;</div><div class="line">sudo kdb meta-set user:/tests/path check/path/mode &quot;rw&quot;</div><div class="line"></div><div class="line"># Standard users should not be able to read/write the root folder</div><div class="line">[ $(id -u) = 0 ] &amp;&amp; printf &gt;&amp;2 &#39;User is root\n&#39; || kdb set user:/tests/path &quot;/root&quot;</div><div class="line"># STDERR: User is root|.*C03200.*</div><div class="line"></div><div class="line"># Set something which the current user can access for sure</div><div class="line">kdb set user:/tests/path &quot;$HOME&quot;</div><div class="line"># STDOUT-REGEX: .*Set string to &quot;/.*&quot;.*</div><div class="line"></div><div class="line">#cleanup</div><div class="line">sudo kdb rm -r user:/tests</div><div class="line">sudo kdb umount user:/tests</div></div><!-- fragment --><p>An example where part of the permissions are missing for a tmp file</p>
+<p>``` sudo kdb mount test.dump user:/tests path dump sudo kdb set user:/tests/path "$HOME" sudo kdb meta-set user:/tests/path check/path "" sudo kdb meta-set user:/tests/path check/path/user "" sudo kdb meta-set user:/tests/path check/path/mode "rwx"</p>
+<h1><a class="anchor" id="autotoc_md490"></a>
+Standard users should not be able to read/write the root folder</h1>
+<p>kdb set user:/tests/path/tempfile  chmod +rw <code>kdb get user:/tests/path/tempfile</code> kdb set user:/tests/path <code>kdb get user:/tests/path/tempfile</code> </p>
 <h1><a class="anchor" id="autotoc_md491"></a>
-Set valid IPv4 address</h1>
-<p>kdb set user/tests/network/host 127.0.0.1 </p>
+ERROR:C03200</h1>
 <h1><a class="anchor" id="autotoc_md492"></a>
-Check for valid IPv4 address</h1>
-<p>kdb meta-set user/tests/network/host check/ipaddr ipv4</p>
+Set something which the current user can access for sure</h1>
+<p>chmod +x <code>kdb get user:/tests/path/tempfile</code> kdb set user:/tests/path <code>kdb get user:/tests/path/tempfile</code> </p>
 <h1><a class="anchor" id="autotoc_md493"></a>
-Try to set invalid IPv4 address</h1>
-<p>kdb set user/tests/network/host 133.133.133.1337 </p>
-<h1><a class="anchor" id="autotoc_md494"></a>
-RET: 5</h1>
-<h1><a class="anchor" id="autotoc_md495"></a>
-STDERR:.*Validation Semantic: name:.*133.133.133.1337.*</h1>
-<p>kdb get user/tests/network/host #&gt; 127.0.0.1</p>
-<h1><a class="anchor" id="autotoc_md496"></a>
-Set valid IPv4 address</h1>
-<p>kdb set user/tests/network/host 1.2.3.4 #&gt; Set string to "1.2.3.4" kdb get user/tests/network/host #&gt; 1.2.3.4</p>
-<h1><a class="anchor" id="autotoc_md497"></a>
-Check for any valid network address</h1>
-<p>kdb meta-set user/tests/network/host check/ipaddr '' </p>
-<h1><a class="anchor" id="autotoc_md498"></a>
-If identifier `localhost` is not a valid network address it is not part of /etc/hosts</h1>
-<p>kdb set user/tests/network/host localhost || ! grep -q localhost /etc/hosts</p>
-<p>kdb get user/tests/network/host </p>
-<h1><a class="anchor" id="autotoc_md499"></a>
-STDOUT-REGEX: localhost|1.2.3.4</h1>
-<h1><a class="anchor" id="autotoc_md500"></a>
-Undo modifications to the key database</h1>
-<p>kdb rm -r user/tests/network sudo kdb umount user/tests/network ```</p>
-<p>If <code>check/port</code> is specified on a given key, the plugin will validate if the port is a correct number between 1 and 65535.</p>
-<p>If <code>check/port/listen</code> is specified, the plugin will check if the application can be started and listen on the given port.</p>
-<h2><a class="anchor" id="autotoc_md501"></a>
-Future Work</h2>
-<p><code>check/port/connect</code> to check if the port can be pinged/reached (usually for clients). If not reachable, users receive a warning. A correct timeout setting will be problematic though. </p>
+STDOUT-REGEX: Set string to "/.*".*</h1>
+<p>#cleanup sudo rm -rf <code>kdb get user:/tests/path/tempfile</code> sudo kdb rm -r user:/tests sudo kdb umount user:/tests ```</p>
+<h2><a class="anchor" id="autotoc_md494"></a>
+Future work</h2>
+<p>Add a check which ensures that the given path is a file/directory/symbolic link/hard link/etc. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-install-config-file_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-install-config-file_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,4 +31,4 @@ You have already used the script for a previous version of the file\&. In this c
 .PP
 To install the config file at \fC~/\&.config/installing\&.ini\fP we can use the following command
 .PP
-\fCkdb install-config-file user/tests/installing installing\&.ini ini\fP 
+\fCkdb install-config-file user:/tests/installing installing\&.ini ini\fP 

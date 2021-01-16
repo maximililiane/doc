@@ -24,10 +24,10 @@ For cascading keys, the namespace will default to {\ttfamily spec}, because that
 \item {\ttfamily /sw/elektra/kdb/\#0/current/namespace}\+: Specifies which default namespace should be used when setting a cascading name. By default the namespace is {\ttfamily user}, except {\ttfamily kdb} is used as root, then {\ttfamily system} is the default.
 \end{DoxyItemize}
 
-To set a metakey called {\ttfamily description} associated with the key {\ttfamily user/example/key} to the value {\ttfamily Hello World!}\+:~\newline
- {\ttfamily kdb meta-\/set spec/example/key description \char`\"{}\+Hello World!\char`\"{}}
+To set a metakey called {\ttfamily description} associated with the key {\ttfamily user\+:/example/key} to the value {\ttfamily Hello World!}\+:~\newline
+ {\ttfamily kdb meta-\/set spec\+:/example/key description \char`\"{}\+Hello World!\char`\"{}}
 
-To create a new key {\ttfamily spec/example/newkey} with a null value (if it did not exist before) and a metakey {\ttfamily namespace/\#0} associated with it to the value {\ttfamily system}\+:~\newline
+To create a new key {\ttfamily spec\+:/example/newkey} with a null value (if it did not exist before) and a metakey {\ttfamily namespace/\#0} associated with it to the value {\ttfamily system}\+:~\newline
  {\ttfamily kdb meta-\/set /example/newkey \char`\"{}namespace/\#0\char`\"{} system}
 
 To create an override link for a {\ttfamily /test} key\+:
@@ -35,7 +35,7 @@ To create an override link for a {\ttfamily /test} key\+:
 
 \begin{DoxyCode}
 kdb set /overrides/test "example override"
-sudo kdb meta-set spec/test override/#0 /overrides/test
+sudo kdb meta-set spec:/test override/#0 /overrides/test
 \end{DoxyCode}
 
 
@@ -43,7 +43,7 @@ To remove it\+:
 
 
 \begin{DoxyCode}
-sudo kdb meta-set spec/test override/#0
+sudo kdb meta-set spec:/test override/#0
 \end{DoxyCode}
 
 

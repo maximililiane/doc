@@ -39,7 +39,7 @@ Best implementation candidate was\+:
 
 \begin{DoxyEnumerate}
 \item Provide a function {\ttfamily int genconf (Key\+Set $\ast$ ks, Key $\ast$ error\+Key)} where {\ttfamily ks} is filled with a list of all variants with the essential configuration (subkeys {\ttfamily config}) and the changed parts of the contract (subkeys {\ttfamily infos}).
-\item Keys defined in {\ttfamily system/elektra/plugins/$<$plugin$>$/variants/$<$variantname$>$} have the same content, but take precedence. If a variant with the same name is defined, only {\ttfamily config} or {\ttfamily infos} from {\ttfamily genconf} are considered if they are not mentioned in {\ttfamily system/elektra/plugins/variants}.
+\item Keys defined in {\ttfamily system\+:/elektra/plugins/$<$plugin$>$/variants/$<$variantname$>$} have the same content, but take precedence. If a variant with the same name is defined, only {\ttfamily config} or {\ttfamily infos} from {\ttfamily genconf} are considered if they are not mentioned in {\ttfamily system\+:/elektra/plugins/variants}.
 \item If the bool key {\ttfamily override} (for a plugin or a variant) is true, it will be overwritten (content of {\ttfamily genconf} ignored, but instead a plugin or variant as given is created).
 \item If the bool key {\ttfamily disable} (for a plugin or a variant) is true the plugin or a variant of the plugin will not be available.
 \item Empty {\ttfamily config} and {\ttfamily infos} mean\+:
@@ -53,16 +53,16 @@ Best implementation candidate was\+:
 
 
 \begin{DoxyCode}
-system/access
-system/access/config
-system/access/config/lens = Access.lns
-system/access/infos
-system/access/infos/provides = storage/access
-system/aliases
-system/aliases/config
-system/aliases/config/lens = Aliases.lns
-system/aliases/infos
-system/aliases/infos/provides = storage/aliases
+system:/access
+system:/access/config
+system:/access/config/lens = Access.lns
+system:/access/infos
+system:/access/infos/provides = storage/access
+system:/aliases
+system:/aliases/config
+system:/aliases/config/lens = Aliases.lns
+system:/aliases/infos
+system:/aliases/infos/provides = storage/aliases
 \end{DoxyCode}
 
 
@@ -70,25 +70,25 @@ system/aliases/infos/provides = storage/aliases
 
 
 \begin{DoxyCode}
-user/configparser/config
-user/configparser/config/script = python\_configparser.py
+user:/configparser/config
+user:/configparser/config/script = python\_configparser.py
 \end{DoxyCode}
 
 
-The user/admin specifies\+:
+The user\+:/admin specifies\+:
 
 
 \begin{DoxyCode}
-system/elektra/plugins/jni/disable = 1
-system/elektra/plugins/augeas/variants/access
-system/elektra/plugins/augeas/variants/access/disable = 1
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/infos
-system/elektra/plugins/augeas/variants/aliases/infos/status = 10000
-system/elektra/plugins/python/variants/configparser
-system/elektra/plugins/python/variants/configparser/override = 1
-system/elektra/plugins/python/variants/configparser/config
-system/elektra/plugins/python/variants/configparser/config/script = mybetter\_configparser.py
+system:/elektra/plugins/jni/disable = 1
+system:/elektra/plugins/augeas/variants/access
+system:/elektra/plugins/augeas/variants/access/disable = 1
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/infos
+system:/elektra/plugins/augeas/variants/aliases/infos/status = 10000
+system:/elektra/plugins/python/variants/configparser
+system:/elektra/plugins/python/variants/configparser/override = 1
+system:/elektra/plugins/python/variants/configparser/config
+system:/elektra/plugins/python/variants/configparser/config/script = mybetter\_configparser.py
 \end{DoxyCode}
 
 
@@ -106,9 +106,9 @@ To have a space-\/separated simpleini one would use\+:
 
 
 \begin{DoxyCode}
-system/elektra/plugins/simpleini/variants/spacesep
-system/elektra/plugins/simpleini/variants/spacesep/config
-system/elektra/plugins/simpleini/variants/spacesep/config/format = "% %"
+system:/elektra/plugins/simpleini/variants/spacesep
+system:/elektra/plugins/simpleini/variants/spacesep/config
+system:/elektra/plugins/simpleini/variants/spacesep/config/format = "% %"
 \end{DoxyCode}
 
 
@@ -137,11 +137,11 @@ It is also not possible to add additional information to a variant, only overrid
 
 
 \begin{DoxyCode}
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/override = 1
-system/elektra/plugins/augeas/variants/aliases/config
-system/elektra/plugins/augeas/variants/aliases/config/lens = Aliases.lns
-system/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/override = 1
+system:/elektra/plugins/augeas/variants/aliases/config
+system:/elektra/plugins/augeas/variants/aliases/config/lens = Aliases.lns
+system:/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
 \end{DoxyCode}
 
 
@@ -149,9 +149,9 @@ works, while
 
 
 \begin{DoxyCode}
-system/elektra/plugins/augeas/variants/aliases
-system/elektra/plugins/augeas/variants/aliases/config
-system/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
+system:/elektra/plugins/augeas/variants/aliases
+system:/elektra/plugins/augeas/variants/aliases/config
+system:/elektra/plugins/augeas/variants/aliases/config/otherparam = 0
 \end{DoxyCode}
 
 

@@ -1,87 +1,106 @@
 
 \begin{DoxyItemize}
-\item infos = Information about ni plugin is in keys below
-\item infos/author = Markus Raab \href{mailto:elektra@libelektra.org}{\tt elektra@libelektra.\+org}
+\item infos = Information about the profile plugin is in keys below
+\item infos/author = Thomas Waser \href{mailto:thomas.waser@libelektra.org}{\tt thomas.\+waser@libelektra.\+org}
 \item infos/licence = B\+SD
-\item infos/provides = storage/ini
 \item infos/needs =
-\item infos/placements = getstorage setstorage
-\item infos/status = maintained unittest libc nodep
+\item infos/provides =
+\item infos/recommends =
+\item infos/placements = postgetstorage presetstorage
+\item infos/status = libc nodep global preview unfinished
 \item infos/metadata =
-\item infos/description = Reads and writes the nickel ini format
+\item infos/description = helps switching between configuration profiles
 \end{DoxyItemize}
 
-This plugin uses the nickel library in order to read/write \hyperlink{doc_help_elektra-metadata_md}{metakeys} in the nickel ini format. It\textquotesingle{}s purpose is to be used in the {\ttfamily spec}-\/namespace or when any metadata should be stored.
+Following the elektra keyname convention application configurations are stored under {\ttfamily /sw/org/myapp/\#} and {\ttfamily /sw/org/myapp/\#0/current}is the profile to be used. The {\ttfamily profile} plugin provides an easy way to switch configuration profiles.
 
-For other applications, e.\+g. modifying {\ttfamily smb.\+conf} you should prefer the \hyperlink{autotoc_md289_src_plugins_ini_README_md}{ini plugin}.
+The key {\ttfamily /sw/org/myapp/\#0/profile} defines what profile should be used as {\ttfamily current}, e.\+g. {\ttfamily /sw/org/myapp/\#0/profile = myprofile}. If a key {\ttfamily /sw/org/myapp/\#0/myprofile/key} is found and no key {\ttfamily /sw/org/myapp/\#0/current/key} exists an override key will be created linking {\ttfamily /sw/org/myapp/\#0/currrent/key} to {\ttfamily /sw/org/myapp/\#0/myapp/key} If neither {\ttfamily /sw/org/myapp/\#0/current/key} nor {\ttfamily /sw/org/myapp/\#0/myprofile/key} is found, but {\ttfamily /sw/org/myapp/\#0/\%/key}, {\ttfamily /sw/org/myapp/\#0/current/key} will be linked to {\ttfamily /sw/org/myapp/\#0/\%/key}.
 
-To mount the ni plugin you can simply use\+:
-
-
-\begin{DoxyCode}
-kdb mount file.ini spec/ni ni
-\end{DoxyCode}
+So a cascading lookup will automatically implement following preferences (next to the namespace preferences)\+:
 
 
-The strength of this plugin is that it supports arbitrary meta data and the file format is still human readable. For example the following lines\+:
+\begin{DoxyEnumerate}
+\item Usage of key in {\ttfamily current}
+\item Usage of key in the profile set with {\ttfamily profile}
+\item Usage of key in the {\ttfamily \%} fallback profile
+\end{DoxyEnumerate}
 
-
-\begin{DoxyCode}
-[key]
-meta=foo
-\end{DoxyCode}
-
-
-specify that {\ttfamily key} has a metadata key {\ttfamily meta} containing the metavalue {\ttfamily foo}\+:
+Suppose we have the configuration file {\ttfamily profile.\+ini} in {\ttfamily $\sim$/.config}\+:
 
 
 \begin{DoxyCode}
-kdb meta-get user/ni/key meta
-#> foo
+cat profile.ini
+#> []
+#> profile = myprofile
+#>
+#> [current]
+#> key2 = will win
+#>
+#> [myprofile]
+#> key1 = test1
+#> key2 = test2
+#>
+#> [%]
+#> key2 = failed?
+#> key3 = test3
 \end{DoxyCode}
 
 
-For the metadata of the parent key use the following syntax\+:
+Then we simply mount it {\itshape without} the profile plugin\+:
 
 
 \begin{DoxyCode}
-[]
-meta=foo
+kdb mount profile.ini /sw/org/myapp/#0 ini
 \end{DoxyCode}
 
 
-Line continuation works by ending the line with {\ttfamily \textbackslash{}\textbackslash{}} (a single backslash). If you want a line break at the end of the line, use {\ttfamily \textbackslash{}\textbackslash{}n\textbackslash{}\textbackslash{}}.
-
-To export a {\ttfamily Key\+Set} in the nickel format use\+:
+But we have to make sure that the profile plugin is mounted globally\+:
 
 
 \begin{DoxyCode}
-kdb export spec/ni ni > example.ni
+kdb global-mount profile
 \end{DoxyCode}
 
 
-For in-\/detail explanation of the syntax (nested keys are not supported by the plugin) \href{/home/jenkins/workspace/libelektra-release/src/plugins/ni/nickel-1.1.0/include/bohr/ni.h}{\tt see /src/plugins/ni/nickel-\/1.1.\+0/include/bohr/ni.h}
+Then we can access {\ttfamily /sw/org/myapp/\#0} in a profile-\/aware way\+:
 
-``{\ttfamily  @section autotoc\+\_\+md505 Mount the}ni{\ttfamily plugin at}spec/tests/ni` sudo kdb mount file.\+ini spec/tests/ni ni\hypertarget{autotoc_md502_autotoc_md506}{}\section{Add some metadata}\label{autotoc_md502_autotoc_md506}
-kdb meta-\/set spec/tests/ni/key metakey metavalue kdb meta-\/set spec/tests/ni/key check/type char\hypertarget{autotoc_md502_autotoc_md507}{}\section{Retrieve metadata}\label{autotoc_md502_autotoc_md507}
-kdb meta-\/ls spec/tests/ni/key \#$>$ check/type \#$>$ metakey kdb meta-\/get spec/tests/ni/key metakey \#$>$ metavalue\hypertarget{autotoc_md502_autotoc_md508}{}\section{Add and retrieve key values}\label{autotoc_md502_autotoc_md508}
-kdb get spec/tests/ni/key \#$>$ kdb set spec/tests/ni/key value kdb set spec/tests/ni/key/to nothing kdb get spec/tests/ni/key \#$>$ value kdb get spec/tests/ni/key/to \#$>$ nothing\hypertarget{autotoc_md502_autotoc_md509}{}\section{Undo modifications}\label{autotoc_md502_autotoc_md509}
-kdb rm -\/r spec/tests/ni sudo kdb umount spec/tests/ni ```\hypertarget{autotoc_md502_autotoc_md510}{}\subsection{Limitations}\label{autotoc_md502_autotoc_md510}
 
-\begin{DoxyItemize}
-\item Supports most Key\+Sets, but {\ttfamily kdb test} currently reports some errors (likely because of the U\+T\+F-\/8 handling happening within ni).
-\item Keys have a random order when written out.
-\item Comments are not preserved, they are simply removed.
-\item Parse errors simply result in ignoring (and removing) these parts.
-\end{DoxyItemize}\hypertarget{autotoc_md502_autotoc_md511}{}\subsection{Nickel}\label{autotoc_md502_autotoc_md511}
-This plugin is based on the Nickel Library written by author\+: \href{mailto:charles@chaoslizard.org}{\tt charles@chaoslizard.\+org}
+\begin{DoxyCode}
+kdb ls /sw
+#> spec:/sw/org/myapp/#0/current/key1
+#> spec:/sw/org/myapp/#0/current/key3
+#> user:/sw/org/myapp/#0
+#> user:/sw/org/myapp/#0/%
+#> user:/sw/org/myapp/#0/%/key2
+#> user:/sw/org/myapp/#0/%/key3
+#> user:/sw/org/myapp/#0/current
+#> user:/sw/org/myapp/#0/current/key2
+#> user:/sw/org/myapp/#0/profile
+#> user:/sw/org/myapp/#0/myprofile
+#> user:/sw/org/myapp/#0/myprofile/key1
+#> user:/sw/org/myapp/#0/myprofile/key2
+\end{DoxyCode}
 
-Nickel (Ni) has its strength in building up a hierarchical recursive Node structure which is perfect for parsing and generating ini files. With them arbitrary deep nested hierarchy are possible, but limited in a keyname of a fixed size.
 
-The A\+PI of nickel is very suited for elektra, it can use {\ttfamily F\+I\+L\+E$\ast$} pointers (using that elektra could open and lock files), the node-\/hierarchy can be transformed to keysets, but it lacks many features like comments and types.
+As we can see with the {\ttfamily -\/v} option, we will fetch keys from our {\ttfamily myprofile} even though we request {\ttfamily current}\+:
 
-The format is more general than the kde-\/ini format, it can handle their configuration well, when the section names do not exceed the specified length. Nesting is only required in the first depth, any deeper is not understood by kde config parser.
 
-The memory footprint is for a 190.\+000 (reduced to 35.\+000 when rewrote first ) line ini file with 1.\+1\+MB size is 16.\+88 MB. The sort order is not stable, even not with the same file rewritten again.
+\begin{DoxyCode}
+kdb get -v /sw/org/myapp/#0/current/key1
+#> got 25 keys
+#> searching spec:/sw/org/myapp/#0/current/key1, found: spec:/sw/org/myapp/#0/current/key1, options:
+       KDB\_O\_CALLBACK
+#> The resulting keyname is user:/sw/org/myapp/#0/myprofile/key1
+#> test1
+\end{DoxyCode}
 
-\href{https://lab.burn.capital/chaz-attic/bohr}{\tt bohr libraries} 
+
+To switch profile we simply have to set one key\+:
+
+
+\begin{DoxyCode}
+kdb set user:/sw/org/myapp/#0/profile newprofile
+\end{DoxyCode}
+
+
+Usually, this will be done via commandline by setting {\ttfamily proc\+:/sw/org/myapp/\#0/profile}. 

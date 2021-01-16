@@ -76,7 +76,7 @@ Here an example of how you can easily check if a key exists\+:
 \textcolor{keyword}{import} kdb
 
 with \hyperlink{classkdb_1_1KDB}{kdb.KDB}() \textcolor{keyword}{as} k:
-    namespace = \textcolor{stringliteral}{"user"}
+    namespace = \textcolor{stringliteral}{"user:/"}
     path = \textcolor{stringliteral}{'\{\}/test'}.format(namespace)
 
     ks = \hyperlink{classkdb_1_1KeySet}{kdb.KeySet}()
@@ -221,13 +221,13 @@ with KDB() \textcolor{keyword}{as} data:
     data.get(keyset, \textcolor{stringliteral}{'user'})
     print(describe(keyset, \textcolor{stringliteral}{"Initial Keyset"}))
 
-    new\_key = key(\textcolor{stringliteral}{'user/sw/pk/key\_name'}, \textcolor{stringliteral}{'key\_value'})
+    new\_key = key(\textcolor{stringliteral}{'user:/sw/pk/key\_name'}, \textcolor{stringliteral}{'key\_value'})
     \textcolor{comment}{# adding new\_key to the existing key-set,}
     \textcolor{comment}{# ks['/user/sw/pk/key\_name'].value == 'key\_value'}
     keyset.append(new\_key)
     print(describe(keyset, \textcolor{stringliteral}{"Add New Key"}))
 
-    newer\_key = key(\textcolor{stringliteral}{'user/sw/pk/key\_name'}, \textcolor{stringliteral}{'other\_key\_value'})
+    newer\_key = key(\textcolor{stringliteral}{'user:/sw/pk/key\_name'}, \textcolor{stringliteral}{'other\_key\_value'})
     \textcolor{comment}{# adding newer\_key to the existing key-set, by doing so replacing new\_key,}
     \textcolor{comment}{# ks['/user/sw/pk/key\_name'].value == 'other\_key\_value'}
     keyset.append(newer\_key)

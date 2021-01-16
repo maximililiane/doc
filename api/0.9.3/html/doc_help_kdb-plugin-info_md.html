@@ -49,7 +49,7 @@ $(function() {
 </p>
 <p>This command will print out all the information about an Elektra plugin except it's configuration.<br />
  This command will also print out any functions that are exported by the plugin.<br />
- Information about a plugin will be read from <code>system/elektra/modules/</code>. If the information could not be located there, such as when a plugin is not mounted, the module will be loaded dynamically and then the information will be requested directly from the plugin.<br />
+ Information about a plugin will be read from <code>system:/elektra/modules/</code>. If the information could not be located there, such as when a plugin is not mounted, the module will be loaded dynamically and then the information will be requested directly from the plugin.<br />
  If a user wishes to load the information directly from the plugin, they can force that by using the <code>-l</code> option.<br />
 </p>
 <p>This command returns the following exit statuses:<br />
@@ -67,7 +67,7 @@ $(function() {
 <li><code>-V</code>, <code>--version</code>: Print version info.</li>
 <li><code>-p</code>, <code>--profile &lt;profile&gt;</code>: Use a different kdb profile.</li>
 <li><code>-C</code>, <code>--color &lt;when&gt;</code>: Print never/auto(default)/always colored output.</li>
-<li><code>-l</code>, <code>--load</code>: Load plugin even if system/elektra is available.</li>
+<li><code>-l</code>, <code>--load</code>: Load plugin even if system:/elektra is available.</li>
 <li><code>-c</code>, <code>--plugins-config &lt;plugins-config&gt;</code>: Add a plugin configuration.</li>
 </ul>
 <p>To print all the information about the <code>dump</code> plugin:<br />

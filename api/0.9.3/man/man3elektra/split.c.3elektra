@@ -1,4 +1,4 @@
-.TH "split.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "split.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -379,7 +379,7 @@ split needs to be processed with \fBsplitDivide()\fP before\&.
 .PP
 \fBPrecondition:\fP
 .RS 4
-user/system was split before\&. 
+user:/system was split before\&. 
 .RE
 .PP
 \fBParameters:\fP

@@ -1,4 +1,4 @@
-.TH "kdbinternal.h" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbinternal.h" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,23 +19,11 @@ kdbinternal.h \- Includes most internal header files\&.
 .br
 \fC#include <kdbmodule\&.h>\fP
 .br
-\fC#include <kdbobsolete\&.h>\fP
-.br
 \fC#include <kdbplugin\&.h>\fP
 .br
 \fC#include <kdbprivate\&.h>\fP
 .br
-\fC#include <kdbproposal\&.h>\fP
-.br
 
-.SS "Functions"
-
-.in +1c
-.ti -1c
-.RI "ssize_t \fBkeySetStringF\fP (Key *key, const char *format,\&.\&.\&.)"
-.br
-.RI "Set a formatted string\&. "
-.in -1c
 .SH "Detailed Description"
 .PP 
 Includes most internal header files\&. 

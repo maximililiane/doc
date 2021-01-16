@@ -1,4 +1,4 @@
-.TH "invoke" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "invoke" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -60,7 +60,7 @@ invoke \- Functionality to use plugins and invoke functions\&.
 .ti -1c
 .RI "int \fBelektraDeferredCall\fP (Plugin *handle, const char *elektraPluginFunctionName, KeySet *parameters)"
 .br
-.RI "Call a deferable function on a plugin handle\&. "
+.RI "Call a deferrable function on a plugin handle\&. "
 .ti -1c
 .RI "int \fBelektraDeferredCallAdd\fP (ElektraDeferredCallList *list, const char *name, KeySet *parameters)"
 .br
@@ -107,7 +107,7 @@ elektraInvokeClose (handle);
 .SS "int elektraDeferredCall (Plugin * handle, const char * elektraPluginFunctionName, KeySet * parameters)"
 
 .PP
-Call a deferable function on a plugin handle\&. If the function is exported by the plugin it is directly invoked, if the plugin supports deferring calls, the call is deferred\&. If both is possible (function is exported and deferred calls are supported), the function is directly called and the call is deferred (i\&.e\&. for nested plugins)\&.
+Call a deferrable function on a plugin handle\&. If the function is exported by the plugin it is directly invoked, if the plugin supports deferring calls, the call is deferred\&. If both is possible (function is exported and deferred calls are supported), the function is directly called and the call is deferred (i\&.e\&. for nested plugins)\&.
 .PP
 \fBParameters:\fP
 .RS 4

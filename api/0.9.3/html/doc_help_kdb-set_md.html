@@ -64,17 +64,17 @@ $(function() {
 <li><code>/sw/elektra/kdb/#0/current/namespace</code>: Specifies which default namespace should be used when setting a cascading name. By default the namespace is user, except <code>kdb</code> is used as root, then <code>system</code> is the default.</li>
 </ul>
 <p>To set a Key to the value <code>Hello World!</code>:<br />
- <code>kdb set user/example/key "Hello World!"</code></p>
+ <code>kdb set user:/example/key "Hello World!"</code></p>
 <p>To create a new key with a null value:<br />
- <code>kdb set user/example/key</code></p>
+ <code>kdb set user:/example/key</code></p>
 <p>To set a key to an empty value:<br />
- <code>kdb set user/example/key ""</code></p>
+ <code>kdb set user:/example/key ""</code></p>
 <p>To set a key to a negative value:<br />
  <code>kdb set -- /tests/neg -3</code></p>
 <p>To create bookmarks:<br />
- <code>kdb set user/sw/elektra/kdb/#0/current/bookmarks</code></p>
+ <code>kdb set user:/sw/elektra/kdb/#0/current/bookmarks</code></p>
 <p>Followed by:<br />
- <code>kdb set user/sw/elektra/kdb/#0/current/bookmarks/kdb user/sw/elektra/kdb/#0/current</code></p>
+ <code>kdb set user:/sw/elektra/kdb/#0/current/bookmarks/kdb user:/sw/elektra/kdb/#0/current</code></p>
 <ul>
 <li><a class="el" href="doc_help_kdb_md.html">kdb(1)</a> for how to configure the kdb utility and use the bookmarks.</li>
 <li><a class="el" href="doc_help_elektra-key-names_md.html">elektra-key-names(7)</a> for an explanation of key names.</li>

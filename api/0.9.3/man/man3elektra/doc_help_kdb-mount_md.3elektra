@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-mount_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-mount_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,7 +24,7 @@ This command allows a user to persistently mount a new \fIbackend\fP\&. Mounting
 .PP
 A backend acts as a worker to allow Elektra to interpret configuration files as keys in the central key database such that any edits to the keys are reflected in the file and vice versa\&. Additionally, the user can use this command to list the currently mounted backends by running the command with no arguments\&. More about mounting is explained in \fBelektra-mounting(7)\fP\&.
 .PP
-This command writes into the \fC/etc\fP directory to make the mounting persistent\&. As such it requires root permissions\&. Use \fCkdb file system/elektra/mountpoints\fP to find out where exactly it will write to\&.
+This command writes into the \fC/etc\fP directory to make the mounting persistent\&. As such it requires root permissions\&. Use \fCkdb file system:/elektra/mountpoints\fP to find out where exactly it will write to\&.
 .PP
 Absolute paths are still relative to their namespace (see \fCkdb plugin-info resolver\fP)\&. Only system+spec mount points are actually absolute\&. Read \fBelektra-namespaces(7)\fP for further information\&.
 .PP
@@ -80,7 +80,7 @@ To list the currently mounted backends:
 .PP
 To mount a system configuration file using the ini format:
 .br
- \fCkdb mount /etc/configuration\&.ini system/example ini\fP
+ \fCkdb mount /etc/configuration\&.ini system:/example ini\fP
 .PP
 Print a null-terminated output of paths and backend names:
 .br
@@ -88,15 +88,15 @@ Print a null-terminated output of paths and backend names:
 .PP
 To mount the /etc/file system file with two plugins with a respective configuration option each:
 .br
- \fCkdb mount /etc/file system/file plugin1 plugin1config=config1 plugin2 plugin2config=config2\fP
+ \fCkdb mount /etc/file system:/file plugin1 plugin1config=config1 plugin2 plugin2config=config2\fP
 .PP
 To mount the /etc/file system file with two plugins and setting both to be verbose:
 .br
- \fCkdb mount -c verbose=1 /etc/file system/file plugin1 plugin2\fP
+ \fCkdb mount -c verbose=1 /etc/file system:/file plugin1 plugin2\fP
 .PP
 To recode and rename a configuration file using Elektra:
 .br
- \fCkdb mount recode\&.txt dir/recode ni rename cut=path iconv to=utf8,from=latin1\fP
+ \fCkdb mount recode\&.txt dir:/recode ni rename cut=path iconv to=utf8,from=latin1\fP
 .PP
 .IP "\(bu" 2
 \fBelektra-glossary(7)\fP\&.

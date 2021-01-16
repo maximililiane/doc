@@ -1,4 +1,4 @@
-.TH "org.libelektra.Key" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "org.libelektra.Key" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -152,10 +152,6 @@ Inherits Iterable< String >\&.
 .RI "boolean \fBisDirectBelow\fP (final \fBKey\fP other)"
 .br
 .RI "Helper function to check if key is direct sub-key of other key\&. "
-.ti -1c
-.RI "boolean \fBisInactive\fP ()"
-.br
-.RI "Helper function to check if key is set to inactive\&. "
 .ti -1c
 .RI "boolean \fBisBinary\fP ()"
 .br
@@ -694,17 +690,6 @@ Helper function to check if key is direct sub-key of other key\&.
 \fBReturns:\fP
 .RS 4
 Boolean if this key is direct sub-key of other key ('child') 
-.RE
-.PP
-
-.SS "boolean org\&.libelektra\&.Key\&.isInactive ()\fC [inline]\fP"
-
-.PP
-Helper function to check if key is set to inactive\&. 
-.PP
-\fBReturns:\fP
-.RS 4
-Boolean if this key is inactive 
 .RE
 .PP
 

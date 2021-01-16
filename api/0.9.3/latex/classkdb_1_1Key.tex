@@ -72,10 +72,6 @@ void \hyperlink{classkdb_1_1Key_ad2f72ce0985413ce588dc33a575ea306}{add\+Base\+Na
 \begin{DoxyCompactList}\small\item\em Adds a base name for a key. \end{DoxyCompactList}\item 
 void \hyperlink{classkdb_1_1Key_aec6af8723a31af40f9a16614ea46c341}{del\+Base\+Name} ()
 \begin{DoxyCompactList}\small\item\em Delete the base\+Name of a key. \end{DoxyCompactList}\item 
-ssize\+\_\+t \hyperlink{classkdb_1_1Key_a92d6ec8adb547051b2861749e25e954e}{get\+Full\+Name\+Size} () const
-\begin{DoxyCompactList}\small\item\em Bytes needed to store the key name including user domain and ending N\+U\+LL. \end{DoxyCompactList}\item 
-std\+::string \hyperlink{classkdb_1_1Key_aae77aecb3dece445f103b3ce81b02515}{get\+Full\+Name} () const
-\begin{DoxyCompactList}\small\item\em Get key full name, including the user domain name. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_ae52e7f4c4461db5356ddeef64a870cad}{operator==} (const \hyperlink{classkdb_1_1Key}{Key} \&k) const
 \begin{DoxyCompactList}\small\item\em Compare the name of two keys. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_a7cf40dd6e79e63765c9535a8fcee6491}{operator!=} (const \hyperlink{classkdb_1_1Key}{Key} \&k) const
@@ -134,8 +130,10 @@ const \hyperlink{classkdb_1_1Key}{Key} \hyperlink{classkdb_1_1Key_a848292bf5591e
 \begin{DoxyCompactList}\small\item\em Returns the value of a meta-\/information which is current. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_a69e621790e5717c56f7275e0b8d5e27c}{is\+Valid} () const
 \item 
-std\+::string \hyperlink{classkdb_1_1Key_a71b191c56eacb692c2f92ed440b32b46}{get\+Namespace} () const
+Elektra\+Namespace \hyperlink{classkdb_1_1Key_aac012cf123370b4e7975984978c81419}{get\+Namespace} () const
 \item 
+ssize\+\_\+t \hyperlink{classkdb_1_1Key_a50586fabaaf3531ab19b0e9c03f08dcb}{set\+Namespace} (Elektra\+Namespace ns) const
+\begin{DoxyCompactList}\small\item\em Set the namespace of the key. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_a024ecb6d7c87244fb83c3fee58a0d696}{is\+Cascading} () const
 \begin{DoxyCompactList}\small\item\em Determines if the key is in cascading namespace. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_acf01e9a60bbd0e2768be782d149ac700}{is\+Spec} () const
@@ -152,8 +150,6 @@ bool \hyperlink{classkdb_1_1Key_a2170b1d9decef951b478454e3ee0b618}{is\+String} (
 \begin{DoxyCompactList}\small\item\em Check if a key is string type. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_ad748648cb25e2dc77972581e12a5b31c}{is\+Binary} () const
 \begin{DoxyCompactList}\small\item\em Check if a key is binary type. \end{DoxyCompactList}\item 
-bool \hyperlink{classkdb_1_1Key_a3a27bc4aa9dc8237ce2151ae37fde119}{is\+Inactive} () const
-\begin{DoxyCompactList}\small\item\em Check whether a key is inactive. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_a2ced1c67613e5024f22563318567ed67}{is\+Below} (const \hyperlink{classkdb_1_1Key}{Key} \&k) const
 \begin{DoxyCompactList}\small\item\em Check if the key check is below the key key or not. \end{DoxyCompactList}\item 
 bool \hyperlink{classkdb_1_1Key_a501eda4871a57faf5f7588a372d8f9c4}{is\+Below\+Or\+Same} (const \hyperlink{classkdb_1_1Key}{Key} \&k) const
@@ -184,7 +180,7 @@ To use it include\+:
 \item \hyperlink{group__keymeta}{Key metadata }, including but not limited to\+:
 \begin{DoxyItemize}
 \item \hyperlink{group__meta_gafb89735689929ff717cc9f2d0d0b46a2}{Key comment }
-\item \hyperlink{owner_8c_a35922a017bee8b4bcb493bbdfad9d6f5}{Key owner }
+\item \hyperlink{}{Key owner }
 \item \hyperlink{group__keymeta}{U\+ID, G\+ID and filesystem-\/like mode permissions }
 \item \hyperlink{group__keymeta}{Mode, change and modification times }
 \end{DoxyItemize}
@@ -323,7 +319,7 @@ We can also give an empty key name and a K\+E\+Y\+\_\+\+E\+ND tag with the same 
 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \textcolor{comment}{// work with it}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
@@ -338,7 +334,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Next parameter is a pointer to the value that will be used. If no \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{K\+E\+Y\+\_\+\+B\+I\+N\+A\+RY} was used before, a string is assumed. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex0"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex0"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
@@ -347,7 +343,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Define a maximum length of the value. This is only used when setting a binary key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex1"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex1"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// has no effect on strings}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
@@ -356,7 +352,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} ~\newline
  Next two parameter is a metaname and a metavalue. See \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{key\+Set\+Meta()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"comment"}, \textcolor{stringliteral}{"a comment"},  \textcolor{comment}{// with a comment}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"owner"}, \textcolor{stringliteral}{"root"},         \textcolor{comment}{// and an owner}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"special"}, \textcolor{stringliteral}{"yes"},        \textcolor{comment}{// and any other metadata}
@@ -368,8 +364,8 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{K\+E\+Y\+\_\+\+F\+L\+A\+GS} ~\newline
  Bitwise disjunction of flags, which don\textquotesingle{}t require one or more values. recommended way to set multiple flags. overrides previously defined flags. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{KEY\_FLAGS}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY} | \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{KEY\_CASCADING\_NAME}, \textcolor{comment}{// flags}
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
+        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// binary key}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
@@ -379,45 +375,29 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Allows one to change the key to a binary key. Make sure that you also pass \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{K\+E\+Y\+\_\+\+S\+I\+ZE} before you set the value. Otherwise it will be cut off with first \textbackslash{}0 in the string. So this flag toggle from \hyperlink{group__keyvalue_ga622bde1eb0e0c4994728331326340ef2}{key\+Set\+String()} to \hyperlink{group__keyvalue_gaa50a5358fd328d373a45f395fa1b99e7}{key\+Set\+Binary()}. If no value (nor size) is given, it will be a N\+U\+LL key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex2"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex2"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// now the size is important}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// sets the binary value ("some")}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{K\+E\+Y\+\_\+\+C\+A\+S\+C\+A\+D\+I\+N\+G\+\_\+\+N\+A\+ME} allow the name to start with / useful for \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()} and \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} parent/lookup keys
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a5205cbd2831bc881da3589a95c08e054}{K\+E\+Y\+\_\+\+M\+E\+T\+A\+\_\+\+N\+A\+ME} allow the name to start with arbitrary namespaces useful to compare with metakeys
 \end{DoxyItemize}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000010}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+:
-\begin{DoxyItemize}
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a9e43e47c8a21478538e2d20e049981d5}{K\+E\+Y\+\_\+\+D\+IR} ~\newline
- Define that the key is a directory rather than an ordinary key. This means its executable bits in its mode are set. But even without this option the key can have subkeys. See \hyperlink{group__meta_gaae575bd86a628a15ee45baa860522e75}{key\+Set\+Dir()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{K\+E\+Y\+\_\+\+O\+W\+N\+ER} ~\newline
- Next parameter is the owner. See \hyperlink{owner_8c_a88d6ec200ba0707b7c1b4a88133d2be4}{key\+Set\+Owner()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{K\+E\+Y\+\_\+\+U\+ID}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac0628bbaba7c837ca73323681393d15f}{K\+E\+Y\+\_\+\+G\+ID} ~\newline
- Next parameter is taken as the U\+ID (uid\+\_\+t) or G\+ID (gid\+\_\+t) that will be defined on the key. See \hyperlink{group__meta_gab5f284f5ecd261e0a290095f50ba1af7}{key\+Set\+U\+I\+D()} and \hyperlink{group__meta_ga9e3d0fb3f7ba906e067727b9155d22e3}{key\+Set\+G\+I\+D()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{K\+E\+Y\+\_\+\+M\+O\+DE} ~\newline
- Next parameter is taken as mode permissions (int) to the key. See \hyperlink{group__meta_ga8803037e35b9da1ce492323a88ff6bc3}{key\+Set\+Mode()}. 
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+: 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// with a simple value}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{KEY\_MODE}, 0777,            \textcolor{comment}{// permissions}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
+\begin{DoxyItemize}
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{K\+E\+Y\+\_\+\+C\+O\+M\+M\+E\+NT} ~\newline
  Next parameter is a comment. See \hyperlink{group__meta_ga8863a877a84fa46e6017fe72e49b89c1}{key\+Set\+Comment()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex4"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex4"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// key type}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{KEY\_COMMENT}, \textcolor{stringliteral}{"value is truncated"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"root"},             \textcolor{comment}{// owner (not uid) is root}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{KEY\_UID}, 0,                      \textcolor{comment}{// root uid}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
@@ -483,7 +463,7 @@ We can also give an empty key name and a K\+E\+Y\+\_\+\+E\+ND tag with the same 
 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \textcolor{comment}{// work with it}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
@@ -498,7 +478,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Next parameter is a pointer to the value that will be used. If no \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{K\+E\+Y\+\_\+\+B\+I\+N\+A\+RY} was used before, a string is assumed. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex0"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex0"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
@@ -507,7 +487,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Define a maximum length of the value. This is only used when setting a binary key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex1"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex1"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// has no effect on strings}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
@@ -516,7 +496,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} ~\newline
  Next two parameter is a metaname and a metavalue. See \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{key\+Set\+Meta()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"comment"}, \textcolor{stringliteral}{"a comment"},  \textcolor{comment}{// with a comment}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"owner"}, \textcolor{stringliteral}{"root"},         \textcolor{comment}{// and an owner}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"special"}, \textcolor{stringliteral}{"yes"},        \textcolor{comment}{// and any other metadata}
@@ -528,8 +508,8 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{K\+E\+Y\+\_\+\+F\+L\+A\+GS} ~\newline
  Bitwise disjunction of flags, which don\textquotesingle{}t require one or more values. recommended way to set multiple flags. overrides previously defined flags. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{KEY\_FLAGS}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY} | \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{KEY\_CASCADING\_NAME}, \textcolor{comment}{// flags}
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
+        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// binary key}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
@@ -539,45 +519,29 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Allows one to change the key to a binary key. Make sure that you also pass \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{K\+E\+Y\+\_\+\+S\+I\+ZE} before you set the value. Otherwise it will be cut off with first \textbackslash{}0 in the string. So this flag toggle from \hyperlink{group__keyvalue_ga622bde1eb0e0c4994728331326340ef2}{key\+Set\+String()} to \hyperlink{group__keyvalue_gaa50a5358fd328d373a45f395fa1b99e7}{key\+Set\+Binary()}. If no value (nor size) is given, it will be a N\+U\+LL key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex2"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex2"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// now the size is important}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// sets the binary value ("some")}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{K\+E\+Y\+\_\+\+C\+A\+S\+C\+A\+D\+I\+N\+G\+\_\+\+N\+A\+ME} allow the name to start with / useful for \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()} and \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} parent/lookup keys
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a5205cbd2831bc881da3589a95c08e054}{K\+E\+Y\+\_\+\+M\+E\+T\+A\+\_\+\+N\+A\+ME} allow the name to start with arbitrary namespaces useful to compare with metakeys
 \end{DoxyItemize}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000010}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+:
-\begin{DoxyItemize}
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a9e43e47c8a21478538e2d20e049981d5}{K\+E\+Y\+\_\+\+D\+IR} ~\newline
- Define that the key is a directory rather than an ordinary key. This means its executable bits in its mode are set. But even without this option the key can have subkeys. See \hyperlink{group__meta_gaae575bd86a628a15ee45baa860522e75}{key\+Set\+Dir()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{K\+E\+Y\+\_\+\+O\+W\+N\+ER} ~\newline
- Next parameter is the owner. See \hyperlink{owner_8c_a88d6ec200ba0707b7c1b4a88133d2be4}{key\+Set\+Owner()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{K\+E\+Y\+\_\+\+U\+ID}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac0628bbaba7c837ca73323681393d15f}{K\+E\+Y\+\_\+\+G\+ID} ~\newline
- Next parameter is taken as the U\+ID (uid\+\_\+t) or G\+ID (gid\+\_\+t) that will be defined on the key. See \hyperlink{group__meta_gab5f284f5ecd261e0a290095f50ba1af7}{key\+Set\+U\+I\+D()} and \hyperlink{group__meta_ga9e3d0fb3f7ba906e067727b9155d22e3}{key\+Set\+G\+I\+D()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{K\+E\+Y\+\_\+\+M\+O\+DE} ~\newline
- Next parameter is taken as mode permissions (int) to the key. See \hyperlink{group__meta_ga8803037e35b9da1ce492323a88ff6bc3}{key\+Set\+Mode()}. 
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+: 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// with a simple value}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{KEY\_MODE}, 0777,            \textcolor{comment}{// permissions}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
+\begin{DoxyItemize}
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{K\+E\+Y\+\_\+\+C\+O\+M\+M\+E\+NT} ~\newline
  Next parameter is a comment. See \hyperlink{group__meta_ga8863a877a84fa46e6017fe72e49b89c1}{key\+Set\+Comment()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex4"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex4"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// key type}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{KEY\_COMMENT}, \textcolor{stringliteral}{"value is truncated"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"root"},             \textcolor{comment}{// owner (not uid) is root}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{KEY\_UID}, 0,                      \textcolor{comment}{// root uid}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
@@ -646,7 +610,7 @@ We can also give an empty key name and a K\+E\+Y\+\_\+\+E\+ND tag with the same 
 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/some/example"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \textcolor{comment}{// work with it}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
@@ -661,7 +625,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Next parameter is a pointer to the value that will be used. If no \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{K\+E\+Y\+\_\+\+B\+I\+N\+A\+RY} was used before, a string is assumed. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex0"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex0"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
@@ -670,7 +634,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Define a maximum length of the value. This is only used when setting a binary key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex1"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex1"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// has no effect on strings}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// set a string value}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
@@ -679,7 +643,7 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} ~\newline
  Next two parameter is a metaname and a metavalue. See \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{key\+Set\+Meta()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"comment"}, \textcolor{stringliteral}{"a comment"},  \textcolor{comment}{// with a comment}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"owner"}, \textcolor{stringliteral}{"root"},         \textcolor{comment}{// and an owner}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{KEY\_META}, \textcolor{stringliteral}{"special"}, \textcolor{stringliteral}{"yes"},        \textcolor{comment}{// and any other metadata}
@@ -691,8 +655,8 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{K\+E\+Y\+\_\+\+F\+L\+A\+GS} ~\newline
  Bitwise disjunction of flags, which don\textquotesingle{}t require one or more values. recommended way to set multiple flags. overrides previously defined flags. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a4b83f86a07a7a0d6e24ecafe43cfea1b}{KEY\_FLAGS}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY} | \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{KEY\_CASCADING\_NAME}, \textcolor{comment}{// flags}
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex3"},
+        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// binary key}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
@@ -702,45 +666,29 @@ You can call \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New(
  Allows one to change the key to a binary key. Make sure that you also pass \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{K\+E\+Y\+\_\+\+S\+I\+ZE} before you set the value. Otherwise it will be cut off with first \textbackslash{}0 in the string. So this flag toggle from \hyperlink{group__keyvalue_ga622bde1eb0e0c4994728331326340ef2}{key\+Set\+String()} to \hyperlink{group__keyvalue_gaa50a5358fd328d373a45f395fa1b99e7}{key\+Set\+Binary()}. If no value (nor size) is given, it will be a N\+U\+LL key. 
 \begin{DoxyCodeInclude}
 \textcolor{comment}{// Create and initialize a key with a name and nothing else}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex2"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex2"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 4,               \textcolor{comment}{// now the size is important}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// sets the binary value ("some")}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8afc1567f74444ff9c219f7456b652b4ec}{K\+E\+Y\+\_\+\+C\+A\+S\+C\+A\+D\+I\+N\+G\+\_\+\+N\+A\+ME} allow the name to start with / useful for \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()} and \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} parent/lookup keys
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a5205cbd2831bc881da3589a95c08e054}{K\+E\+Y\+\_\+\+M\+E\+T\+A\+\_\+\+N\+A\+ME} allow the name to start with arbitrary namespaces useful to compare with metakeys
 \end{DoxyItemize}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000010}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+:
-\begin{DoxyItemize}
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a9e43e47c8a21478538e2d20e049981d5}{K\+E\+Y\+\_\+\+D\+IR} ~\newline
- Define that the key is a directory rather than an ordinary key. This means its executable bits in its mode are set. But even without this option the key can have subkeys. See \hyperlink{group__meta_gaae575bd86a628a15ee45baa860522e75}{key\+Set\+Dir()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{K\+E\+Y\+\_\+\+O\+W\+N\+ER} ~\newline
- Next parameter is the owner. See \hyperlink{owner_8c_a88d6ec200ba0707b7c1b4a88133d2be4}{key\+Set\+Owner()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{K\+E\+Y\+\_\+\+U\+ID}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac0628bbaba7c837ca73323681393d15f}{K\+E\+Y\+\_\+\+G\+ID} ~\newline
- Next parameter is taken as the U\+ID (uid\+\_\+t) or G\+ID (gid\+\_\+t) that will be defined on the key. See \hyperlink{group__meta_gab5f284f5ecd261e0a290095f50ba1af7}{key\+Set\+U\+I\+D()} and \hyperlink{group__meta_ga9e3d0fb3f7ba906e067727b9155d22e3}{key\+Set\+G\+I\+D()}.
-\item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{K\+E\+Y\+\_\+\+M\+O\+DE} ~\newline
- Next parameter is taken as mode permissions (int) to the key. See \hyperlink{group__meta_ga8803037e35b9da1ce492323a88ff6bc3}{key\+Set\+Mode()}. 
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]The flags below are deprecated and \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a040582834bb2d90049947d7ef74e87e2}{K\+E\+Y\+\_\+\+M\+E\+TA} should be preferred. They remain some time, however, for compatibility\+: 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex3"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},    \textcolor{comment}{// with a simple value}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1b0a91ff3a855d6993930ebf0abaa518}{KEY\_MODE}, 0777,            \textcolor{comment}{// permissions}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                  \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
+\begin{DoxyItemize}
 \item \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{K\+E\+Y\+\_\+\+C\+O\+M\+M\+E\+NT} ~\newline
  Next parameter is a comment. See \hyperlink{group__meta_ga8863a877a84fa46e6017fe72e49b89c1}{key\+Set\+Comment()}. 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/tmp/ex4"},
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/tmp/ex4"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY},                   \textcolor{comment}{// key type}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a6d531b5c41445d19d0452eebdccbfa01}{KEY\_SIZE}, 7,                    \textcolor{comment}{// assume binary length 7}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"some data"},                \textcolor{comment}{// value that will be truncated in 7 bytes}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac29427bb47cc31689d02912e36161ee3}{KEY\_COMMENT}, \textcolor{stringliteral}{"value is truncated"},
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"root"},             \textcolor{comment}{// owner (not uid) is root}
-        \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a28f01a87d65f065172f734c9c9446c0e}{KEY\_UID}, 0,                      \textcolor{comment}{// root uid}
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});                        \textcolor{comment}{// end of args}
 \end{DoxyCodeInclude}
 
@@ -805,7 +753,7 @@ Adds {\ttfamily base\+Name} (that will be escaped) to the current key name. A ne
 
 Assumes that {\ttfamily key} is a directory and will append {\ttfamily base\+Name} to it. The function adds the path separator for concatenating.
 
-So if {\ttfamily key} has name {\ttfamily \char`\"{}system/dir1/dir2\char`\"{}} and this method is called with {\ttfamily base\+Name} {\ttfamily \char`\"{}mykey\char`\"{}}, the resulting key will have the name {\ttfamily \char`\"{}system/dir1/dir2/mykey\char`\"{}}.
+So if {\ttfamily key} has name {\ttfamily \char`\"{}system\+:/dir1/dir2\char`\"{}} and this method is called with {\ttfamily base\+Name} {\ttfamily \char`\"{}mykey\char`\"{}}, the resulting key will have the name {\ttfamily \char`\"{}system\+:/dir1/dir2/mykey\char`\"{}}.
 
 When {\ttfamily base\+Name} is 0 nothing will happen and the size of the name is returned.
 
@@ -813,16 +761,16 @@ The escaping rules apply as in \hyperlink{group__keyname}{above }.
 
 A simple example is\+: 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/my/long"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/my/long"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{"myname"});
-printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user/my/long/myname}
+printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user:/my/long/myname}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
  E.\+g. if you add . it will be escaped\+: 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         succeed\_if (\hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{"."}) >= 0, \textcolor{stringliteral}{"could not add a base name"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/valid/\(\backslash\)\(\backslash\)."});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/valid/\(\backslash\)\(\backslash\)."});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{"."});
 \end{DoxyCodeInclude}
  \begin{DoxySeeAlso}{See also}
@@ -1036,7 +984,7 @@ To avoid that problem you can use \hyperlink{group__keymeta_ga8e63720a65610a2959
 \textcolor{keywordtype}{void} o (KeySet * ks)
 \{
         \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * current;
-        \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * shared = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (0);
+        \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * shared = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"/"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
         \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{keySetMeta} (shared, \textcolor{stringliteral}{"shared1"}, \textcolor{stringliteral}{"this metadata should be shared among many keys"});
         \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{keySetMeta} (shared, \textcolor{stringliteral}{"shared2"}, \textcolor{stringliteral}{"this metadata should be shared among many keys also"});
         \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{keySetMeta} (shared, \textcolor{stringliteral}{"shared3"}, \textcolor{stringliteral}{"this metadata should be shared among many keys too"});
@@ -1109,7 +1057,7 @@ To avoid that problem you can use \hyperlink{group__keymeta_ga8e63720a65610a2959
 \textcolor{keywordtype}{void} o(KeySet *ks)
 \{
         \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *current;
-        \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *shared = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (0);
+        \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *shared = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"/"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
         \hyperlink{group__keymeta_gae1f15546b234ffb6007d8a31178652b9}{keySetMeta}(shared, \textcolor{stringliteral}{"shared"}, \textcolor{stringliteral}{"this metadata should be shared among many keys"});
 
         \hyperlink{group__keyset_gabe793ff51f1728e3429c84a8a9086b70}{ksRewind}(ks);
@@ -1347,14 +1295,14 @@ This is a much more efficient version of \hyperlink{group__keyname_ga0992d26bcfc
 \begin{DoxyCodeInclude}
         \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{""});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"user"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"user:/"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  And there is also support for really empty basenames\+: 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         succeed\_if (\hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{""}) >= 0, \textcolor{stringliteral}{"could not add a base name"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/valid/%"});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/valid/%"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  \begin{DoxyNote}{Note}
@@ -1381,8 +1329,6 @@ a pointer to the basename
 \hyperlink{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}{key\+Get\+Base\+Name()}, \hyperlink{group__keyname_ga1a0b76c5d9e5367c7e72211e6c63d43a}{key\+Get\+Base\+Name\+Size()} 
 
 \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} a pointer to the name 
-
-\hyperlink{owner_8c_af6485fb8599714b6bbd830cf915ffea5}{key\+Owner()} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} a pointer to the owner 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classkdb_1_1Key_aef3cc0ef1621b91718604e899b43ebc0}\label{classkdb_1_1Key_aef3cc0ef1621b91718604e899b43ebc0}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Base\+Name\+Size@{get\+Base\+Name\+Size}}
@@ -1394,11 +1340,11 @@ a pointer to the basename
 
 Calculates number of bytes needed to store basename of {\ttfamily key}. 
 
-\hyperlink{classkdb_1_1Key}{Key} names that have only root names (e.\+g. {\ttfamily \char`\"{}system\char`\"{}} or {\ttfamily \char`\"{}user\char`\"{}} or {\ttfamily \char`\"{}user\+:domain\char`\"{}} ) does not have basenames, thus the function will return 1 bytes to store \char`\"{}\char`\"{}.
+\hyperlink{classkdb_1_1Key}{Key} names that have only root names (e.\+g. {\ttfamily \char`\"{}system\+:/\char`\"{}} or {\ttfamily \char`\"{}user\+:/\char`\"{}} or {\ttfamily \char`\"{}user\+:domain\char`\"{}} ) does not have basenames, thus the function will return 1 bytes to store \char`\"{}\char`\"{}.
 
 Basenames are denoted as\+:
 \begin{DoxyItemize}
-\item {\ttfamily system/some/thing/basename} -\/$>$ {\ttfamily basename} 
+\item {\ttfamily system\+:/some/thing/basename} -\/$>$ {\ttfamily basename} 
 \item {\ttfamily user\+:domain/some/thing/base\textbackslash{}/name} $>$ {\ttfamily base\textbackslash{}/name} 
 \end{DoxyItemize}
 
@@ -1454,7 +1400,7 @@ When the returned\+Binary is to small to hold the data (its maximum size is give
 \begin{DoxyParagraph}{Example\+:}
 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *key = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/keyname"}, KEY\_TYPE, KEY\_TYPE\_BINARY, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *key = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/keyname"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a1ca18d4e094ae7487d35ecedda2235ff}{KEY\_BINARY}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \textcolor{keywordtype}{char} buffer[300];
 
 \textcolor{keywordflow}{if} (\hyperlink{group__keyvalue_ga4c0d8a4a11174197699c231e0b5c3c84}{keyGetBinary}(key,buffer,\textcolor{keyword}{sizeof}(buffer)) == -1)
@@ -1547,70 +1493,6 @@ the number of bytes needed to store the key value
 \begin{DoxySeeAlso}{See also}
 \hyperlink{group__keyvalue_ga41b9fac5ccddafe407fc0ae1e2eb8778}{key\+Get\+String()}, \hyperlink{group__keyvalue_ga4c0d8a4a11174197699c231e0b5c3c84}{key\+Get\+Binary()}, \hyperlink{group__keyvalue_ga6f29609c5da53c6dc26a98678d5752af}{key\+Value()} 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classkdb_1_1Key_aae77aecb3dece445f103b3ce81b02515}\label{classkdb_1_1Key_aae77aecb3dece445f103b3ce81b02515}} 
-\index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Full\+Name@{get\+Full\+Name}}
-\index{get\+Full\+Name@{get\+Full\+Name}!kdb\+::\+Key@{kdb\+::\+Key}}
-\subsubsection{\texorpdfstring{get\+Full\+Name()}{getFullName()}}
-{\footnotesize\ttfamily std\+::string kdb\+::\+Key\+::get\+Full\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Get key full name, including the user domain name. 
-
-\begin{DoxyReturn}{Returns}
-number of bytes written 
-\end{DoxyReturn}
-
-\begin{DoxyRetVals}{Return values}
-{\em 1} & on empty name \\
-\hline
-{\em -\/1} & on N\+U\+LL pointers \\
-\hline
-{\em -\/1} & if max\+Size is 0 or larger than S\+S\+I\+Z\+E\+\_\+\+M\+AX \\
-\hline
-\end{DoxyRetVals}
-
-\begin{DoxyParams}{Parameters}
-{\em key} & the key object \\
-\hline
-{\em returned\+Name} & pre-\/allocated memory to write the key name \\
-\hline
-{\em max\+Size} & maximum number of bytes that will fit in returned\+Name, including the final N\+U\+LL\\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em Key\+Exception} & if key is null \\
-\hline
-\end{DoxyExceptions}
-\mbox{\Hypertarget{classkdb_1_1Key_a92d6ec8adb547051b2861749e25e954e}\label{classkdb_1_1Key_a92d6ec8adb547051b2861749e25e954e}} 
-\index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Full\+Name\+Size@{get\+Full\+Name\+Size}}
-\index{get\+Full\+Name\+Size@{get\+Full\+Name\+Size}!kdb\+::\+Key@{kdb\+::\+Key}}
-\subsubsection{\texorpdfstring{get\+Full\+Name\+Size()}{getFullNameSize()}}
-{\footnotesize\ttfamily ssize\+\_\+t kdb\+::\+Key\+::get\+Full\+Name\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Bytes needed to store the key name including user domain and ending N\+U\+LL. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em key} & the key object to work with \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-number of bytes needed to store key name including user domain 
-\end{DoxyReturn}
-
-\begin{DoxyRetVals}{Return values}
-{\em 1} & on empty name \\
-\hline
-{\em -\/1} & on N\+U\+LL pointer \\
-\hline
-\end{DoxyRetVals}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()} 
-\end{DoxySeeAlso}
 \mbox{\Hypertarget{classkdb_1_1Key_aa9643866a567ba5f012a3e9ab2a91721}\label{classkdb_1_1Key_aa9643866a567ba5f012a3e9ab2a91721}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Func@{get\+Func}}
 \index{get\+Func@{get\+Func}!kdb\+::\+Key@{kdb\+::\+Key}}
@@ -1678,7 +1560,7 @@ You must not delete or change the returned key, use \hyperlink{group__keymeta_ga
 \begin{DoxyParams}{Parameters}
 {\em key} & the key object to work with \\
 \hline
-{\em meta\+Name} & the name of the meta information you want the value from \\
+{\em meta\+Name} & the name of the meta information you want the value from If the name does not start with \textquotesingle{}meta\+:/\textquotesingle{}, we will prefix it with \textquotesingle{}meta\+:/\textquotesingle{}. \\
 \hline
 \end{DoxyParams}
 
@@ -1743,8 +1625,6 @@ Returns a pointer to the abbreviated real internal {\ttfamily key} name.
 
 This is a much more efficient version of \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} and can use it if you are responsible enough to not mess up things. You are not allowed to change anything in the returned array. The content of that string may change after \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} and similar functions. If you need a copy of the name, consider using \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}.
 
-The name will be without owner, see \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()} if you need the name with its owner.
-
 
 \begin{DoxyRetVals}{Return values}
 {\em \char`\"{}\char`\"{}} & when there is no key\+Name. The reason is 
@@ -1761,11 +1641,11 @@ Valid key names are\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily spec/something} for specification of other keys.
-\item {\ttfamily proc/something} for in-\/memory keys, e.\+g. commandline.
-\item {\ttfamily dir/something} for dir keys in current working directory
-\item {\ttfamily system/something} for system keys in /etc or /
-\item {\ttfamily user/something} for user keys in home directory
+\item {\ttfamily spec\+:/something} for specification of other keys.
+\item {\ttfamily proc\+:/something} for in-\/memory keys, e.\+g. commandline.
+\item {\ttfamily dir\+:/something} for dir keys in current working directory
+\item {\ttfamily system\+:/something} for system keys in /etc or /
+\item {\ttfamily user\+:/something} for user keys in home directory
 \item {\ttfamily user\+:username/something} for other users (deprecated\+: \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} + \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()} currently unsupported)
 \item {\ttfamily /something} for cascading keys (actually refers to one of the above, see also \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()})
 
@@ -1790,11 +1670,7 @@ a pointer to the keyname which must not be changed.
 \begin{DoxySeeAlso}{See also}
 \hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()} for the string length 
 
-\hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size()} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} the full name 
-
 \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} as alternative to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} a \hyperlink{classkdb_1_1Key_ab5bc93e22f4cf40b9d2b1fc32cc260be}{copy} 
-
-\hyperlink{owner_8c_af6485fb8599714b6bbd830cf915ffea5}{key\+Owner()} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} a pointer to owner 
 
 \hyperlink{group__keyname_ga6fe6af4c27b35d911a533f4ae4d698bb}{key\+Unescaped\+Name} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} an unescaped \hyperlink{group__key}{Key} name
 \end{DoxySeeAlso}
@@ -1835,23 +1711,21 @@ number of bytes needed, including ending N\+U\+LL, to store key name without own
 \hline
 \end{DoxyRetVals}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size()} 
+\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} 
 
 \hyperlink{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}{key\+Get\+Unescaped\+Name\+Size} to \hyperlink{classkdb_1_1Key_ac558a1f1b2cb50d77fbabcbb24950c05}{get} size of unescaped name 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classkdb_1_1Key_a71b191c56eacb692c2f92ed440b32b46}\label{classkdb_1_1Key_a71b191c56eacb692c2f92ed440b32b46}} 
+\mbox{\Hypertarget{classkdb_1_1Key_aac012cf123370b4e7975984978c81419}\label{classkdb_1_1Key_aac012cf123370b4e7975984978c81419}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Namespace@{get\+Namespace}}
 \index{get\+Namespace@{get\+Namespace}!kdb\+::\+Key@{kdb\+::\+Key}}
 \subsubsection{\texorpdfstring{get\+Namespace()}{getNamespace()}}
-{\footnotesize\ttfamily std\+::string kdb\+::\+Key\+::get\+Namespace (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Elektra\+Namespace kdb\+::\+Key\+::get\+Namespace (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \begin{DoxyReturn}{Returns}
-namespace as string
+namespace of the key
 \end{DoxyReturn}
-Will return slash for cascading names.
-
 \begin{DoxySeeAlso}{See also}
-\hyperlink{classkdb_1_1Key_a6c1812730e9cb714893c9f9b1e503303}{get\+Name()}, \hyperlink{classkdb_1_1Key_a3b3d0d74246b259b10caed425216d91c}{is\+User()}, \hyperlink{classkdb_1_1Key_a44833fb97b02ca58205c48d740c4cada}{is\+System()} 
+Elektra\+Namespace, \hyperlink{group__keyname_gafc3ca03ed10f87eb59bdc02cf2a0de8d}{key\+Get\+Namespace} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classkdb_1_1Key_ae050f835e06aa0ecb828315e1fdb63ea}\label{classkdb_1_1Key_ae050f835e06aa0ecb828315e1fdb63ea}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!get\+Reference\+Counter@{get\+Reference\+Counter}}
@@ -1867,7 +1741,7 @@ The reference counting is the essential property of keys to make sure that they 
 
 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/proper\_name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}); \textcolor{comment}{// ref counter = 0}
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/proper\_name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}); \textcolor{comment}{// ref counter = 0}
 KeySet *ks = \hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew} (1, k, \hyperlink{group__keyset_ga7a28fce3773b2c873c94ac80b8b4cd54}{KS\_END});
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel}(k); \textcolor{comment}{// key will not be deleted, because its in the keyset}
 \hyperlink{group__keyset_ga27e5c16473b02a422238c8d970db7ac8}{ksDel}(ks); \textcolor{comment}{// now the key will be deleted}
@@ -1876,7 +1750,7 @@ KeySet *ks = \hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew}
 
 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/proper\_name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}); \textcolor{comment}{// ref counter 0}
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/proper\_name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}); \textcolor{comment}{// ref counter 0}
 KeySet *ks1 = \hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew}(1, k, \hyperlink{group__keyset_ga7a28fce3773b2c873c94ac80b8b4cd54}{KS\_END}); \textcolor{comment}{// ref counter of k 1}
 KeySet *ks2 = \hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew}(1, k, \hyperlink{group__keyset_ga7a28fce3773b2c873c94ac80b8b4cd54}{KS\_END}); \textcolor{comment}{// ref counter of k 2}
 \hyperlink{group__keyset_ga27e5c16473b02a422238c8d970db7ac8}{ksDel}(ks1); \textcolor{comment}{// ref counter of k 1}
@@ -2046,7 +1920,7 @@ key=\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(0);
 Note that the \hyperlink{classkdb_1_1Key}{Key} structure keeps its own size field that is calculated by library internal calls, so to avoid inconsistencies, you must never use the pointer returned by \hyperlink{group__keyvalue_ga6f29609c5da53c6dc26a98678d5752af}{key\+Value()} method to set a new value. Use \hyperlink{group__keyvalue_ga622bde1eb0e0c4994728331326340ef2}{key\+Set\+String()} or \hyperlink{group__keyvalue_gaa50a5358fd328d373a45f395fa1b99e7}{key\+Set\+Binary()} instead.
 \end{DoxyNote}
 \begin{DoxyWarning}{Warning}
-Binary keys will return a N\+U\+LL pointer when there is no data in contrast to \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()}, \hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{key\+Base\+Name()}, \hyperlink{owner_8c_af6485fb8599714b6bbd830cf915ffea5}{key\+Owner()} and \hyperlink{group__meta_gac89fd319783b3457db45b4c09e55274a}{key\+Comment()}. For string value the behaviour is the same.
+Binary keys will return a N\+U\+LL pointer when there is no data in contrast to \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()}, \hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{key\+Base\+Name()} and \hyperlink{group__meta_gac89fd319783b3457db45b4c09e55274a}{key\+Comment()}. For string value the behaviour is the same.
 \end{DoxyWarning}
 \begin{DoxyParagraph}{Example\+:}
 
@@ -2055,7 +1929,7 @@ KDB *handle = \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdbOpen}
 KeySet *ks=\hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew}(0, \hyperlink{group__keyset_ga7a28fce3773b2c873c94ac80b8b4cd54}{KS\_END});
 \hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *current=0;
 
-kdbGetByName(handle,ks,\textcolor{stringliteral}{"system/sw/my"},KDB\_O\_SORT|KDB\_O\_RECURSIVE);
+kdbGetByName(handle,ks,\textcolor{stringliteral}{"system:/sw/my"},KDB\_O\_SORT|KDB\_O\_RECURSIVE);
 
 \hyperlink{group__keyset_gabe793ff51f1728e3429c84a8a9086b70}{ksRewind}(ks);
 \textcolor{keywordflow}{while} (current=\hyperlink{group__keyset_ga317321c9065b5a4b3e33fe1c399bcec9}{ksNext}(ks)) \{
@@ -2142,15 +2016,15 @@ Check if the key check is below the key key or not.
 \begin{DoxyReturn}{Returns}
 true if our key is below k
 \end{DoxyReturn}
-Example\+: \begin{DoxyVerb}key user/sw/app
-check user/sw/app/key
+Example\+: \begin{DoxyVerb}key user:/sw/app
+check user:/sw/app/key
 \end{DoxyVerb}
 
 
 returns true because check is below key
 
-Example\+: \begin{DoxyVerb}key user/sw/app
-check user/sw/app/folder/key
+Example\+: \begin{DoxyVerb}key user:/sw/app
+check user:/sw/app/folder/key
 \end{DoxyVerb}
 
 
@@ -2292,14 +2166,14 @@ Check whether the key {\ttfamily check} is directly below the key {\ttfamily key
 true if our key is direct below k
 \end{DoxyReturn}
 \begin{DoxyVerb}Example:
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 returns true because check is below key
 
 Example:
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 does not return true, because there is only an indirect relation
 \end{DoxyVerb}
@@ -2324,34 +2198,6 @@ does not return true, because there is only an indirect relation
 \begin{DoxySeeAlso}{See also}
 \hyperlink{group__keytest_ga03332b5d97c76a4fd2640aca4762b8df}{key\+Is\+Below()}, \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()}, \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classkdb_1_1Key_a3a27bc4aa9dc8237ce2151ae37fde119}\label{classkdb_1_1Key_a3a27bc4aa9dc8237ce2151ae37fde119}} 
-\index{kdb\+::\+Key@{kdb\+::\+Key}!is\+Inactive@{is\+Inactive}}
-\index{is\+Inactive@{is\+Inactive}!kdb\+::\+Key@{kdb\+::\+Key}}
-\subsubsection{\texorpdfstring{is\+Inactive()}{isInactive()}}
-{\footnotesize\ttfamily bool kdb\+::\+Key\+::is\+Inactive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Check whether a key is inactive. 
-
-In Elektra terminology a hierarchy of keys is inactive if the rootkey\textquotesingle{}s basename starts with \textquotesingle{}.\textquotesingle{}. So a key is also inactive if it is below an inactive key. For example, user/key/.hidden is inactive and so is user/.hidden/below.
-
-Inactive keys should not have any meaning to applications, they are only a convention reserved for users and administrators. To automatically remove all inactive keys for an application, consider to use the hidden plugin.
-
-
-\begin{DoxyParams}{Parameters}
-{\em key} & the key object to work with \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyRetVals}{Return values}
-{\em 1} & if the key is inactive \\
-\hline
-{\em 0} & if the key is active \\
-\hline
-{\em -\/1} & on N\+U\+LL pointer or when key has no name \\
-\hline
-\end{DoxyRetVals}
 \mbox{\Hypertarget{classkdb_1_1Key_af499cd8c7d664818327c67624f1489e0}\label{classkdb_1_1Key_af499cd8c7d664818327c67624f1489e0}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!is\+Meta\+Locked@{is\+Meta\+Locked}}
 \index{is\+Meta\+Locked@{is\+Meta\+Locked}!kdb\+::\+Key@{kdb\+::\+Key}}
@@ -2504,7 +2350,7 @@ An invalid key has no name. The name of valid keys either start with user or sys
 \hline
 \end{DoxyRetVals}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{classkdb_1_1Key_a6c1812730e9cb714893c9f9b1e503303}{get\+Name()}, \hyperlink{classkdb_1_1Key_a3b3d0d74246b259b10caed425216d91c}{is\+User()}, \hyperlink{classkdb_1_1Key_a44833fb97b02ca58205c48d740c4cada}{is\+System()}, \hyperlink{classkdb_1_1Key_a71b191c56eacb692c2f92ed440b32b46}{get\+Namespace()} 
+\hyperlink{classkdb_1_1Key_a6c1812730e9cb714893c9f9b1e503303}{get\+Name()}, \hyperlink{classkdb_1_1Key_a3b3d0d74246b259b10caed425216d91c}{is\+User()}, \hyperlink{classkdb_1_1Key_a44833fb97b02ca58205c48d740c4cada}{is\+System()}, \hyperlink{classkdb_1_1Key_aac012cf123370b4e7975984978c81419}{get\+Namespace()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{classkdb_1_1Key_a92daf058cb9896c7a926bddeecf179ef}\label{classkdb_1_1Key_a92daf058cb9896c7a926bddeecf179ef}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!is\+Value\+Locked@{is\+Value\+Locked}}
@@ -2535,7 +2381,7 @@ In your application you can make use of that flag to know if you changed somethi
 Note that the sync status will be updated on any change, including metadata.
 \end{DoxyNote}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\hyperlink{deprecated__deprecated000012}{Deprecated}]The handling of synchronization is done internally and does not need to be checked by neither application nor plugins.\end{DoxyRefDesc}
+\item[\hyperlink{deprecated__deprecated000004}{Deprecated}]The handling of synchronization is done internally and does not need to be checked by neither application nor plugins.\end{DoxyRefDesc}
 
 
 \begin{DoxySeeAlso}{See also}
@@ -2664,18 +2510,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -2916,18 +2752,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -2998,18 +2824,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -3100,18 +2916,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -3182,18 +2988,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -3264,18 +3060,8 @@ Given any Keys k1 and k2 constructed with \hyperlink{group__key_gad23c65b44bf48d
 \end{DoxyCodeInclude}
  Here are some more examples\+: 
 \begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-
-\textcolor{comment}{// keyCmp(k1,k2) < 0}
-\textcolor{comment}{// keyCmp(k2,k1) > 0}
-\end{DoxyCode}
-
-
-And even more\+: 
-\begin{DoxyCode}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"markus"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b}{KEY\_OWNER}, \textcolor{stringliteral}{"max"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k1 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/a"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} *k2 = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew}(\textcolor{stringliteral}{"user:/b"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 
 \textcolor{comment}{// keyCmp(k1,k2) < 0}
 \textcolor{comment}{// keyCmp(k2,k1) > 0}
@@ -3380,9 +3166,6 @@ Set the value for {\ttfamily key} as {\ttfamily new\+String\+Value}. The functio
 
 String values will be saved in backend storage, when kdb\+Set\+Key() will be called, in U\+T\+F-\/8 universal encoding, regardless of the program\textquotesingle{}s current encoding, when iconv plugin is present.
 
-\begin{DoxyNote}{Note}
-The type will be set to K\+E\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+S\+T\+R\+I\+NG. When the type of the key is already a string type it won\textquotesingle{}t be changed.
-\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
 {\em key} & the key to set the string value \\
@@ -3417,20 +3200,20 @@ Sets {\ttfamily base\+Name} as the new basename for {\ttfamily key}. Only the ba
 
 A simple example is\+: 
 \begin{DoxyCodeInclude}
-\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/my/long/name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+\hyperlink{classkdb_1_1Key_a5679f5cae63caddd64a60388b9cc77fa}{Key} * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/my/long/name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{"myname"});
-printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user/my/long/myname}
+printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user:/my/long/myname}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
  All text after the last {\ttfamily \textquotesingle{}/\textquotesingle{}} in the {\ttfamily key} keyname is erased and {\ttfamily base\+Name} is appended. If {\ttfamily base\+Name} is 0 (N\+U\+LL), then the last part of the keyname is removed without replacement.
 
-Let us suppose {\ttfamily key} has name {\ttfamily \char`\"{}system/dir1/dir2/key1\char`\"{}}. If {\ttfamily base\+Name} is {\ttfamily \char`\"{}key2\char`\"{}}, the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2/key2\char`\"{}}. If {\ttfamily base\+Name} is 0 (N\+U\+LL), the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2\char`\"{}}. If {\ttfamily base\+Name} is empty, the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2/\%\char`\"{}}, where {\ttfamily \char`\"{}\%\char`\"{}} denotes an empty base name, as also shown in the following code\+:
+Let us suppose {\ttfamily key} has name {\ttfamily \char`\"{}system\+:/dir1/dir2/key1\char`\"{}}. If {\ttfamily base\+Name} is {\ttfamily \char`\"{}key2\char`\"{}}, the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2/key2\char`\"{}}. If {\ttfamily base\+Name} is 0 (N\+U\+LL), the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2\char`\"{}}. If {\ttfamily base\+Name} is empty, the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2/\%\char`\"{}}, where {\ttfamily \char`\"{}\%\char`\"{}} denotes an empty base name, as also shown in the following code\+:
 
 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{""});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/%"});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/%"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{key\+Set\+Base\+Name()} does proper escaping on the supplied name argument.
@@ -3449,14 +3232,7 @@ If you want to add and not change the basename, use \hyperlink{group__keyname_ga
 
 \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} to \hyperlink{classkdb_1_1Key_a615124f0a2b291e03975b49c233654d7}{set} a completely new name
 \end{DoxySeeAlso}
-To add an inactive key name, use\+: 
-\begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
-        \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{".hiddenkey"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/.hiddenkey"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{".hiddenkey"});
-\end{DoxyCodeInclude}
- 
+
 \begin{DoxyParams}{Parameters}
 {\em key} & the key object to work with \\
 \hline
@@ -3550,7 +3326,7 @@ It will remove a meta information if new\+Meta\+String is 0.
 \begin{DoxyParams}{Parameters}
 {\em key} & the key object to work with \\
 \hline
-{\em meta\+Name} & the name of the meta information where you want to change the value \\
+{\em meta\+Name} & the name of the meta information where you want to change the value If the name does not start with \textquotesingle{}meta\+:/\textquotesingle{}, we will prefix it with \textquotesingle{}meta\+:/\textquotesingle{}. \\
 \hline
 {\em new\+Meta\+String} & the new value for the meta information \\
 \hline
@@ -3588,11 +3364,11 @@ Set a new name to a key.
 
 A valid name is one of the forms\+:
 \begin{DoxyItemize}
-\item {\ttfamily spec/something} for specification of other keys.
-\item {\ttfamily proc/something} for in-\/memory keys, e.\+g. commandline.
-\item {\ttfamily dir/something} for dir keys in current working directory
-\item {\ttfamily system/something} for system keys in /etc or /
-\item {\ttfamily user/something} for user keys in home directory
+\item {\ttfamily spec\+:/something} for specification of other keys.
+\item {\ttfamily proc\+:/something} for in-\/memory keys, e.\+g. commandline.
+\item {\ttfamily dir\+:/something} for dir keys in current working directory
+\item {\ttfamily system\+:/something} for system keys in /etc or /
+\item {\ttfamily user\+:/something} for user keys in home directory
 \item {\ttfamily user\+:username/something} for other users (deprecated\+: \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} + \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()} currently unsupported)
 \item {\ttfamily /something} for cascading keys (actually refers to one of the above, see also \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()})
 \end{DoxyItemize}
@@ -3607,7 +3383,7 @@ You should always follow the guidelines for key tree structure creation.
 
 A private copy of the key name will be stored, and the {\ttfamily new\+Name} parameter can be freed after this call.
 
-.., . and / will be handled as in filesystem paths. A valid name will be build out of the (valid) name what you pass, e.\+g. user///sw/../sw//././\+My\+App -\/$>$ user/sw/\+My\+App
+.., . and / will be handled as in filesystem paths. A valid name will be build out of the (valid) name what you pass, e.\+g. user\+:///sw/../sw//././\+My\+App -\/$>$ user\+:/sw/\+My\+App
 
 On invalid names, N\+U\+LL or \char`\"{}\char`\"{} the name will be \char`\"{}\char`\"{} afterwards.
 
@@ -3630,9 +3406,9 @@ On invalid names, N\+U\+LL or \char`\"{}\char`\"{} the name will be \char`\"{}\c
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New()}, \hyperlink{owner_8c_a88d6ec200ba0707b7c1b4a88133d2be4}{key\+Set\+Owner()} 
+\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New()} 
 
-\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} 
+\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} 
 
 \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{key\+Set\+Base\+Name()}, \hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{key\+Add\+Base\+Name()} to manipulate a name
 \end{DoxySeeAlso}
@@ -3641,6 +3417,19 @@ On invalid names, N\+U\+LL or \char`\"{}\char`\"{} the name will be \char`\"{}\c
 {\em Key\+Invalid\+Name} & if the name is not valid \\
 \hline
 \end{DoxyExceptions}
+\mbox{\Hypertarget{classkdb_1_1Key_a50586fabaaf3531ab19b0e9c03f08dcb}\label{classkdb_1_1Key_a50586fabaaf3531ab19b0e9c03f08dcb}} 
+\index{kdb\+::\+Key@{kdb\+::\+Key}!set\+Namespace@{set\+Namespace}}
+\index{set\+Namespace@{set\+Namespace}!kdb\+::\+Key@{kdb\+::\+Key}}
+\subsubsection{\texorpdfstring{set\+Namespace()}{setNamespace()}}
+{\footnotesize\ttfamily ssize\+\_\+t kdb\+::\+Key\+::set\+Namespace (\begin{DoxyParamCaption}\item[{Elektra\+Namespace}]{ns }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the namespace of the key. 
+
+\begin{DoxySeeAlso}{See also}
+Elektra\+Namespace, \hyperlink{group__keyname_ga98c1c1307419e689c98e556e5c542073}{key\+Set\+Namespace} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classkdb_1_1Key_a18df1f7a447b999fae5faf32fc1ab893}\label{classkdb_1_1Key_a18df1f7a447b999fae5faf32fc1ab893}} 
 \index{kdb\+::\+Key@{kdb\+::\+Key}!set\+String@{set\+String}}
 \index{set\+String@{set\+String}!kdb\+::\+Key@{kdb\+::\+Key}}
@@ -3655,9 +3444,6 @@ The function will allocate and save a private copy of {\ttfamily new\+String\+Va
 
 String values will be saved in backend storage, when kdb\+Set\+Key() will be called, in U\+T\+F-\/8 universal encoding, regardless of the program\textquotesingle{}s current encoding, when iconv plugin is present.
 
-\begin{DoxyNote}{Note}
-The type will be set to K\+E\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+S\+T\+R\+I\+NG. When the type of the key is already a string type it won\textquotesingle{}t be changed.
-\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
 {\em key} & the key to set the string value \\

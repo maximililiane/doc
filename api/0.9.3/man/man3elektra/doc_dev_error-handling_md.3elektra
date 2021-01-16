@@ -1,4 +1,4 @@
-.TH "doc_dev_error-handling_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_dev_error-handling_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -63,13 +63,13 @@ Additional metakeys yield all the details\&.
 [error/line] represents the exact line of that source file\&.
 .PP
 .PP
-Beside errors, Elektra can also emit warnings metadata\&. While only a single error can be set on a specific error key, warnings can be up to 100 entries (#00 - #99):
+Beside errors, Elektra can also emit warnings metadata\&. While only a single error can be set on a specific error key, warnings can be up to 100 entries (#0 - #_99):
 .PP
 .IP "\(bu" 2
 [warnings] indicate that at least one warning is present\&. The value of the metakey contains the number of warnings which can be accessed\&.
 .PP
 .PP
-Additional metakeys yield all the details\&. The warnings are stored in a special array format which range from 00 to 99\&. E\&.g\&., the first warning number can be accessed by getting the key \fCwarnings/#00/number\fP\&. The following metadatas are available and have the same semantics as the error metadata: \fC[warnings/<number>/number]\fP, \fC[warnings/<number>/description]\fP, \fC[warnings/<number>/reason]\fP, \fC[warnings/<number>/module]\fP, \fC[warnings/<number>/file]\fP, \fC[warnings/<number>/line]\fP
+Additional metakeys yield all the details\&. The warnings are stored in a special array format which range from 0 to _99\&. E\&.g\&., the first warning number can be accessed by getting the key \fCwarnings/#0/number\fP\&. The following metadatas are available and have the same semantics as the error metadata: \fC[warnings/<number>/number]\fP, \fC[warnings/<number>/description]\fP, \fC[warnings/<number>/reason]\fP, \fC[warnings/<number>/module]\fP, \fC[warnings/<number>/file]\fP, \fC[warnings/<number>/line]\fP
 .PP
 If there are more than 100 warnings, the information will be overwritten from the start again\&.
 .PP

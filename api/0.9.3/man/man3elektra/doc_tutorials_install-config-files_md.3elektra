@@ -1,4 +1,4 @@
-.TH "doc_tutorials_install-config-files_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_install-config-files_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,22 +17,22 @@ It is especially useful in the context of package upgrades\&. In this case
 .PP
 First of all, we create a small example configuration file\&. To do so, we first create a temporary file and store its location in Elektra\&.
 .PP
-``` kdb set user/tests/tempfiles/firstFile  echo -e 'keyA=a\\nkeyB=b\\nkeyC=c' > \fCkdb get user/tests/tempfiles/firstFile\fP 
+``` kdb set user:/tests/tempfiles/firstFile  echo -e 'keyA=a\\nkeyB=b\\nkeyC=c' > \fCkdb get user:/tests/tempfiles/firstFile\fP 
 .PP
 .nf
-The following call to `kdb install-config-file` will mount it at `system/tests/installing` and additionally create a copy of it\&.
+The following call to `kdb install-config-file` will mount it at `system:/tests/installing` and additionally create a copy of it\&.
 The copy will be required for a three-way merge later on\&.
 
 .fi
 .PP
- kdb install-config-file system/tests/installing \fCkdb get user/tests/tempfiles/firstFile\fP ini 
+ kdb install-config-file system:/tests/installing \fCkdb get user:/tests/tempfiles/firstFile\fP mini 
 .PP
 .nf
 We can now safely make changes to our configuration\&.
 
 .fi
 .PP
- kdb set system/tests/installing/keyB X 
+ kdb set system:/tests/installing/keyB X 
 .PP
 .nf
 Let's assume that we've downloaded a different version of this file from the internet and placed it into the directory `/tmp/new`\&.
@@ -45,18 +45,18 @@ Read the tutorials on mounting and namespaces if you are not sure what this mean
 
 .fi
 .PP
- kdb set user/tests/tempfiles/secondFile $(echo $(mktemp -d)/$(basename $(kdb get user/tests/tempfiles/firstFile))) echo -e 'keyA=a\\nkeyB=b\\nkeyC=Y' > \fCkdb get user/tests/tempfiles/secondFile\fP kdb install-config-file system/tests/installing $(kdb get user/tests/tempfiles/secondFile) ini 
+ kdb set user:/tests/tempfiles/secondFile $(echo $(mktemp -d)/$(basename $(kdb get user:/tests/tempfiles/firstFile))) echo -e 'keyA=a\\nkeyB=b\\nkeyC=Y' > \fCkdb get user:/tests/tempfiles/secondFile\fP kdb install-config-file system:/tests/installing $(kdb get user:/tests/tempfiles/secondFile) mini 
 .PP
 .nf
 We can check that this worked by calling
 
 .fi
 .PP
- kdb get system/tests/installing/keyB #> X kdb get system/tests/installing/keyC #> Y 
+ kdb get system:/tests/installing/keyB #> X kdb get system:/tests/installing/keyC #> Y 
 .PP
 .nf
 Finally, we use the following commands to clean up our tutorial\&.
 
 .fi
 .PP
- kdb umount system/tests/installing rm -rf $(kdb get user/tests/tempfiles/firstFile) rm -rf $(kdb get user/tests/tempfiles/secondFile) kdb rm -rf user/tests/tempfiles kdb rm -rf user/elektra/merge/preserve ``` 
+ kdb umount system:/tests/installing rm -rf $(kdb get user:/tests/tempfiles/firstFile) rm -rf $(kdb get user:/tests/tempfiles/secondFile) kdb rm -rf user:/tests/tempfiles kdb rm -rf user:/elektra/merge/preserve ``` 

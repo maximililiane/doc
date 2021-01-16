@@ -1,4 +1,4 @@
-.TH "src_libs_README_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "src_libs_README_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -70,14 +70,6 @@ libelektra-plugin\&.so
 .PP
 .PP
 \fB\fBlibplugin\fP\fP contains \fCelektraPlugin*\fP symbols to be used by plugins\&.
-.PP
-.PP
-.nf
-libelektra-proposal\&.so
-.fi
-.PP
-.PP
-\fB\fBlibproposal\fP\fP contains functions that are proposed for libcore\&. Depends on internals of libcore and as such must always fit to the exact same version\&.
 .PP
 .PP
 .nf

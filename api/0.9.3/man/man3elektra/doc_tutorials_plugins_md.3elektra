@@ -1,4 +1,4 @@
-.TH "doc_tutorials_plugins_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_plugins_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -127,16 +127,16 @@ The already mentioned \fCgenerate_readme\fP will produce a list of Keys using th
 .PP
 .PP
 .nf
-keyNew ("system/elektra/modules/yajl/infos/licence",
+keyNew ("system:/elektra/modules/yajl/infos/licence",
         KEY_VALUE, "BSD", KEY_END);
 .fi
 .PP
 .PP
-In your plugin, specifically in your \fCelektraPluginGet()\fP implementation, you have to return the contract whenever configuration below \fCsystem/elektra/modules/plugin\fP is requested:
+In your plugin, specifically in your \fCelektraPluginGet()\fP implementation, you have to return the contract whenever configuration below \fCsystem:/elektra/modules/plugin\fP is requested:
 .PP
 .PP
 .nf
-if (!strcmp (keyName(parentKey), "system/elektra/modules/plugin"))
+if (!strcmp (keyName(parentKey), "system:/elektra/modules/plugin"))
 {
         KeySet *moduleConf = elektraPluginContract();
         ksAppend(returned, moduleConf);
@@ -153,23 +153,23 @@ The \fCelektraPluginContract()\fP is a method implemented by the plugin develope
 static inline KeySet *elektraYajlContract()
 {
         return ksNew (30,
-        keyNew ("system/elektra/modules/yajl",
+        keyNew ("system:/elektra/modules/yajl",
                 KEY_VALUE, "yajl plugin waits for your orders", KEY_END),
-        keyNew ("system/elektra/modules/yajl/exports", KEY_END),
-        keyNew ("system/elektra/modules/yajl/exports/get",
+        keyNew ("system:/elektra/modules/yajl/exports", KEY_END),
+        keyNew ("system:/elektra/modules/yajl/exports/get",
                 KEY_FUNC, elektraYajlGet,
                 KEY_END),
-        keyNew ("system/elektra/modules/yajl/exports/set",
+        keyNew ("system:/elektra/modules/yajl/exports/set",
                 KEY_FUNC, elektraYajlSet,
                 KEY_END),
 #include "readme_yourplugin\&.c"
-        keyNew ("system/elektra/modules/yajl/infos/version",
+        keyNew ("system:/elektra/modules/yajl/infos/version",
                 KEY_VALUE, PLUGINVERSION, KEY_END),
-        keyNew ("system/elektra/modules/yajl/config", KEY_END),
-        keyNew ("system/elektra/modules/yajl/config/",
+        keyNew ("system:/elektra/modules/yajl/config", KEY_END),
+        keyNew ("system:/elektra/modules/yajl/config/",
                 KEY_VALUE, "system",
                 KEY_END),
-        keyNew ("system/elektra/modules/yajl/config/below",
+        keyNew ("system:/elektra/modules/yajl/config/below",
                 KEY_VALUE, "user",
                 KEY_END),
         KS_END);
@@ -260,9 +260,9 @@ This section will focus on an overview of the kind of code you would use to deve
 \fC0\fP: The function was successful and the given keyset/configuration was \fBnot changed\fP (\fCELEKTRA_PLUGIN_STATUS_NO_UPDATE\fP)\&.
 .PP
 .PP
-Any other return value indicates an error (\fCELEKTRA_PLUGIN_STATUS_ERROR\fP)\&. The function will take in a \fCKey\fP, usually called \fCparentKey\fP which contains a string containing the path to the file that is mounted\&. For instance, if you run the command \fCkdb mount /etc/linetest system/linetest line\fP then \fCkeyString(parentKey)\fP should be equal to \fC/etc/linetest\fP\&. At this point, you generally want to open the file so you can begin saving it into keys\&. Here is the trickier part to explain\&. Basically, at this point you will want to iterate through the file and create keys and store string values inside of them according to what your plugin is supposed to do\&. I will give a few examples of different plugins to better explain\&.
+Any other return value indicates an error (\fCELEKTRA_PLUGIN_STATUS_ERROR\fP)\&. The function will take in a \fCKey\fP, usually called \fCparentKey\fP which contains a string containing the path to the file that is mounted\&. For instance, if you run the command \fCkdb mount /etc/linetest system:/linetest line\fP then \fCkeyString(parentKey)\fP should be equal to \fC/etc/linetest\fP\&. At this point, you generally want to open the file so you can begin saving it into keys\&. Here is the trickier part to explain\&. Basically, at this point you will want to iterate through the file and create keys and store string values inside of them according to what your plugin is supposed to do\&. I will give a few examples of different plugins to better explain\&.
 .PP
-The line plugin was written to read files into a \fCKeySet\fP line by line using the newline character as a delimiter and naming the keys by their line number such as \fC#1\fP, \fC#2\fP, \&.\&. \fC#_22\fP for a file with 22 lines\&. So once I open the file given by \fCparentKey\fP, every time as I read a line I create a new key, let's call it \fCnew_key\fP using \fCdupKey(parentKey)\fP\&. Then I set \fCnew_key\fP's name to \fClineNN\fP (where NN is the line number) using \fCkeyAddBaseName\fP and store the string value of the line into the key using \fCkeySetString\fP\&. Once the key is initialized, I append it to the \fCKeySet\fP that was passed into the \fCelektraPluginGet\fP function, let's call it \fCreturned\fP for now, using \fCksAppendKey(returned, new_key)\fP\&. Now the \fCKeySet\fP will contain \fCnew_key\fP with the name \fC#N\fP properly saved where it should be according to the \fCkdb mount\fP command (in this case, \fCsystem/linetest/#N\fP), and a string value equal to the contents of that line in the file\&. The line plugin repeats these steps as long as it hasn't reached end of file, thus saving the whole file into a \fCKeySet\fP line by line\&.
+The line plugin was written to read files into a \fCKeySet\fP line by line using the newline character as a delimiter and naming the keys by their line number such as \fC#1\fP, \fC#2\fP, \&.\&. \fC#_22\fP for a file with 22 lines\&. So once I open the file given by \fCparentKey\fP, every time as I read a line I create a new key, let's call it \fCnew_key\fP using \fCdupKey(parentKey)\fP\&. Then I set \fCnew_key\fP's name to \fClineNN\fP (where NN is the line number) using \fCkeyAddBaseName\fP and store the string value of the line into the key using \fCkeySetString\fP\&. Once the key is initialized, I append it to the \fCKeySet\fP that was passed into the \fCelektraPluginGet\fP function, let's call it \fCreturned\fP for now, using \fCksAppendKey(returned, new_key)\fP\&. Now the \fCKeySet\fP will contain \fCnew_key\fP with the name \fC#N\fP properly saved where it should be according to the \fCkdb mount\fP command (in this case, \fCsystem:/linetest/#N\fP), and a string value equal to the contents of that line in the file\&. The line plugin repeats these steps as long as it hasn't reached end of file, thus saving the whole file into a \fCKeySet\fP line by line\&.
 .PP
 The \fCsimpleini\fP plugin works similarly, but it parses for \fCini\fP files instead of just line-by-line\&. At their most simple level, \fCini\fP files are in the format of \fCname=value\fP with each pair taking one line\&. So for this plugin, it makes a lot of sense to name each \fCKey\fP in the \fCKeySet\fP by the string to the left of the \fC=\fP sign and store the value into each key as a string\&. For instance, the name of the key would be \fCname\fP and \fCkeyGetString(name)\fP would return \fCvalue\fP\&.
 .PP
@@ -355,7 +355,7 @@ The \fCelektraPluginCheckConf\fP function is exported via the plugin's contract\
 .PP
 .PP
 .nf
-keyNew ("system/elektra/modules/" ELEKTRA_PLUGIN_NAME "/exports/checkconf", KEY_FUNC, elektraLineCheckConf, KEY_END);
+keyNew ("system:/elektra/modules/" ELEKTRA_PLUGIN_NAME "/exports/checkconf", KEY_FUNC, elektraLineCheckConf, KEY_END);
 .fi
 .PP
 .PP

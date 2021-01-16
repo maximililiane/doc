@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-meta-show_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-meta-show_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -37,17 +37,17 @@ This command will return the following values as an exit status:
 .PP
 .PP
 .nf
-# Backup-and-Restore: user/tests/examples
+# Backup-and-Restore: user:/tests/examples
 
-# We use `dump` as storage format here, since storage plugins such as INI
-sudo kdb mount ls\&.ecf user/tests/examples dump
+# We use `dump` as storage format here
+sudo kdb mount ls\&.ecf user:/tests/examples dump
 
 # Create the keys we use for the examples
-kdb set user/tests/examples/kdb-meta-show test
-kdb meta-set user/tests/examples/kdb-meta-show meta1 val1
-kdb meta-set user/tests/examples/kdb-meta-show meta2 val2
-kdb meta-set user/tests/examples/kdb-meta-show meta3 val3
-kdb meta-set user/tests/examples/kdb-meta-show meta4 val4
+kdb set user:/tests/examples/kdb-meta-show test
+kdb meta-set user:/tests/examples/kdb-meta-show meta1 val1
+kdb meta-set user:/tests/examples/kdb-meta-show meta2 val2
+kdb meta-set user:/tests/examples/kdb-meta-show meta3 val3
+kdb meta-set user:/tests/examples/kdb-meta-show meta4 val4
 
 # list all meta keys for /tests/examples/kdb-meta-show
 kdb meta-show /tests/examples/kdb-meta-show
@@ -56,8 +56,8 @@ kdb meta-show /tests/examples/kdb-meta-show
 #> meta3: val3
 #> meta4: val4
 
-kdb rm -r user/tests/examples
-sudo kdb umount user/tests/examples
+kdb rm -r user:/tests/examples
+sudo kdb umount user:/tests/examples
 .fi
 .PP
 .PP

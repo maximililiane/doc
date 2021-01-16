@@ -55,15 +55,15 @@ Conflicts occur when a Key has a different value in all three Key\+Sets.~\newlin
 \end{DoxyItemize}
 
 To complete a simple merge of three Key\+Sets\+:~\newline
- {\ttfamily kdb merge user/ours user/theirs user/base user/result}~\newline
+ {\ttfamily kdb merge user\+:/ours user\+:/theirs user\+:/base user\+:/result}~\newline
 
 
 To complete a merge whilst using the {\ttfamily ours} version of the Key\+Set to resolve conflicts\+:~\newline
- {\ttfamily kdb merge -\/s ours user/ours user/theirs user/base user/result}~\newline
+ {\ttfamily kdb merge -\/s ours user\+:/ours user\+:/theirs user\+:/base user\+:/result}~\newline
 
 
 To complete a three-\/way merge and overwrite all current keys in the {\ttfamily resultpath}\+:~\newline
- {\ttfamily kdb merge -\/s cut user/ours user/theirs user/base user/result}~\newline
+ {\ttfamily kdb merge -\/s cut user\+:/ours user\+:/theirs user\+:/base user\+:/result}~\newline
 
 
 

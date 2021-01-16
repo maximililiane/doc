@@ -1,4 +1,4 @@
-.TH "doc_tutorials_application-integration_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_application-integration_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -214,7 +214,7 @@ You can use those features like following:
 .PP
 .nf
 kdb set /overrides/test "example override"
-sudo kdb meta-set spec/test override/#0 /overrides/test
+sudo kdb meta-set spec:/test override/#0 /overrides/test
 .fi
 .PP
 .PP
@@ -236,7 +236,7 @@ So we specify:
 .PP
 .PP
 .nf
-kdb meta-set spec/sw/org/myapp/#0/current/section/subsection/key \
+kdb meta-set spec:/sw/org/myapp/#0/current/section/subsection/key \
     "fallback/#0" /sw/otherorg/otherapp/#0/current/section/subsection/key
 .fi
 .PP
@@ -261,8 +261,8 @@ the behavior of these plugins\&.
 .PP
 .PP
 .nf
-sudo kdb mount tutorial\&.ecf spec/sw/org/myapp/#0/current"
-cat << HERE | kdb import spec/sw/org/myapp/#0/current ni  \
+sudo kdb mount tutorial\&.ecf spec:/sw/org/myapp/#0/current"
+cat << HERE | kdb import spec:/sw/org/myapp/#0/current ni  \
 []                                         \
  mountpoint = my-config-file\&.ini           \
  infos/plugins = ini validation            \
@@ -271,7 +271,7 @@ cat << HERE | kdb import spec/sw/org/myapp/#0/current ni  \
 fallback/#0=/sw/otherorg/otherapp/#0/current/section/subsection/key  \
 description = A description of the key     \
 HERE
-kdb meta-ls spec/sw/org/myapp/#0/current # verify if specification is present now
+kdb meta-ls spec:/sw/org/myapp/#0/current # verify if specification is present now
 #> infos/plugins
 #> mountpoint
 .fi

@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-rm_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-rm_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -30,7 +30,7 @@ This command will return the following values as an exit status:
 .IP "\(bu" 2
 \fC-r\fP, \fC--recursive\fP: Work in a recursive mode\&.
 .IP "\(bu" 2
-\fC-E\fP, \fC--without-elektra\fP: Omit the \fCsystem/elektra\fP directory\&.
+\fC-E\fP, \fC--without-elektra\fP: Omit the \fCsystem:/elektra\fP directory\&.
 .IP "\(bu" 2
 \fC-f\fP, \fC--force\fP: Do not fail on missing key, nor print if there was a key (-v to still print)\&.
 .IP "\(bu" 2
@@ -41,19 +41,19 @@ This command will return the following values as an exit status:
 .PP
 To remove a single key:
 .br
- \fCkdb rm user/example/key1\fP
+ \fCkdb rm user:/example/key1\fP
 .PP
 To remove multiple keys:
 .br
- \fCkdb rm -r user/example\fP
+ \fCkdb rm -r user:/example\fP
 .PP
-To remove all keys in \fCsystem\fP except \fCsystem/elektra\fP:
+To remove all keys in \fCsystem\fP except \fCsystem:/elektra\fP:
 .br
  \fCsudo kdb rm -rE system\fP
 .PP
 To not fail when key is missing:
 .br
- \fCkdb rm -f user/maybe/missing\fP
+ \fCkdb rm -f user:/maybe/missing\fP
 .PP
 .IP "\(bu" 2
 \fBelektra-key-names(7)\fP for an explanation of key names\&. 

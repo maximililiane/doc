@@ -141,7 +141,7 @@ $(function() {
 <li>Added a plugin to handle MAC addresses. <code>kdbGet</code> converts a MAC address into a decimal 64-bit integer (with the most significant 16 bits always set to 0), if the format is supported. <code>kdbSet</code> restores the converted values back to there original form. _(Thomas Bretterbauer)_</li>
 </ul>
 <ul>
-<li>We fixed compiler warnings reported by GCC 9 in the <a href="/home/jenkins/workspace/libelektra-release/src/plugins/mini/testmod_mini.c">unit test code</a> of the plugin. _(René Schwaiger)_</li>
+<li>We fixed compiler warnings reported by GCC 9 in the <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/src/plugins/mini/testmod_mini.c">unit test code</a> of the plugin. _(René Schwaiger)_</li>
 </ul>
 <ul>
 <li><a href="https://www.libelektra.org/plugins/mmapstorage">mmapstorage</a> is now able to persist the Global KeySet, which is used by the <code>cache</code> plugin. _(Mihael Pranjić)_</li>
@@ -171,7 +171,7 @@ $(function() {
 <li>no time in future to maintain _(Kurt Micheli)_</li>
 </ul>
 <ul>
-<li>The spec plugin was partly rewritten to better support specifications for arrays. This includes some breaking changes concerning the less used (and also less functional) parts of the plugin. To find out more about these changes take a look at the <a class="el" href="autotoc_md645.html#src_plugins_spec_README_md">README</a>. It now better reflects the actually implemented behaviour. _(Klemens Böswirth)_</li>
+<li>The spec plugin was partly rewritten to better support specifications for arrays. This includes some breaking changes concerning the less used (and also less functional) parts of the plugin. To find out more about these changes take a look at the <a class="el" href="autotoc_md605.html#src_plugins_spec_README_md">README</a>. It now better reflects the actually implemented behaviour. _(Klemens Böswirth)_</li>
 </ul>
 <ul>
 <li>The <a href="https://www.libelektra.org/plugins/specload">specload</a> plugin is a special storage plugin. Instead of using a storage file it calls an external application to request its specification. For the transfer it relies on the <a href="https://www.libelektra.org/plugins/quickdump">quickdump</a> plugin. _(Klemens Böswirth)_</li>
@@ -390,7 +390,7 @@ $(function() {
 <ul>
 <li>The <a href="https://master.libelektra.org/doc/markdownlinkconverter">Markdown Link Converter</a> uses the index <code>1</code> for the first line number instead of <code>0</code>. This update fixes an off-by-one-error, when the user tries to use the error location data printed by the tool in a text editor. _(René Schwaiger)_</li>
 <li>We added a badge for <a href="https://lgtm.com">LGTM</a> to the https://master.libelektra.org/README.md "main ReadMe file". _(René Schwaiger)_</li>
-<li>Added LCDproc and <a href="/home/jenkins/workspace/libelektra-release/examples/spec/cassandra.ini">Cassandra</a> specification examples. These examples provide a good guideline for writing specifications for configurations. _(Michael Zronek)_</li>
+<li>Added LCDproc and <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/examples/spec/cassandra.ini">Cassandra</a> specification examples. These examples provide a good guideline for writing specifications for configurations. _(Michael Zronek)_</li>
 <li>Drastically improved the error message format. For more information look <a class="el" href="doc_decisions_error_message_format_md.html">here</a>. _(Michael Zronek)_</li>
 <li>Added a guideline for writing consistent and good error messages. For more information look <a class="el" href="doc_dev_error-message_md.html">here</a>. _(Michael Zronek)_</li>
 <li>Every <code>kdb</code> command now accepts <code>v</code> and <code>d</code> as option to show more information in case of warnings or errors. _(Michael Zronek)_</li>

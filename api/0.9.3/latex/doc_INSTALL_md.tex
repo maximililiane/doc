@@ -18,33 +18,31 @@ For the following Linux distributions and package managers 0.\+8 packages are av
 
 For \href{https://build.opensuse.org/package/show/home:bekun:devel/elektra}{\tt Open\+S\+U\+SE, Cent\+OS, Fedora, R\+H\+EL and S\+LE} Kai-\/\+Uwe Behrmann kindly provides packages \href{http://software.opensuse.org/download.html?project=home%3Abekun%3Adevel&package=libelektra4}{\tt for download}.
 
-To use the Ubuntu-\/\+Bionic packages, the following steps need to be made\+:
+We also provide more recent versions and bleeding-\/edge versions in our repositories\+:
+
+We provide stable and bleeding-\/edge repositories for following Debian-\/based distributions\+:
+
+
+\begin{DoxyItemize}
+\item Debian Buster
+\item Ubuntu Focal
+\item Ubuntu Bionic
+\end{DoxyItemize}
+
+To use the our stable repositories with our recent releases, following steps need to be made\+:
 
 
 \begin{DoxyEnumerate}
-\item Run {\ttfamily sudo apt-\/key adv -\/-\/keyserver keyserver.\+ubuntu.\+com -\/-\/recv-\/keys D919\+C\+E8\+B27\+A64\+C16656\+F\+C\+A9\+F\+F1532673651\+F9\+C6C} to obtain the key.
-\item Add {\ttfamily deb \href{https://ubuntu-bionic-repo.libelektra.org/}{\tt https\+://ubuntu-\/bionic-\/repo.\+libelektra.\+org/} bionic main} into {\ttfamily /etc/apt/sources.list}
-\item {\ttfamily sudo apt-\/get update}
+\item Run {\ttfamily sudo apt-\/key adv -\/-\/keyserver keys.\+gnupg.\+net -\/-\/recv-\/keys F26\+B\+B\+E02\+F3\+C315\+A19\+B\+F1\+F791\+A9\+A25\+C\+C1\+C\+C83\+E839} to obtain the key.
+\item Add {\ttfamily deb \href{https://debs.libelektra.org/}{\tt https\+://debs.\+libelektra.\+org/}$<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$ $<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$ main} into {\ttfamily /etc/apt/sources.list} where {\ttfamily $<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$} is the Codename of your distributions e.\+g.{\ttfamily focal},{\ttfamily bionic},{\ttfamily buster}, etc.
 \end{DoxyEnumerate}
 
-To use the debian repository of the latest builds from master put following lines in {\ttfamily /etc/apt/sources.list}\+:
-
-For Stretch\+:
+This can also be done using (e.\+g. for Ubuntu Focal)\+:
 
 
 \begin{DoxyCode}
-deb     [trusted=yes] https://debian-buster-repo.libelektra.org/ buster main
-deb-src [trusted=yes] https://debian-buster-repo.libelektra.org/ buster main
-\end{DoxyCode}
-
-
-Which can also be done using\+:
-
-
-\begin{DoxyCode}
-sudo apt-get install apt-transport-https
-echo "deb     [trusted=yes] https://debian-buster-repo.libelektra.org/ buster main" | sudo tee
-       /etc/apt/sources.list.d/elektra.list
+apt-get install software-properties-common apt-transport-https
+echo "deb https://debs.libelektra.org/focal focal main" | sudo tee /etc/apt/sources.list.d/elektra.list
 \end{DoxyCode}
 
 
@@ -53,17 +51,60 @@ Or alternatively, you can use (if you do not mind many dependences just to add o
 
 \begin{DoxyCode}
 sudo apt-get install software-properties-common apt-transport-https
-sudo add-apt-repository "deb     [trusted=yes] https://debian-buster-repo.libelektra.org/ buster main"
+sudo add-apt-repository "deb https://debs.libelektra.org/focal focal main"
 \end{DoxyCode}
 
 
-For Jessie (not updated anymore, contains 0.\+8.\+24 packages which were created shortly before 0.\+8.\+25 release)
+If you would like to use our bleeding-\/edge builds (master builds), append {\ttfamily -\/unstable} to {\ttfamily $<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$}.
+
+The {\ttfamily etc/apt/source.\+list} entry must look like following\+: {\ttfamily deb \href{https://debs.libelektra.org/}{\tt https\+://debs.\+libelektra.\+org/}$<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$ $<$D\+I\+S\+T\+R\+I\+B\+U\+T\+I\+ON$>$-\/unstable main}
+
+E.\+g. {\ttfamily deb \href{https://debs.libelektra.org/focal}{\tt https\+://debs.\+libelektra.\+org/focal} focal-\/unstable main}
+
+\begin{quote}
+N\+O\+TE\+: for Ubuntu Bionic the yamlcpp plugin is excluded due to missing dependencies and therefore the package {\ttfamily libelektra4-\/yamlcpp} is not available. \end{quote}
+
+
+We also provide stable and bleeding-\/edge packages for Fedora 33.
+
+For the stable repository\+:
 
 
 \begin{DoxyCode}
-deb     [trusted=yes] https://debian-stable.libelektra.org/elektra-stable/ jessie main
-deb-src [trusted=yes] https://debian-stable.libelektra.org/elektra-stable/ jessie main
+wget https://rpms.libelektra.org/fedora-33/libelektra.repo -O libelektra.repo;
+sudo mv libelektra.repo /etc/yum.repos.d/;
+sudo yum update
 \end{DoxyCode}
+
+
+Or alternatively you can use dnf to add this repo\+:
+
+
+\begin{DoxyCode}
+dnf config-manager --add-repo https://rpms.libelektra.org/fedora-33/libelektra.repo
+\end{DoxyCode}
+
+
+For our bleeding-\/edge builds append {\ttfamily -\/unstable} to the distribution name\+:
+
+
+\begin{DoxyCode}
+wget https://rpms.libelektra.org/fedora-33-unstable/libelektra.repo -O libelektra.repo;
+sudo mv libelektra.repo /etc/yum.repos.d/;
+sudo yum update
+\end{DoxyCode}
+
+
+Or alternatively you can use dnf to add this repo\+:
+
+
+\begin{DoxyCode}
+dnf config-manager --add-repo https://rpms.libelektra.org/fedora-33-unstable/libelektra.repo
+\end{DoxyCode}
+
+
+\begin{quote}
+T\+O\+DO\+: add how-\/to for debugsym packages (different for rpm and deb) \end{quote}
 
 
 To get all packaged plugins, bindings and tools install\+:
@@ -82,23 +123,13 @@ apt-get install elektra-bin
 \end{DoxyCode}
 
 
-If you want to rebuild Elektra from Debian unstable or our repositories, add a {\ttfamily deb-\/src} entry to {\ttfamily /etc/apt/sources.list} and then run\+:
+To build Debian/\+Ubuntu Packages from the source you might want to use\+:
 
 
 \begin{DoxyCode}
-apt-get source -b elektra
+make package # See CPack below
 \end{DoxyCode}
 
-
-To build Debian Packages from the source you might want to use\+:
-
-
-\begin{DoxyCode}
-dpkg-buildpackage -us -uc -sa
-\end{DoxyCode}
-
-
-(You need to be in the Debian branch, see \hyperlink{doc_GIT_md}{G\+IT})
 
 You can install Elektra using \href{http://brew.sh}{\tt Homebrew} via the shell command\+:
 
@@ -114,7 +145,59 @@ Please refer to the section OS Independent below.
 
 First follow the steps in \hyperlink{doc_COMPILE_md}{C\+O\+M\+P\+I\+LE}.
 
-After you completed building Elektra on your own, there are multiple options how to install it. For example, with make or c\+Pack tools.
+After you completed building Elektra on your own, there are multiple options how to install it. For example, with make or C\+Pack tools. We recommend to use the packages from our build server or that you generate your own packages with C\+Pack.
+
+The current supported systems are\+: Debian, Ubuntu and Fedora.
+
+Then use\+:
+
+
+\begin{DoxyCode}
+make package
+\end{DoxyCode}
+
+
+which will create packages for distributions where a Generator is implemented.
+
+You can find the generated packages in the {\ttfamily package} directory of the build directory.
+
+\begin{quote}
+N\+O\+TE\+: If all plugins/bindings/tools a package includes are excluded, the package will be not generated. \end{quote}
+
+
+On Debian based distributions you will need to set L\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+P\+A\+TH before generating the package. Simply {\ttfamily cd} into the build directory and run following command\+:
+
+
+\begin{DoxyCode}
+LD\_LIBRARY\_PATH=$(pwd)/lib:$\{LD\_LIBRARY\_PATH\} make package
+\end{DoxyCode}
+
+
+To install the packages run this in the {\ttfamily package} directory\+:
+
+
+\begin{DoxyCode}
+apt-get install ./*
+\end{DoxyCode}
+
+
+If any dependency problems appear, run following command to install the missing dependencies\+:
+
+
+\begin{DoxyCode}
+apt-get -f install
+\end{DoxyCode}
+
+
+To install R\+PM packages we recommend using {\ttfamily yum localinstall} since installing with {\ttfamily rpm} doesn\textquotesingle{}t resolve missing dependencies.
+
+Run following command in the {\ttfamily package} directory\+:
+
+
+\begin{DoxyCode}
+yum localinstall *
+\end{DoxyCode}
+
 
 
 \begin{DoxyCode}
@@ -139,18 +222,6 @@ or in the build directory (will not honor {\ttfamily D\+E\+S\+T\+D\+IR}!)\+:
 xargs rm < install\_manifest.txt
 \end{DoxyCode}
 
-
-First follow the steps in \hyperlink{doc_COMPILE_md}{C\+O\+M\+P\+I\+LE}.
-
-Then use\+:
-
-
-\begin{DoxyCode}
-cpack
-\end{DoxyCode}
-
-
-which should create a package for distributions where a Generator is implemented. See \href{/home/jenkins/workspace/libelektra-release/scripts/cmake/ElektraPackaging.cmake}{\tt this cmake file} for available Generators and send a merge request for your system.
 
 If you encounter the problem that the library can not be found (output like this)
 

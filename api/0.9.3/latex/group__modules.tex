@@ -69,7 +69,7 @@ $>$=0 otherwise
 
 Initialises the module loading system. 
 
-Most operating systems will have to do nothing here. Anyway you are required to add the key system/elektra/modules if it was successful.
+Most operating systems will have to do nothing here. Anyway you are required to add the key system\+:/elektra/modules if it was successful.
 
 On error -\/1 is returned and if error != 0 error information is added to it.
 
@@ -104,7 +104,7 @@ Otherwise load the module/library given by name. You need to take care that a pr
 
 The next step is to fetch the symbol elektra\+Plugin\+Factory.
 
-If everything was successful append all information to the keyset modules and return the pointer. Take care that you can close the module with that information. All information needs to be stored within system/elektra/modules/name You might want to use an struct and store it there as binary key.
+If everything was successful append all information to the keyset modules and return the pointer. Take care that you can close the module with that information. All information needs to be stored within system\+:/elektra/modules/name You might want to use an struct and store it there as binary key.
 
 If anything goes wrong don\textquotesingle{}t append anything to modules. Instead report the error to the error key and return with 0.
 

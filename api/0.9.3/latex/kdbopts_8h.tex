@@ -89,7 +89,7 @@ The basic usage of this function is as follows\+:
 \hline
 {\em envp} & A list of environment variables. This needs to be a null-\/terminated list of strings of the format \textquotesingle{}K\+EY=V\+A\+L\+UE\textquotesingle{}. \\
 \hline
-{\em parent\+Key} & The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.\+e. \textquotesingle{}user/test/parent\textquotesingle{} will be translated into \textquotesingle{}spec/test/parent\textquotesingle{}, before checking against spec keys.\\
+{\em parent\+Key} & The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.\+e. \textquotesingle{}user\+:/test/parent\textquotesingle{} will be translated into \textquotesingle{}spec\+:/test/parent\textquotesingle{}, before checking against spec keys.\\
 \hline
 \end{DoxyParams}
 

@@ -1,4 +1,4 @@
-.TH "doc_tutorials_command-line-options_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_command-line-options_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -333,34 +333,34 @@ FILES="one\&.txt:other\&.log" VERBOSE=1 erm -fi --recursive
 .fi
 .PP
 .PP
-The following keys will be created by \fCelektraGetOpts\fP (assuming the specification is mounted at \fCspec/sw/org/erm/#0/current\fP):
+The following keys will be created by \fCelektraGetOpts\fP (assuming the specification is mounted at \fCspec:/sw/org/erm/#0/current\fP):
 .PP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/force = '1'\fP
+\fCproc:/sw/org/erm/#0/current/force = '1'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/interactive = 'always'\fP
+\fCproc:/sw/org/erm/#0/current/interactive = 'always'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/recursive = '1'\fP
+\fCproc:/sw/org/erm/#0/current/recursive = '1'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/verbose = '1'\fP
+\fCproc:/sw/org/erm/#0/current/verbose = '1'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files [array] = '#1'\fP
+\fCproc:/sw/org/erm/#0/current/files [array] = '#1'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files/#0 = 'one\&.txt'\fP
+\fCproc:/sw/org/erm/#0/current/files/#0 = 'one\&.txt'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files/#1 = 'other\&.log'\fP
+\fCproc:/sw/org/erm/#0/current/files/#1 = 'other\&.log'\fP
 .PP
 .PP
 Calling \fCFILES='abcd\&.txt' erm 123\&.txt 456\&.txt\fP meanwhile will result in:
 .PP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files [array] = '#1'\fP
+\fCproc:/sw/org/erm/#0/current/files [array] = '#1'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files/#0 = '123\&.txt'\fP
+\fCproc:/sw/org/erm/#0/current/files/#0 = '123\&.txt'\fP
 .IP "\(bu" 2
-\fCproc/sw/org/erm/#0/current/files/#1 = '456\&.txt'\fP
+\fCproc:/sw/org/erm/#0/current/files/#1 = '456\&.txt'\fP
 .PP
 .PP
-NOTE: \fCproc/sw/org/erm/#0/current/files [array] = '#1'\fP means the \fCarray\fP metadata of \fCproc/sw/org/erm/#0/current/files\fP is \fC#1\fP\&.
+NOTE: \fCproc:/sw/org/erm/#0/current/files [array] = '#1'\fP means the \fCarray\fP metadata of \fCproc:/sw/org/erm/#0/current/files\fP is \fC#1\fP\&.
 .PP
 You can find a full working example \fChere\fP\&. However, it uses a hard coded specification which is a bit harder to read\&. 

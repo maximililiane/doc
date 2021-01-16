@@ -1,75 +1,86 @@
-.TH "autotoc_md486" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "autotoc_md486" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-autotoc_md486Plugin: network 
+autotoc_md486Plugin: path 
  \- 
 .IP "\(bu" 2
-infos = Information about network plugin is in keys below
+infos = Information about path plugin is in keys below
 .IP "\(bu" 2
 infos/author = Markus Raab elektra@libelektra.org
 .IP "\(bu" 2
 infos/licence = BSD
 .IP "\(bu" 2
-infos/provides = check
+infos/placements = presetstorage
 .IP "\(bu" 2
 infos/needs =
 .IP "\(bu" 2
-infos/placements = presetstorage
+infos/provides = check
 .IP "\(bu" 2
-infos/status = maintained unittest nodep libc nodoc
+infos/status = maintained nodep libc nodoc
 .IP "\(bu" 2
-infos/metadata = check/ipaddr check/port check/port/listen
+infos/metadata = check/path check/path/mode check/path/user
 .IP "\(bu" 2
-infos/description = Checks keys if they contain a valid ip address
+infos/description = Checks if keys enriched with appropriate metadata contain valid paths as values as well as correct permissions
 .PP
 .PP
-This plugin is a check plugin that checks if a key contains a valid ip address\&. It uses the \fCPOSIX\&.1-2001\fP interface \fCgetaddrinfo()\fP in order to check if an ip address is valid\&.
+This plugin checks whether the value of a key is a valid file system path and optionally if correct permissions are set for a certain user\&.
 .PP
-Furthermore \fCgetaddrinfo()\fP is used in \fCcheck/port\fP to resolve a port by its service name which is defined under \fC/etc/services\fP\&. The portname is translated to the respective portnumber\&. The plugin can be used to check for valid port numbers and if the set port is free to use\&.
+The motivation to write this plugin is given by the two paths that exist in /etc/fstab: the device file and the mountpoint\&. A missing file is not necessarily an error, because the device file may appear later when a device is plugged in and the mountpoint may be there when another subsequent mount was executed\&. So only warnings are yielded in that case\&. One situation, however, presents an error: Only an absolute path is allowed to occur for both device and mountpoint\&. When checking for relative files, it is not enough to look at the first character if it is a \fC/\fP, because remote file systems and some special names are valid, too\&.
 .PP
-While, in theory, a regular expression can express if a string is a network address, in practice, such an attempt does not work well\&. The reason is that an unmanageable number of valid shortenings for IPv6 addresses makes the regular expression hard to write and understand\&.
+If \fCcheck/path/mode = <permission>\fP is also present it will check for the correct permissions of the file/directory\&. Optionally, you can also add \fCcheck/path/user = <user>"\fP which then checks the permissions for the given user\&. When calling \fCkdb set\fP on the actual key, you have to run as \fCroot\fP user or the file permissions cannot be checked (you will receive an error message)\&. It is also possible to leave the \fCcheck/path/user\fP empty (just provide an empty string) which then takes the executing user as target to check\&. So for example \fCsudo kdb set \&.\&.\&.\fP will check if \fCroot\fP can access the target file/directory whereas \fCkdb set \&.\&.\&.\fP will take the current executing process/user\&. If \fCcheck/path/user\fP is not given at all, the plugin will check accessibility for the \fCroot\fP user only (which again requires \fCsudo\fP)
 .PP
-So the idea of building such a complicated regular expression was discarded, but instead a dedicated checker was introduced\&. The idea is to use the operating system facilities to resolve the network address\&. If this succeeds, it is guaranteed that this network address will be valid when it is resolved by the same interface afterwards\&.
+\fCcheck/path/mode = rw\fP and \fCcheck/path/user = tomcat\fP for example will check if the user \fCtomcat\fP has read and write access to the path which was set for the key\&. Please note that the file has to exist already and it is not checked if the user has the right to create a file in the directory\&.
 .PP
-Many network address translators coexist\&. In \fCPOSIX\&.1-2001\fP a powerful address translator is provided with the interface \fCgetaddrinfo()\fP\&. It is a common network address translation for both IPv4 and IPv6\&. We used it to implement this plugin\&.
+Permissions available:
 .PP
-Every key tagged with the metakey \fCcheck/ipaddr\fP will be checked using \fCgetaddrinfo()\fP\&. If additionally the values \fCipv4\fP or \fCipv6\fP are supplied, the address family will be specified\&.
+.IP "\(bu" 2
+\fCr\fP: **R**ead
+.IP "\(bu" 2
+\fCw\fP: **W**rite
+.IP "\(bu" 2
+\fCx\fP: e**X**ecute
 .PP
-``\fC @section autotoc_md490 Mount Network plugin to\fPuser/tests/network` sudo kdb mount config\&.file user/tests/network network
-.SH "Set valid IPv4 address"
 .PP
-kdb set user/tests/network/host 127\&.0\&.0\&.1 
-.SH "Check for valid IPv4 address"
+If the metakey \fCcheck/path\fP is present, it is checked if the value is a valid absolute file system path\&. If a metavalue is present, an additional check will be done if it is a directory or device file\&.
 .PP
-kdb meta-set user/tests/network/host check/ipaddr ipv4
-.SH "Try to set invalid IPv4 address"
+An example on which the user should have no permission at all for the root directory\&.
 .PP
-kdb set user/tests/network/host 133\&.133\&.133\&.1337 
-.SH "RET: 5"
 .PP
-.SH "STDERR:\&.*Validation Semantic: name:\&.*133\&.133\&.133\&.1337\&.*"
+.nf
+sudo kdb mount test\&.dump user:/tests path dump
+sudo kdb set user:/tests/path "$HOME"
+sudo kdb meta-set user:/tests/path check/path ""
+sudo kdb meta-set user:/tests/path check/path/user ""
+sudo kdb meta-set user:/tests/path check/path/mode "rw"
+
+# Standard users should not be able to read/write the root folder
+[ $(id -u) = 0 ] && printf >&2 'User is root\n' || kdb set user:/tests/path "/root"
+# STDERR: User is root|\&.*C03200\&.*
+
+# Set something which the current user can access for sure
+kdb set user:/tests/path "$HOME"
+# STDOUT-REGEX: \&.*Set string to "/\&.*"\&.*
+
+#cleanup
+sudo kdb rm -r user:/tests
+sudo kdb umount user:/tests
+.fi
 .PP
-kdb get user/tests/network/host #> 127\&.0\&.0\&.1
-.SH "Set valid IPv4 address"
 .PP
-kdb set user/tests/network/host 1\&.2\&.3\&.4 #> Set string to '1\&.2\&.3\&.4' kdb get user/tests/network/host #> 1\&.2\&.3\&.4
-.SH "Check for any valid network address"
+An example where part of the permissions are missing for a tmp file
 .PP
-kdb meta-set user/tests/network/host check/ipaddr '' 
-.SH "If identifier `localhost` is not a valid network address it is not part of /etc/hosts"
+``` sudo kdb mount test\&.dump user:/tests path dump sudo kdb set user:/tests/path '$HOME' sudo kdb meta-set user:/tests/path check/path '' sudo kdb meta-set user:/tests/path check/path/user '' sudo kdb meta-set user:/tests/path check/path/mode 'rwx'
+.SH "Standard users should not be able to read/write the root folder"
 .PP
-kdb set user/tests/network/host localhost || ! grep -q localhost /etc/hosts
+kdb set user:/tests/path/tempfile  chmod +rw \fCkdb get user:/tests/path/tempfile\fP kdb set user:/tests/path \fCkdb get user:/tests/path/tempfile\fP 
+.SH "ERROR:C03200"
 .PP
-kdb get user/tests/network/host 
-.SH "STDOUT-REGEX: localhost|1\&.2\&.3\&.4"
+.SH "Set something which the current user can access for sure"
 .PP
-.SH "Undo modifications to the key database"
+chmod +x \fCkdb get user:/tests/path/tempfile\fP kdb set user:/tests/path \fCkdb get user:/tests/path/tempfile\fP 
+.SH "STDOUT-REGEX: Set string to '/\&.*'\&.*"
 .PP
-kdb rm -r user/tests/network sudo kdb umount user/tests/network ```
-.PP
-If \fCcheck/port\fP is specified on a given key, the plugin will validate if the port is a correct number between 1 and 65535\&.
-.PP
-If \fCcheck/port/listen\fP is specified, the plugin will check if the application can be started and listen on the given port\&.
-.SS "Future Work"
-\fCcheck/port/connect\fP to check if the port can be pinged/reached (usually for clients)\&. If not reachable, users receive a warning\&. A correct timeout setting will be problematic though\&. 
+#cleanup sudo rm -rf \fCkdb get user:/tests/path/tempfile\fP sudo kdb rm -r user:/tests sudo kdb umount user:/tests ```
+.SS "Future work"
+Add a check which ensures that the given path is a file/directory/symbolic link/hard link/etc\&. 

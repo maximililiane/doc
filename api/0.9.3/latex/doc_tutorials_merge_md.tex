@@ -64,13 +64,13 @@ Basic Usage\+:
 
 
 \begin{DoxyCode}
-kdb merge system/hosts/ours system/hosts/theirs system/hosts/base system/hosts/result
+kdb merge system:/hosts/ours system:/hosts/theirs system:/hosts/base system:/hosts/result
 \end{DoxyCode}
 
 
 Here are examples of the same Key\+Sets being merged using different strategies. The Key\+Sets are mounted using a property format, the left side of \textquotesingle{}=\textquotesingle{} is the name of the Key, the right side is its string value.
 
-We start with the base Key\+Set, {\ttfamily system/base}\+:
+We start with the base Key\+Set, {\ttfamily system\+:/base}\+:
 
 
 \begin{DoxyCode}
@@ -82,7 +82,7 @@ key5=5
 \end{DoxyCode}
 
 
-Here is our Key\+Set, {\ttfamily system/ours}\+:
+Here is our Key\+Set, {\ttfamily system\+:/ours}\+:
 
 
 \begin{DoxyCode}
@@ -93,7 +93,7 @@ key5=fish
 \end{DoxyCode}
 
 
-Here is their Key\+Set, {\ttfamily system/theirs}\+:
+Here is their Key\+Set, {\ttfamily system\+:/theirs}\+:
 
 
 \begin{DoxyCode}
@@ -108,7 +108,7 @@ Now we will examine the result Key\+Set with the different strategies.
 
 
 \begin{DoxyCode}
-kdb merge -s preserve system/ours system/theirs system/base system/result
+kdb merge -s preserve system:/ours system:/theirs system:/base system:/result
 \end{DoxyCode}
 
 
@@ -116,11 +116,11 @@ The merge will fail because of a conflict for {\ttfamily key4} since {\ttfamily 
 
 
 \begin{DoxyCode}
-kdb merge -s ours system/ours system/theirs system/base system/result
+kdb merge -s ours system:/ours system:/theirs system:/base system:/result
 \end{DoxyCode}
 
 
-The result Key\+Set, system/result will be\+:
+The result Key\+Set, system\+:/result will be\+:
 
 
 \begin{DoxyCode}
@@ -134,11 +134,11 @@ Because the conflict of {\ttfamily key4} (it was deleted in {\ttfamily ours} but
 
 
 \begin{DoxyCode}
-kdb merge -s theirs system/ours system/theirs system/base system/result
+kdb merge -s theirs system:/ours system:/theirs system:/base system:/result
 \end{DoxyCode}
 
 
-The result Key\+Set, {\ttfamily system/result} will be\+:
+The result Key\+Set, {\ttfamily system\+:/result} will be\+:
 
 
 \begin{DoxyCode}
@@ -153,11 +153,11 @@ Here, the conflict of {\ttfamily key4} is solved by using their copy, thus {\ttf
 
 
 \begin{DoxyCode}
-kdb merge -s base system/ours system/theirs system/base system/result
+kdb merge -s base system:/ours system:/theirs system:/base system:/result
 \end{DoxyCode}
 
 
-The result Key\+Set, {\ttfamily system/result} will be\+:
+The result Key\+Set, {\ttfamily system\+:/result} will be\+:
 
 
 \begin{DoxyCode}

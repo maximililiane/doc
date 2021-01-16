@@ -1,4 +1,4 @@
-.TH "doc_tutorials_code-generator_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_code-generator_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,11 +35,11 @@ In this guide we will create a basic template, that generates a single file cont
 .PP
 .PP
 .nf
-user/sw/myapp/#0/current
-user/sw/myapp/#0/current/dir0
-user/sw/myapp/#0/current/dir0/subdir0/key0
-user/sw/myapp/#0/current/dir0/subdir0/key1
-user/sw/myapp/#0/current/dir1
+user:/sw/myapp/#0/current
+user:/sw/myapp/#0/current/dir0
+user:/sw/myapp/#0/current/dir0/subdir0/key0
+user:/sw/myapp/#0/current/dir0/subdir0/key1
+user:/sw/myapp/#0/current/dir1
 .fi
 .PP
 .PP
@@ -174,7 +174,7 @@ kdb gen example user userkeys
 .fi
 .PP
 .PP
-This should produce the file \fCuserkeys\&.txt\fP\&. The file should be the same, as if we had called \fCkdb ls user > userkeys\&.txt\fP\&.
+This should produce the file \fCuserkeys\&.txt\fP\&. The file should be the same, as if we had called \fCkdb ls user:/ > userkeys\&.txt\fP\&.
 .PP
 Lastly, we will discuss a few more advanced concepts\&.
 .PP

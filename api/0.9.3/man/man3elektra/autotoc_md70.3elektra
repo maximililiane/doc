@@ -1,36 +1,39 @@
-.TH "autotoc_md70" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "autotoc_md70" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-autotoc_md70Plugin: c 
+autotoc_md70Plugin: cache 
  \- 
 .IP "\(bu" 2
-infos = Information about the c plugin is in keys below
+infos = Information about the cache plugin is in keys below
 .IP "\(bu" 2
-infos/author = Markus Raab elektra@libelektra.org
+infos/author = Mihael Pranjic mpranj@limun.org
 .IP "\(bu" 2
 infos/licence = BSD
 .IP "\(bu" 2
-infos/needs = ccode
+infos/needs =
 .IP "\(bu" 2
-infos/provides = storage/c
+infos/provides =
 .IP "\(bu" 2
 infos/recommends =
 .IP "\(bu" 2
-infos/placements = getstorage setstorage
+infos/placements = pregetcache postgetcache
 .IP "\(bu" 2
-infos/status = maintained nodep libc writeonly preview nodoc
+infos/status = maintained unittest shelltest specific global
 .IP "\(bu" 2
 infos/metadata =
 .IP "\(bu" 2
-infos/description = C-struct exports for Elektra
+infos/description = caches keysets from previous \fC\fBkdbGet()\fP\fP calls
 .PP
 .PP
-Export Elektra’s C-structs (e\&.g\&. \fCksNew(\&.\&. keyNew(\fP)\&. This is useful for generating test data, e\&.g\&.:
+This caching plugin stores keysets from previous \fC\fBkdbGet()\fP\fP calls to improve performance when reading configuration files\&.
 .PP
+The cache plugin is compiled and enabled on compatible systems by default\&. No actions are needed to enable it\&.
 .PP
-.nf
-kdb export user/testdata c
-.fi
+POSIX compliant system (including XSI extensions)\&. The plugin is only compiled if the plugins \fCresolver\fP and \fCmmapstorage\fP are also available\&.
 .PP
- 
+The cache files are located in the user's home directory below \fC~/\&.cache/elektra/\fP and shall not be altered, otherwise the behavior is undefined\&. If \fCXDG_CACHE_HOME\fP is set, the cache files are located below \fC$XDG_CACHE_HOME/elektra\fP\&.
+.PP
+Use the tool \fCkdb cache\fP to enable, disable or clear the cache\&.
+.PP
+Incompatible with storage plugins, which do not always produce the same keyset on any invocation concerning the same configuration file\&. A notable example here is the \fCini\fP plugin (see issue #2592)\&. 

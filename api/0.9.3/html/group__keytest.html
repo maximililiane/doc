@@ -71,9 +71,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0150fb549225d8789e7297b919965e72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__keytest.html#ga0150fb549225d8789e7297b919965e72">keyIsDirectlyBelow</a> (const Key *key, const Key *check)</td></tr>
 <tr class="memdesc:ga0150fb549225d8789e7297b919965e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the key <code>check</code> is directly below the key <code>key</code>.  <a href="#ga0150fb549225d8789e7297b919965e72">More...</a><br /></td></tr>
 <tr class="separator:ga0150fb549225d8789e7297b919965e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa25f699f592031c1a0abc1504d14e13e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__keytest.html#gaa25f699f592031c1a0abc1504d14e13e">keyIsInactive</a> (const Key *key)</td></tr>
-<tr class="memdesc:gaa25f699f592031c1a0abc1504d14e13e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether a key is inactive.  <a href="#gaa25f699f592031c1a0abc1504d14e13e">More...</a><br /></td></tr>
-<tr class="separator:gaa25f699f592031c1a0abc1504d14e13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9526b371087564e43e3dff8ad0dac949"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__keytest.html#ga9526b371087564e43e3dff8ad0dac949">keyIsBinary</a> (const Key *key)</td></tr>
 <tr class="memdesc:ga9526b371087564e43e3dff8ad0dac949"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a key is binary type.  <a href="#ga9526b371087564e43e3dff8ad0dac949">More...</a><br /></td></tr>
 <tr class="separator:ga9526b371087564e43e3dff8ad0dac949"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,7 +122,7 @@ Functions</h2></td></tr>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>the owner will only be used if the names are equal.</dd></dl>
 <p>Given any Keys k1 and k2 constructed with <a class="el" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89" title="A practical way to fully create a Key object in one step. ">keyNew()</a>, following equation hold true:</p>
-<div class="fragment"><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (0, 0) == 0, <span class="stringliteral">&quot;all null pointers same&quot;</span>);</div><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (k1, 0) == 1, <span class="stringliteral">&quot;null pointer is smaller&quot;</span>);</div><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (0, k2) == -1, <span class="stringliteral">&quot;null pointer is smaller&quot;</span>);</div></div><!-- fragment --><p> Here are some more examples: </p><div class="fragment"><div class="line">Key *k1 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user/a&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line">Key *k2 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user/b&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line"></div><div class="line"><span class="comment">// keyCmp(k1,k2) &lt; 0</span></div><div class="line"><span class="comment">// keyCmp(k2,k1) &gt; 0</span></div></div><!-- fragment --><p>And even more: </p><div class="fragment"><div class="line">Key *k1 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user/a&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b">KEY_OWNER</a>, <span class="stringliteral">&quot;markus&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line">Key *k2 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user/a&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8a77ca60362fa8daca8d5347db4385068b">KEY_OWNER</a>, <span class="stringliteral">&quot;max&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line"></div><div class="line"><span class="comment">// keyCmp(k1,k2) &lt; 0</span></div><div class="line"><span class="comment">// keyCmp(k2,k1) &gt; 0</span></div></div><!-- fragment --><p>Do not strcmp the <a class="el" href="group__keyname.html#ga8e805c726a60da921d3736cda7813513" title="Returns a pointer to the abbreviated real internal key name. ">keyName()</a> yourself because the result differs from simple ascii comparison.</p>
+<div class="fragment"><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (0, 0) == 0, <span class="stringliteral">&quot;all null pointers same&quot;</span>);</div><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (k1, 0) == 1, <span class="stringliteral">&quot;null pointer is smaller&quot;</span>);</div><div class="line">        succeed_if (<a class="code" href="group__keytest.html#gaf6e66e12fe04d535a5d1c8218ced803e">keyCmp</a> (0, k2) == -1, <span class="stringliteral">&quot;null pointer is smaller&quot;</span>);</div></div><!-- fragment --><p> Here are some more examples: </p><div class="fragment"><div class="line">Key *k1 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user:/a&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line">Key *k2 = <a class="code" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89">keyNew</a>(<span class="stringliteral">&quot;user:/b&quot;</span>, <a class="code" href="group__key.html#gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403">KEY_END</a>);</div><div class="line"></div><div class="line"><span class="comment">// keyCmp(k1,k2) &lt; 0</span></div><div class="line"><span class="comment">// keyCmp(k2,k1) &gt; 0</span></div></div><!-- fragment --><p>Do not strcmp the <a class="el" href="group__keyname.html#ga8e805c726a60da921d3736cda7813513" title="Returns a pointer to the abbreviated real internal key name. ">keyName()</a> yourself because the result differs from simple ascii comparison.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">k1</td><td>the first key object to compare with </td></tr>
@@ -166,11 +163,11 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Check if the key check is below the key key or not. </p>
-<p>Example: </p><pre class="fragment">key user/sw/app
-check user/sw/app/key
+<p>Example: </p><pre class="fragment">key user:/sw/app
+check user:/sw/app/key
 </pre><p>returns true because check is below key</p>
-<p>Example: </p><pre class="fragment">key user/sw/app
-check user/sw/app/folder/key
+<p>Example: </p><pre class="fragment">key user:/sw/app
+check user:/sw/app/folder/key
 </pre><p>returns also true because check is indirect below key</p>
 <p>Obviously, there is no key above a namespace (e.g. user, system, /):</p>
 <pre class="fragment">key *
@@ -259,14 +256,14 @@ check user
 
 <p>Check whether the key <code>check</code> is directly below the key <code>key</code>. </p>
 <pre class="fragment">Example:
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 returns true because check is below key
 
 Example:
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 does not return true, because there is only an indirect relation
 </pre><dl class="params"><dt>Parameters</dt><dd>
@@ -285,42 +282,6 @@ does not return true, because there is only an indirect relation
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__keytest.html#ga03332b5d97c76a4fd2640aca4762b8df" title="Check if the key check is below the key key or not. ">keyIsBelow()</a>, <a class="el" href="group__keyname.html#ga7699091610e7f3f43d2949514a4b35d9" title="Set a new name to a key. ">keySetName()</a>, <a class="el" href="group__keyname.html#gab29a850168d9b31c9529e90cf9ab68be" title="Get abbreviated key name (without owner name). ">keyGetName()</a> </dd></dl>
-
-</div>
-</div>
-<a id="gaa25f699f592031c1a0abc1504d14e13e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa25f699f592031c1a0abc1504d14e13e">&#9670;&nbsp;</a></span>keyIsInactive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int keyIsInactive </td>
-          <td>(</td>
-          <td class="paramtype">const Key *&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check whether a key is inactive. </p>
-<p>In Elektra terminology a hierarchy of keys is inactive if the rootkey's basename starts with '.'. So a key is also inactive if it is below an inactive key. For example, user/key/.hidden is inactive and so is user/.hidden/below.</p>
-<p>Inactive keys should not have any meaning to applications, they are only a convention reserved for users and administrators. To automatically remove all inactive keys for an application, consider to use the hidden plugin.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>the key object to work with </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">1</td><td>if the key is inactive </td></tr>
-    <tr><td class="paramname">0</td><td>if the key is active </td></tr>
-    <tr><td class="paramname">-1</td><td>on NULL pointer or when key has no name </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -382,7 +343,7 @@ does not return true, because there is only an indirect relation
 <p>After <a class="el" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89" title="A practical way to fully create a Key object in one step. ">keyNew()</a> the flag will normally be set, but after <a class="el" href="group__kdb.html#ga28e385fd9cb7ccfe0b2f1ed2f62453a1" title="Retrieve keys in an atomic and universal way. ">kdbGet()</a> and <a class="el" href="group__kdb.html#ga11436b058408f83d303ca5e996832bcf" title="Set keys in an atomic and universal way. ">kdbSet()</a> the flag will be removed. When you modify the key the flag will be set again.</p>
 <p>In your application you can make use of that flag to know if you changed something in a key after a <a class="el" href="group__kdb.html#ga28e385fd9cb7ccfe0b2f1ed2f62453a1" title="Retrieve keys in an atomic and universal way. ">kdbGet()</a> or <a class="el" href="group__kdb.html#ga11436b058408f83d303ca5e996832bcf" title="Set keys in an atomic and universal way. ">kdbSet()</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>Note that the sync status will be updated on any change, including metadata.</dd></dl>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000012">Deprecated:</a></b></dt><dd>The handling of synchronization is done internally and does not need to be checked by neither application nor plugins.</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000004">Deprecated:</a></b></dt><dd>The handling of synchronization is done internally and does not need to be checked by neither application nor plugins.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>after <a class="el" href="group__key.html#gad23c65b44bf48d773759e1f9a4d43b89" title="A practical way to fully create a Key object in one step. ">keyNew()</a>, <a class="el" href="group__key.html#gae6ec6a60cc4b8c1463fa08623d056ce3" title="Return a duplicate of a key. ">keyDup()</a> keys need sync</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

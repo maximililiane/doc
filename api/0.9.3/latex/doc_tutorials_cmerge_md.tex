@@ -12,14 +12,14 @@ The easiest case is if all three versions contain equal data.
 
 
 \begin{DoxyCode}
-kdb set user/tests/base a
-#> Create a new key user/tests/base with string "a"
-kdb set user/tests/their a
-#> Create a new key user/tests/their with string "a"
-kdb set user/tests/our a
-#> Create a new key user/tests/our with string "a"
-kdb cmerge user/tests/our user/tests/their user/tests/base user/tests/result
-kdb get user/tests/result
+kdb set user:/tests/base a
+#> Create a new key user:/tests/base with string "a"
+kdb set user:/tests/their a
+#> Create a new key user:/tests/their with string "a"
+kdb set user:/tests/our a
+#> Create a new key user:/tests/our with string "a"
+kdb cmerge user:/tests/our user:/tests/their user:/tests/base user:/tests/result
+kdb get user:/tests/result
 #> a
 \end{DoxyCode}
 
@@ -28,7 +28,7 @@ We change the our key for another example.
 
 
 \begin{DoxyCode}
-kdb set user/tests/our b
+kdb set user:/tests/our b
 #> Set string to "b"
 \end{DoxyCode}
 
@@ -37,11 +37,11 @@ Using a {\ttfamily result} path that is not empty gives an error. The option {\t
 
 
 \begin{DoxyCode}
-kdb cmerge user/tests/our user/tests/their user/tests/base user/tests/result
+kdb cmerge user:/tests/our user:/tests/their user:/tests/base user:/tests/result
 # RET: 3
 # There are keys in the result path. Use -f to override them.
-kdb cmerge -f user/tests/our user/tests/their user/tests/base user/tests/result
-kdb get user/tests/result
+kdb cmerge -f user:/tests/our user:/tests/their user:/tests/base user:/tests/result
+kdb get user:/tests/result
 #> b
 \end{DoxyCode}
 
@@ -50,10 +50,10 @@ We can use the same key multiple times in a single call to cmerge.
 
 
 \begin{DoxyCode}
-kdb set user/tests/same a
-#> Create a new key user/tests/same with string "a"
-kdb cmerge -f user/tests/same user/tests/same user/tests/same user/tests/result
-kdb get user/tests/result
+kdb set user:/tests/same a
+#> Create a new key user:/tests/same with string "a"
+kdb cmerge -f user:/tests/same user:/tests/same user:/tests/same user:/tests/result
+kdb get user:/tests/result
 #> a
 \end{DoxyCode}
 
@@ -70,7 +70,7 @@ echo "127.0.0.1       localhost
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters" | kdb import user/tests/hosts/base hosts
+ff02::2 ip6-allrouters" | kdb import user:/tests/hosts/base hosts
 
 echo "127.0.0.1       localhost
 127.0.1.1       computer
@@ -80,7 +80,7 @@ echo "127.0.0.1       localhost
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters" | kdb import user/tests/hosts/our hosts
+ff02::2 ip6-allrouters" | kdb import user:/tests/hosts/our hosts
 
 echo "127.0.0.1       localhost
 127.0.1.1       computer
@@ -90,9 +90,9 @@ echo "127.0.0.1       localhost
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters" | kdb import user/tests/hosts/their hosts
+ff02::2 ip6-allrouters" | kdb import user:/tests/hosts/their hosts
 
-kdb cmerge user/tests/hosts/our user/tests/hosts/their user/tests/hosts/base user/tests/hosts/result
+kdb cmerge user:/tests/hosts/our user:/tests/hosts/their user:/tests/hosts/base user:/tests/hosts/result
 \end{DoxyCode}
 
 
@@ -100,7 +100,7 @@ The merge notices that only one of the three versions of the key {\ttfamily ip6-
 
 
 \begin{DoxyCode}
-kdb get user/tests/hosts/result/ipv6/ip6-localhost
+kdb get user:/tests/hosts/result/ipv6/ip6-localhost
 #> ::2
 \end{DoxyCode}
 
@@ -113,7 +113,7 @@ To demonstrate this, we continue the hosts example\+:
 
 
 \begin{DoxyCode}
-kdb meta-get user/tests/hosts/result/ipv6/ip6-localhost comment/#2
+kdb meta-get user:/tests/hosts/result/ipv6/ip6-localhost comment/#2
 #>  THEIR The following lines are desirable for IPv6 capable hosts
 \end{DoxyCode}
 
@@ -122,26 +122,27 @@ We set up some keys\+:
 
 
 \begin{DoxyCode}
-kdb set user/tests/meta/base equal
-#> Create a new key user/tests/meta/base with string "equal"
-kdb meta-set user/tests/meta/base comment/#0 "This is the original inline comment"
-kdb meta-set user/tests/meta/base comment/#1 "This is the first line of the original comment above the key"
-kdb meta-set user/tests/meta/base comment/#2 "This is the second line of the original comment above the
+kdb set user:/tests/meta/base equal
+#> Create a new key user:/tests/meta/base with string "equal"
+kdb meta-set user:/tests/meta/base comment/#0 "This is the original inline comment"
+kdb meta-set user:/tests/meta/base comment/#1 "This is the first line of the original comment above the
+       key"
+kdb meta-set user:/tests/meta/base comment/#2 "This is the second line of the original comment above the
        key"
 
-kdb set user/tests/meta/their equal
-#> Create a new key user/tests/meta/their with string "equal"
-kdb meta-set user/tests/meta/their comment/#0 "This is their inline comment"
-kdb meta-set user/tests/meta/their comment/#1 "This is the first line of their comment above the key"
-kdb meta-set user/tests/meta/their comment/#2 "This is the second line of their comment above the key"
+kdb set user:/tests/meta/their equal
+#> Create a new key user:/tests/meta/their with string "equal"
+kdb meta-set user:/tests/meta/their comment/#0 "This is their inline comment"
+kdb meta-set user:/tests/meta/their comment/#1 "This is the first line of their comment above the key"
+kdb meta-set user:/tests/meta/their comment/#2 "This is the second line of their comment above the key"
 
-kdb set user/tests/meta/our equal
-#> Create a new key user/tests/meta/our with string "equal"
-kdb meta-set user/tests/meta/our comment/#0 "This is your custom inline comment"
-kdb meta-set user/tests/meta/our comment/#1 "This is the first line of your custom comment above the key"
-kdb meta-set user/tests/meta/our comment/#2 "This is the second line of your custom comment above the key"
+kdb set user:/tests/meta/our equal
+#> Create a new key user:/tests/meta/our with string "equal"
+kdb meta-set user:/tests/meta/our comment/#0 "This is your custom inline comment"
+kdb meta-set user:/tests/meta/our comment/#1 "This is the first line of your custom comment above the key"
+kdb meta-set user:/tests/meta/our comment/#2 "This is the second line of your custom comment above the key"
 
-kdb cmerge user/tests/meta/our user/tests/meta/their user/tests/meta/base user/tests/meta/metaFromOur
+kdb cmerge user:/tests/meta/our user:/tests/meta/their user:/tests/meta/base user:/tests/meta/metaFromOur
 \end{DoxyCode}
 
 
@@ -149,11 +150,11 @@ Now we can check if the metadata has been merged as expected.
 
 
 \begin{DoxyCode}
-kdb meta-get user/tests/meta/metaFromOur comment/#0
+kdb meta-get user:/tests/meta/metaFromOur comment/#0
 #> This is your custom inline comment
-kdb meta-get user/tests/meta/metaFromOur comment/#1
+kdb meta-get user:/tests/meta/metaFromOur comment/#1
 #> This is the first line of your custom comment above the key
-kdb meta-get user/tests/meta/metaFromOur comment/#2
+kdb meta-get user:/tests/meta/metaFromOur comment/#2
 #> This is the second line of your custom comment above the key
 \end{DoxyCode}
 
@@ -162,10 +163,11 @@ If a key is part of the result because its value has changed then the result wil
 
 
 \begin{DoxyCode}
-kdb set user/tests/meta/their different
+kdb set user:/tests/meta/their different
 #> Set string to "different"
 
-kdb cmerge user/tests/meta/our user/tests/meta/their user/tests/meta/base user/tests/meta/metaFromChanged
+kdb cmerge user:/tests/meta/our user:/tests/meta/their user:/tests/meta/base
+       user:/tests/meta/metaFromChanged
 \end{DoxyCode}
 
 
@@ -173,7 +175,7 @@ We can test again if the result meets our expectations.
 
 
 \begin{DoxyCode}
-kdb meta-get user/tests/meta/metaFromChanged comment/#2
+kdb meta-get user:/tests/meta/metaFromChanged comment/#2
 #> This is the second line of their comment above the key
 \end{DoxyCode}
 
@@ -186,19 +188,19 @@ echo "one\(\backslash\)
 two\(\backslash\)
 three\(\backslash\)
 four\(\backslash\)
-five" | kdb import user/tests/arrays/original line
+five" | kdb import user:/tests/arrays/original line
 
 echo "previous\(\backslash\)
 one\(\backslash\)
 two\(\backslash\)
 three\(\backslash\)
 four\(\backslash\)
-five" | kdb import user/tests/arrays/changed line
+five" | kdb import user:/tests/arrays/changed line
 
-kdb cmerge -f user/tests/arrays/changed user/tests/arrays/original user/tests/arrays/original
-       user/tests/arrays/result
+kdb cmerge -f user:/tests/arrays/changed user:/tests/arrays/original user:/tests/arrays/original
+       user:/tests/arrays/result
 
-kdb get user/tests/arrays/result/#0
+kdb get user:/tests/arrays/result/#0
 #> previous
 \end{DoxyCode}
 
@@ -211,4 +213,4 @@ There are two tools of which cmerge is the central tool\+:
 \item `kdb cmerge-\/config-\/files` performs a three-\/way merge on three files using Elektra
 \end{DoxyEnumerate}
 
-All the tools that use the merge library rely on the same A\+PI. An exemplary call to this A\+PI can be found in the \href{/home/jenkins/workspace/libelektra-release/examples/kdbset.c}{\tt examples folder}. 
+All the tools that use the merge library rely on the same A\+PI. An exemplary call to this A\+PI can be found in the \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/examples/kdbset.c}{\tt examples folder}. 

@@ -1,4 +1,4 @@
-.TH "kdb::KDB" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdb::KDB" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -73,7 +73,7 @@ Opens the session with the \fBKey\fP database\&.
 errorKey must be a valid key, e\&.g\&. created with \fBkeyNew()\fP
 .RE
 .PP
-The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
+The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system:/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
 .PP
 You must always call this method before retrieving or committing any keys to the database\&. In the end of the program, after using the key database, you must not forget to \fBkdbClose()\fP\&.
 .PP
@@ -85,14 +85,14 @@ Get a \fC\fBKDB\fP\fP handle for every thread using elektra\&. Don't share the h
 .nf
 void thread1 (void)
 {
-        Key * parent = keyNew ("/app/part1", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part1", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
 }
 void thread2 (void)
 {
-        Key * parent = keyNew ("/app/part2", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part2", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
@@ -150,7 +150,7 @@ Opens the session with the \fBKey\fP database\&.
 errorKey must be a valid key, e\&.g\&. created with \fBkeyNew()\fP
 .RE
 .PP
-The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
+The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system:/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
 .PP
 You must always call this method before retrieving or committing any keys to the database\&. In the end of the program, after using the key database, you must not forget to \fBkdbClose()\fP\&.
 .PP
@@ -162,14 +162,14 @@ Get a \fC\fBKDB\fP\fP handle for every thread using elektra\&. Don't share the h
 .nf
 void thread1 (void)
 {
-        Key * parent = keyNew ("/app/part1", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part1", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
 }
 void thread2 (void)
 {
-        Key * parent = keyNew ("/app/part2", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part2", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
@@ -223,7 +223,7 @@ Opens the session with the \fBKey\fP database\&.
 errorKey must be a valid key, e\&.g\&. created with \fBkeyNew()\fP
 .RE
 .PP
-The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
+The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system:/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
 .PP
 You must always call this method before retrieving or committing any keys to the database\&. In the end of the program, after using the key database, you must not forget to \fBkdbClose()\fP\&.
 .PP
@@ -235,14 +235,14 @@ Get a \fC\fBKDB\fP\fP handle for every thread using elektra\&. Don't share the h
 .nf
 void thread1 (void)
 {
-        Key * parent = keyNew ("/app/part1", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part1", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
 }
 void thread2 (void)
 {
-        Key * parent = keyNew ("/app/part2", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part2", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
@@ -398,7 +398,7 @@ If not done earlier \fBkdbGet()\fP will fully retrieve all keys under the \fCpar
 .PP
 \fBNote:\fP
 .RS 4
-\fBkdbGet()\fP might retrieve more keys than requested (that are not below parentKey)\&. These keys must be passed to calls of \fBkdbSet()\fP, otherwise they will be lost\&. This stems from the fact that the user has the only copy of the whole configuration and backends only write configuration that was passed to them\&. For example, if you \fBkdbGet()\fP 'system/mountpoint/interest' you will not only get all keys below system/mountpoint/interest, but also all keys below system/mountpoint (if system/mountpoint is a mountpoint as the name suggests, but system/mountpoint/interest is not a mountpoint)\&. Make sure to not touch or remove keys outside the keys of interest, because others may need them!
+\fBkdbGet()\fP might retrieve more keys than requested (that are not below parentKey)\&. These keys must be passed to calls of \fBkdbSet()\fP, otherwise they will be lost\&. This stems from the fact that the user has the only copy of the whole configuration and backends only write configuration that was passed to them\&. For example, if you \fBkdbGet()\fP 'system:/mountpoint/interest' you will not only get all keys below system:/mountpoint/interest, but also all keys below system:/mountpoint (if system:/mountpoint is a mountpoint as the name suggests, but system:/mountpoint/interest is not a mountpoint)\&. Make sure to not touch or remove keys outside the keys of interest, because others may need them!
 .RE
 .PP
 \fBExample:\fP
@@ -565,7 +565,7 @@ If not done earlier \fBkdbGet()\fP will fully retrieve all keys under the \fCpar
 .PP
 \fBNote:\fP
 .RS 4
-\fBkdbGet()\fP might retrieve more keys than requested (that are not below parentKey)\&. These keys must be passed to calls of \fBkdbSet()\fP, otherwise they will be lost\&. This stems from the fact that the user has the only copy of the whole configuration and backends only write configuration that was passed to them\&. For example, if you \fBkdbGet()\fP 'system/mountpoint/interest' you will not only get all keys below system/mountpoint/interest, but also all keys below system/mountpoint (if system/mountpoint is a mountpoint as the name suggests, but system/mountpoint/interest is not a mountpoint)\&. Make sure to not touch or remove keys outside the keys of interest, because others may need them!
+\fBkdbGet()\fP might retrieve more keys than requested (that are not below parentKey)\&. These keys must be passed to calls of \fBkdbSet()\fP, otherwise they will be lost\&. This stems from the fact that the user has the only copy of the whole configuration and backends only write configuration that was passed to them\&. For example, if you \fBkdbGet()\fP 'system:/mountpoint/interest' you will not only get all keys below system:/mountpoint/interest, but also all keys below system:/mountpoint (if system:/mountpoint is a mountpoint as the name suggests, but system:/mountpoint/interest is not a mountpoint)\&. Make sure to not touch or remove keys outside the keys of interest, because others may need them!
 .RE
 .PP
 \fBExample:\fP
@@ -693,7 +693,7 @@ Opens the session with the \fBKey\fP database\&.
 errorKey must be a valid key, e\&.g\&. created with \fBkeyNew()\fP
 .RE
 .PP
-The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
+The method will bootstrap itself the following way\&. The first step is to open the default backend\&. With it system:/elektra/mountpoints will be loaded and all needed libraries and mountpoints will be determined\&. These libraries for backends will be loaded and with it the \fC\fBKDB\fP\fP data structure will be initialized\&.
 .PP
 You must always call this method before retrieving or committing any keys to the database\&. In the end of the program, after using the key database, you must not forget to \fBkdbClose()\fP\&.
 .PP
@@ -705,14 +705,14 @@ Get a \fC\fBKDB\fP\fP handle for every thread using elektra\&. Don't share the h
 .nf
 void thread1 (void)
 {
-        Key * parent = keyNew ("/app/part1", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part1", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
 }
 void thread2 (void)
 {
-        Key * parent = keyNew ("/app/part2", KEY_CASCADING_NAME, KEY_END);
+        Key * parent = keyNew ("/app/part2", KEY_END);
         KDB * h = kdbOpen (parent);
         // fetch keys and work with them
         kdbClose (h, parent);
@@ -762,7 +762,7 @@ after conflict errors in \fBkdbSet()\fP\&.
 .PP
 The \fCreturned\fP \fBKeySet\fP must be a valid \fBKeySet\fP, e\&.g\&. constructed with \fBksNew()\fP\&.
 .PP
-The \fCparentKey\fP \fBKey\fP must be a valid \fBKey\fP, e\&.g\&. constructed with \fBkeyNew()\fP\&.
+The \fCparentKey\fP \fBKey\fP must be a valid \fBKey\fP, e\&.g\&. constructed with \fBkeyNew()\fP\&. It must not have read-only name, value or metadata\&.
 .RE
 .PP
 If you pass NULL on any parameter \fBkdbSet()\fP will fail immediately without doing anything\&.
@@ -771,11 +771,11 @@ With \fCparentKey\fP you can give an hint which part of the given keyset is of i
 .PP
 \fBErrors\fP
 .RS 4
-If some error occurs:
+If \fCparentKey == NULL\fP or \fCparentKey\fP has read-only metadata, \fBkdbSet()\fP will immediately return the error code -1\&. In all other error cases the following happens:
 .IP "\(bu" 2
 \fBkdbSet()\fP will leave the \fBKeySet\fP's * internal cursor on the key that generated the error\&.
 .IP "\(bu" 2
-Error information will be written into the metadata of the parent key\&.
+Error information will be written into the metadata of the parent key, if possible\&.
 .IP "\(bu" 2
 None of the keys are actually committed in this situation, i\&.e\&. no configuration file will be modified\&.
 .PP
@@ -810,14 +810,14 @@ Each key is checked with \fBkeyNeedSync()\fP before being actually committed\&. 
 .PP
 .nf
 KeySet * myConfig = ksNew (0, KS_END);
-Key * parentKey = keyNew ("system/sw/MyApp", KEY_END);
+Key * parentKey = keyNew ("system:/sw/MyApp", KEY_END);
 KDB * handle = kdbOpen (parentKey);
 
 kdbGet (handle, myConfig, parentKey); // kdbGet needs to be called first!
 KeySet * base = ksDup (myConfig);     // save a copy of original keyset
 
 // change the keys within myConfig
-ksAppendKey (myConfig, keyNew ("system/sw/MyApp/Test", KEY_VALUE, "5", KEY_END));
+ksAppendKey (myConfig, keyNew ("system:/sw/MyApp/Test", KEY_VALUE, "5", KEY_END));
 
 KeySet * ours = ksDup (myConfig); // save a copy of our keyset
 KeySet * theirs;                  // needed for 3-way merging
@@ -886,7 +886,7 @@ empty/invalid (error C01320)
 .br
 \fI0\fP if nothing had to be done, no changes in \fBKDB\fP 
 .br
-\fI-1\fP on failure, no changes in \fBKDB\fP 
+\fI-1\fP on failure, no changes in \fBKDB\fP, an error will be set on \fCparentKey\fP if possible (see 'Errors' above) 
 .RE
 .PP
 \fBSee also:\fP
@@ -940,7 +940,7 @@ after conflict errors in \fBkdbSet()\fP\&.
 .PP
 The \fCreturned\fP \fBKeySet\fP must be a valid \fBKeySet\fP, e\&.g\&. constructed with \fBksNew()\fP\&.
 .PP
-The \fCparentKey\fP \fBKey\fP must be a valid \fBKey\fP, e\&.g\&. constructed with \fBkeyNew()\fP\&.
+The \fCparentKey\fP \fBKey\fP must be a valid \fBKey\fP, e\&.g\&. constructed with \fBkeyNew()\fP\&. It must not have read-only name, value or metadata\&.
 .RE
 .PP
 If you pass NULL on any parameter \fBkdbSet()\fP will fail immediately without doing anything\&.
@@ -949,11 +949,11 @@ With \fCparentKey\fP you can give an hint which part of the given keyset is of i
 .PP
 \fBErrors\fP
 .RS 4
-If some error occurs:
+If \fCparentKey == NULL\fP or \fCparentKey\fP has read-only metadata, \fBkdbSet()\fP will immediately return the error code -1\&. In all other error cases the following happens:
 .IP "\(bu" 2
 \fBkdbSet()\fP will leave the \fBKeySet\fP's * internal cursor on the key that generated the error\&.
 .IP "\(bu" 2
-Error information will be written into the metadata of the parent key\&.
+Error information will be written into the metadata of the parent key, if possible\&.
 .IP "\(bu" 2
 None of the keys are actually committed in this situation, i\&.e\&. no configuration file will be modified\&.
 .PP
@@ -988,14 +988,14 @@ Each key is checked with \fBkeyNeedSync()\fP before being actually committed\&. 
 .PP
 .nf
 KeySet * myConfig = ksNew (0, KS_END);
-Key * parentKey = keyNew ("system/sw/MyApp", KEY_END);
+Key * parentKey = keyNew ("system:/sw/MyApp", KEY_END);
 KDB * handle = kdbOpen (parentKey);
 
 kdbGet (handle, myConfig, parentKey); // kdbGet needs to be called first!
 KeySet * base = ksDup (myConfig);     // save a copy of original keyset
 
 // change the keys within myConfig
-ksAppendKey (myConfig, keyNew ("system/sw/MyApp/Test", KEY_VALUE, "5", KEY_END));
+ksAppendKey (myConfig, keyNew ("system:/sw/MyApp/Test", KEY_VALUE, "5", KEY_END));
 
 KeySet * ours = ksDup (myConfig); // save a copy of our keyset
 KeySet * theirs;                  // needed for 3-way merging
@@ -1064,7 +1064,7 @@ empty/invalid (error C01320)
 .br
 \fI0\fP if nothing had to be done, no changes in \fBKDB\fP 
 .br
-\fI-1\fP on failure, no changes in \fBKDB\fP 
+\fI-1\fP on failure, no changes in \fBKDB\fP, an error will be set on \fCparentKey\fP if possible (see 'Errors' above) 
 .RE
 .PP
 \fBSee also:\fP

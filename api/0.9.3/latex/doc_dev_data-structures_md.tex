@@ -42,13 +42,13 @@ There are several ways to define consistency relations on key sets. For {\bfseri
 
 
 \begin{DoxyCode}
-system
-system/elektra
-system/elektra/mountpoints
+system:/
+system:/elektra
+system:/elektra/mountpoints
 \end{DoxyCode}
 
 
-would allow the key {\ttfamily system/elektra/mountpoints/tcl} to be added, but not the key {\ttfamily system/apps/abc} because {\ttfamily system/apps} is missing. File systems enforce this kind of consistency.
+would allow the key {\ttfamily system\+:/elektra/mountpoints/tcl} to be added, but not the key {\ttfamily system\+:/apps/abc} because {\ttfamily system\+:/apps} is missing. File systems enforce this kind of consistency.
 
 These semantics are however not useful for configurations. Especially for user configurations often only some keys need to be overwritten. It is not a good idea to copy all parent keys to the users configuration. For this reason we use a less strict definition of consistency supporting such holes.
 
@@ -56,13 +56,13 @@ We also evaluated a form of {\bfseries weak consistency}. It avoids adding some 
 
 
 \begin{DoxyCode}
-user/sw/apps/abc/current/bindings
-user/sw/apps/abc/current/bindings/key1
-user/sw/apps/abc/current/bindings/key2
+user:/sw/apps/abc/current/bindings
+user:/sw/apps/abc/current/bindings/key1
+user:/sw/apps/abc/current/bindings/key2
 \end{DoxyCode}
 
 
-the weak consistency would allow inserting {\ttfamily user/sw/apps/abc/current/bindings/key3} because it is directly below an existing key. It would also allow adding {\ttfamily user/sw/apps/xyz/current} because it does not have any parent key. But it would not allow {\ttfamily user/sw/apps/abc/current/bindings/dir/key1} to add. The worst-\/case complexity was found to be too expensive, and hence {\ttfamily Key\+Set} has {\bfseries no consistency} check at all.
+the weak consistency would allow inserting {\ttfamily user\+:/sw/apps/abc/current/bindings/key3} because it is directly below an existing key. It would also allow adding {\ttfamily user\+:/sw/apps/xyz/current} because it does not have any parent key. But it would not allow {\ttfamily user\+:/sw/apps/abc/current/bindings/dir/key1} to add. The worst-\/case complexity was found to be too expensive, and hence {\ttfamily Key\+Set} has {\bfseries no consistency} check at all.
 
 This means any key with a valid key name can be inserted into {\ttfamily Key\+Set}. The {\ttfamily Key\+Set} is changed so that it is now impossible to append keys without a name. {\ttfamily ks\+Append\+Key(ks, Key $\ast$to\+Append)} takes ownership of the key {\ttfamily to\+Append} and will delete the key in that case. The caller does not have to free {\ttfamily to\+Append}\+: either it is in the key set or it is deleted.
 
@@ -117,7 +117,7 @@ Continue reading \hyperlink{doc_dev_error-handling_md}{with the error handling}.
 
 The O\+P\+M\+P\+HM is a non-\/dynamic randomized hash map of the Las Vegas type, that creates an index over the elements, to gain O(1) access.
 
-The elements must be arranged in an array and each element must have a unique name, to identify the elements. The source can be found in \href{/home/jenkins/workspace/libelektra-release/src/include/kdbopmphm.h}{\tt kdbopmphm.\+h} and \href{/home/jenkins/workspace/libelektra-release/src/libs/elektra/opmphm.c}{\tt opmphm.\+c} and also works outside of Elektra.
+The elements must be arranged in an array and each element must have a unique name, to identify the elements. The source can be found in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/include/kdbopmphm.h}{\tt kdbopmphm.\+h} and \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/libs/elektra/opmphm.c}{\tt opmphm.\+c} and also works outside of Elektra.
 
 The O\+P\+M\+P\+HM does not store any buckets, your array of elements are the buckets and the O\+P\+M\+P\+HM represent an arbitrary index over those. The desired index of an element, also known as the order, is set in {\ttfamily Opmphm\+Graph-\/$>$edges\mbox{[}i\mbox{]}.order}, where {\ttfamily i} is the i-\/th element in your array. When the orders should represent the array indices, the default order can be applied during the assignment step. When the orders are not the default order, {\ttfamily Opmphm\+Graph-\/$>$edges\mbox{[}i\mbox{]}.order} should be set before the assignment step.
 

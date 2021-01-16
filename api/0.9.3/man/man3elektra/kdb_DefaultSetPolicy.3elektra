@@ -1,8 +1,8 @@
-.TH "kdb::DefaultSetPolicy" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdb::DefaultSetPolicy" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-kdb::DefaultSetPolicy \- Implements creating user/ key when key is not found\&.  
+kdb::DefaultSetPolicy \- Implements creating user:/ key when key is not found\&.  
 
 .SH SYNOPSIS
 .br
@@ -11,7 +11,7 @@ kdb::DefaultSetPolicy \- Implements creating user/ key when key is not found\&.
 \fC#include <kdbvalue\&.hpp>\fP
 .SH "Detailed Description"
 .PP 
-Implements creating user/ key when key is not found\&. 
+Implements creating user:/ key when key is not found\&. 
 
 .SH "Author"
 .PP 

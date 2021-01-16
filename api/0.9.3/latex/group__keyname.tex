@@ -26,26 +26,34 @@ ssize\+\_\+t \hyperlink{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}{key\+
 \begin{DoxyCompactList}\small\item\em return size of unescaped name with embedded and terminating null characters \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name} (const Key $\ast$key, char $\ast$returned\+Name, size\+\_\+t max\+Size)
 \begin{DoxyCompactList}\small\item\em Get abbreviated key name (without owner name). \end{DoxyCompactList}\item 
+ssize\+\_\+t \hyperlink{group__keyname_ga44a576c7919d5b03f28d3ed3afaa7cd1}{key\+Get\+Unescaped\+Name} (const Key $\ast$key, char $\ast$returned\+Name, size\+\_\+t max\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the unescaped name of a key into provided buffer. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name} (Key $\ast$key, const char $\ast$new\+Name)
 \begin{DoxyCompactList}\small\item\em Set a new name to a key. \end{DoxyCompactList}\item 
-ssize\+\_\+t \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size} (const Key $\ast$key)
-\begin{DoxyCompactList}\small\item\em Bytes needed to store the key name including user domain and ending N\+U\+LL. \end{DoxyCompactList}\item 
-ssize\+\_\+t \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name} (const Key $\ast$key, char $\ast$returned\+Name, size\+\_\+t max\+Size)
-\begin{DoxyCompactList}\small\item\em Get key full name, including the user domain name. \end{DoxyCompactList}\item 
+ssize\+\_\+t \hyperlink{group__keyname_gaa70593a2c772c4b7bc33423b9b10a270}{key\+Add\+Name} (Key $\ast$key, const char $\ast$new\+Name)
+\begin{DoxyCompactList}\small\item\em Add an already escaped name to the keyname. \end{DoxyCompactList}\item 
+bool \hyperlink{group__keyname_ga26bacb092ebca8f69f3fee72069733d8}{elektra\+Key\+Name\+Validate} (const char $\ast$name, bool is\+Complete)
+\begin{DoxyCompactList}\small\item\em Takes an escaped key name and validates it. \end{DoxyCompactList}\item 
+void \hyperlink{group__keyname_ga99ef3765a0ea0887c8ab72859ae2592e}{elektra\+Key\+Name\+Canonicalize} (const char $\ast$name, char $\ast$$\ast$canonical\+Name, size\+\_\+t $\ast$canonical\+Size\+Ptr, size\+\_\+t offset, size\+\_\+t $\ast$usize\+Ptr)
+\begin{DoxyCompactList}\small\item\em Takes a valid (non-\/)canonical key name and produces its canonical form. \end{DoxyCompactList}\item 
+void \hyperlink{group__keyname_ga85dd2a5169e900c6c8371c54c7944edb}{elektra\+Key\+Name\+Unescape} (const char $\ast$canonical\+Name, char $\ast$unescaped\+Name)
+\begin{DoxyCompactList}\small\item\em Takes a canonical key name and unescapes it. \end{DoxyCompactList}\item 
 const char $\ast$ \hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{key\+Base\+Name} (const Key $\ast$key)
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the internal unescaped key name where the {\ttfamily basename} starts. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_ga1a0b76c5d9e5367c7e72211e6c63d43a}{key\+Get\+Base\+Name\+Size} (const Key $\ast$key)
 \begin{DoxyCompactList}\small\item\em Calculates number of bytes needed to store basename of {\ttfamily key}. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}{key\+Get\+Base\+Name} (const Key $\ast$key, char $\ast$returned, size\+\_\+t max\+Size)
 \begin{DoxyCompactList}\small\item\em Calculate the basename of a key name and put it in {\ttfamily returned} finalizing the string with N\+U\+LL. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{group__keyname_ga35ac22f466de1a74ca72b05e8252980d}{elektra\+Key\+Name\+Escape\+Part} (const char $\ast$part, char $\ast$$\ast$escaped\+Part)
+\begin{DoxyCompactList}\small\item\em Takes a single key name part and produces its escaped form. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{key\+Add\+Base\+Name} (Key $\ast$key, const char $\ast$base\+Name)
 \begin{DoxyCompactList}\small\item\em Adds {\ttfamily base\+Name} (that will be escaped) to the current key name. \end{DoxyCompactList}\item 
-ssize\+\_\+t \hyperlink{group__keyname_gaa70593a2c772c4b7bc33423b9b10a270}{key\+Add\+Name} (Key $\ast$key, const char $\ast$new\+Name)
-\begin{DoxyCompactList}\small\item\em Add an already escaped name to the keyname. \end{DoxyCompactList}\item 
 ssize\+\_\+t \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{key\+Set\+Base\+Name} (Key $\ast$key, const char $\ast$base\+Name)
 \begin{DoxyCompactList}\small\item\em Sets {\ttfamily base\+Name} as the new basename for {\ttfamily key}. \end{DoxyCompactList}\item 
 \hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace} \hyperlink{group__keyname_gafc3ca03ed10f87eb59bdc02cf2a0de8d}{key\+Get\+Namespace} (const Key $\ast$key)
-\begin{DoxyCompactList}\small\item\em For currently valid namespaces see \hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em For currently valid namespaces see \hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace}. \end{DoxyCompactList}\item 
+ssize\+\_\+t \hyperlink{group__keyname_ga98c1c1307419e689c98e556e5c542073}{key\+Set\+Namespace} (Key $\ast$key, \hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace} ns)
+\begin{DoxyCompactList}\small\item\em Changes the namespace of a key. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -73,11 +81,11 @@ A namespace denotes the place the key comes from\+:
 \end{DoxyParagraph}
 
 \begin{DoxyItemize}
-\item {\ttfamily spec/something} for specification of other keys.
-\item {\ttfamily proc/something} for in-\/memory keys, e.\+g. commandline.
-\item {\ttfamily dir/something} for dir keys in current working directory
-\item {\ttfamily system/something} for system keys in /etc or /
-\item {\ttfamily user/something} for user keys in home directory
+\item {\ttfamily spec\+:/something} for specification of other keys.
+\item {\ttfamily proc\+:/something} for in-\/memory keys, e.\+g. commandline.
+\item {\ttfamily dir\+:/something} for dir keys in current working directory
+\item {\ttfamily system\+:/something} for system keys in /etc or /
+\item {\ttfamily user\+:/something} for user keys in home directory
 \item {\ttfamily user\+:username/something} for other users (deprecated\+: \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} + \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()} currently unsupported)
 \item {\ttfamily /something} for cascading keys (actually refers to one of the above, see also \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()})
 
@@ -123,7 +131,6 @@ Key names and key name parts have following goals\+:
 \item Key name parts starting with \# are array elements. Then only \+\_\+ (underscore) followed by 0-\/9 is allowed. So we have the regular expression \#\mbox{[}\+\_\+\mbox{]}$\ast$\mbox{[}0-\/9\mbox{]}+ with the further limitation that the number of \+\_\+ is defined by the number of digits-\/1.
 \item Key name parts starting with \+\_\+ are reserved for special purposes (if you use this within a plugin you still have to make sure \+\_\+ is escaped properly)
 \item Key name parts starting with @ are reserved for special purposes (if you use this within a plugin you still have to make sure @ is escaped properly)
-\item If any key name part starts with . (dot) it means the key is inactive, see \hyperlink{group__keytest_gaa25f699f592031c1a0abc1504d14e13e}{key\+Is\+Inactive()}.
 \end{DoxyItemize}
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{Escaping rules}
@@ -153,6 +160,119 @@ Key names and key name parts have following goals\+:
 \end{DoxyItemize}
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{group__keyname_ga99ef3765a0ea0887c8ab72859ae2592e}\label{group__keyname_ga99ef3765a0ea0887c8ab72859ae2592e}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!elektra\+Key\+Name\+Canonicalize@{elektra\+Key\+Name\+Canonicalize}}
+\index{elektra\+Key\+Name\+Canonicalize@{elektra\+Key\+Name\+Canonicalize}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{elektra\+Key\+Name\+Canonicalize()}{elektraKeyNameCanonicalize()}}
+{\footnotesize\ttfamily void elektra\+Key\+Name\+Canonicalize (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{char $\ast$$\ast$}]{canonical\+Name,  }\item[{size\+\_\+t $\ast$}]{canonical\+Size\+Ptr,  }\item[{size\+\_\+t}]{offset,  }\item[{size\+\_\+t $\ast$}]{usize\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Takes a valid (non-\/)canonical key name and produces its canonical form. 
+
+As a side-\/effect it can also calculate the size of the corresponding unescaped key name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The key name that is processed \\
+\hline
+{\em canonical\+Name} & Output buffer for the canonical name \\
+\hline
+{\em canonical\+Size\+Ptr} & Pointer to size of {\ttfamily canonical\+Name} \\
+\hline
+{\em offset} & Offset into {\ttfamily canonical\+Name} \\
+\hline
+{\em usize\+Ptr} & Output variable for the size of the unescaped name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily name} M\+U\+ST be a valid (non-\/)canonical key name. If it is not, the result is undefined 
+
+{\ttfamily canonical\+Name} M\+U\+ST be a valid first argument for \hyperlink{internal_8c_ab0432d6765c40a5408a204c43747f4d4}{elektra\+Realloc()} when cast to void$\ast$$\ast$ 
+
+{\ttfamily canonical\+Size\+Ptr} $>$= {\ttfamily offset} 
+
+{\ttfamily offset} M\+U\+ST be 0 or {\ttfamily $\ast$canonical\+Name + offset} M\+U\+ST point to the zero-\/termintor of a valid canonical key name that starts at {\ttfamily $\ast$canonical\+Name} 
+
+if {\ttfamily offset} is 0 then {\ttfamily $\ast$usize\+Ptr} M\+U\+ST 0, otherwise {\ttfamily $\ast$usize\+Ptr} M\+U\+ST be the correct unescaped size of the existing canonical name in {\ttfamily $\ast$canonical\+Name}
+\end{DoxyPrecond}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__keyname_ga26bacb092ebca8f69f3fee72069733d8}{elektra\+Key\+Name\+Validate} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__keyname_ga35ac22f466de1a74ca72b05e8252980d}\label{group__keyname_ga35ac22f466de1a74ca72b05e8252980d}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!elektra\+Key\+Name\+Escape\+Part@{elektra\+Key\+Name\+Escape\+Part}}
+\index{elektra\+Key\+Name\+Escape\+Part@{elektra\+Key\+Name\+Escape\+Part}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{elektra\+Key\+Name\+Escape\+Part()}{elektraKeyNameEscapePart()}}
+{\footnotesize\ttfamily size\+\_\+t elektra\+Key\+Name\+Escape\+Part (\begin{DoxyParamCaption}\item[{const char $\ast$}]{part,  }\item[{char $\ast$$\ast$}]{escaped\+Part }\end{DoxyParamCaption})}
+
+
+
+Takes a single key name part and produces its escaped form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em part} & A single key name part, i.\+e. contained \textquotesingle{}/\textquotesingle{} will be escaped, \textquotesingle{}\textbackslash{}0\textquotesingle{} terminates part \\
+\hline
+{\em escaped\+Part} & Output buffer for the escaped form\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily escaped\+Part} M\+U\+ST be a valid first argument for \hyperlink{internal_8c_ab0432d6765c40a5408a204c43747f4d4}{elektra\+Realloc()} when cast to {\ttfamily void$\ast$$\ast$}
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+The size of the escaped form excluding the zero terminator 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__keyname_ga85dd2a5169e900c6c8371c54c7944edb}\label{group__keyname_ga85dd2a5169e900c6c8371c54c7944edb}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!elektra\+Key\+Name\+Unescape@{elektra\+Key\+Name\+Unescape}}
+\index{elektra\+Key\+Name\+Unescape@{elektra\+Key\+Name\+Unescape}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{elektra\+Key\+Name\+Unescape()}{elektraKeyNameUnescape()}}
+{\footnotesize\ttfamily void elektra\+Key\+Name\+Unescape (\begin{DoxyParamCaption}\item[{const char $\ast$}]{canonical\+Name,  }\item[{char $\ast$}]{unescaped\+Name }\end{DoxyParamCaption})}
+
+
+
+Takes a canonical key name and unescapes it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em canonical\+Name} & The canonical name to unescape \\
+\hline
+{\em unescaped\+Name} & Output buffer for the unescaped name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily canonical\+Name} M\+U\+ST be a canonical key name. If this is not the case, the result is undefined. 
+
+{\ttfamily unescaped\+Name} M\+U\+ST be allocated to the correct size.
+\end{DoxyPrecond}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__keyname_ga99ef3765a0ea0887c8ab72859ae2592e}{elektra\+Key\+Name\+Canonicalize} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{group__keyname_ga26bacb092ebca8f69f3fee72069733d8}\label{group__keyname_ga26bacb092ebca8f69f3fee72069733d8}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!elektra\+Key\+Name\+Validate@{elektra\+Key\+Name\+Validate}}
+\index{elektra\+Key\+Name\+Validate@{elektra\+Key\+Name\+Validate}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{elektra\+Key\+Name\+Validate()}{elektraKeyNameValidate()}}
+{\footnotesize\ttfamily bool elektra\+Key\+Name\+Validate (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{bool}]{is\+Complete }\end{DoxyParamCaption})}
+
+
+
+Takes an escaped key name and validates it. 
+
+Complete key names must inlcude a namespace or a leading slash.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The escaped key name to check \\
+\hline
+{\em is\+Complete} & Whether or not {\ttfamily name} is supposed to be a complete key name\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \#true} & If {\ttfamily name} is a valid key name. \\
+\hline
+{\em \#false} & Otherwise \\
+\hline
+\end{DoxyRetVals}
 \mbox{\Hypertarget{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}\label{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Add\+Base\+Name@{key\+Add\+Base\+Name}}
 \index{key\+Add\+Base\+Name@{key\+Add\+Base\+Name}!Name Manipulation Methods@{Name Manipulation Methods}}
@@ -167,7 +287,7 @@ A new base\+Name will be added, no other part of the key name will be affected.
 
 Assumes that {\ttfamily key} is a directory and will append {\ttfamily base\+Name} to it. The function adds the path separator for concatenating.
 
-So if {\ttfamily key} has name {\ttfamily \char`\"{}system/dir1/dir2\char`\"{}} and this method is called with {\ttfamily base\+Name} {\ttfamily \char`\"{}mykey\char`\"{}}, the resulting key will have the name {\ttfamily \char`\"{}system/dir1/dir2/mykey\char`\"{}}.
+So if {\ttfamily key} has name {\ttfamily \char`\"{}system\+:/dir1/dir2\char`\"{}} and this method is called with {\ttfamily base\+Name} {\ttfamily \char`\"{}mykey\char`\"{}}, the resulting key will have the name {\ttfamily \char`\"{}system\+:/dir1/dir2/mykey\char`\"{}}.
 
 When {\ttfamily base\+Name} is 0 nothing will happen and the size of the name is returned.
 
@@ -175,16 +295,16 @@ The escaping rules apply as in \hyperlink{group__keyname}{above }.
 
 A simple example is\+: 
 \begin{DoxyCodeInclude}
-Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/my/long"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/my/long"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{"myname"});
-printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user/my/long/myname}
+printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user:/my/long/myname}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
  E.\+g. if you add . it will be escaped\+: 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         succeed\_if (\hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{"."}) >= 0, \textcolor{stringliteral}{"could not add a base name"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/valid/\(\backslash\)\(\backslash\)."});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/valid/\(\backslash\)\(\backslash\)."});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{"."});
 \end{DoxyCodeInclude}
  \begin{DoxySeeAlso}{See also}
@@ -232,16 +352,16 @@ The same way as in \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}
 
 For example\+: 
 \begin{DoxyCodeInclude}
-Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/x/r"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/x/r"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_gaa70593a2c772c4b7bc33423b9b10a270}{keyAddName} (k, \textcolor{stringliteral}{"../y/a//././z"});
-assert (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"user/x/y/a/z"}));
+assert (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"user:/x/y/a/z"}));
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
  Unlike \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} it adds relative to the previous name and cannot change the namespace of a key. For example\+: 
 \begin{DoxyCodeInclude}
-Key * n = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/away"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+Key * n = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/away"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_gaa70593a2c772c4b7bc33423b9b10a270}{keyAddName} (n, \textcolor{stringliteral}{"../../../new/name"});
-assert (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (n), \textcolor{stringliteral}{"user/new/name"}));
+assert (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (n), \textcolor{stringliteral}{"user:/new/name"}));
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (n);
 \end{DoxyCodeInclude}
  The passed name needs to be valid according the \hyperlink{group__keyname}{key name rules }. It is not allowed to\+:
@@ -257,24 +377,20 @@ assert (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{k
 {\em new\+Name} & the new name to append\\
 \hline
 \end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily key} M\+U\+ST be a valid \#\+Key
+\end{DoxyPrecond}
 \begin{DoxySince}{Since}
 0.\+8.\+11
 \end{DoxySince}
 
 \begin{DoxyRetVals}{Return values}
-{\em size} & of the new key \\
-\hline
-{\em -\/1} & if key is a null pointer or the key has an empty name \\
-\hline
-{\em -\/1} & if new\+Name is not a valid escaped name \\
-\hline
-{\em -\/1} & on allocation errors \\
-\hline
-{\em -\/1} & if key was inserted to a keyset before \\
-\hline
-{\em 0} & if nothing was done because new\+Name had only slashes, is too short, is empty or is null \\
+{\em -\/1} & if {\ttfamily key == N\+U\+LL}, {\ttfamily key} is read-\/only, {\ttfamily new\+Name == N\+U\+LL} or {\ttfamily new\+Name} is not a valid escaped name \\
 \hline
 \end{DoxyRetVals}
+\begin{DoxyReturn}{Returns}
+new size of the escaped name of {\ttfamily key} 
+\end{DoxyReturn}
 \mbox{\Hypertarget{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}\label{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Base\+Name@{key\+Base\+Name}}
 \index{key\+Base\+Name@{key\+Base\+Name}!Name Manipulation Methods@{Name Manipulation Methods}}
@@ -291,14 +407,14 @@ This is a much more efficient version of \hyperlink{group__keyname_ga0992d26bcfc
 \begin{DoxyCodeInclude}
         \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{""});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"user"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"user:/"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  And there is also support for really empty basenames\+: 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         succeed\_if (\hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{keyAddBaseName} (k, \textcolor{stringliteral}{""}) >= 0, \textcolor{stringliteral}{"could not add a base name"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/valid/%"});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/valid/%"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  \begin{DoxyNote}{Note}
@@ -325,8 +441,6 @@ a pointer to the basename
 \hyperlink{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}{key\+Get\+Base\+Name()}, \hyperlink{group__keyname_ga1a0b76c5d9e5367c7e72211e6c63d43a}{key\+Get\+Base\+Name\+Size()} 
 
 \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} to get a pointer to the name 
-
-\hyperlink{owner_8c_af6485fb8599714b6bbd830cf915ffea5}{key\+Owner()} to get a pointer to the owner 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}\label{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Base\+Name@{key\+Get\+Base\+Name}}
@@ -340,8 +454,8 @@ Calculate the basename of a key name and put it in {\ttfamily returned} finalizi
 
 Some examples\+:
 \begin{DoxyItemize}
-\item basename of {\ttfamily system/some/keyname} is {\ttfamily keyname} 
-\item basename of {\ttfamily \char`\"{}user/tmp/some key\char`\"{}} is {\ttfamily \char`\"{}some key\char`\"{}} 
+\item basename of {\ttfamily system\+:/some/keyname} is {\ttfamily keyname} 
+\item basename of {\ttfamily \char`\"{}user\+:/tmp/some key\char`\"{}} is {\ttfamily \char`\"{}some key\char`\"{}} 
 \end{DoxyItemize}
 
 
@@ -380,11 +494,11 @@ number of bytes copied to {\ttfamily returned}
 
 Calculates number of bytes needed to store basename of {\ttfamily key}. 
 
-Key names that have only root names (e.\+g. {\ttfamily \char`\"{}system\char`\"{}} or {\ttfamily \char`\"{}user\char`\"{}} or {\ttfamily \char`\"{}user\+:domain\char`\"{}} ) does not have basenames, thus the function will return 1 bytes to store \char`\"{}\char`\"{}.
+Key names that have only root names (e.\+g. {\ttfamily \char`\"{}system\+:/\char`\"{}} or {\ttfamily \char`\"{}user\+:/\char`\"{}} or {\ttfamily \char`\"{}user\+:domain\char`\"{}} ) does not have basenames, thus the function will return 1 bytes to store \char`\"{}\char`\"{}.
 
 Basenames are denoted as\+:
 \begin{DoxyItemize}
-\item {\ttfamily system/some/thing/basename} -\/$>$ {\ttfamily basename} 
+\item {\ttfamily system\+:/some/thing/basename} -\/$>$ {\ttfamily basename} 
 \item {\ttfamily user\+:domain/some/thing/base\textbackslash{}/name} $>$ {\ttfamily base\textbackslash{}/name} 
 \end{DoxyItemize}
 
@@ -400,65 +514,6 @@ size in bytes of {\ttfamily key\textquotesingle{}s} basename including ending N\
 \hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{key\+Base\+Name()}, \hyperlink{group__keyname_ga0992d26bcfca767cb8e77053a483eb64}{key\+Get\+Base\+Name()} 
 
 \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()}, \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} 
-\end{DoxySeeAlso}
-\mbox{\Hypertarget{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}\label{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}} 
-\index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Full\+Name@{key\+Get\+Full\+Name}}
-\index{key\+Get\+Full\+Name@{key\+Get\+Full\+Name}!Name Manipulation Methods@{Name Manipulation Methods}}
-\subsubsection{\texorpdfstring{key\+Get\+Full\+Name()}{keyGetFullName()}}
-{\footnotesize\ttfamily ssize\+\_\+t key\+Get\+Full\+Name (\begin{DoxyParamCaption}\item[{const Key $\ast$}]{key,  }\item[{char $\ast$}]{returned\+Name,  }\item[{size\+\_\+t}]{max\+Size }\end{DoxyParamCaption})}
-
-
-
-Get key full name, including the user domain name. 
-
-\begin{DoxyReturn}{Returns}
-number of bytes written 
-\end{DoxyReturn}
-
-\begin{DoxyRetVals}{Return values}
-{\em 1} & on empty name \\
-\hline
-{\em -\/1} & on N\+U\+LL pointers \\
-\hline
-{\em -\/1} & if max\+Size is 0 or larger than S\+S\+I\+Z\+E\+\_\+\+M\+AX \\
-\hline
-\end{DoxyRetVals}
-
-\begin{DoxyParams}{Parameters}
-{\em key} & the key object \\
-\hline
-{\em returned\+Name} & pre-\/allocated memory to write the key name \\
-\hline
-{\em max\+Size} & maximum number of bytes that will fit in returned\+Name, including the final N\+U\+LL \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}\label{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}} 
-\index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Full\+Name\+Size@{key\+Get\+Full\+Name\+Size}}
-\index{key\+Get\+Full\+Name\+Size@{key\+Get\+Full\+Name\+Size}!Name Manipulation Methods@{Name Manipulation Methods}}
-\subsubsection{\texorpdfstring{key\+Get\+Full\+Name\+Size()}{keyGetFullNameSize()}}
-{\footnotesize\ttfamily ssize\+\_\+t key\+Get\+Full\+Name\+Size (\begin{DoxyParamCaption}\item[{const Key $\ast$}]{key }\end{DoxyParamCaption})}
-
-
-
-Bytes needed to store the key name including user domain and ending N\+U\+LL. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em key} & the key object to work with \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-number of bytes needed to store key name including user domain 
-\end{DoxyReturn}
-
-\begin{DoxyRetVals}{Return values}
-{\em 1} & on empty name \\
-\hline
-{\em -\/1} & on N\+U\+LL pointer \\
-\hline
-\end{DoxyRetVals}
-\begin{DoxySeeAlso}{See also}
-\hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}\label{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Name@{key\+Get\+Name}}
@@ -501,7 +556,7 @@ number of bytes written to {\ttfamily returned\+Name}
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()}, \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size()} 
+\hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()} 
 \end{DoxySeeAlso}
 \mbox{\Hypertarget{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}\label{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Name\+Size@{key\+Get\+Name\+Size}}
@@ -531,7 +586,7 @@ number of bytes needed, including ending N\+U\+LL, to store key name without own
 \hline
 \end{DoxyRetVals}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size()} 
+\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} 
 
 \hyperlink{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}{key\+Get\+Unescaped\+Name\+Size} to get size of unescaped name 
 \end{DoxySeeAlso}
@@ -545,9 +600,6 @@ number of bytes needed, including ending N\+U\+LL, to store key name without own
 
 For currently valid namespaces see \hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace}. 
 
-\begin{DoxySince}{Since}
-0.\+8.\+10 Added method to \hyperlink{kdbproposal_8h}{kdbproposal.\+h}
-\end{DoxySince}
 To handle every possible cases (including namespaces) a key can have\+: 
 \begin{DoxyCodeInclude}
 \textcolor{keywordflow}{switch} (\hyperlink{group__keyname_gafc3ca03ed10f87eb59bdc02cf2a0de8d}{keyGetNamespace} (k))
@@ -567,9 +619,6 @@ To handle every possible cases (including namespaces) a key can have\+:
 \textcolor{keywordflow}{case} \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68a61adca2f9dff47e65dfcdb492ffa7a20}{KEY\_NS\_SYSTEM}:
         printf (\textcolor{stringliteral}{"system namespace\(\backslash\)n"});
         \textcolor{keywordflow}{break};
-\textcolor{keywordflow}{case} \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68a33d6c53529b4e6921d0b1d6565df2f1f}{KEY\_NS\_EMPTY}:
-        printf (\textcolor{stringliteral}{"empty name\(\backslash\)n"});
-        \textcolor{keywordflow}{break};
 \textcolor{keywordflow}{case} \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68a3659698b0a07454ca8055ab693e8efd1}{KEY\_NS\_NONE}:
         printf (\textcolor{stringliteral}{"no key\(\backslash\)n"});
         \textcolor{keywordflow}{break};
@@ -583,8 +632,7 @@ To handle every possible cases (including namespaces) a key can have\+:
 \end{DoxyCodeInclude}
  To loop over all valid namespaces use\+: 
 \begin{DoxyCodeInclude}
-\textcolor{keywordflow}{for} (\hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektraNamespace} ns = \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68ae06281f94c2b7a221115afbaa1e0ff45}{KEY\_NS\_FIRST}; ns <= 
-      \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68ad4d0f219a657517ddd50cd06c8190310}{KEY\_NS\_LAST}; ++ns)
+\textcolor{keywordflow}{for} (\hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektraNamespace} ns = KEY\_NS\_FIRST; ns <= KEY\_NS\_LAST; ++ns)
 \{
         \textcolor{comment}{// work with namespace}
         printf (\textcolor{stringliteral}{"%d\(\backslash\)n"}, ns);
@@ -600,6 +648,44 @@ This method might be enhanced. You do not have any guarantee that, when for a sp
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the namespace of a key. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{group__keyname_ga44a576c7919d5b03f28d3ed3afaa7cd1}\label{group__keyname_ga44a576c7919d5b03f28d3ed3afaa7cd1}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Unescaped\+Name@{key\+Get\+Unescaped\+Name}}
+\index{key\+Get\+Unescaped\+Name@{key\+Get\+Unescaped\+Name}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{key\+Get\+Unescaped\+Name()}{keyGetUnescapedName()}}
+{\footnotesize\ttfamily ssize\+\_\+t key\+Get\+Unescaped\+Name (\begin{DoxyParamCaption}\item[{const Key $\ast$}]{key,  }\item[{char $\ast$}]{returned\+Name,  }\item[{size\+\_\+t}]{max\+Size }\end{DoxyParamCaption})}
+
+
+
+Copies the unescaped name of a key into provided buffer. 
+
+We will only copy the full name, if the buffer is to small an error code is returned.
+
+To ensure your buffer is big enough, you can use \hyperlink{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}{key\+Get\+Unescaped\+Name\+Size()} to find the correct size.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the Key to extract the unescaped name from \\
+\hline
+{\em returned\+Name} & output buffer \\
+\hline
+{\em max\+Size} & maximum bytes that can be copied into {\ttfamily returned\+Name} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily key} M\+U\+ST be a valid \#\+Key and {\ttfamily key != N\+U\+LL} 
+
+{\ttfamily returned\+Name} M\+U\+ST be allocated to be at least {\ttfamily max\+Size} bytes big and {\ttfamily returned\+Name != N\+U\+LL}
+\end{DoxyPrecond}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & precondition error \\
+\hline
+{\em -\/2} & the size of the unescaped name is bigger then {\ttfamily max\+Size} \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyReturn}{Returns}
+otherwise, the actual size of the unescaped name, i.\+e. the number of bytes copied into {\ttfamily returned\+Name} 
 \end{DoxyReturn}
 \mbox{\Hypertarget{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}\label{group__keyname_ga5e7eff0c77678420199d0d2e8729152b}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Get\+Unescaped\+Name\+Size@{key\+Get\+Unescaped\+Name\+Size}}
@@ -640,8 +726,6 @@ Returns a pointer to the abbreviated real internal {\ttfamily key} name.
 
 This is a much more efficient version of \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} and can use it if you are responsible enough to not mess up things. You are not allowed to change anything in the returned array. The content of that string may change after \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} and similar functions. If you need a copy of the name, consider using \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}.
 
-The name will be without owner, see \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()} if you need the name with its owner.
-
 
 \begin{DoxyRetVals}{Return values}
 {\em \char`\"{}\char`\"{}} & when there is no key\+Name. The reason is 
@@ -658,11 +742,11 @@ Valid key names are\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily spec/something} for specification of other keys.
-\item {\ttfamily proc/something} for in-\/memory keys, e.\+g. commandline.
-\item {\ttfamily dir/something} for dir keys in current working directory
-\item {\ttfamily system/something} for system keys in /etc or /
-\item {\ttfamily user/something} for user keys in home directory
+\item {\ttfamily spec\+:/something} for specification of other keys.
+\item {\ttfamily proc\+:/something} for in-\/memory keys, e.\+g. commandline.
+\item {\ttfamily dir\+:/something} for dir keys in current working directory
+\item {\ttfamily system\+:/something} for system keys in /etc or /
+\item {\ttfamily user\+:/something} for user keys in home directory
 \item {\ttfamily user\+:username/something} for other users (deprecated\+: \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} + \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()} currently unsupported)
 \item {\ttfamily /something} for cascading keys (actually refers to one of the above, see also \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()})
 
@@ -687,11 +771,7 @@ a pointer to the keyname which must not be changed.
 \begin{DoxySeeAlso}{See also}
 \hyperlink{group__keyname_gabdbcfa51ed8a387e47ead207affa2d2e}{key\+Get\+Name\+Size()} for the string length 
 
-\hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_gab65dc9d43d3ee08d5e936a20ebbddd23}{key\+Get\+Full\+Name\+Size()} to get the full name 
-
 \hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()} as alternative to get a copy 
-
-\hyperlink{owner_8c_af6485fb8599714b6bbd830cf915ffea5}{key\+Owner()} to get a pointer to owner 
 
 \hyperlink{group__keyname_ga6fe6af4c27b35d911a533f4ae4d698bb}{key\+Unescaped\+Name} to get an unescaped \hyperlink{group__key}{Key} name 
 \end{DoxySeeAlso}
@@ -710,20 +790,20 @@ Only the base\+Name will be affected and no other part of the key.
 
 A simple example is\+: 
 \begin{DoxyCodeInclude}
-Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user/my/long/name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
+Key * k = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"user:/my/long/name"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{"myname"});
-printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user/my/long/myname}
+printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k)); \textcolor{comment}{// will print user:/my/long/myname}
 \hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (k);
 \end{DoxyCodeInclude}
  All text after the last {\ttfamily \textquotesingle{}/\textquotesingle{}} in the {\ttfamily key} keyname is erased and {\ttfamily base\+Name} is appended. If {\ttfamily base\+Name} is 0 (N\+U\+LL), then the last part of the keyname is removed without replacement.
 
-Let us suppose {\ttfamily key} has name {\ttfamily \char`\"{}system/dir1/dir2/key1\char`\"{}}. If {\ttfamily base\+Name} is {\ttfamily \char`\"{}key2\char`\"{}}, the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2/key2\char`\"{}}. If {\ttfamily base\+Name} is 0 (N\+U\+LL), the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2\char`\"{}}. If {\ttfamily base\+Name} is empty, the resulting key name will be {\ttfamily \char`\"{}system/dir1/dir2/\%\char`\"{}}, where {\ttfamily \char`\"{}\%\char`\"{}} denotes an empty base name, as also shown in the following code\+:
+Let us suppose {\ttfamily key} has name {\ttfamily \char`\"{}system\+:/dir1/dir2/key1\char`\"{}}. If {\ttfamily base\+Name} is {\ttfamily \char`\"{}key2\char`\"{}}, the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2/key2\char`\"{}}. If {\ttfamily base\+Name} is 0 (N\+U\+LL), the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2\char`\"{}}. If {\ttfamily base\+Name} is empty, the resulting key name will be {\ttfamily \char`\"{}system\+:/dir1/dir2/\%\char`\"{}}, where {\ttfamily \char`\"{}\%\char`\"{}} denotes an empty base name, as also shown in the following code\+:
 
 
 \begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
+        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system:/valid"});
         \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{""});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/%"});
+        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system:/%"});
         succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{""});
 \end{DoxyCodeInclude}
  \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{key\+Set\+Base\+Name()} does proper escaping on the supplied name argument.
@@ -742,14 +822,7 @@ If you want to add and not change the basename, use \hyperlink{group__keyname_ga
 
 \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{key\+Set\+Name()} to set a completely new name
 \end{DoxySeeAlso}
-To add an inactive key name, use\+: 
-\begin{DoxyCodeInclude}
-        \hyperlink{group__keyname_ga7699091610e7f3f43d2949514a4b35d9}{keySetName} (k, \textcolor{stringliteral}{"system/valid"});
-        \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{keySetBaseName} (k, \textcolor{stringliteral}{".hiddenkey"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName} (k), \textcolor{stringliteral}{"system/.hiddenkey"});
-        succeed\_if\_same\_string (\hyperlink{group__keyname_gaaff35e7ca8af5560c47e662ceb9465f5}{keyBaseName} (k), \textcolor{stringliteral}{".hiddenkey"});
-\end{DoxyCodeInclude}
- 
+
 \begin{DoxyParams}{Parameters}
 {\em key} & the key object to work with \\
 \hline
@@ -780,11 +853,11 @@ Set a new name to a key.
 
 A valid name is one of the forms\+:
 \begin{DoxyItemize}
-\item {\ttfamily spec/something} for specification of other keys.
-\item {\ttfamily proc/something} for in-\/memory keys, e.\+g. commandline.
-\item {\ttfamily dir/something} for dir keys in current working directory
-\item {\ttfamily system/something} for system keys in /etc or /
-\item {\ttfamily user/something} for user keys in home directory
+\item {\ttfamily spec\+:/something} for specification of other keys.
+\item {\ttfamily proc\+:/something} for in-\/memory keys, e.\+g. commandline.
+\item {\ttfamily dir\+:/something} for dir keys in current working directory
+\item {\ttfamily system\+:/something} for system keys in /etc or /
+\item {\ttfamily user\+:/something} for user keys in home directory
 \item {\ttfamily user\+:username/something} for other users (deprecated\+: \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()} + \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()} currently unsupported)
 \item {\ttfamily /something} for cascading keys (actually refers to one of the above, see also \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()})
 \end{DoxyItemize}
@@ -799,7 +872,7 @@ You should always follow the guidelines for key tree structure creation.
 
 A private copy of the key name will be stored, and the {\ttfamily new\+Name} parameter can be freed after this call.
 
-.., . and / will be handled as in filesystem paths. A valid name will be build out of the (valid) name what you pass, e.\+g. user///sw/../sw//././\+My\+App -\/$>$ user/sw/\+My\+App
+.., . and / will be handled as in filesystem paths. A valid name will be build out of the (valid) name what you pass, e.\+g. user\+:///sw/../sw//././\+My\+App -\/$>$ user\+:/sw/\+My\+App
 
 On invalid names, N\+U\+LL or \char`\"{}\char`\"{} the name will be \char`\"{}\char`\"{} afterwards.
 
@@ -822,12 +895,44 @@ On invalid names, N\+U\+LL or \char`\"{}\char`\"{} the name will be \char`\"{}\c
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
-\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New()}, \hyperlink{owner_8c_a88d6ec200ba0707b7c1b4a88133d2be4}{key\+Set\+Owner()} 
+\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{key\+New()} 
 
-\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_gaaba1494a5ffc976e0e56c43f4334a23c}{key\+Get\+Full\+Name()}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} 
+\hyperlink{group__keyname_gab29a850168d9b31c9529e90cf9ab68be}{key\+Get\+Name()}, \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{key\+Name()} 
 
 \hyperlink{group__keyname_ga6e804bd453f98c28b0ff51430d1df407}{key\+Set\+Base\+Name()}, \hyperlink{group__keyname_gaa942091fc4bd5c2699e49ddc50829524}{key\+Add\+Base\+Name()} to manipulate a name 
 \end{DoxySeeAlso}
+\mbox{\Hypertarget{group__keyname_ga98c1c1307419e689c98e556e5c542073}\label{group__keyname_ga98c1c1307419e689c98e556e5c542073}} 
+\index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Set\+Namespace@{key\+Set\+Namespace}}
+\index{key\+Set\+Namespace@{key\+Set\+Namespace}!Name Manipulation Methods@{Name Manipulation Methods}}
+\subsubsection{\texorpdfstring{key\+Set\+Namespace()}{keySetNamespace()}}
+{\footnotesize\ttfamily ssize\+\_\+t key\+Set\+Namespace (\begin{DoxyParamCaption}\item[{Key $\ast$}]{key,  }\item[{\hyperlink{group__key_gaec3b8d6f430ae49b91bafe8a86310a68}{elektra\+Namespace}}]{ns }\end{DoxyParamCaption})}
+
+
+
+Changes the namespace of a key. 
+
+The rest of the name remains unchanged.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The \#\+Key whose namespace will be changed \\
+\hline
+{\em ns} & The new namespace of for {\ttfamily key} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily ns} M\+U\+ST be a valid namespace and not \hyperlink{group__key_ggaec3b8d6f430ae49b91bafe8a86310a68a3659698b0a07454ca8055ab693e8efd1}{K\+E\+Y\+\_\+\+N\+S\+\_\+\+N\+O\+NE} 
+
+{\ttfamily key} M\+U\+ST be a valid \#\+Key, especially {\ttfamily key != N\+U\+LL}
+\end{DoxyPrecond}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & precondition error \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyReturn}{Returns}
+the new size the {\ttfamily }\{key\}\textquotesingle{}s escaped name 
+\end{DoxyReturn}
 \mbox{\Hypertarget{group__keyname_ga6fe6af4c27b35d911a533f4ae4d698bb}\label{group__keyname_ga6fe6af4c27b35d911a533f4ae4d698bb}} 
 \index{Name Manipulation Methods@{Name Manipulation Methods}!key\+Unescaped\+Name@{key\+Unescaped\+Name}}
 \index{key\+Unescaped\+Name@{key\+Unescaped\+Name}!Name Manipulation Methods@{Name Manipulation Methods}}

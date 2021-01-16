@@ -48,9 +48,23 @@ $(function() {
 <li>maybe less metadata to save memory (only array?)</li>
 </ul>
 <p>Do not encode any semantics into the key names. All semantic must be in metadata.</p>
+<p>Nevertheless, there are guidelines (without any checks in <code>keySetBaseName</code>):</p>
+<ul>
+<li><code>#</code> is used to indicate that array numbers follow.</li>
+<li><code>®</code> is used to indicate that some information was encoded in the key name. This is usually only needed internally in storage plugins.</li>
+<li>The UTF-8 sequence <code>®elektra</code> (i.e. the 9-byte sequence <code>C2 AE 65 6C 65 6B 74 72 61</code>) is reserved, see key name docu.</li>
+</ul>
 <p>There are, however, rules and conventions which syntax to use for specific semantics. The <code>spec</code> plugin guards these rules.</p>
 <ul>
+<li>for consistency, whenever possible, metadata should be preferred</li>
+<li>no escaping of key base names necessary</li>
+<li>it is very unlikely that <code>®elektra</code> collides with a real key base name a user wanted to have</li>
+<li><code>®elektra</code> makes very clear that there is a special reserved meaning</li>
+<li><code>®elektra</code> UTF-8 encoding decodes to "some character" + ® in many 8-bit encodings (including ISO 8859-1 aka Latin1 and Windows (Codepage) 1252, in the encoding <code>C</code>, however, you get `''$'\302\256''elektra'`)</li>
+</ul>
+<ul>
 <li><a class="el" href="doc_decisions_array_md.html">Arrays</a></li>
+<li><a class="el" href="doc_decisions_base_name_md.html">Base Names</a></li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

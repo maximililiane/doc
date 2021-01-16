@@ -1,4 +1,4 @@
-.TH "kdbopts.h" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbopts.h" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -83,7 +83,7 @@ The basic usage of this function is as follows:
 .br
 \fIenvp\fP A list of environment variables\&. This needs to be a null-terminated list of strings of the format 'KEY=VALUE'\&. 
 .br
-\fIparentKey\fP The parent key below which the function while search for option specifications\&. Also used for error reporting\&. The key will be translated into the spec namespace automatically, i\&.e\&. 'user/test/parent' will be translated into 'spec/test/parent', before checking against spec keys\&.
+\fIparentKey\fP The parent key below which the function while search for option specifications\&. Also used for error reporting\&. The key will be translated into the spec namespace automatically, i\&.e\&. 'user:/test/parent' will be translated into 'spec:/test/parent', before checking against spec keys\&.
 .RE
 .PP
 \fBReturn values:\fP

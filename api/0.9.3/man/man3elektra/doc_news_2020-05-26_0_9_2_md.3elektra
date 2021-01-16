@@ -1,4 +1,4 @@
-.TH "doc_news_2020-05-26_0_9_2_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_news_2020-05-26_0_9_2_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -268,7 +268,7 @@ The CMake code of the code generation does not print warnings about unknown rege
 .IP "\(bu" 2
 We updated some of the software in the \fBDockerfile for Debian sid\fP\&. _(René Schwaiger)_
 .IP "\(bu" 2
-Building the \fBdocumentation Dockerfile for Debian Stretch\fP works again\&. _(René Schwaiger)_
+Building the documentation Dockerfile for Debian Stretch works again\&. _(René Schwaiger)_
 .IP "\(bu" 2
 Use Python 3, SWIG 4\&.0 and Ruby 2\&.5 in the \fBDockerfile for Debian sid\fP\&. _(Mihael Pranjić)_
 .IP "\(bu" 2

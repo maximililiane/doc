@@ -57,19 +57,19 @@ $(function() {
 <li><code>-p</code>, <code>--profile &lt;profile&gt;</code>: Use a different kdb profile.</li>
 <li><code>-C</code>, <code>--color &lt;when&gt;</code>: Print never/auto(default)/always colored output.</li>
 <li><code>-r</code>, <code>--recursive</code>: Work in a recursive mode.</li>
-<li><code>-E</code>, <code>--without-elektra</code>: Omit the <code>system/elektra</code> directory.</li>
+<li><code>-E</code>, <code>--without-elektra</code>: Omit the <code>system:/elektra</code> directory.</li>
 <li><code>-f</code>, <code>--force</code>: Do not fail on missing key, nor print if there was a key (-v to still print).</li>
 <li><code>-v</code>, <code>--verbose</code>: Explain what is happening. Prints additional information in case of errors/warnings.</li>
 <li><code>-d</code>, <code>--debug</code>: Give debug information. Prints additional debug information in case of errors/warnings.</li>
 </ul>
 <p>To remove a single key:<br />
- <code>kdb rm user/example/key1</code></p>
+ <code>kdb rm user:/example/key1</code></p>
 <p>To remove multiple keys:<br />
- <code>kdb rm -r user/example</code></p>
-<p>To remove all keys in <code>system</code> except <code>system/elektra</code>:<br />
+ <code>kdb rm -r user:/example</code></p>
+<p>To remove all keys in <code>system</code> except <code>system:/elektra</code>:<br />
  <code>sudo kdb rm -rE system</code></p>
 <p>To not fail when key is missing:<br />
- <code>kdb rm -f user/maybe/missing</code></p>
+ <code>kdb rm -f user:/maybe/missing</code></p>
 <ul>
 <li><a class="el" href="doc_help_elektra-key-names_md.html">elektra-key-names(7)</a> for an explanation of key names. </li>
 </ul>

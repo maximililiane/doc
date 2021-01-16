@@ -62,7 +62,7 @@ $(function() {
 <p>Some remaining mem leaks in rare circumstances were fixed. Valgrind should now never report any leaks, if it does, please report the issue.</p>
 <p>Added delMeta() for C++, because setMeta() with NULL will set the number 0 and not remove the meta.</p>
 <p>Arguments of isBelow, isDirectBelow, isBelowOrSame are swapped for better readability. k.isBelow(root) now means the obvious thing. The change only effects the C++ binding, keyIsBelow is unaffected by the change.</p>
-<p><a href="/home/jenkins/workspace/libelektra-release/doc/METADATA.ini">Specification of metadata</a> and <a href="/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini">contracts</a> written/greatly improved.</p>
+<p><a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/METADATA.ini">Specification of metadata</a> and <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini">contracts</a> written/greatly improved.</p>
 <p><a class="el" href="doc_decisions_README_md.html">Decisions</a> are introduced again.</p>
 <p>Most often the KeySet is ideal, e.g. when doing full iteration or when performing set operations. In some cases, however, a hierarchical data structure fits better. This is especially true for GUIs. Luckily, Keys can be in multiple data structures because of their reference counting.</p>
 <p>We now fully embrace github:</p>

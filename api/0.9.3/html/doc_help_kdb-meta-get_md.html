@@ -63,10 +63,10 @@ $(function() {
 <li><code>-v</code>, <code>--verbose</code>: Explain what is happening. Prints additional information in case of errors/warnings.</li>
 <li><code>-d</code>, <code>--debug</code>: Give debug information. Prints additional debug information in case of errors/warnings.</li>
 </ul>
-<p>To get the value of a metakey called <code>description</code> stored in the key <code>spec/example/key</code>:<br />
- <code>kdb meta-get spec/example/key description</code></p>
-<p>To get the value of metakey called <code>override/#0</code> stored in the key <code>spec/example/dir/key</code>:<br />
- <code>kdb meta-get spec/example/dir/key "override/#0"</code></p>
+<p>To get the value of a metakey called <code>description</code> stored in the key <code>spec:/example/key</code>:<br />
+ <code>kdb meta-get spec:/example/key description</code></p>
+<p>To get the value of metakey called <code>override/#0</code> stored in the key <code>spec:/example/dir/key</code>:<br />
+ <code>kdb meta-get spec:/example/dir/key "override/#0"</code></p>
 <ul>
 <li>How to set metadata: <a class="el" href="doc_help_kdb-meta-set_md.html">kdb-meta-set(1)</a></li>
 <li>For more about cascading keys see <a class="el" href="doc_help_elektra-cascading_md.html">elektra-cascading(7)</a></li>

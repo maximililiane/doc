@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-plugin-info_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-plugin-info_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,7 +15,7 @@ This command will print out all the information about an Elektra plugin except i
 .br
  This command will also print out any functions that are exported by the plugin\&.
 .br
- Information about a plugin will be read from \fCsystem/elektra/modules/\fP\&. If the information could not be located there, such as when a plugin is not mounted, the module will be loaded dynamically and then the information will be requested directly from the plugin\&.
+ Information about a plugin will be read from \fCsystem:/elektra/modules/\fP\&. If the information could not be located there, such as when a plugin is not mounted, the module will be loaded dynamically and then the information will be requested directly from the plugin\&.
 .br
  If a user wishes to load the information directly from the plugin, they can force that by using the \fC-l\fP option\&.
 .br
@@ -46,7 +46,7 @@ This command returns the following exit statuses:
 .IP "\(bu" 2
 \fC-C\fP, \fC--color <when>\fP: Print never/auto(default)/always colored output\&.
 .IP "\(bu" 2
-\fC-l\fP, \fC--load\fP: Load plugin even if system/elektra is available\&.
+\fC-l\fP, \fC--load\fP: Load plugin even if system:/elektra is available\&.
 .IP "\(bu" 2
 \fC-c\fP, \fC--plugins-config <plugins-config>\fP: Add a plugin configuration\&.
 .PP

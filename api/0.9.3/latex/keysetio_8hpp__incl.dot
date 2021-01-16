@@ -23,12 +23,15 @@ digraph "keysetio.hpp"
   Node9 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node3 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
   Node10 [label="keyexcept.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$keyexcept_8hpp.html"];
-  Node3 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
-  Node11 [label="kdb.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="stdexcept",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node10 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="kdb.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node2 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
-  Node0 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
-  Node12 [label="keyset.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$keyset_8hpp.html"];
-  Node12 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
-  Node12 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
-  Node12 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="keyset.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$keyset_8hpp.html"];
+  Node13 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
 }

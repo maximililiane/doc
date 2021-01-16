@@ -1,4 +1,4 @@
-.TH "doc_decisions_global_validation_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_decisions_global_validation_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,9 +14,9 @@ global plugin can register additional backends to load
 .IP "\(bu" 2
 split \fCkdbGet\fP into multiple steps:
 .IP "  1." 6
-do \fCkdbGet\fP on \fCsystem/elektra\fP to update mount points
+do \fCkdbGet\fP on \fCsystem:/elektra\fP to update mount points
 .IP "  2." 6
-first do \fCkdbGet\fP on the \fCspec/\fP-namespace
+first do \fCkdbGet\fP on the \fCspec:/\fP-namespace
 .IP "  3." 6
 then calculate which backends are needed
 .IP "  4." 6
@@ -27,8 +27,14 @@ then fetch all backends as needed
 split loops in \fCkdbGet\fP not only according placements but also according namespace (get spec first)
 .PP
 .PP
+Not supported, admins/maintainers need to stay with their spec within what applications request by \fCkdbGet\fP\&.
+.PP
 .IP "\(bu" 2
-always load everything (with mmap)
+it is too expensive to always load all keys (: is this true?)
+.IP "\(bu" 2
+problems in implementing to always get everything
+.IP "\(bu" 2
+it makes the parameter to \fCkdbGet\fP basically useless
 .PP
 .PP
 .IP "\(bu" 2

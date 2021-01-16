@@ -1,4 +1,4 @@
-.TH "doc_TESTING_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_TESTING_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -85,14 +85,14 @@ To give your user the permissions to the relevant paths execute the lines below 
 .PP
 First load the required information and verify the paths:
 .PP
-``` kdb mount-info echo \fCkdb sget system/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX \&.\fP/\fCkdb sget system/info/elektra/constants/cmake/KDB_DB_SPEC \&.\fP echo \fCkdb sget system/info/elektra/constants/cmake/KDB_DB_SYSTEM \&.\fP 
+``` kdb mount-info echo \fCkdb sget system:/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX \&.\fP/\fCkdb sget system:/info/elektra/constants/cmake/KDB_DB_SPEC \&.\fP echo \fCkdb sget system:/info/elektra/constants/cmake/KDB_DB_SYSTEM \&.\fP 
 .PP
 .nf
 Then change the permissions:
 
 .fi
 .PP
- chown -R \fCwhoami\fP \fCkdb sget system/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX \&.\fP/\fCkdb sget system/info/elektra/constants/cmake/KDB_DB_SPEC \&.\fP chown -R \fCwhoami\fP \fCkdb sget system/info/elektra/constants/cmake/KDB_DB_SYSTEM \&.\fP ```
+ chown -R \fCwhoami\fP \fCkdb sget system:/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX \&.\fP/\fCkdb sget system:/info/elektra/constants/cmake/KDB_DB_SPEC \&.\fP chown -R \fCwhoami\fP \fCkdb sget system:/info/elektra/constants/cmake/KDB_DB_SYSTEM \&.\fP ```
 .PP
 After that all test cases should run successfully as described above\&.
 .IP "3." 4
@@ -183,7 +183,7 @@ should only write below
 .IP "  \(bu" 4
 \fC/tests/<testname>\fP (e\&.g\&. \fC/tests/ruby\fP) and
 .IP "  \(bu" 4
-\fCsystem/elektra\fP (e\&.g\&. for mounts or globalplugins)\&.
+\fCsystem:/elektra\fP (e\&.g\&. for mounts or globalplugins)\&.
 .PP
 
 .IP "\(bu" 2
@@ -278,7 +278,8 @@ We assume that your current working directory is a newly created build directory
 .PP
 .PP
 .nf
-~e/scripts/configure-debian -DCMAKE_C_COMPILER=/usr/src/afl/afl-2\&.52b/afl-gcc -DCMAKE_CXX_COMPILER=/usr/src/afl/afl-2\&.52b/afl-g++ ~e
+~e/scripts/dev/configure-debian -DCMAKE_C_COMPILER=/usr/src/afl/AFL-2\&.57b/afl-gcc -DCMAKE_CXX_COMPILER=/usr/src/afl/AFL-2\&.57b/afl-g++ ~e
+make -j 5
 .fi
 .PP
 .PP
@@ -287,7 +288,7 @@ Copy some import files to \fCtestcase_dir\fP, for example:
 .PP
 .nf
 mkdir -p testcase_dir
-cp ~e/src/plugins/ini/ini/* testcase_dir
+cp ~e/src/plugins/toml/toml/* testcase_dir
 .fi
 .PP
 .PP
@@ -295,7 +296,7 @@ Fewer files is better\&. Then run, for example:
 .PP
 .PP
 .nf
-LD_LIBRARY_PATH=`pwd`/lib /usr/src/afl/afl-2\&.52b/afl-fuzz -i testcase_dir -o findings_dir bin/kdb import user/tests ini
+LD_LIBRARY_PATH=`pwd`/lib /usr/src/afl/AFL-2\&.57b/afl-fuzz -i testcase_dir -o findings_dir bin/kdb import user:/tests toml
 .fi
 .PP
 .PP
@@ -303,7 +304,7 @@ Check if something is happening with:
 .PP
 .PP
 .nf
-watch kdb export user/tests
+watch kdb export user:/tests
 .fi
 .PP
 .PP
@@ -422,7 +423,7 @@ Run the \fCoclint\fP command specifying the files you want to analyze
 .PP
 .nf
 cd \&.\&.
-oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/ini/*\&.c
+oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/toml/*\&.c
 .fi
 .PP
 .PP

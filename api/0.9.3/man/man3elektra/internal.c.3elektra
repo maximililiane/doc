@@ -1,4 +1,4 @@
-.TH "internal.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "internal.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,10 @@ internal.c \- Internal methods for Elektra\&.
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'kdbprivate\&.h'\fP
+.br
+\fC#include <kdb\&.h>\fP
+.br
 \fC#include 'kdbinternal\&.h'\fP
 .br
 \fC#include <kdbassert\&.h>\fP
@@ -79,10 +83,6 @@ internal.c \- Internal methods for Elektra\&.
 .RI "char * \fBelektraVFormat\fP (const char *format, va_list arg_list)"
 .br
 .RI "Does string formatting in fresh allocated memory\&. "
-.ti -1c
-.RI "int \fBelektraValidateKeyName\fP (const char *name, size_t size)"
-.br
-.RI "Validates whether the supplied keyname is valid\&. "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -505,33 +505,6 @@ This function also works with \\0 characters in the buffer\&. The length is take
 \fIs\fP must be an allocated buffer 
 .br
 \fIl\fP the length of s 
-.RE
-.PP
-
-.SS "int elektraValidateKeyName (const char * name, size_t size)"
-
-.PP
-Validates whether the supplied keyname is valid\&. The function looks for tangling escape characters in the end and for a minimum length\&.
-.PP
-Does not check for valid namespaces
-.PP
-\fBPrecondition:\fP
-.RS 4
-size must be at least 2
-.RE
-.PP
-\fBParameters:\fP
-.RS 4
-\fIname\fP the key name that is to be checked 
-.br
-\fIsize\fP a elektraStrLen of the key name 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fItrue\fP if the supplied keyname part is valid 
-.br
-\fIfalse\fP if its invalid 
 .RE
 .PP
 

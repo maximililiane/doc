@@ -49,16 +49,19 @@ $(function() {
 <ul>
 <li>global plugin can register additional backends to load</li>
 <li>split <code>kdbGet</code> into multiple steps:<ol type="1">
-<li>do <code>kdbGet</code> on <code>system/elektra</code> to update mount points</li>
-<li>first do <code>kdbGet</code> on the <code>spec/</code>-namespace</li>
+<li>do <code>kdbGet</code> on <code>system:/elektra</code> to update mount points</li>
+<li>first do <code>kdbGet</code> on the <code>spec:/</code>-namespace</li>
 <li>then calculate which backends are needed</li>
 <li>then fetch all backends as needed</li>
 </ol>
 </li>
 <li>split loops in <code>kdbGet</code> not only according placements but also according namespace (get spec first)</li>
 </ul>
+<p>Not supported, admins/maintainers need to stay with their spec within what applications request by <code>kdbGet</code>.</p>
 <ul>
-<li>always load everything (with mmap)</li>
+<li>it is too expensive to always load all keys (: is this true?)</li>
+<li>problems in implementing to always get everything</li>
+<li>it makes the parameter to <code>kdbGet</code> basically useless</li>
 </ul>
 <ul>
 <li><a class="el" href="doc_decisions_internal_cache_md.html">Internal Cache</a></li>

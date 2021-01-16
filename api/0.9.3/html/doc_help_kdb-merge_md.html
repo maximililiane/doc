@@ -88,13 +88,13 @@ $(function() {
 <li><code>-i</code>, <code>--interactive</code> Interactively resolve the conflicts.</li>
 </ul>
 <p>To complete a simple merge of three KeySets:<br />
- <code>kdb merge user/ours user/theirs user/base user/result</code><br />
+ <code>kdb merge user:/ours user:/theirs user:/base user:/result</code><br />
 </p>
 <p>To complete a merge whilst using the <code>ours</code> version of the KeySet to resolve conflicts:<br />
- <code>kdb merge -s ours user/ours user/theirs user/base user/result</code><br />
+ <code>kdb merge -s ours user:/ours user:/theirs user:/base user:/result</code><br />
 </p>
 <p>To complete a three-way merge and overwrite all current keys in the <code>resultpath</code>:<br />
- <code>kdb merge -s cut user/ours user/theirs user/base user/result</code><br />
+ <code>kdb merge -s cut user:/ours user:/theirs user:/base user:/result</code><br />
 </p>
 <ul>
 <li><a class="el" href="doc_help_elektra-merge-strategy_md.html">elektra-merge-strategy(7)</a></li>

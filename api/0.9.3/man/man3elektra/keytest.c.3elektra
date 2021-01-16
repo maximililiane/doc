@@ -1,4 +1,4 @@
-.TH "keytest.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "keytest.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -33,10 +33,6 @@ keytest.c \- Methods for making tests\&.
 .RI "int \fBkeyIsDirectlyBelow\fP (const Key *key, const Key *check)"
 .br
 .RI "Check whether the key \fCcheck\fP is directly below the key \fCkey\fP\&. "
-.ti -1c
-.RI "int \fBkeyIsInactive\fP (const Key *key)"
-.br
-.RI "Check whether a key is inactive\&. "
 .ti -1c
 .RI "int \fBkeyIsBinary\fP (const Key *key)"
 .br

@@ -4,7 +4,7 @@ The underlying framework of {\ttfamily kdb gen} is quite flexible. It is based o
 
 To distinguish the user facing parts of {\ttfamily kdb gen} from the internal layer interfacing {\ttfamily kdb gen} to the mustache library, we will call the internal layer the {\itshape framework}.
 
-The file \href{/home/jenkins/workspace/libelektra-release/src/tools/kdb/gen.cpp}{\tt {\ttfamily src/tools/kdb/gen.\+cpp}} implements the command-\/line interface (C\+LI) and is of little interest to this guide. Instead we will focus on the framework that is invoked via the C\+LI. The bulk of the framework is implemented in the classes \href{/home/jenkins/workspace/libelektra-release/src/tools/kdb/gen/template.hpp}{\tt {\ttfamily Gen\+Template} and {\ttfamily Gen\+Template\+List}} (and of course kainjow\textquotesingle{}s mustache library).
+The file \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/tools/kdb/gen.cpp}{\tt {\ttfamily src/tools/kdb/gen.\+cpp}} implements the command-\/line interface (C\+LI) and is of little interest to this guide. Instead we will focus on the framework that is invoked via the C\+LI. The bulk of the framework is implemented in the classes \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/tools/kdb/gen/template.hpp}{\tt {\ttfamily Gen\+Template} and {\ttfamily Gen\+Template\+List}} (and of course kainjow\textquotesingle{}s mustache library).
 
 First we need to define a few terms\+:
 
@@ -25,11 +25,11 @@ In this guide we will create a basic template, that generates a single file cont
 
 
 \begin{DoxyCode}
-user/sw/myapp/#0/current
-user/sw/myapp/#0/current/dir0
-user/sw/myapp/#0/current/dir0/subdir0/key0
-user/sw/myapp/#0/current/dir0/subdir0/key1
-user/sw/myapp/#0/current/dir1
+user:/sw/myapp/#0/current
+user:/sw/myapp/#0/current/dir0
+user:/sw/myapp/#0/current/dir0/subdir0/key0
+user:/sw/myapp/#0/current/dir0/subdir0/key1
+user:/sw/myapp/#0/current/dir1
 \end{DoxyCode}
 
 
@@ -135,7 +135,7 @@ The framework will invoke {\ttfamily get\+Template\+Data} for each part of our t
 
 The code above simply iterates over the input Key\+Set and for each key creates an object {\ttfamily \{ name\+: \$key\+Name \}}. All those objects are collected into a list, which is then stored under the key {\ttfamily keys} in the global object.
 
-To make the framework aware of our class (and by extension our template), we have to then add it to {\ttfamily Gen\+Template\+List}. This is simply done by adding a line to the implementation of {\ttfamily Gen\+Template\+List\+::\+Gen\+Template\+List ()} in \href{/home/jenkins/workspace/libelektra-release/src/tools/kdb/gen/template.cpp}{\tt {\ttfamily template.\+cpp}}.
+To make the framework aware of our class (and by extension our template), we have to then add it to {\ttfamily Gen\+Template\+List}. This is simply done by adding a line to the implementation of {\ttfamily Gen\+Template\+List\+::\+Gen\+Template\+List ()} in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/tools/kdb/gen/template.cpp}{\tt {\ttfamily template.\+cpp}}.
 
 For our example that is\+:
 
@@ -163,7 +163,7 @@ kdb gen example user userkeys
 \end{DoxyCode}
 
 
-This should produce the file {\ttfamily userkeys.\+txt}. The file should be the same, as if we had called {\ttfamily kdb ls user $>$ userkeys.\+txt}.
+This should produce the file {\ttfamily userkeys.\+txt}. The file should be the same, as if we had called {\ttfamily kdb ls user\+:/ $>$ userkeys.\+txt}.
 
 Lastly, we will discuss a few more advanced concepts.
 
@@ -209,7 +209,7 @@ To use the partial named {\ttfamily Y} (i.\+e. the file {\ttfamily src/tools/kdb
 
 The prefix {\ttfamily partial.} is required by the framework, if you omit it, there will be an error.
 
-By default mustache escapes values for use in H\+T\+ML (unless {\ttfamily \{\{\{ name \}\}\}} or {\ttfamily \{\{\& name \}\}} is used). Since most of our templates are not H\+T\+ML, the escape function can be customised. You simply have to override {\ttfamily Gen\+Template\+::escape\+Function}. For an example see {\ttfamily Highlevel\+Gen\+Template\+::escape\+Function} in \href{/home/jenkins/workspace/libelektra-release/src/tools/kdb/gen/highlevel/highlevel.hpp}{\tt {\ttfamily src/tools/kdb/gen/highlevel/highlevel.\+hpp}}, it is designed for C code instead of H\+T\+ML.
+By default mustache escapes values for use in H\+T\+ML (unless {\ttfamily \{\{\{ name \}\}\}} or {\ttfamily \{\{\& name \}\}} is used). Since most of our templates are not H\+T\+ML, the escape function can be customised. You simply have to override {\ttfamily Gen\+Template\+::escape\+Function}. For an example see {\ttfamily Highlevel\+Gen\+Template\+::escape\+Function} in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/tools/kdb/gen/highlevel/highlevel.hpp}{\tt {\ttfamily src/tools/kdb/gen/highlevel/highlevel.\+hpp}}, it is designed for C code instead of H\+T\+ML.
 
 For some templates it might be necessary to switch which parts are produced based on the given parameters. This can be done by overriding {\ttfamily get\+Parts()} in your template class.
 

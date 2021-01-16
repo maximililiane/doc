@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-meta-get_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-meta-get_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -39,13 +39,13 @@ This command will return the following values as an exit status:
 \fC-d\fP, \fC--debug\fP: Give debug information\&. Prints additional debug information in case of errors/warnings\&.
 .PP
 .PP
-To get the value of a metakey called \fCdescription\fP stored in the key \fCspec/example/key\fP:
+To get the value of a metakey called \fCdescription\fP stored in the key \fCspec:/example/key\fP:
 .br
- \fCkdb meta-get spec/example/key description\fP
+ \fCkdb meta-get spec:/example/key description\fP
 .PP
-To get the value of metakey called \fCoverride/#0\fP stored in the key \fCspec/example/dir/key\fP:
+To get the value of metakey called \fCoverride/#0\fP stored in the key \fCspec:/example/dir/key\fP:
 .br
- \fCkdb meta-get spec/example/dir/key 'override/#0'\fP
+ \fCkdb meta-get spec:/example/dir/key 'override/#0'\fP
 .PP
 .IP "\(bu" 2
 How to set metadata: \fBkdb-meta-set(1)\fP

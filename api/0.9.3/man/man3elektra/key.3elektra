@@ -1,4 +1,4 @@
-.TH "key" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "key" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -43,7 +43,7 @@ key \- Key is an essential class that encapsulates key \fBname \fP, \fBvalue \fP
 
 .in +1c
 .ti -1c
-.RI "enum \fBelektraKeyFlags\fP { \fBKEY_NAME\fP =1, \fBKEY_VALUE\fP =1<<1, \fBKEY_FLAGS\fP =3, \fBKEY_OWNER\fP =1<<2, \fBKEY_COMMENT\fP =1<<3, \fBKEY_BINARY\fP =1<<4, \fBKEY_UID\fP =1<<5, \fBKEY_GID\fP =1<<6, \fBKEY_MODE\fP =1<<7, \fBKEY_ATIME\fP =1<<8, \fBKEY_MTIME\fP =1<<9, \fBKEY_CTIME\fP =1<<10, \fBKEY_SIZE\fP =1<<11, \fBKEY_DIR\fP =1<<14, \fBKEY_META\fP =1<<15, \fBKEY_NULL\fP =1<<16, \fBKEY_CASCADING_NAME\fP =1<<20, \fBKEY_META_NAME\fP =1<<21, \fBKEY_END\fP =0 }
+.RI "enum \fBelektraKeyFlags\fP { \fBKEY_NAME\fP =1, \fBKEY_VALUE\fP =1<<1, \fBKEY_FLAGS\fP =3, \fBKEY_COMMENT\fP =1<<3, \fBKEY_BINARY\fP =1<<4, \fBKEY_SIZE\fP =1<<11, \fBKEY_META\fP =1<<15, \fBKEY_NULL\fP =1<<16, \fBKEY_END\fP =0 }
 .RI "Allows \fBkeyNew()\fP to determine which information comes next\&. ""
 .br
 .ti -1c
@@ -51,7 +51,7 @@ key \- Key is an essential class that encapsulates key \fBname \fP, \fBvalue \fP
 .RI "Lock options\&. ""
 .br
 .ti -1c
-.RI "enum \fBelektraNamespace\fP { \fBKEY_NS_NONE\fP =0, \fBKEY_NS_EMPTY\fP =1, \fBKEY_NS_META\fP =2, \fBKEY_NS_CASCADING\fP =3, \fBKEY_NS_FIRST\fP =4, \fBKEY_NS_SPEC\fP =4, \fBKEY_NS_PROC\fP =5, \fBKEY_NS_DIR\fP =6, \fBKEY_NS_USER\fP =7, \fBKEY_NS_SYSTEM\fP =8, \fBKEY_NS_LAST\fP =8 }
+.RI "enum \fBelektraNamespace\fP { \fBKEY_NS_NONE\fP =0, \fBKEY_NS_CASCADING\fP =1, \fBKEY_NS_META\fP =2, \fBKEY_NS_SPEC\fP =3, \fBKEY_NS_PROC\fP =4, \fBKEY_NS_DIR\fP =5, \fBKEY_NS_USER\fP =6, \fBKEY_NS_SYSTEM\fP =7, \fBKEY_NS_DEFAULT\fP =8 }
 .RI "Elektra currently supported Key namespaces\&. ""
 .br
 .in -1c
@@ -196,87 +196,14 @@ Flag for the key data
 \fB\fIKEY_FLAGS \fP\fP
 Allows to define multiple flags at once\&. 
 .TP
-\fB\fIKEY_OWNER \fP\fP
-Flag for the key user domain 
-.TP
 \fB\fIKEY_COMMENT \fP\fP
 Flag for the key comment 
 .TP
 \fB\fIKEY_BINARY \fP\fP
 Flag if the key is binary 
 .TP
-\fB\fIKEY_UID \fP\fP
-Flag for the key UID
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_GID \fP\fP
-Flag for the key GID
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_MODE \fP\fP
-Flag for the key permissions
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_ATIME \fP\fP
-Flag for the key access time
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_MTIME \fP\fP
-Flag for the key change time
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_CTIME \fP\fP
-Flag for the key status change time
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
 \fB\fIKEY_SIZE \fP\fP
 Flag for maximum size to limit value 
-.TP
-\fB\fIKEY_DIR \fP\fP
-Flag for the key directories
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
 .TP
 \fB\fIKEY_META \fP\fP
 Flag for metadata 
@@ -290,19 +217,6 @@ do not use
 .RE
 .PP
 
-.TP
-\fB\fIKEY_CASCADING_NAME \fP\fP
-Is default, no need to use it
-.PP
-\fBDeprecated\fP
-.RS 4
-do not use 
-.RE
-.PP
-
-.TP
-\fB\fIKEY_META_NAME \fP\fP
-Allow any key names (not only with known namespaces+cascading 
 .TP
 \fB\fIKEY_END \fP\fP
 Used as a parameter terminator to \fBkeyNew()\fP 
@@ -347,17 +261,11 @@ Elektra currently supported Key namespaces\&.
 \fB\fIKEY_NS_NONE \fP\fP
 no key given as parameter to \fBkeyGetNamespace()\fP 
 .TP
-\fB\fIKEY_NS_EMPTY \fP\fP
-key name was empty, e\&.g\&. invalid key name 
-.TP
-\fB\fIKEY_NS_META \fP\fP
-metakey, i\&.e\&. any key name not under other categories 
-.TP
 \fB\fIKEY_NS_CASCADING \fP\fP
 cascading key, starts with /, abstract name for any of the namespaces below 
 .TP
-\fB\fIKEY_NS_FIRST \fP\fP
-For iteration over namespaces (first element, inclusive) 
+\fB\fIKEY_NS_META \fP\fP
+metakey, i\&.e\&. any key name not under other categories 
 .TP
 \fB\fIKEY_NS_SPEC \fP\fP
 spec contains the specification of the other namespaces 
@@ -374,8 +282,8 @@ user key in the home directory of the current user
 \fB\fIKEY_NS_SYSTEM \fP\fP
 system key is shared for a computer system 
 .TP
-\fB\fIKEY_NS_LAST \fP\fP
-For iteration over namespaces (last element, inclusive) 
+\fB\fIKEY_NS_DEFAULT \fP\fP
+default key used as a fallback if no other key is found 
 .SH "Function Documentation"
 .PP 
 .SS "int keyClear (Key * key)"
@@ -644,7 +552,7 @@ Return how many references the key has\&. The reference counting is the essentia
 .PP
 .PP
 .nf
-Key *k = keyNew("user/proper_name", KEY_END); // ref counter = 0
+Key *k = keyNew("user:/proper_name", KEY_END); // ref counter = 0
 KeySet *ks = ksNew (1, k, KS_END);
 keyDel(k); // key will not be deleted, because its in the keyset
 ksDel(ks); // now the key will be deleted
@@ -654,7 +562,7 @@ ksDel(ks); // now the key will be deleted
 .PP
 .PP
 .nf
-Key *k = keyNew("user/proper_name", KEY_END); // ref counter 0
+Key *k = keyNew("user:/proper_name", KEY_END); // ref counter 0
 KeySet *ks1 = ksNew(1, k, KS_END); // ref counter of k 1
 KeySet *ks2 = ksNew(1, k, KS_END); // ref counter of k 2
 ksDel(ks1); // ref counter of k 1
@@ -840,7 +748,7 @@ keyDel (k);
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/some/example", KEY_END);
+Key *k=keyNew("user:/some/example", KEY_END);
 // work with it
 keyDel (k);
 .fi
@@ -860,7 +768,7 @@ You can call \fBkeyNew()\fP in many different ways depending on the attribute ta
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex0",
+Key *k=keyNew("user:/tmp/ex0",
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
 
@@ -874,7 +782,7 @@ Key *k=keyNew("user/tmp/ex0",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex1",
+Key *k=keyNew("user:/tmp/ex1",
         KEY_SIZE, 4,               // has no effect on strings
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
@@ -888,7 +796,7 @@ Key *k=keyNew("user/tmp/ex1",
  Next two parameter is a metaname and a metavalue\&. See \fBkeySetMeta()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
+Key *k=keyNew("user:/tmp/ex3",
         KEY_META, "comment", "a comment",  // with a comment
         KEY_META, "owner", "root",         // and an owner
         KEY_META, "special", "yes",        // and any other metadata
@@ -907,8 +815,8 @@ Key *k=keyNew("user/tmp/ex3",
  Bitwise disjunction of flags, which don't require one or more values\&. recommended way to set multiple flags\&. overrides previously defined flags\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_FLAGS, KEY_BINARY | KEY_CASCADING_NAME, // flags
+Key *k=keyNew("user:/tmp/ex3",
+        KEY_BINARY,                     // binary key
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_END);                       // end of args
@@ -923,7 +831,7 @@ Key *k=keyNew("user/tmp/ex3",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex2",
+Key *k=keyNew("user:/tmp/ex2",
         KEY_BINARY,
         KEY_SIZE, 4,               // now the size is important
         KEY_VALUE, "some data",    // sets the binary value ("some")
@@ -932,54 +840,27 @@ Key *k=keyNew("user/tmp/ex2",
 .fi
 .PP
 
-.IP "\(bu" 2
-\fBKEY_CASCADING_NAME\fP allow the name to start with / useful for \fBksLookup()\fP and \fBkdbGet()\fP parent/lookup keys
-.IP "\(bu" 2
-\fBKEY_META_NAME\fP allow the name to start with arbitrary namespaces useful to compare with metakeys
 .PP
 .PP
 \fBDeprecated\fP
 .RS 4
-The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility:
-.IP "\(bu" 2
-\fBKEY_DIR\fP 
-.br
- Define that the key is a directory rather than an ordinary key\&. This means its executable bits in its mode are set\&. But even without this option the key can have subkeys\&. See \fBkeySetDir()\fP\&.
-.IP "\(bu" 2
-\fBKEY_OWNER\fP 
-.br
- Next parameter is the owner\&. See \fBkeySetOwner()\fP\&.
-.IP "\(bu" 2
-\fBKEY_UID\fP, \fBKEY_GID\fP 
-.br
- Next parameter is taken as the UID (uid_t) or GID (gid_t) that will be defined on the key\&. See \fBkeySetUID()\fP and \fBkeySetGID()\fP\&.
-.IP "\(bu" 2
-\fBKEY_MODE\fP 
-.br
- Next parameter is taken as mode permissions (int) to the key\&. See \fBkeySetMode()\fP\&. 
+The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility: 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_VALUE, "some data",    // with a simple value
-        KEY_MODE, 0777,            // permissions
-        KEY_END);                  // end of args
 
 .fi
 .PP
-
 .IP "\(bu" 2
 \fBKEY_COMMENT\fP 
 .br
  Next parameter is a comment\&. See \fBkeySetComment()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex4",
+Key *k=keyNew("user:/tmp/ex4",
         KEY_BINARY,                     // key type
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_COMMENT, "value is truncated",
-        KEY_OWNER, "root",              // owner (not uid) is root
-        KEY_UID, 0,                     // root uid
         KEY_END);                       // end of args
 
 .fi

@@ -1,4 +1,4 @@
-.TH "doc_tutorials_crypto_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_crypto_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -54,23 +54,23 @@ The \fCfcrypt\fP plugin and the \fCcrypto\fP plugin support both versions (versi
 .PP
 In this tutorial we explain the use of the \fCcrypto\fP plugin and the \fCfcrypt\fP plugin by a simple example: We want to protect a password that is contained in an INI-file\&.
 .PP
-The following example demonstrates how the INI-file is mounted without encryption enabled\&. We create the password at \fCuser/tests/password\fP and display the contents of \fCtest\&.ini\fP\&.
+The following example demonstrates how the INI-file is mounted without encryption enabled\&. We create the password at \fCuser:/tests/password\fP and display the contents of \fCtest\&.ini\fP\&.
 .PP
 \fIStep 1:\fP Mount \fCtest\&.ini\fP
 .PP
 .PP
 .nf
-kdb mount test\&.ini user/tests ini
+kdb mount test\&.ini user:/tests ini
 .fi
 .PP
 .PP
-\fIStep 2:\fP Set the password at \fCuser/tests/password\fP and display the contents of \fCtest\&.ini\fP
+\fIStep 2:\fP Set the password at \fCuser:/tests/password\fP and display the contents of \fCtest\&.ini\fP
 .PP
 .PP
 .nf
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
-#> password=1234
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat | tail -n1
+#> password = 1234
 .fi
 .PP
 .PP
@@ -78,8 +78,8 @@ kdb file user/tests/password | xargs cat
 .PP
 .PP
 .nf
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 .fi
 .PP
 .PP
@@ -97,7 +97,7 @@ The \fCfcrypt\fP plugin enables the encryption and decryption of entire configur
 .PP
 .PP
 .nf
-sudo kdb mount test\&.ini user/tests fcrypt "encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
+sudo kdb mount test\&.ini user:/tests fcrypt "encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 .fi
 .PP
 .PP
@@ -123,9 +123,9 @@ The complete procedure looks like this:
 .PP
 .PP
 .nf
-kdb mount test\&.ini user/tests fcrypt "encrypt/key=$(kdb gen-gpg-testkey)" ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb mount test\&.ini user:/tests fcrypt "encrypt/key=$(kdb gen-gpg-testkey)" ini
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 .fi
 .PP
 .PP
@@ -133,8 +133,8 @@ To clean up the environment we run:
 .PP
 .PP
 .nf
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 .fi
 .PP
 .PP
@@ -144,7 +144,7 @@ An example backend configuration is given as follows:
 .PP
 .PP
 .nf
-sudo kdb mount test\&.ini user/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
+sudo kdb mount test\&.ini user:/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 .fi
 .PP
 .PP
@@ -162,9 +162,9 @@ The complete example looks like this:
 .PP
 .PP
 .nf
-kdb mount test\&.ini user/tests fcrypt "sign/key=$(kdb gen-gpg-testkey)" ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb mount test\&.ini user:/tests fcrypt "sign/key=$(kdb gen-gpg-testkey)" ini
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 .fi
 .PP
 .PP
@@ -172,8 +172,8 @@ To clean up the environment we run:
 .PP
 .PP
 .nf
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 .fi
 .PP
 .PP
@@ -183,7 +183,7 @@ Mounting \fCtest\&.ini\fP with signatures and encryption enabled can be done lik
 .PP
 .PP
 .nf
-sudo kdb mount test\&.ini user/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D,encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
+sudo kdb mount test\&.ini user:/tests fcrypt "sign/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D,encrypt/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" ini
 .fi
 .PP
 .PP
@@ -191,9 +191,9 @@ The complete example looks like this:
 .PP
 .PP
 .nf
-kdb mount test\&.ini user/tests fcrypt "sign/key=$(kdb gen-gpg-testkey),encrypt/key=$(kdb gen-gpg-testkey)" ini
-kdb set user/tests/password 1234
-kdb file user/tests/password | xargs cat
+kdb mount test\&.ini user:/tests fcrypt "sign/key=$(kdb gen-gpg-testkey),encrypt/key=$(kdb gen-gpg-testkey)" ini
+kdb set user:/tests/password 1234
+kdb file user:/tests/password | xargs cat
 .fi
 .PP
 .PP
@@ -201,8 +201,8 @@ To clean up the environment we run:
 .PP
 .PP
 .nf
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/password
+kdb umount user:/tests
 .fi
 .PP
 .PP
@@ -216,7 +216,7 @@ To follow our example of an encrypted password in \fCtest\&.ini\fP, we first mou
 .PP
 .PP
 .nf
-sudo kdb mount test\&.ini user/tests crypto "crypto/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" base64 ini
+sudo kdb mount test\&.ini user:/tests crypto "crypto/key=DDEBEF9EE2DC931701338212DAF635B17F230E8D" base64 ini
 .fi
 .PP
 .PP
@@ -224,11 +224,11 @@ We recommend adding the \fCbase64\fP plugin to the backend, because \fCcrypto\fP
 .PP
 To tell the \fCcrypto\fP plugin which Keys it should process, the metakey \fCcrypto/encrypt\fP is used\&. The \fCcrypto\fP plugin searches for the metakey \fCcrypto/encrypt\fP\&. If the value is equal to \fC1\fP, the value of the Key will be encrypted\&.
 .PP
-We want to protect the password, that is stored under \fCuser/test/password\fP\&. So we set the metakey as follows:
+We want to protect the password, that is stored under \fCuser:/test/password\fP\&. So we set the metakey as follows:
 .PP
 .PP
 .nf
-kdb meta-set user/tests/password crypto/encrypt 1
+kdb meta-set user:/tests/password crypto/encrypt 1
 .fi
 .PP
 .PP
@@ -236,7 +236,7 @@ Now we are safe to set the actual password:
 .PP
 .PP
 .nf
-kdb set user/tests/password "1234"
+kdb set user:/tests/password "1234"
 .fi
 .PP
 .PP
@@ -253,7 +253,7 @@ You can access the password as usual with \fCkdb get\fP:
 .PP
 .PP
 .nf
-kdb get user/tests/password
+kdb get user:/tests/password
 .fi
 .PP
 .PP
@@ -263,7 +263,7 @@ You can disable the encryption by setting \fCcrypto/encrypt\fP to a value other 
 .PP
 .PP
 .nf
-kdb meta-set user/tests/password crypto/encrypt 0
+kdb meta-set user:/tests/password crypto/encrypt 0
 .fi
 .PP
 .PP
@@ -271,20 +271,20 @@ The complete example looks like this:
 .PP
 .PP
 .nf
-kdb mount test\&.ini user/tests crypto "crypto/key=$(kdb gen-gpg-testkey)" base64 ini
-kdb meta-set user/tests/password crypto/encrypt 1
-kdb set user/tests/password 1234
-kdb set user/tests/unencrypted "I am not encrypted"
-kdb file user/tests/password | xargs cat
+kdb mount test\&.ini user:/tests crypto "crypto/key=$(kdb gen-gpg-testkey)" base64 ini
+kdb meta-set user:/tests/password crypto/encrypt 1
+kdb set user:/tests/password 1234
+kdb set user:/tests/unencrypted "I am not encrypted"
+kdb file user:/tests/password | xargs cat
 .fi
 .PP
 .PP
-To disable encryption on \fCuser/tests/password\fP, we can run:
+To disable encryption on \fCuser:/tests/password\fP, we can run:
 .PP
 .PP
 .nf
-kdb meta-set user/tests/password crypto/encrypt 0
-kdb file user/tests/password | xargs cat
+kdb meta-set user:/tests/password crypto/encrypt 0
+kdb file user:/tests/password | xargs cat
 .fi
 .PP
 .PP
@@ -292,9 +292,9 @@ To clean up the environment we run:
 .PP
 .PP
 .nf
-kdb rm user/tests/unencrypted
-kdb rm user/tests/password
-kdb umount user/tests
+kdb rm user:/tests/unencrypted
+kdb rm user:/tests/password
+kdb umount user:/tests
 .fi
 .PP
 .PP

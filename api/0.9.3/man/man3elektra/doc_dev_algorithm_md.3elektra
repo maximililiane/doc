@@ -1,4 +1,4 @@
-.TH "doc_dev_algorithm_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_dev_algorithm_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -51,38 +51,38 @@ For example, a generator plugin in the backend (A) always emits following keys\&
 .PP
 .PP
 .nf
-user/sw/generator/akey (A)
-user/sw/generator/dir (A)
-user/sw/generator/dir/outside1 (A)
-user/sw/generator/dir/outside2 (A)
+user:/sw/generator/akey (A)
+user:/sw/generator/dir (A)
+user:/sw/generator/dir/outside1 (A)
+user:/sw/generator/dir/outside2 (A)
 .fi
 .PP
 .PP
-It will still return these keys even if the plugin is not responsible for some of them anymore\&. This can happen if another backend B is mounted to \fCuser/sw/generator/dir\fP\&. In the example it yields the following keys:
+It will still return these keys even if the plugin is not responsible for some of them anymore\&. This can happen if another backend B is mounted to \fCuser:/sw/generator/dir\fP\&. In the example it yields the following keys:
 .PP
 .PP
 .nf
-user/sw/generator/dir (B)
-user/sw/generator/dir/new (B)
-user/sw/generator/dir/outside1 (B)
-user/sw/generator/outside (B)
+user:/sw/generator/dir (B)
+user:/sw/generator/dir/new (B)
+user:/sw/generator/dir/outside1 (B)
+user:/sw/generator/outside (B)
 .fi
 .PP
 .PP
-In this situation \fC\fBkdbGet()\fP\fP is responsible to pop all three keys at, and below, \fCuser/sw/generator/dir\fP of backend (A) and the key \fCuser/sw/generator/outside\fP of backend (B)\&. The user will get the resulting key set:
+In this situation \fC\fBkdbGet()\fP\fP is responsible to pop all three keys at, and below, \fCuser:/sw/generator/dir\fP of backend (A) and the key \fCuser:/sw/generator/outside\fP of backend (B)\&. The user will get the resulting key set:
 .PP
 .PP
 .nf
-user/sw/generator/akey (A)
-user/sw/generator/dir (B)
-user/sw/generator/dir/new (B)
-user/sw/generator/dir/outside1 (B)
+user:/sw/generator/akey (A)
+user:/sw/generator/dir (B)
+user:/sw/generator/dir/new (B)
+user:/sw/generator/dir/outside1 (B)
 .fi
 .PP
 .PP
-Note that the key exactly at the mount point comes from the backend mounted at \fCuser/sw/generator/dir\fP\&.
+Note that the key exactly at the mount point comes from the backend mounted at \fCuser:/sw/generator/dir\fP\&.
 .PP
-\fC\fBkdbOpen()\fP\fP already creates a \fCSplit\fP object for the whole configuration tree\&. In this object, \fC\fBkdbOpen()\fP\fP will append a list of all backends available\&. A specific \fC\fBkdbGet()\fP\fP request usually includes only a part of the configuration\&. For example, the user is only interested in keys below \fCuser/sw/apps/userapp\fP\&. All backends that cannot contribute to configuration below \fCuser/sw/apps/userapp\fP will be omitted for that request\&. To achieve this, parts of the \fCSplit\fP object are filtered out\&. After this step we know the list of backends involved\&. The \fCSplit\fP object allocates a key set for each of these backends\&.
+\fC\fBkdbOpen()\fP\fP already creates a \fCSplit\fP object for the whole configuration tree\&. In this object, \fC\fBkdbOpen()\fP\fP will append a list of all backends available\&. A specific \fC\fBkdbGet()\fP\fP request usually includes only a part of the configuration\&. For example, the user is only interested in keys below \fCuser:/sw/apps/userapp\fP\&. All backends that cannot contribute to configuration below \fCuser:/sw/apps/userapp\fP will be omitted for that request\&. To achieve this, parts of the \fCSplit\fP object are filtered out\&. After this step we know the list of backends involved\&. The \fCSplit\fP object allocates a key set for each of these backends\&.
 .PP
 Afterwards the first plugin of each backend is called to determine if an update is needed\&. If no update is needed, the algorithm has finished and returns zero\&.
 .PP
@@ -108,7 +108,7 @@ The given goal is to keep the sequence of needed syscalls low\&. If no update is
 .PP
 This decision yields some advantages\&. Both the storage plugins and Elektra’s core can conform to C99\&. Because the resolver plugin is the very first in the chain of plugins, it is guaranteed that no useless work is done\&.
 .PP
-Because Elektra provides self-contained configuration, \fC\fBkdbOpen()\fP\fP has to retrieve settings in the \fIbootstrapping\fP process below \fCsystem/elektra\fP as explained in \fCbootstrapping\fP\&. Because of the new way to keep track of removed keys, the internally executed \fC\fBkdbGet()\fP\fP creates a problem\&. Without countermeasures even the first \fC\fBkdbGet()\fP\fP of a user requesting the configuration below \fCsystem/elektra\fP fails, because the resolver finds out that the configuration is already up to date\&. The configuration delivered by the user is empty at this point\&. As a result, the empty configuration will be appointed and returned to the user\&.
+Because Elektra provides self-contained configuration, \fC\fBkdbOpen()\fP\fP has to retrieve settings in the \fIbootstrapping\fP process below \fCsystem:/elektra\fP as explained in \fCbootstrapping\fP\&. Because of the new way to keep track of removed keys, the internally executed \fC\fBkdbGet()\fP\fP creates a problem\&. Without countermeasures even the first \fC\fBkdbGet()\fP\fP of a user requesting the configuration below \fCsystem:/elektra\fP fails, because the resolver finds out that the configuration is already up to date\&. The configuration delivered by the user is empty at this point\&. As a result, the empty configuration will be appointed and returned to the user\&.
 .PP
 A simple way to resolve this issue is to reload the default backend after the internal configuration was fetched\&. Reloading resets the timestamps and \fC\fBkdbGet()\fP\fP works as expected\&.
 .PP
@@ -132,7 +132,7 @@ int kdbSet(KDB *handle, KeySet *returned, Key * parentKey);
 .fi
 .PP
 .PP
-The user passes the configuration using the \fCKeySet\fP \fCreturned\fP\&. The key set will not be changed by \fC\fBkdbSet()\fP\fP\&. The \fCparentKey\fP provides a way to limit which part of the configuration is written out\&. For example, the \fCparentKey\fP \fCuser/sw/org/app/#0/current\fP will induce \fC\fBkdbSet()\fP\fP to only modify the key databases below \fCuser/sw/org/app\fP even if the \fCKeySet\fP \fCreturned\fP also contains more configuration\&. Note that all backends with no keys in \fCreturned\fP but that are below \fCparentKey\fP will completely wipe out their key database\&. The \fCKDB\fP handle contains the necessary data structures\&.
+The user passes the configuration using the \fCKeySet\fP \fCreturned\fP\&. The key set will not be changed by \fC\fBkdbSet()\fP\fP\&. The \fCparentKey\fP provides a way to limit which part of the configuration is written out\&. For example, the \fCparentKey\fP \fCuser:/sw/org/app/#0/current\fP will induce \fC\fBkdbSet()\fP\fP to only modify the key databases below \fCuser:/sw/org/app\fP even if the \fCKeySet\fP \fCreturned\fP also contains more configuration\&. Note that all backends with no keys in \fCreturned\fP but that are below \fCparentKey\fP will completely wipe out their key database\&. The \fCKDB\fP handle contains the necessary data structures\&.
 .PP
 As a first step, \fC\fBkdbSet()\fP\fP \fIdivides\fP the configuration passed in by the user to the key sets in the \fCSplit\fP object\&. \fC\fBkdbSet()\fP\fP searches for every key if the \fIsync flag\fP is checked\&. Then \fC\fBkdbSet()\fP\fP decides if a key was removed from a backend by comparing the actual size of the key set with the size stored from the last \fC\fBkdbGet()\fP\fP call\&. We see that it is necessary to call \fC\fBkdbGet()\fP\fP first before invocations of \fC\fBkdbSet()\fP\fP are allowed\&.
 .PP

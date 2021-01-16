@@ -3,7 +3,7 @@
 
 \begin{DoxyItemize}
 \item {\ttfamily mountpoint} is where in the key database the new backend should be mounted to. It must be a cascading mount point, i.\+e., {\ttfamily mountpoint} must start with {\ttfamily /}.
-\item {\ttfamily plugin} are extra Elektra plugins to be used (next to the one specified in {\ttfamily spec/$<$mountpoint$>$}).
+\item {\ttfamily plugin} are extra Elektra plugins to be used (next to the one specified in {\ttfamily spec\+:/$<$mountpoint$>$}).
 \item Plugins may be followed by a {\ttfamily ,} separated list of {\ttfamily keys=values} pairs which will be used as plugin configuration.
 \end{DoxyItemize}
 
@@ -13,18 +13,18 @@ This command allows a user to mount a new {\itshape backend} described by a prev
 
 
 \begin{DoxyCode}
-sudo kdb mount /path/to/some-spec-file.ini spec/example/mountpoint ni
+sudo kdb mount /path/to/some-spec-file.ini spec:/example/mountpoint ni
 \end{DoxyCode}
 
 
-The idea of mounting is explained \hyperlink{doc_help_elektra-mounting_md}{in elektra-\/mounting(7)}. The {\ttfamily spec} \hyperlink{doc_help_elektra-namespaces_md}{namespace} contains metaconfiguration that describes the configuration in all other namespaces. The metadata used for the specification is described in \href{/home/jenkins/workspace/libelektra-release/doc/METADATA.ini}{\tt M\+E\+T\+A\+D\+A\+T\+A.\+ini}.
+The idea of mounting is explained \hyperlink{doc_help_elektra-mounting_md}{in elektra-\/mounting(7)}. The {\ttfamily spec} \hyperlink{doc_help_elektra-namespaces_md}{namespace} contains metaconfiguration that describes the configuration in all other namespaces. The metadata used for the specification is described in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/METADATA.ini}{\tt M\+E\+T\+A\+D\+A\+T\+A.\+ini}.
 
 During {\ttfamily spec-\/mount} the {\ttfamily spec} keys are searched for relevant metadata\+:
 
 
 \begin{DoxyItemize}
 \item For every metadata {\ttfamily mountpoint} an additional cascading mount point will be mounted. The metadata {\ttfamily mountpoint} is usually at the parent key (the top-\/level key of the specification).
-\item The {\ttfamily infos/$\ast$} and {\ttfamily config/needs} from \href{/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}, that are tagged by {\ttfamily usedby = spec}, will work as described there.
+\item The {\ttfamily infos/$\ast$} and {\ttfamily config/needs} from \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini}{\tt C\+O\+N\+T\+R\+A\+C\+T.\+ini}, that are tagged by {\ttfamily usedby = spec}, will work as described there.
 \item For other metadata suitable plugins are searched and mounted additionally.
 \end{DoxyItemize}
 
@@ -32,14 +32,14 @@ For example\+:
 
 
 \begin{DoxyCode}
-kdb meta-get spec/example/mountpoint mountpoint  # verify that we have a mountpoint here
+kdb meta-get spec:/example/mountpoint mountpoint  # verify that we have a mountpoint here
 sudo kdb spec-mount /example/mountpoint  # mounts /example/mountpoint according to
                                          # the specification as found at
-                                         # spec/example/mountpoint
+                                         # spec:/example/mountpoint
 \end{DoxyCode}
 
 
-This command writes into the {\ttfamily /etc} directory and as such it requires root permissions. Use {\ttfamily kdb file system/elektra/mountpoints} to find out where exactly it will write to.
+This command writes into the {\ttfamily /etc} directory and as such it requires root permissions. Use {\ttfamily kdb file system\+:/elektra/mountpoints} to find out where exactly it will write to.
 
 Note that many specifications have globs like {\ttfamily \+\_\+} and {\ttfamily \#}. They will only work if the {\ttfamily spec} plugin is present\+:
 
@@ -70,7 +70,7 @@ kdb global-mount
 \item {\ttfamily /sw/elektra/kdb/\#0/current/plugins}\+: It contains a space-\/separated list of plugins and their configs which are added automatically (by default sync). The plugin-\/configuration syntax is as described above in the \href{#SYNOPSIS}{\tt synopsis}.
 \end{DoxyItemize}
 
-To mount /example as described in {\ttfamily spec/example}\+:~\newline
+To mount /example as described in {\ttfamily spec\+:/example}\+:~\newline
  {\ttfamily sudo kdb spec-\/mount /example}
 
 Additionally, add {\ttfamily ini} plugin (instead of some default resolver) with a config for I\+NI\+:~\newline

@@ -1,4 +1,4 @@
-.TH "opts.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "opts.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,7 +27,7 @@ opts.c
 
 .in +1c
 .ti -1c
-.RI "char * \fBgenerateUsageLine\fP (const char *progname, const Key *command, const Key *commandArgs)"
+.RI "char * \fBgenerateUsageLine\fP (const char *progname, Key *command, const Key *commandArgs)"
 .br
 .RI "Generate usage line for help message from optionsSpec\&. "
 .ti -1c
@@ -67,7 +67,7 @@ NOTE: Per default option processing DOES NOT stop, when a non-option string is e
 The basic usage of this function is as follows: 
 .PP
 .nf
-     KDB * kdb = kdbOpen (parentKey);
+   KDB * kdb = kdbOpen (parentKey);
         KeySet * ks = ksNew (0, KS_END);
 
         kdbGet (kdb, ks, parentKey);
@@ -105,7 +105,7 @@ The basic usage of this function is as follows:
 .br
 \fIenvp\fP A list of environment variables\&. This needs to be a null-terminated list of strings of the format 'KEY=VALUE'\&. 
 .br
-\fIparentKey\fP The parent key below which the function while search for option specifications\&. Also used for error reporting\&. The key will be translated into the spec namespace automatically, i\&.e\&. 'user/test/parent' will be translated into 'spec/test/parent', before checking against spec keys\&.
+\fIparentKey\fP The parent key below which the function while search for option specifications\&. Also used for error reporting\&. The key will be translated into the spec namespace automatically, i\&.e\&. 'user:/test/parent' will be translated into 'spec:/test/parent', before checking against spec keys\&.
 .RE
 .PP
 \fBReturn values:\fP
@@ -158,7 +158,7 @@ The full help message extracted from \fCerrorKey\fP, or NULL if no help message 
 .RE
 .PP
 
-.SS "char * generateUsageLine (const char * progname, const Key * command, const Key * commandArgs)"
+.SS "char * generateUsageLine (const char * progname, Key * command, const Key * commandArgs)"
 
 .PP
 Generate usage line for help message from optionsSpec\&. 

@@ -41,8 +41,8 @@ The other strategies are implemented by the merge framework and are documented i
 \item {\ttfamily /sw/elektra/kdb/\#0/current/namespace}\+: Specifies which default namespace should be used when setting a cascading name. By default the namespace is user, except {\ttfamily kdb} is used as root, then {\ttfamily system} is the default ({\ttfamily validate} strategy only).
 \end{DoxyItemize}
 
-To change the configuration in K\+DB below {\ttfamily user/ini} with {\ttfamily /usr/bin/vim}, you would use\+:~\newline
- {\ttfamily kdb editor -\/e /usr/bin/vim user/ini}
+To change the configuration in K\+DB below {\ttfamily user\+:/ini} with {\ttfamily /usr/bin/vim}, you would use\+:~\newline
+ {\ttfamily kdb editor -\/e /usr/bin/vim user\+:/ini}
 
 Or set a new editor as default using\+:~\newline
  {\ttfamily kdb set /sw/elektra/kdb/\#0/current/editor /usr/bin/nano}

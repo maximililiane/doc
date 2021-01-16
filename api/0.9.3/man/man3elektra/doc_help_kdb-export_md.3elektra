@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-export_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-export_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,7 +28,7 @@ Where \fCsource\fP is the path of the key(s) you want to export\&. Additionally,
 .IP "\(bu" 2
 \fC-C\fP, \fC--color <when>\fP: Print never/auto(default)/always colored output\&.
 .IP "\(bu" 2
-\fC-E\fP, \fC--without-elektra\fP: Omit the \fCsystem/elektra\fP directory\&.
+\fC-E\fP, \fC--without-elektra\fP: Omit the \fCsystem:/elektra\fP directory\&.
 .IP "\(bu" 2
 \fC-c\fP, \fC--plugins-config <plugins-config>\fP: Add a configuration to the format plugin\&.
 .IP "\(bu" 2
@@ -51,9 +51,9 @@ To backup your full key database in Elektra’s \fCstorage\fP format to a file c
  \fCkdb export / > full-backup\&.ecf\fP
 .br
 .PP
-To backup a keyset stored in \fCuser/keyset\fP in the \fCini\fP format to a file called \fCkeyset\&.ini\fP:
+To backup a keyset stored in \fCuser:/keyset\fP in the \fCini\fP format to a file called \fCkeyset\&.ini\fP:
 .br
- \fCkdb export user/keyset ini > keyset\&.ini\fP
+ \fCkdb export user:/keyset ini > keyset\&.ini\fP
 .br
 .PP
 Change default format to \fCsimpleini\fP:
@@ -64,10 +64,10 @@ Create two key values and export them as \fCxml\fP:
 .PP
 .PP
 .nf
-kdb set user/tests/kdb-export/one one
-kdb set user/tests/kdb-export/two two
+kdb set user:/tests/kdb-export/one one
+kdb set user:/tests/kdb-export/two two
 
-kdb export user/tests/kdb-export/ xml
+kdb export user:/tests/kdb-export/ xml
 #> <?xml version="1\&.0" encoding="UTF-8" standalone="no" ?>
 #> <kdb-export>
 #>
@@ -78,7 +78,7 @@ kdb export user/tests/kdb-export/ xml
 #> </kdb-export>
 
 
-kdb rm -r user/tests
+kdb rm -r user:/tests
 # cleanup
 .fi
 .PP
@@ -87,10 +87,10 @@ Create two key values and export them with the \fCxerces\fP plugin:
 .PP
 .PP
 .nf
-kdb set user/tests/kdb-export/one one
-kdb set user/tests/kdb-export/two two
+kdb set user:/tests/kdb-export/one one
+kdb set user:/tests/kdb-export/two two
 
-kdb export user/tests/kdb-export/ xerces
+kdb export user:/tests/kdb-export/ xerces
 #> <?xml version="1\&.0" encoding="UTF-8" standalone="no" ?>
 #> <kdb-export>
 #>
@@ -100,7 +100,7 @@ kdb export user/tests/kdb-export/ xerces
 #>
 #> </kdb-export>
 
-kdb rm -r user/tests
+kdb rm -r user:/tests
 # cleanup
 .fi
 .PP

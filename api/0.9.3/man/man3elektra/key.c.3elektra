@@ -1,4 +1,4 @@
-.TH "key.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "key.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,8 @@ key.c \- Methods for Key manipulation\&.
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'kdblogger\&.h'\fP
+.br
 \fC#include <stdio\&.h>\fP
 .br
 \fC#include 'kdb\&.h'\fP
@@ -106,7 +108,7 @@ keyDel (k);
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/some/example", KEY_END);
+Key *k=keyNew("user:/some/example", KEY_END);
 // work with it
 keyDel (k);
 .fi
@@ -126,7 +128,7 @@ You can call \fBkeyNew()\fP in many different ways depending on the attribute ta
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex0",
+Key *k=keyNew("user:/tmp/ex0",
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
 
@@ -140,7 +142,7 @@ Key *k=keyNew("user/tmp/ex0",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex1",
+Key *k=keyNew("user:/tmp/ex1",
         KEY_SIZE, 4,               // has no effect on strings
         KEY_VALUE, "some data",    // set a string value
         KEY_END);                  // end of args
@@ -154,7 +156,7 @@ Key *k=keyNew("user/tmp/ex1",
  Next two parameter is a metaname and a metavalue\&. See \fBkeySetMeta()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
+Key *k=keyNew("user:/tmp/ex3",
         KEY_META, "comment", "a comment",  // with a comment
         KEY_META, "owner", "root",         // and an owner
         KEY_META, "special", "yes",        // and any other metadata
@@ -173,8 +175,8 @@ Key *k=keyNew("user/tmp/ex3",
  Bitwise disjunction of flags, which don't require one or more values\&. recommended way to set multiple flags\&. overrides previously defined flags\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_FLAGS, KEY_BINARY | KEY_CASCADING_NAME, // flags
+Key *k=keyNew("user:/tmp/ex3",
+        KEY_BINARY,                     // binary key
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_END);                       // end of args
@@ -189,7 +191,7 @@ Key *k=keyNew("user/tmp/ex3",
 .PP
 .nf
 // Create and initialize a key with a name and nothing else
-Key *k=keyNew("user/tmp/ex2",
+Key *k=keyNew("user:/tmp/ex2",
         KEY_BINARY,
         KEY_SIZE, 4,               // now the size is important
         KEY_VALUE, "some data",    // sets the binary value ("some")
@@ -198,54 +200,27 @@ Key *k=keyNew("user/tmp/ex2",
 .fi
 .PP
 
-.IP "\(bu" 2
-\fBKEY_CASCADING_NAME\fP allow the name to start with / useful for \fBksLookup()\fP and \fBkdbGet()\fP parent/lookup keys
-.IP "\(bu" 2
-\fBKEY_META_NAME\fP allow the name to start with arbitrary namespaces useful to compare with metakeys
 .PP
 .PP
 \fBDeprecated\fP
 .RS 4
-The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility:
-.IP "\(bu" 2
-\fBKEY_DIR\fP 
-.br
- Define that the key is a directory rather than an ordinary key\&. This means its executable bits in its mode are set\&. But even without this option the key can have subkeys\&. See \fBkeySetDir()\fP\&.
-.IP "\(bu" 2
-\fBKEY_OWNER\fP 
-.br
- Next parameter is the owner\&. See \fBkeySetOwner()\fP\&.
-.IP "\(bu" 2
-\fBKEY_UID\fP, \fBKEY_GID\fP 
-.br
- Next parameter is taken as the UID (uid_t) or GID (gid_t) that will be defined on the key\&. See \fBkeySetUID()\fP and \fBkeySetGID()\fP\&.
-.IP "\(bu" 2
-\fBKEY_MODE\fP 
-.br
- Next parameter is taken as mode permissions (int) to the key\&. See \fBkeySetMode()\fP\&. 
+The flags below are deprecated and \fBKEY_META\fP should be preferred\&. They remain some time, however, for compatibility: 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex3",
-        KEY_VALUE, "some data",    // with a simple value
-        KEY_MODE, 0777,            // permissions
-        KEY_END);                  // end of args
 
 .fi
 .PP
-
 .IP "\(bu" 2
 \fBKEY_COMMENT\fP 
 .br
  Next parameter is a comment\&. See \fBkeySetComment()\fP\&. 
 .PP
 .nf
-Key *k=keyNew("user/tmp/ex4",
+Key *k=keyNew("user:/tmp/ex4",
         KEY_BINARY,                     // key type
         KEY_SIZE, 7,                    // assume binary length 7
         KEY_VALUE, "some data",         // value that will be truncated in 7 bytes
         KEY_COMMENT, "value is truncated",
-        KEY_OWNER, "root",              // owner (not uid) is root
-        KEY_UID, 0,                     // root uid
         KEY_END);                       // end of args
 
 .fi

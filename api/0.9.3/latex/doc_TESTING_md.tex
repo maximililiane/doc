@@ -79,11 +79,11 @@ If the access is denied, several tests will fail. You have some options to avoid
 
 First load the required information and verify the paths\+:
 
-``` kdb mount-\/info echo {\ttfamily kdb sget system/info/elektra/constants/cmake/\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX .}/{\ttfamily kdb sget system/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+P\+EC .} echo {\ttfamily kdb sget system/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+Y\+S\+T\+EM .} 
+``` kdb mount-\/info echo {\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX .}/{\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+P\+EC .} echo {\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+Y\+S\+T\+EM .} 
 \begin{DoxyCode}
 Then change the permissions:
 \end{DoxyCode}
- chown -\/R {\ttfamily whoami} {\ttfamily kdb sget system/info/elektra/constants/cmake/\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX .}/{\ttfamily kdb sget system/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+P\+EC .} chown -\/R {\ttfamily whoami} {\ttfamily kdb sget system/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+Y\+S\+T\+EM .} ```
+ chown -\/R {\ttfamily whoami} {\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX .}/{\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+P\+EC .} chown -\/R {\ttfamily whoami} {\ttfamily kdb sget system\+:/info/elektra/constants/cmake/\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+Y\+S\+T\+EM .} ```
 
 After that all test cases should run successfully as described above.
 \item Compile Elektra so that system paths are not actual system paths, e.\+g. to write everything into the home directory ({\ttfamily $\sim$}) use cmake options\+: {\ttfamily -\/\+D\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+Y\+S\+T\+EM=\char`\"{}$\sim$/.\+config/kdb/system\char`\"{} -\/\+D\+K\+D\+B\+\_\+\+D\+B\+\_\+\+S\+P\+EC=\char`\"{}$\sim$/.\+config/kdb/spec\char`\"{}} (for an example of a full C\+Make invocation see {\ttfamily scripts/configure-\/home})
@@ -164,7 +164,7 @@ set\_property(TEST testname PROPERTY LABELS kdbtests)
 \item should only write below
 \begin{DoxyItemize}
 \item {\ttfamily /tests/$<$testname$>$} (e.\+g. {\ttfamily /tests/ruby}) and
-\item {\ttfamily system/elektra} (e.\+g. for mounts or globalplugins).
+\item {\ttfamily system\+:/elektra} (e.\+g. for mounts or globalplugins).
 \end{DoxyItemize}
 \item Before executing tests, no keys must be present below {\ttfamily /tests}. The test cases need to clean up everything they wrote. (Including temporary files)
 \item If your test has memory leaks, e.\+g. because the library used leaks and they cannot be fixed, give them the label {\ttfamily memleak} with the following command\+:
@@ -252,8 +252,9 @@ We assume that your current working directory is a newly created build directory
 
 
 \begin{DoxyCode}
-~e/scripts/configure-debian -DCMAKE\_C\_COMPILER=/usr/src/afl/afl-2.52b/afl-gcc
-       -DCMAKE\_CXX\_COMPILER=/usr/src/afl/afl-2.52b/afl-g++ ~e
+~e/scripts/dev/configure-debian -DCMAKE\_C\_COMPILER=/usr/src/afl/AFL-2.57b/afl-gcc
+       -DCMAKE\_CXX\_COMPILER=/usr/src/afl/AFL-2.57b/afl-g++ ~e
+make -j 5
 \end{DoxyCode}
 
 
@@ -262,7 +263,7 @@ Copy some import files to {\ttfamily testcase\+\_\+dir}, for example\+:
 
 \begin{DoxyCode}
 mkdir -p testcase\_dir
-cp ~e/src/plugins/ini/ini/* testcase\_dir
+cp ~e/src/plugins/toml/toml/* testcase\_dir
 \end{DoxyCode}
 
 
@@ -270,8 +271,8 @@ Fewer files is better. Then run, for example\+:
 
 
 \begin{DoxyCode}
-LD\_LIBRARY\_PATH=`pwd`/lib /usr/src/afl/afl-2.52b/afl-fuzz -i testcase\_dir -o findings\_dir bin/kdb import
-       user/tests ini
+LD\_LIBRARY\_PATH=`pwd`/lib /usr/src/afl/AFL-2.57b/afl-fuzz -i testcase\_dir -o findings\_dir bin/kdb import
+       user:/tests toml
 \end{DoxyCode}
 
 
@@ -279,7 +280,7 @@ Check if something is happening with\+:
 
 
 \begin{DoxyCode}
-watch kdb export user/tests
+watch kdb export user:/tests
 \end{DoxyCode}
 
 
@@ -402,7 +403,7 @@ make
 
 \begin{DoxyCode}
 cd ..
-oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/ini/*.c
+oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/toml/*.c
 \end{DoxyCode}
 
 

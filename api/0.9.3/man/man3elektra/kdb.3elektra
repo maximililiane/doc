@@ -1,4 +1,4 @@
-.TH "kdb" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdb" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -41,7 +41,7 @@ kdb \- This is the main namespace for the C++ binding and libraries\&.
 .ti -1c
 .RI "class \fBDefaultSetPolicy\fP"
 .br
-.RI "Implements creating user/ key when key is not found\&. "
+.RI "Implements creating user:/ key when key is not found\&. "
 .ti -1c
 .RI "class \fBGetPolicyIs\fP"
 .br

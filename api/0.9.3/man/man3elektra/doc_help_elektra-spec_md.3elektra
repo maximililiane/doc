@@ -1,4 +1,4 @@
-.TH "doc_help_elektra-spec_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_elektra-spec_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -56,9 +56,9 @@ namespace/#0=user
 .PP
 .PP
 .IP "1." 4
-When this file is mounted to \fCspec/sw/app/#0\fP we specify, that for the key \fC/sw/app/#0/promise\fP only the namespace \fCuser\fP should be used\&.
+When this file is mounted to \fCspec:/sw/app/#0\fP we specify, that for the key \fC/sw/app/#0/promise\fP only the namespace \fCuser\fP should be used\&.
 .IP "2." 4
-If this key was not found, but \fC/somewhere/else\fP is present, we will use this key instead\&. The \fCfallback\fP technique is very powerful: it allows us to have (recursive) links between applications\&. In the example above, the application is tricked in receiving e\&.g\&. the key \fCuser/somewhere/else\fP when \fCpromise\fP was not available\&.
+If this key was not found, but \fC/somewhere/else\fP is present, we will use this key instead\&. The \fCfallback\fP technique is very powerful: it allows us to have (recursive) links between applications\&. In the example above, the application is tricked in receiving e\&.g\&. the key \fCuser:/somewhere/else\fP when \fCpromise\fP was not available\&.
 .IP "3." 4
 The value \fC20\fP will be used as default, even if no configuration file is found\&.
 .PP

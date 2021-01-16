@@ -37,32 +37,32 @@ The other strategies are implemented by the merge framework and are documented i
 \item {\ttfamily /sw/elektra/kdb/\#0/current/namespace}\+: Specifies which default namespace should be used when setting a cascading name. By default the namespace is user, except {\ttfamily kdb} is used as root, then {\ttfamily system} is the default ({\ttfamily validate} strategy only).
 \end{DoxyItemize}
 
-To import a configuration stored in the X\+ML format in a file called {\ttfamily example.\+xml} below {\ttfamily user/keyset}\+:~\newline
- {\ttfamily kdb import user/keyset xmltool $<$ example.\+xml}
+To import a configuration stored in the X\+ML format in a file called {\ttfamily example.\+xml} below {\ttfamily user\+:/keyset}\+:~\newline
+ {\ttfamily kdb import user\+:/keyset xmltool $<$ example.\+xml}
 
-To import a configuration stored in the {\ttfamily ini} format in a file called {\ttfamily example.\+ini} below {\ttfamily user/keyset} replacing any previous keys stored there\+:~\newline
- {\ttfamily cat example.\+ini $\vert$ kdb import -\/s cut user/keyset ini}
+To import a configuration stored in the {\ttfamily ini} format in a file called {\ttfamily example.\+ini} below {\ttfamily user\+:/keyset} replacing any previous keys stored there\+:~\newline
+ {\ttfamily cat example.\+ini $\vert$ kdb import -\/s cut user\+:/keyset ini}
 
-To import a configuration stored in the {\ttfamily ini} format in a file called {\ttfamily example.\+ini} below {\ttfamily user/keyset} keeping any previous keys stored there that aren\textquotesingle{}t present in the newly imported configuration\+:~\newline
- {\ttfamily cat example.\+ini $\vert$ kdb import -\/s import user/keyset ini}
+To import a configuration stored in the {\ttfamily ini} format in a file called {\ttfamily example.\+ini} below {\ttfamily user\+:/keyset} keeping any previous keys stored there that aren\textquotesingle{}t present in the newly imported configuration\+:~\newline
+ {\ttfamily cat example.\+ini $\vert$ kdb import -\/s import user\+:/keyset ini}
 
-To restore a backup (stored as {\ttfamily sw.\+ecf}) of a user\textquotesingle{}s configuration below {\ttfamily system/sw}\+:~\newline
- {\ttfamily cat sw.\+ecf $\vert$ kdb import system/sw}
+To restore a backup (stored as {\ttfamily sw.\+ecf}) of a user\textquotesingle{}s configuration below {\ttfamily system\+:/sw}\+:~\newline
+ {\ttfamily cat sw.\+ecf $\vert$ kdb import system\+:/sw}
 
 To import a sample {\ttfamily xml} content with the {\ttfamily xerces} plugin\+:
 
 
 \begin{DoxyCode}
 # import two keys from a xml string
-kdb import user/tests/kdb-import/ xerces <<< "<?xml version=\(\backslash\)"1.0\(\backslash\)" encoding=\(\backslash\)"UTF-8\(\backslash\)" standalone=\(\backslash\)"no\(\backslash\)"
+kdb import user:/tests/kdb-import/ xerces <<< "<?xml version=\(\backslash\)"1.0\(\backslash\)" encoding=\(\backslash\)"UTF-8\(\backslash\)" standalone=\(\backslash\)"no\(\backslash\)"
        ?><kdb-import><one>one</one><two>two</two></kdb-import>"
 
 # get the values and verify they got imported correctly
-kdb get user/tests/kdb-import/one
+kdb get user:/tests/kdb-import/one
 #> one
-kdb get user/tests/kdb-import/two
+kdb get user:/tests/kdb-import/two
 #> two
-kdb rm -r user/tests/kdb-import
+kdb rm -r user:/tests/kdb-import
 \end{DoxyCode}
 
 
@@ -71,16 +71,16 @@ To import a sample {\ttfamily xml} content via specifying the file format direct
 
 \begin{DoxyCode}
 # import two keys from a xml string
-kdb import user/tests/kdb-import/ xml <<< "<?xml version=\(\backslash\)"1.0\(\backslash\)" encoding=\(\backslash\)"UTF-8\(\backslash\)" standalone=\(\backslash\)"no\(\backslash\)"
+kdb import user:/tests/kdb-import/ xml <<< "<?xml version=\(\backslash\)"1.0\(\backslash\)" encoding=\(\backslash\)"UTF-8\(\backslash\)" standalone=\(\backslash\)"no\(\backslash\)"
        ?><kdb-import><one>one</one><two>two</two></kdb-import>"
 
 # get the values and verify they got imported correctly
-kdb get user/tests/kdb-import/one
+kdb get user:/tests/kdb-import/one
 #> one
-kdb get user/tests/kdb-import/two
+kdb get user:/tests/kdb-import/two
 #> two
 
-kdb rm -r user/tests/kdb-import
+kdb rm -r user:/tests/kdb-import
 \end{DoxyCode}
 
 

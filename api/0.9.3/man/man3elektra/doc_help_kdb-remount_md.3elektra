@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-remount_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-remount_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,8 +31,8 @@ This command allows a user to use an existing backend (such as one from a previo
 \fC-i\fP, \fC--interactive\fP: Instead of passing all information by parameters ask the user interactively\&.
 .PP
 .PP
-To mount a new file using an existing backend that is mounted to \fCsystem/example\fP:
+To mount a new file using an existing backend that is mounted to \fCsystem:/example\fP:
 .br
- \fCkdb remount /etc/configuration2\&.ini system/example2 system/example\fP
+ \fCkdb remount /etc/configuration2\&.ini system:/example2 system:/example\fP
 .br
  

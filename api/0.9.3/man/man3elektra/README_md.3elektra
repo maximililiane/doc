@@ -1,4 +1,4 @@
-.TH "README_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "README_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,6 +10,8 @@ README_mdElektra
 .PP
 Elektra provides a mature, consistent and easily comprehensible API\&. Its modularity effectively avoids code duplication across applications and tools concerning their configuration tasks\&. Elektra abstracts from cross-platform-related issues and enables applications to be aware of other applications' configurations, leveraging easy application integration\&.
 .PP
+.IP "\(bu" 2
+If you are new, start reading \fBGet Started\fP
 .IP "\(bu" 2
 \fCBuild server\fP
 .IP "\(bu" 2

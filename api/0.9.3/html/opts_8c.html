@@ -73,9 +73,9 @@ Include dependency graph for opts.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a161f57de445030a5b069e73d0d9cc547"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opts_8c.html#a161f57de445030a5b069e73d0d9cc547">generateUsageLine</a> (const char *progname, const Key *command, const Key *commandArgs)</td></tr>
-<tr class="memdesc:a161f57de445030a5b069e73d0d9cc547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate usage line for help message from optionsSpec.  <a href="#a161f57de445030a5b069e73d0d9cc547">More...</a><br /></td></tr>
-<tr class="separator:a161f57de445030a5b069e73d0d9cc547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac86da6aa4782c9946c0220a527ada996"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opts_8c.html#ac86da6aa4782c9946c0220a527ada996">generateUsageLine</a> (const char *progname, Key *command, const Key *commandArgs)</td></tr>
+<tr class="memdesc:ac86da6aa4782c9946c0220a527ada996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate usage line for help message from optionsSpec.  <a href="#ac86da6aa4782c9946c0220a527ada996">More...</a><br /></td></tr>
+<tr class="separator:ac86da6aa4782c9946c0220a527ada996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b60d56d97c918867960f19c19ab4058"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opts_8c.html#a9b60d56d97c918867960f19c19ab4058">elektraGetOpts</a> (KeySet *ks, int argc, const char **argv, const char **envp, Key *parentKey)</td></tr>
 <tr class="memdesc:a9b60d56d97c918867960f19c19ab4058"><td class="mdescLeft">&#160;</td><td class="mdescRight">This functions parses a specification of program options, together with a list of arguments and environment variables to extract the option values.  <a href="#a9b60d56d97c918867960f19c19ab4058">More...</a><br /></td></tr>
 <tr class="separator:a9b60d56d97c918867960f19c19ab4058"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,7 +143,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">argc</td><td>The number of strings in argv. </td></tr>
     <tr><td class="paramname">argv</td><td>The arguments to be processed. </td></tr>
     <tr><td class="paramname">envp</td><td>A list of environment variables. This needs to be a null-terminated list of strings of the format 'KEY=VALUE'. </td></tr>
-    <tr><td class="paramname">parentKey</td><td>The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.e. 'user/test/parent' will be translated into 'spec/test/parent', before checking against spec keys.</td></tr>
+    <tr><td class="paramname">parentKey</td><td>The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.e. 'user:/test/parent' will be translated into 'spec:/test/parent', before checking against spec keys.</td></tr>
   </table>
   </dd>
 </dl>
@@ -233,8 +233,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a161f57de445030a5b069e73d0d9cc547"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a161f57de445030a5b069e73d0d9cc547">&#9670;&nbsp;</a></span>generateUsageLine()</h2>
+<a id="ac86da6aa4782c9946c0220a527ada996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac86da6aa4782c9946c0220a527ada996">&#9670;&nbsp;</a></span>generateUsageLine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Key *&#160;</td>
+          <td class="paramtype">Key *&#160;</td>
           <td class="paramname"><em>command</em>, </td>
         </tr>
         <tr>

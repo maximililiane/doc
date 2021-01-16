@@ -44,7 +44,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>Currently the default backend (default.ecf) will also be used for bootstrapping. There are two problems with this approach:</p>
 <ol type="1">
-<li>Thus the default backend first will be read with parentKey <code>system/elektra</code> and later with parentKey <code>system</code>, it needs to store absolute paths and thus won't work with the current INI plugin</li>
+<li>Thus the default backend first will be read with parentKey <code>system:/elektra</code> and later with parentKey <code>system:/</code>, it needs to store absolute paths and thus won't work with most of the plugins (except dump).</li>
 <li>When <code>system</code> is large without mount points, everything is reread twice during bootstrapping.</li>
 </ol>
 <ul>
@@ -56,7 +56,7 @@ $(function() {
 <li>Bootstrap should be fast and not unnecessarily read large files</li>
 </ul>
 <ul>
-<li>Implement a hack so that <code>system/elektra</code> is actually read as <code>system</code>. (Will not solve problem 2.)<ul>
+<li>Implement a hack so that <code>system:/elektra</code> is actually read as <code>system:/</code>. (Will not solve problem 2.)<ul>
 <li>Its a hack.</li>
 <li>Its confusing and does not play well with persistent data with relative key names.</li>
 </ul>
@@ -69,10 +69,8 @@ $(function() {
 <p>Split up the concepts of default (<code>default.ecf</code>) and bootstrap (<code>elektra.ecf</code>) backend. During bootstrap only <code>elektra.ecf</code> is read. The default backend reading <code>default.ecf</code> is only relevant as long as no root backend is mounted.</p>
 <p>Algorithm:</p>
 <ol type="1">
-<li>try to get system/elektra using the file elektra.ecf (KDB_DB_INIT)</li>
-<li>if it works, mount the init backend to system/elektra (non-fallback mode)</li>
-<li>if it fails (== 0 or == -1), try default.ecf as fallback</li>
-<li>if the fallback works (i.e. keys are present in system/elektra), mount the default backend to system/elektra (fallback mode)</li>
+<li>try to get system:/elektra using the file elektra.ecf (KDB_DB_INIT)</li>
+<li>if it works, mount the init backend to system:/elektra</li>
 </ol>
 <ul>
 <li>Solves both problems</li>
@@ -80,13 +78,12 @@ $(function() {
 <li>People can decide if and how to migrate</li>
 </ul>
 <ul>
-<li>Fallback mode should be removed with 1.0</li>
 <li>added scripts/upgrade-bootstrap</li>
 </ul>
 <p>to upgrade to new system, either:</p>
 <ul>
 <li>touch /etc/kdb/elektra.ecf (loses old mount points)</li>
-<li>or do kdb export system/elektra/mountpoints, kdb rm -r system/elektra/mountpoints, kdb import system/elektra/mountpoints </li>
+<li>or do kdb export system:/elektra/mountpoints, kdb rm -r system:/elektra/mountpoints, kdb import system:/elektra/mountpoints </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

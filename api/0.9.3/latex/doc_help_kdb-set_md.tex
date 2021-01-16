@@ -29,22 +29,22 @@ To set a key to a negative value, {\ttfamily -\/-\/} has to be used to stop opti
 \end{DoxyItemize}
 
 To set a Key to the value {\ttfamily Hello World!}\+:~\newline
- {\ttfamily kdb set user/example/key \char`\"{}\+Hello World!\char`\"{}}
+ {\ttfamily kdb set user\+:/example/key \char`\"{}\+Hello World!\char`\"{}}
 
 To create a new key with a null value\+:~\newline
- {\ttfamily kdb set user/example/key}
+ {\ttfamily kdb set user\+:/example/key}
 
 To set a key to an empty value\+:~\newline
- {\ttfamily kdb set user/example/key \char`\"{}\char`\"{}}
+ {\ttfamily kdb set user\+:/example/key \char`\"{}\char`\"{}}
 
 To set a key to a negative value\+:~\newline
  {\ttfamily kdb set -\/-\/ /tests/neg -\/3}
 
 To create bookmarks\+:~\newline
- {\ttfamily kdb set user/sw/elektra/kdb/\#0/current/bookmarks}
+ {\ttfamily kdb set user\+:/sw/elektra/kdb/\#0/current/bookmarks}
 
 Followed by\+:~\newline
- {\ttfamily kdb set user/sw/elektra/kdb/\#0/current/bookmarks/kdb user/sw/elektra/kdb/\#0/current}
+ {\ttfamily kdb set user\+:/sw/elektra/kdb/\#0/current/bookmarks/kdb user\+:/sw/elektra/kdb/\#0/current}
 
 
 \begin{DoxyItemize}

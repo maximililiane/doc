@@ -1,4 +1,4 @@
-.TH "doc_DESIGN_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_DESIGN_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -179,7 +179,6 @@ The following functions return an internal string:
 .nf
 const char *keyName(const Key *key);
 const char *keyBaseName(const Key *key);
-const char *keyOwner(const Key *key);
 const char *keyComment(const Key *key);
 .fi
 .PP
@@ -206,7 +205,7 @@ All function names begin with their class name, e\&.g\&. \fCkdb\fP, \fCks\fP or 
 .PP
 \fIGet\fP and \fISet\fP are used for getters/and setters\&. We use \fIIs\fP to ask about a flag or state and \fINeeds\fP to ask about state related to databases\&. For allocation/deallocation we use C++ styled names (e\&.g \fC*New\fP, \fC*Del\fP)\&.
 .PP
-Macros and Enums are written in capital letters\&. Options start with \fCKDB_O\fP, errors with \fCKDB_ERR\fP, namespaces with \fCKEY_NS\fP and key types with \fCKEY_TYPE\fP\&.
+Macros and Enums are written in capital letters\&. Options start with \fCKDB_O\fP, errors with \fCKDB_ERR\fP and namespaces with \fCKEY_NS\fP\&.
 .PP
 Data structures start with a capital letter for every part of the word:
 .PP

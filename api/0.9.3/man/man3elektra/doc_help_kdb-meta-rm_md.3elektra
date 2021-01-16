@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-meta-rm_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-meta-rm_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -25,7 +25,7 @@ This command removes a metakey of a key from the Key database\&.
 .PP
 To remove metakey \fCmetakey\fP of a key:
 .br
- \fCkdb meta-rm user/example metakey\fP
+ \fCkdb meta-rm user:/example metakey\fP
 .PP
 .IP "\(bu" 2
 \fBelektra-metadata(7)\fP for an explanation of the metadata concepts\&.

@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-mv_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-mv_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -39,8 +39,8 @@ This command will return the following values as an exit status:
 .PP
 To move multiple keys:
 .br
- \fCkdb mv -r user/example1 user/example2\fP
+ \fCkdb mv -r user:/example1 user:/example2\fP
 .PP
 To move a single key:
 .br
- \fCkdb mv user/example/key1 user/example/key2\fP 
+ \fCkdb mv user:/example/key1 user:/example/key2\fP 

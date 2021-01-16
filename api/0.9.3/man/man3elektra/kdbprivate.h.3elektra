@@ -1,4 +1,4 @@
-.TH "kdbprivate.h" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbprivate.h" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,8 +24,6 @@ kdbprivate.h \- Private declarations\&.
 \fC#include <kdbnotificationinternal\&.h>\fP
 .br
 \fC#include <kdbplugin\&.h>\fP
-.br
-\fC#include <kdbproposal\&.h>\fP
 .br
 \fC#include <kdbtypes\&.h>\fP
 .br
@@ -70,11 +68,11 @@ kdbprivate.h \- Private declarations\&.
 .br
 .RI "The maximum of how many characters an integer needs as decimal number\&. "
 .ti -1c
-.RI "#define \fBKDB_SYSTEM_ELEKTRA\fP   'system/elektra'"
+.RI "#define \fBKDB_SYSTEM_ELEKTRA\fP   'system:/elektra'"
 .br
 .RI "Backend mounting information\&. "
 .ti -1c
-.RI "#define \fBKDB_CACHE_PREFIX\fP   'system/elektra/cache'"
+.RI "#define \fBKDB_CACHE_PREFIX\fP   'system:/elektra/cache'"
 .br
 .RI "All keys below this are used for cache metadata in the global keyset\&. "
 .ti -1c
@@ -207,7 +205,7 @@ kdbprivate.h \- Private declarations\&.
 .br
 .RI "Closes the trie and all opened backends within\&. "
 .ti -1c
-.RI "Backend * \fBtrieLookup\fP (Trie *trie, const Key *key)"
+.RI "Backend * \fBtrieLookup\fP (Trie *trie, const char *name)"
 .br
 .RI "The Trie structure\&. "
 .ti -1c
@@ -235,11 +233,11 @@ kdbprivate.h \- Private declarations\&.
 .br
 .RI "Mounts a backend into the trie\&. "
 .ti -1c
-.RI "Key * \fBmountGetMountpoint\fP (KDB *handle, const Key *where)"
+.RI "Key * \fBmountGetMountpoint\fP (KDB *handle, const char *where)"
 .br
 .RI "Lookup a mountpoint in a handle for a specific key\&. "
 .ti -1c
-.RI "Backend * \fBmountGetBackend\fP (KDB *handle, const Key *key)"
+.RI "Backend * \fBmountGetBackend\fP (KDB *handle, const char *where)"
 .br
 .RI "Lookup a backend handle for a specific key\&. "
 .ti -1c
@@ -255,13 +253,25 @@ kdbprivate.h \- Private declarations\&.
 .br
 .RI "Copies the key array2 into where array1 points\&. "
 .ti -1c
-.RI "int \fBelektraValidateKeyName\fP (const char *name, size_t size)"
-.br
-.RI "Validates whether the supplied keyname is valid\&. "
-.ti -1c
 .RI "KeySet * \fBksRenameKeys\fP (KeySet *config, const char *name)"
 .br
 .RI "Takes the first key and cuts off this common part for all other keys, instead name will be prepended\&. "
+.ti -1c
+.RI "bool \fBelektraKeyNameValidate\fP (const char *name, bool isComplete)"
+.br
+.RI "Takes an escaped key name and validates it\&. "
+.ti -1c
+.RI "void \fBelektraKeyNameCanonicalize\fP (const char *name, char **canonicalName, size_t *canonicalSizePtr, size_t offset, size_t *usizePtr)"
+.br
+.RI "Takes a valid (non-)canonical key name and produces its canonical form\&. "
+.ti -1c
+.RI "void \fBelektraKeyNameUnescape\fP (const char *name, char *unescapedName)"
+.br
+.RI "Takes a canonical key name and unescapes it\&. "
+.ti -1c
+.RI "size_t \fBelektraKeyNameEscapePart\fP (const char *part, char **escapedPart)"
+.br
+.RI "Takes a single key name part and produces its escaped form\&. "
 .ti -1c
 .RI "ElektraError * \fBelektraErrorCreate\fP (const char *code, const char *description, const char *module, const char *file, kdb_long_t line)"
 .br
@@ -324,7 +334,7 @@ Clear a bit\&.
 
 .PP
 The maximum value of unsigned char+1, needed for iteration over trie children/values: for (i=0; i<KDB_MAX_UCHAR; ++i) 
-.SS "#define KDB_SYSTEM_ELEKTRA   'system/elektra'"
+.SS "#define KDB_SYSTEM_ELEKTRA   'system:/elektra'"
 
 .PP
 Backend mounting information\&. This key directory tells you where each backend is mounted to which mountpoint\&. 
@@ -427,7 +437,7 @@ Do we need relative checks? Is this a cascading backend?
 Builds a backend out of the configuration supplied from: 
 .PP
 .nf
-system/elektra/mountpoints/<name>
+system:/elektra/mountpoints/<name>
 
 .fi
 .PP
@@ -705,8 +715,8 @@ Pop key at given cursor position\&.
 The internal cursor will be rewinded using \fBksRewind()\fP\&. You can use \fBksGetCursor()\fP and \fBksSetCursor()\fP jump back to the previous position\&. e\&.g\&. to pop at current position within \fBksNext()\fP loop: 
 .PP
 .nf
-elektraCursor c = ksGetCursor(ks);
-keyDel (ksPopAtCursor(ks, c));
+cursor_t c = ksGetCursor(ks);
+keyDel (elektraKsPopAtCursor(ks, c));
 ksSetCursor(ks, c);
 ksPrev(ks); // to have correct key after next ksNext()
 
@@ -879,33 +889,6 @@ systemConfig will only be used, not deleted\&.
 .RE
 .PP
 
-.SS "int elektraValidateKeyName (const char * name, size_t size)"
-
-.PP
-Validates whether the supplied keyname is valid\&. The function looks for tangling escape characters in the end and for a minimum length\&.
-.PP
-Does not check for valid namespaces
-.PP
-\fBPrecondition:\fP
-.RS 4
-size must be at least 2
-.RE
-.PP
-\fBParameters:\fP
-.RS 4
-\fIname\fP the key name that is to be checked 
-.br
-\fIsize\fP a elektraStrLen of the key name 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fItrue\fP if the supplied keyname part is valid 
-.br
-\fIfalse\fP if its invalid 
-.RE
-.PP
-
 .SS "int mountBackend (KDB * kdb, Backend * backend, Key * errorKey)"
 
 .PP
@@ -970,7 +953,7 @@ Default Backend is closed\&. mountOpen was executed before\&.
 .RE
 .PP
 
-.SS "Backend* mountGetBackend (KDB * handle, const Key * key)"
+.SS "Backend* mountGetBackend (KDB * handle, const char * where)"
 
 .PP
 Lookup a backend handle for a specific key\&. The required canonical name is ensured by using a key as parameter, which will transform the key to canonical representation\&.
@@ -983,7 +966,7 @@ If key is 0 or invalid the default backend will be returned\&.
 .RS 4
 \fIhandle\fP is the data structure, where the mounted directories are saved\&. 
 .br
-\fIkey\fP the key, that should be looked up\&. 
+\fIwhere\fP the key name, that should be looked up\&. 
 .RE
 .PP
 \fBReturns:\fP
@@ -992,7 +975,7 @@ the backend handle associated with the key
 .RE
 .PP
 
-.SS "Key* mountGetMountpoint (KDB * handle, const Key * where)"
+.SS "Key* mountGetMountpoint (KDB * handle, const char * where)"
 
 .PP
 Lookup a mountpoint in a handle for a specific key\&. Will return a key representing the mountpoint or null if there is no appropriate mountpoint e\&.g\&. its the root mountpoint\&.
@@ -1002,16 +985,14 @@ Lookup a mountpoint in a handle for a specific key\&. Will return a key represen
 
 .PP
 .nf
-Key * key = keyNew ("system/template");
 KDB * handle = kdbOpen();
 Key *mountpoint=0;
-mountpoint=kdbGetMountpoint(handle, key);
+mountpoint=kdbGetMountpoint(handle, "system:/template");
 
 printf("The backend I am using is %s mounted in %s\n",
         keyValue(mountpoint),
         keyName(mountpoint));
 kdbClose (handle);
-keyDel (key);
 
 .fi
 .PP
@@ -1021,7 +1002,7 @@ keyDel (key);
 .RS 4
 \fIhandle\fP is the data structure, where the mounted directories are saved\&. 
 .br
-\fIwhere\fP the key, that should be looked up\&. 
+\fIwhere\fP the key name, that should be looked up\&. 
 .RE
 .PP
 \fBReturns:\fP
@@ -1390,7 +1371,7 @@ split needs to be processed with \fBsplitDivide()\fP before\&.
 .PP
 \fBPrecondition:\fP
 .RS 4
-user/system was split before\&. 
+user:/system was split before\&. 
 .RE
 .PP
 \fBParameters:\fP
@@ -1463,7 +1444,7 @@ Insert into trie\&.
 .RE
 .PP
 
-.SS "Backend* trieLookup (Trie * trie, const Key * key)"
+.SS "Backend* trieLookup (Trie * trie, const char * name)"
 
 .PP
 The Trie structure\&. Lookups a backend inside the trie\&.

@@ -1,4 +1,4 @@
-.TH "doc_help_kdb_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,15 +23,15 @@ External commands can be listed via:
 .PP
 Only a few commands are enough for daily use\&. We can retrieve a key by:
 .br
- \fCkdb get user/key\fP
+ \fCkdb get user:/key\fP
 .PP
 We store a key permanently with a value given by:
 .br
- \fCkdb set user/key value\fP
+ \fCkdb set user:/key value\fP
 .PP
 We list all available keys arranged below a key by:
 .br
- \fCkdb ls user/key\fP
+ \fCkdb ls user:/key\fP
 .PP
 Documentation of plugins is available using the \fBkdb-plugin-info(1)\fP tool:
 .br
@@ -107,7 +107,7 @@ If you want different configuration per user or directories, you should prefer t
 .PP
 Sometimes it is useful to start with default options, for example it is not possible to invert the \fC-q\fP option\&. In such situations one can simply select a non-existing profile, then \fC-q\fP works as usual:
 .br
- \fCkdb mount -p nonexist -q /abc dir/abc\fP
+ \fCkdb mount -p nonexist -q /abc dir:/abc\fP
 .PP
 If \fC%\fP is used as profile name for \fC-p\fP, the \fCkdb\fP tools disables reading from \fCKDB\fP for their own configuration settings\&. Then, they only use command-line arguments\&.
 .PP
@@ -140,8 +140,8 @@ For example, if you set the bookmark kdb:
 .PP
 .PP
 .nf
-kdb set user/sw/elektra/kdb/#0/current/bookmarks
-kdb set user/sw/elektra/kdb/#0/current/bookmarks/kdb user/sw/elektra/kdb/#0/current
+kdb set user:/sw/elektra/kdb/#0/current/bookmarks
+kdb set user:/sw/elektra/kdb/#0/current/bookmarks/kdb user:/sw/elektra/kdb/#0/current
 .fi
 .PP
 .PP

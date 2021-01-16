@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-help_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-help_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,4 +23,4 @@ Also note that, no additional commandline options are allowed for this kind of i
 .PP
 Show how to set keys: \fCkdb help set\fP
 .PP
-Use the info program as man page viewer for the current user: \fCkdb set user/sw/elektra/kdb/#0/current/man /usr/bin/info\fP 
+Use the info program as man page viewer for the current user: \fCkdb set user:/sw/elektra/kdb/#0/current/man /usr/bin/info\fP 

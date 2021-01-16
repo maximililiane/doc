@@ -146,24 +146,24 @@ $(function() {
 </ul>
 <p>The following specification describes the command line interface similar to the one used by <code>rm</code>. (It is based of <code>rm (GNU coreutils) 8.30</code>).</p>
 <div class="fragment"><div class="line">[force]</div><div class="line">opt = f</div><div class="line">opt/long = force</div><div class="line">opt/arg = none</div><div class="line">description = ignore nonexistent files and arguments, never prompt</div><div class="line"></div><div class="line">[interactive]</div><div class="line">opt = #1</div><div class="line">opt/#0 = i</div><div class="line">opt/#0/long = interactive</div><div class="line">opt/#0/arg = optional</div><div class="line">opt/#0/flagvalue = always</div><div class="line">opt/#1 = I</div><div class="line">opt/#1/flagvalue = once</div><div class="line">opt/#1/arg = none</div><div class="line">opt/arg/name = WHEN</div><div class="line">description = prompt according to WHEN: never, once (-I), or always (-i); without WHEN, prompt always</div><div class="line"></div><div class="line">[singlefs]</div><div class="line">opt/long = one-file-system</div><div class="line">opt/arg = none</div><div class="line">description = when removing a hierarchy recursively, skip any directory that is on a file system different from that of the corresponding line argument</div><div class="line"></div><div class="line">[nopreserve]</div><div class="line">opt/long = no-preserve-root</div><div class="line">opt/arg = none</div><div class="line">description = do not treat &#39;/&#39; specially</div><div class="line"></div><div class="line">[preserve]</div><div class="line">opt/long = preserve-root</div><div class="line">opt/arg = optional</div><div class="line">opt/arg/name = all</div><div class="line">opt/flagvalue = root</div><div class="line">description = do not remove &#39;/&#39; (default); with &#39;all&#39;, reject any command line argument on a separate device from its parent</div><div class="line"></div><div class="line">[recursive]</div><div class="line">opt = #1</div><div class="line">opt/#0 = r</div><div class="line">opt/#0/long = recursive</div><div class="line">opt/#0/arg = none</div><div class="line">opt/#1 = R</div><div class="line">opt/#1/arg = none</div><div class="line">description = remove directories and their contents recursively</div><div class="line"></div><div class="line">[emptydirs]</div><div class="line">opt = d</div><div class="line">opt/long = dir</div><div class="line">opt/arg = none</div><div class="line">description = remove empty directories</div><div class="line"></div><div class="line">[verbose]</div><div class="line">opt = v</div><div class="line">opt/long = verbose</div><div class="line">opt/arg = none</div><div class="line">env = VERBOSE</div><div class="line">description = explain what is being done</div><div class="line"></div><div class="line">[showversion]</div><div class="line">opt/long = version</div><div class="line">opt/arg = none</div><div class="line">description = output version information and exit</div><div class="line"></div><div class="line">[files/#]</div><div class="line">args = remaining</div><div class="line">env = FILES</div><div class="line">description = the files that shall be deleted</div></div><!-- fragment --><p>If this specification is used in a program called <code>erm</code> (for Elektra rm), which is called like this:</p>
-<div class="fragment"><div class="line">FILES=&quot;one.txt:other.log&quot; VERBOSE=1 erm -fi --recursive</div></div><!-- fragment --><p>The following keys will be created by <code>elektraGetOpts</code> (assuming the specification is mounted at <code>spec/sw/org/erm/#0/current</code>):</p>
+<div class="fragment"><div class="line">FILES=&quot;one.txt:other.log&quot; VERBOSE=1 erm -fi --recursive</div></div><!-- fragment --><p>The following keys will be created by <code>elektraGetOpts</code> (assuming the specification is mounted at <code>spec:/sw/org/erm/#0/current</code>):</p>
 <ul>
-<li><code>proc/sw/org/erm/#0/current/force = "1"</code></li>
-<li><code>proc/sw/org/erm/#0/current/interactive = "always"</code></li>
-<li><code>proc/sw/org/erm/#0/current/recursive = "1"</code></li>
-<li><code>proc/sw/org/erm/#0/current/verbose = "1"</code></li>
-<li><code>proc/sw/org/erm/#0/current/files [array] = "#1"</code></li>
-<li><code>proc/sw/org/erm/#0/current/files/#0 = "one.txt"</code></li>
-<li><code>proc/sw/org/erm/#0/current/files/#1 = "other.log"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/force = "1"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/interactive = "always"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/recursive = "1"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/verbose = "1"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files [array] = "#1"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files/#0 = "one.txt"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files/#1 = "other.log"</code></li>
 </ul>
 <p>Calling <code>FILES="abcd.txt" erm 123.txt 456.txt</code> meanwhile will result in:</p>
 <ul>
-<li><code>proc/sw/org/erm/#0/current/files [array] = "#1"</code></li>
-<li><code>proc/sw/org/erm/#0/current/files/#0 = "123.txt"</code></li>
-<li><code>proc/sw/org/erm/#0/current/files/#1 = "456.txt"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files [array] = "#1"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files/#0 = "123.txt"</code></li>
+<li><code>proc:/sw/org/erm/#0/current/files/#1 = "456.txt"</code></li>
 </ul>
-<p>NOTE: <code>proc/sw/org/erm/#0/current/files [array] = "#1"</code> means the <code>array</code> metadata of <code>proc/sw/org/erm/#0/current/files</code> is <code>#1</code>.</p>
-<p>You can find a full working example <a href="/home/jenkins/workspace/libelektra-release/examples/opts.c">here</a>. However, it uses a hard coded specification which is a bit harder to read. </p>
+<p>NOTE: <code>proc:/sw/org/erm/#0/current/files [array] = "#1"</code> means the <code>array</code> metadata of <code>proc:/sw/org/erm/#0/current/files</code> is <code>#1</code>.</p>
+<p>You can find a full working example <a href="/home/jenkins/workspace/libelektra-release-pipeline-testing/examples/opts.c">here</a>. However, it uses a hard coded specification which is a bit harder to read. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

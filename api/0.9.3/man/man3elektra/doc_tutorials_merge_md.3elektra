@@ -1,4 +1,4 @@
-.TH "doc_tutorials_merge_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_merge_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -73,13 +73,13 @@ Basic Usage:
 .PP
 .PP
 .nf
-kdb merge system/hosts/ours system/hosts/theirs system/hosts/base system/hosts/result
+kdb merge system:/hosts/ours system:/hosts/theirs system:/hosts/base system:/hosts/result
 .fi
 .PP
 .PP
 Here are examples of the same KeySets being merged using different strategies\&. The KeySets are mounted using a property format, the left side of '=' is the name of the Key, the right side is its string value\&.
 .PP
-We start with the base KeySet, \fCsystem/base\fP:
+We start with the base KeySet, \fCsystem:/base\fP:
 .PP
 .PP
 .nf
@@ -91,7 +91,7 @@ key5=5
 .fi
 .PP
 .PP
-Here is our KeySet, \fCsystem/ours\fP:
+Here is our KeySet, \fCsystem:/ours\fP:
 .PP
 .PP
 .nf
@@ -102,7 +102,7 @@ key5=fish
 .fi
 .PP
 .PP
-Here is their KeySet, \fCsystem/theirs\fP:
+Here is their KeySet, \fCsystem:/theirs\fP:
 .PP
 .PP
 .nf
@@ -117,7 +117,7 @@ Now we will examine the result KeySet with the different strategies\&.
 .PP
 .PP
 .nf
-kdb merge -s preserve system/ours system/theirs system/base system/result
+kdb merge -s preserve system:/ours system:/theirs system:/base system:/result
 .fi
 .PP
 .PP
@@ -125,11 +125,11 @@ The merge will fail because of a conflict for \fCkey4\fP since \fCkey4\fP was de
 .PP
 .PP
 .nf
-kdb merge -s ours system/ours system/theirs system/base system/result
+kdb merge -s ours system:/ours system:/theirs system:/base system:/result
 .fi
 .PP
 .PP
-The result KeySet, system/result will be:
+The result KeySet, system:/result will be:
 .PP
 .PP
 .nf
@@ -143,11 +143,11 @@ Because the conflict of \fCkey4\fP (it was deleted in \fCours\fP but changed in 
 .PP
 .PP
 .nf
-kdb merge -s theirs system/ours system/theirs system/base system/result
+kdb merge -s theirs system:/ours system:/theirs system:/base system:/result
 .fi
 .PP
 .PP
-The result KeySet, \fCsystem/result\fP will be:
+The result KeySet, \fCsystem:/result\fP will be:
 .PP
 .PP
 .nf
@@ -162,11 +162,11 @@ Here, the conflict of \fCkey4\fP is solved by using their copy, thus \fCkey4=ban
 .PP
 .PP
 .nf
-kdb merge -s base system/ours system/theirs system/base system/result
+kdb merge -s base system:/ours system:/theirs system:/base system:/result
 .fi
 .PP
 .PP
-The result KeySet, \fCsystem/result\fP will be:
+The result KeySet, \fCsystem:/result\fP will be:
 .PP
 .PP
 .nf

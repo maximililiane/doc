@@ -1,4 +1,4 @@
-.TH "doc_INSTALL_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_INSTALL_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,33 +28,32 @@ For the following Linux distributions and package managers 0\&.8 packages are av
 .PP
 For \fCOpenSUSE, CentOS, Fedora, RHEL and SLE\fP Kai-Uwe Behrmann kindly provides packages \fCfor download\fP\&.
 .PP
-To use the Ubuntu-Bionic packages, the following steps need to be made:
+We also provide more recent versions and bleeding-edge versions in our repositories:
+.PP
+We provide stable and bleeding-edge repositories for following Debian-based distributions:
+.PP
+.IP "\(bu" 2
+Debian Buster
+.IP "\(bu" 2
+Ubuntu Focal
+.IP "\(bu" 2
+Ubuntu Bionic
+.PP
+.PP
+To use the our stable repositories with our recent releases, following steps need to be made:
 .PP
 .IP "1." 4
-Run \fCsudo apt-key adv --keyserver keyserver\&.ubuntu\&.com --recv-keys D919CE8B27A64C16656FCA9FF1532673651F9C6C\fP to obtain the key\&.
+Run \fCsudo apt-key adv --keyserver keys\&.gnupg\&.net --recv-keys F26BBE02F3C315A19BF1F791A9A25CC1CC83E839\fP to obtain the key\&.
 .IP "2." 4
-Add \fCdeb https://ubuntu-bionic-repo.libelektra.org/ bionic main\fP into \fC/etc/apt/sources\&.list\fP
-.IP "3." 4
-\fCsudo apt-get update\fP
+Add \fCdeb https://debs.libelektra.org/<DISTRIBUTION> <DISTRIBUTION> main\fP into \fC/etc/apt/sources\&.list\fP where \fC<DISTRIBUTION>\fP is the Codename of your distributions e\&.g\&.\fCfocal\fP,\fCbionic\fP,\fCbuster\fP, etc\&.
 .PP
 .PP
-To use the debian repository of the latest builds from master put following lines in \fC/etc/apt/sources\&.list\fP:
-.PP
-For Stretch:
+This can also be done using (e\&.g\&. for Ubuntu Focal):
 .PP
 .PP
 .nf
-deb     [trusted=yes] https://debian-buster-repo\&.libelektra\&.org/ buster main
-deb-src [trusted=yes] https://debian-buster-repo\&.libelektra\&.org/ buster main
-.fi
-.PP
-.PP
-Which can also be done using:
-.PP
-.PP
-.nf
-sudo apt-get install apt-transport-https
-echo "deb     [trusted=yes] https://debian-buster-repo\&.libelektra\&.org/ buster main" | sudo tee /etc/apt/sources\&.list\&.d/elektra\&.list
+apt-get install software-properties-common apt-transport-https
+echo "deb https://debs\&.libelektra\&.org/focal focal main" | sudo tee /etc/apt/sources\&.list\&.d/elektra\&.list
 .fi
 .PP
 .PP
@@ -63,17 +62,62 @@ Or alternatively, you can use (if you do not mind many dependences just to add o
 .PP
 .nf
 sudo apt-get install software-properties-common apt-transport-https
-sudo add-apt-repository "deb     [trusted=yes] https://debian-buster-repo\&.libelektra\&.org/ buster main"
+sudo add-apt-repository "deb https://debs\&.libelektra\&.org/focal focal main"
 .fi
 .PP
 .PP
-For Jessie (not updated anymore, contains 0\&.8\&.24 packages which were created shortly before 0\&.8\&.25 release)
+If you would like to use our bleeding-edge builds (master builds), append \fC-unstable\fP to \fC<DISTRIBUTION>\fP\&.
+.PP
+The \fCetc/apt/source\&.list\fP entry must look like following: \fCdeb https://debs.libelektra.org/<DISTRIBUTION> <DISTRIBUTION>-unstable main\fP
+.PP
+E\&.g\&. \fCdeb https://debs.libelektra.org/focal focal-unstable main\fP
+.PP
+.RS 4
+NOTE: for Ubuntu Bionic the yamlcpp plugin is excluded due to missing dependencies and therefore the package \fClibelektra4-yamlcpp\fP is not available\&. 
+.RE
+.PP
+.PP
+We also provide stable and bleeding-edge packages for Fedora 33\&.
+.PP
+For the stable repository:
 .PP
 .PP
 .nf
-deb     [trusted=yes] https://debian-stable\&.libelektra\&.org/elektra-stable/ jessie main
-deb-src [trusted=yes] https://debian-stable\&.libelektra\&.org/elektra-stable/ jessie main
+wget https://rpms\&.libelektra\&.org/fedora-33/libelektra\&.repo -O libelektra\&.repo;
+sudo mv libelektra\&.repo /etc/yum\&.repos\&.d/;
+sudo yum update
 .fi
+.PP
+.PP
+Or alternatively you can use dnf to add this repo:
+.PP
+.PP
+.nf
+dnf config-manager --add-repo https://rpms\&.libelektra\&.org/fedora-33/libelektra\&.repo
+.fi
+.PP
+.PP
+For our bleeding-edge builds append \fC-unstable\fP to the distribution name:
+.PP
+.PP
+.nf
+wget https://rpms\&.libelektra\&.org/fedora-33-unstable/libelektra\&.repo -O libelektra\&.repo;
+sudo mv libelektra\&.repo /etc/yum\&.repos\&.d/;
+sudo yum update
+.fi
+.PP
+.PP
+Or alternatively you can use dnf to add this repo:
+.PP
+.PP
+.nf
+dnf config-manager --add-repo https://rpms\&.libelektra\&.org/fedora-33-unstable/libelektra\&.repo
+.fi
+.PP
+.PP
+.RS 4
+TODO: add how-to for debugsym packages (different for rpm and deb) 
+.RE
 .PP
 .PP
 To get all packaged plugins, bindings and tools install:
@@ -92,23 +136,13 @@ apt-get install elektra-bin
 .fi
 .PP
 .PP
-If you want to rebuild Elektra from Debian unstable or our repositories, add a \fCdeb-src\fP entry to \fC/etc/apt/sources\&.list\fP and then run:
+To build Debian/Ubuntu Packages from the source you might want to use:
 .PP
 .PP
 .nf
-apt-get source -b elektra
+make package # See CPack below
 .fi
 .PP
-.PP
-To build Debian Packages from the source you might want to use:
-.PP
-.PP
-.nf
-dpkg-buildpackage -us -uc -sa
-.fi
-.PP
-.PP
-(You need to be in the Debian branch, see \fBGIT\fP)
 .PP
 You can install Elektra using \fCHomebrew\fP via the shell command:
 .PP
@@ -124,7 +158,60 @@ Please refer to the section OS Independent below\&.
 .PP
 First follow the steps in \fBCOMPILE\fP\&.
 .PP
-After you completed building Elektra on your own, there are multiple options how to install it\&. For example, with make or cPack tools\&.
+After you completed building Elektra on your own, there are multiple options how to install it\&. For example, with make or CPack tools\&. We recommend to use the packages from our build server or that you generate your own packages with CPack\&.
+.PP
+The current supported systems are: Debian, Ubuntu and Fedora\&.
+.PP
+Then use:
+.PP
+.PP
+.nf
+make package
+.fi
+.PP
+.PP
+which will create packages for distributions where a Generator is implemented\&.
+.PP
+You can find the generated packages in the \fCpackage\fP directory of the build directory\&.
+.PP
+.RS 4
+NOTE: If all plugins/bindings/tools a package includes are excluded, the package will be not generated\&. 
+.RE
+.PP
+.PP
+On Debian based distributions you will need to set LD_LIBRARY_PATH before generating the package\&. Simply \fCcd\fP into the build directory and run following command:
+.PP
+.PP
+.nf
+LD_LIBRARY_PATH=$(pwd)/lib:${LD_LIBRARY_PATH} make package
+.fi
+.PP
+.PP
+To install the packages run this in the \fCpackage\fP directory:
+.PP
+.PP
+.nf
+apt-get install \&./*
+.fi
+.PP
+.PP
+If any dependency problems appear, run following command to install the missing dependencies:
+.PP
+.PP
+.nf
+apt-get -f install
+.fi
+.PP
+.PP
+To install RPM packages we recommend using \fCyum localinstall\fP since installing with \fCrpm\fP doesn't resolve missing dependencies\&.
+.PP
+Run following command in the \fCpackage\fP directory:
+.PP
+.PP
+.nf
+yum localinstall *
+.fi
+.PP
 .PP
 .PP
 .nf
@@ -149,18 +236,6 @@ or in the build directory (will not honor \fCDESTDIR\fP!):
 xargs rm < install_manifest\&.txt
 .fi
 .PP
-.PP
-First follow the steps in \fBCOMPILE\fP\&.
-.PP
-Then use:
-.PP
-.PP
-.nf
-cpack
-.fi
-.PP
-.PP
-which should create a package for distributions where a Generator is implemented\&. See \fCthis cmake file\fP for available Generators and send a merge request for your system\&.
 .PP
 If you encounter the problem that the library can not be found (output like this)
 .PP

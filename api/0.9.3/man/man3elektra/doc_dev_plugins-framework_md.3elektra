@@ -1,4 +1,4 @@
-.TH "doc_dev_plugins-framework_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_dev_plugins-framework_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -21,7 +21,7 @@ As already stated, some parts of the contracts are obligatory\&. \fCkdb mount\fP
 .PP
 As described in \fCinfos/provides\fP, the plugin can also provide descriptive information, for example about the author and the licence\&. Advanced plugins can also export plugin configuration for other plugins so that the overall backend works properly\&. Last, but not least, as enumerated in \fCinfos/placement\fP dependency and placement information makes the system reliable and robust\&. With that information, plugins can be placed into a backend in an automatic and secure way\&.
 .PP
-\fCsystem/elektra/modules\fP provides for every module the information described above\&. The entry exists once a plugin of that module is loaded\&. For each module a special \fImodule backend\fP is generated and mounted at \fCsystem/elektra/modules/<pluginname>\fP\&. The \fCelektraPluginGet()\fP function generates this described contract on requests\&.
+\fCsystem:/elektra/modules\fP provides for every module the information described above\&. The entry exists once a plugin of that module is loaded\&. For each module a special \fImodule backend\fP is generated and mounted at \fCsystem:/elektra/modules/<pluginname>\fP\&. The \fCelektraPluginGet()\fP function generates this described contract on requests\&.
 .PP
 For example, the ccode plugin, implements:
 .PP
@@ -29,12 +29,12 @@ For example, the ccode plugin, implements:
 .nf
 int elektraCcodeGet(Plugin *handle, KeySet *returned, Key *parentKey)
 {
-        if (!strcmp (keyName(parentKey), "system/elektra/modules/ccode"))
+        if (!strcmp (keyName(parentKey), "system:/elektra/modules/ccode"))
         {
                 KeySet *contract = ksNew (30,
-                        keyNew ("system/elektra/modules/ccode",
+                        keyNew ("system:/elektra/modules/ccode",
                                 KEY_END),
-                        keyNew ("system/elektra/modules/ccode/exports",
+                        keyNew ("system:/elektra/modules/ccode/exports",
                                 KEY_END),
                         //\&.\&.\&.
                         KS_END);
@@ -47,13 +47,13 @@ int elektraCcodeGet(Plugin *handle, KeySet *returned, Key *parentKey)
 .fi
 .PP
 .PP
-We see in the listing above that the plugin generates and returns the contract if, and only if, the name of the \fCparentKey\fP is \fCsystem/elektra/modules/ccode\fP\&. The user and the contract checker can access the contract of ccode below the key \fCsystem/elektra/modules/ccode\fP in the same way other configuration is accessed\&. Note that we also have to \fCreturn 1\fP at the end of the contract to not execute the regular functionality of the plugin\&.
+We see in the listing above that the plugin generates and returns the contract if, and only if, the name of the \fCparentKey\fP is \fCsystem:/elektra/modules/ccode\fP\&. The user and the contract checker can access the contract of ccode below the key \fCsystem:/elektra/modules/ccode\fP in the same way other configuration is accessed\&. Note that we also have to \fCreturn 1\fP at the end of the contract to not execute the regular functionality of the plugin\&.
 .PP
 Plugins can also export arbitrary additional functions\&. To export it, simply add another \fCexports\fP symbol to the contract:
 .PP
 .PP
 .nf
-keyNew ("system/elektra/modules/dump/exports/checkconf", KEY_FUNC,
+keyNew ("system:/elektra/modules/dump/exports/checkconf", KEY_FUNC,
         elektraCcodeCheckConf, KEY_END);
 .fi
 .PP

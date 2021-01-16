@@ -86,7 +86,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga933ae8c38aadef6af1462297fcfb5041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute deferred calls from list on given invoke handle.  <a href="#ga933ae8c38aadef6af1462297fcfb5041">More...</a><br /></td></tr>
 <tr class="separator:ga933ae8c38aadef6af1462297fcfb5041"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga80328407d9d418af04c54ab5f10a63c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__invoke.html#ga80328407d9d418af04c54ab5f10a63c0">elektraDeferredCall</a> (Plugin *handle, const char *elektraPluginFunctionName, KeySet *parameters)</td></tr>
-<tr class="memdesc:ga80328407d9d418af04c54ab5f10a63c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a deferable function on a plugin handle.  <a href="#ga80328407d9d418af04c54ab5f10a63c0">More...</a><br /></td></tr>
+<tr class="memdesc:ga80328407d9d418af04c54ab5f10a63c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a deferrable function on a plugin handle.  <a href="#ga80328407d9d418af04c54ab5f10a63c0">More...</a><br /></td></tr>
 <tr class="separator:ga80328407d9d418af04c54ab5f10a63c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa6200aa148a20b58d62cd8cc73f293ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__invoke.html#gaa6200aa148a20b58d62cd8cc73f293ce">elektraDeferredCallAdd</a> (ElektraDeferredCallList *list, const char *name, KeySet *parameters)</td></tr>
 <tr class="memdesc:gaa6200aa148a20b58d62cd8cc73f293ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new deferred call to the deferred call list.  <a href="#gaa6200aa148a20b58d62cd8cc73f293ce">More...</a><br /></td></tr>
@@ -139,7 +139,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Call a deferable function on a plugin handle. </p>
+<p>Call a deferrable function on a plugin handle. </p>
 <p>If the function is exported by the plugin it is directly invoked, if the plugin supports deferring calls, the call is deferred. If both is possible (function is exported and deferred calls are supported), the function is directly called and the call is deferred (i.e. for nested plugins).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -685,7 +685,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000013">Deprecated:</a></b></dt><dd>Do not use.</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd>Do not use.</dd></dl>
 <p>Use <code>elektraInvokeOpen (name, 0, 0)</code> instead.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__invoke.html#ga3eb20131e9a8fc9a6cebf126927c09bc" title="Opens a new handle to invoke functions for a plugin. ">elektraInvokeOpen()</a> </dd></dl>
 

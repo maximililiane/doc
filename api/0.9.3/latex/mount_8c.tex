@@ -30,9 +30,9 @@ int \hyperlink{mount_8c_a23024da76a37a7d29b95d052ba17644e}{mount\+Version} (K\+D
 \begin{DoxyCompactList}\small\item\em Mount the version backend. \end{DoxyCompactList}\item 
 int \hyperlink{mount_8c_aae740f9dc4ff807f236a78a443c66524}{mount\+Backend} (K\+DB $\ast$kdb, Backend $\ast$backend, Key $\ast$error\+Key)
 \begin{DoxyCompactList}\small\item\em Mounts a backend into the trie. \end{DoxyCompactList}\item 
-Key $\ast$ \hyperlink{mount_8c_a06bb59784fce5582ee1363fdb6a59215}{mount\+Get\+Mountpoint} (K\+DB $\ast$handle, const Key $\ast$where)
+Key $\ast$ \hyperlink{mount_8c_af951e2745e17d7b716632362199f3a30}{mount\+Get\+Mountpoint} (K\+DB $\ast$handle, const char $\ast$where)
 \begin{DoxyCompactList}\small\item\em Lookup a mountpoint in a handle for a specific key. \end{DoxyCompactList}\item 
-Backend $\ast$ \hyperlink{mount_8c_a1db75a434f913420942d6896123c5a66}{mount\+Get\+Backend} (K\+DB $\ast$handle, const Key $\ast$key)
+Backend $\ast$ \hyperlink{mount_8c_af949f28a2f16cff516f8b1db88010fbe}{mount\+Get\+Backend} (K\+DB $\ast$handle, const char $\ast$where)
 \begin{DoxyCompactList}\small\item\em Lookup a backend handle for a specific key. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -128,11 +128,11 @@ Default Backend is closed. mount\+Open was executed before.
 {\em 0} & on success \\
 \hline
 \end{DoxyRetVals}
-\mbox{\Hypertarget{mount_8c_a1db75a434f913420942d6896123c5a66}\label{mount_8c_a1db75a434f913420942d6896123c5a66}} 
+\mbox{\Hypertarget{mount_8c_af949f28a2f16cff516f8b1db88010fbe}\label{mount_8c_af949f28a2f16cff516f8b1db88010fbe}} 
 \index{mount.\+c@{mount.\+c}!mount\+Get\+Backend@{mount\+Get\+Backend}}
 \index{mount\+Get\+Backend@{mount\+Get\+Backend}!mount.\+c@{mount.\+c}}
 \subsubsection{\texorpdfstring{mount\+Get\+Backend()}{mountGetBackend()}}
-{\footnotesize\ttfamily Backend$\ast$ mount\+Get\+Backend (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const Key $\ast$}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Backend$\ast$ mount\+Get\+Backend (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const char $\ast$}]{where }\end{DoxyParamCaption})}
 
 
 
@@ -148,17 +148,17 @@ If key is 0 or invalid the default backend will be returned.
 \begin{DoxyParams}{Parameters}
 {\em handle} & is the data structure, where the mounted directories are saved. \\
 \hline
-{\em key} & the key, that should be looked up. \\
+{\em where} & the key name, that should be looked up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the backend handle associated with the key 
 \end{DoxyReturn}
-\mbox{\Hypertarget{mount_8c_a06bb59784fce5582ee1363fdb6a59215}\label{mount_8c_a06bb59784fce5582ee1363fdb6a59215}} 
+\mbox{\Hypertarget{mount_8c_af951e2745e17d7b716632362199f3a30}\label{mount_8c_af951e2745e17d7b716632362199f3a30}} 
 \index{mount.\+c@{mount.\+c}!mount\+Get\+Mountpoint@{mount\+Get\+Mountpoint}}
 \index{mount\+Get\+Mountpoint@{mount\+Get\+Mountpoint}!mount.\+c@{mount.\+c}}
 \subsubsection{\texorpdfstring{mount\+Get\+Mountpoint()}{mountGetMountpoint()}}
-{\footnotesize\ttfamily Key$\ast$ mount\+Get\+Mountpoint (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const Key $\ast$}]{where }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Key$\ast$ mount\+Get\+Mountpoint (\begin{DoxyParamCaption}\item[{K\+DB $\ast$}]{handle,  }\item[{const char $\ast$}]{where }\end{DoxyParamCaption})}
 
 
 
@@ -169,16 +169,14 @@ Will return a key representing the mountpoint or null if there is no appropriate
 \begin{DoxyParagraph}{Example\+:}
 
 \begin{DoxyCode}
-Key * key = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/template"});
 KDB * handle = \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdbOpen}();
 Key *mountpoint=0;
-mountpoint=kdbGetMountpoint(handle, key);
+mountpoint=kdbGetMountpoint(handle, \textcolor{stringliteral}{"system:/template"});
 
 printf(\textcolor{stringliteral}{"The backend I am using is %s mounted in %s\(\backslash\)n"},
         \hyperlink{group__keyvalue_ga6f29609c5da53c6dc26a98678d5752af}{keyValue}(mountpoint),
         \hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName}(mountpoint));
 \hyperlink{group__kdb_gadb54dc9fda17ee07deb9444df745c96f}{kdbClose} (handle);
-\hyperlink{group__key_ga3df95bbc2494e3e6703ece5639be5bb1}{keyDel} (key);
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -186,7 +184,7 @@ printf(\textcolor{stringliteral}{"The backend I am using is %s mounted in %s\(\b
 \begin{DoxyParams}{Parameters}
 {\em handle} & is the data structure, where the mounted directories are saved. \\
 \hline
-{\em where} & the key, that should be looked up. \\
+{\em where} & the key name, that should be looked up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

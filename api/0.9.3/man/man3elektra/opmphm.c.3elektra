@@ -1,4 +1,4 @@
-.TH "opmphm.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "opmphm.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -86,7 +86,7 @@ opmphm.c \- The Order Preserving Minimal Perfect Hash Map\&.
 .br
 .RI "Clears the OPMPHM\&. "
 .ti -1c
-.RI "ELEKTRA_NO_SANITIZE_UNDEFINED ELEKTRA_NO_SANITIZE_INTEGER uint32_t \fBopmphmHashfunction\fP (const void *key, size_t length, uint32_t initval)"
+.RI "ELEKTRA_NO_SANITIZE_UNDEFINED ELEKTRA_NO_SANITIZE_INTEGER ELEKTRA_NO_SANITIZE_ADDRESS uint32_t \fBopmphmHashfunction\fP (const void *key, size_t length, uint32_t initval)"
 .br
 .RI "Hash function By Bob Jenkins, May 2006 http://burtleburtle.net/bob/c/lookup3.c Original name: hashlitte\&. "
 .in -1c

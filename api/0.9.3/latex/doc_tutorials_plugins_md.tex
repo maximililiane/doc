@@ -36,7 +36,7 @@ The K\+DB relies on the first five functions for interacting with configuration 
 
 Most simply put\+: most plugins consist of five major functions, {\ttfamily \hyperlink{elektra_2plugin_8c_a32a70a7876542c51d153164ac5108a57}{elektra\+Plugin\+Open()}}, {\ttfamily elektra\+Plugin\+Close()}, {\ttfamily elektra\+Plugin\+Get()}, {\ttfamily elektra\+Plugin\+Set()}, and {\ttfamily E\+L\+E\+K\+T\+R\+A\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+P\+L\+U\+G\+IN}.
 
-Because remembering all these functions can be cumbersome, we provide a skeleton plugin in order to easily create a new plugin. The skeleton plugin is called \hyperlink{autotoc_md685_src_plugins_template_README_md}{`template`} and a new plugin can be created by calling the copy-\/template script . For example, the author of the \hyperlink{autotoc_md374_src_plugins_line_README_md}{line plugin} used the command {\ttfamily scripts/dev/copy-\/template line} to create the initial version of the plugin. Afterwards two important things are left to be done\+:
+Because remembering all these functions can be cumbersome, we provide a skeleton plugin in order to easily create a new plugin. The skeleton plugin is called \hyperlink{autotoc_md627_src_plugins_template_README_md}{`template`} and a new plugin can be created by calling the copy-\/template script . For example, the author of the \hyperlink{autotoc_md341_src_plugins_line_README_md}{line plugin} used the command {\ttfamily scripts/dev/copy-\/template line} to create the initial version of the plugin. Afterwards two important things are left to be done\+:
 
 
 \begin{DoxyItemize}
@@ -46,7 +46,7 @@ Because remembering all these functions can be cumbersome, we provide a skeleton
 
 After these two steps your plugin is ready to be compiled, installed and mounted for the first time. Have a look at \hyperlink{doc_tutorials_mount_md}{How-\/\+To\+: kdb mount}
 
-If you want to use C++ instead of C for plugin development you can use `copy-\/template` to create a plugin based on \hyperlink{autotoc_md108_src_plugins_cpptemplate_README_md}{`cpptemplate`}. For example, to create a new plugin called {\ttfamily pluginbaby} use the command\+:
+If you want to use C++ instead of C for plugin development you can use `copy-\/template` to create a plugin based on \hyperlink{autotoc_md106_src_plugins_cpptemplate_README_md}{`cpptemplate`}. For example, to create a new plugin called {\ttfamily pluginbaby} use the command\+:
 
 
 \begin{DoxyCode}
@@ -107,22 +107,22 @@ Every of these line represents a clause of the contract. All these clauses need 
 
 The information of clauses are limited to a single line, starting with {\ttfamily -\/} (so that the file renders nicely in Markdown), followed by the clause itself separated by {\ttfamily =}. Only for the description an unlimited amount of lines can be used (until the end of the file).
 
-For the meaning (semantics) of these clauses, please refer to \href{/home/jenkins/workspace/libelektra-release/doc/CONTRACT.ini}{\tt contract specification}. The only difference for filter plugins is that their {\ttfamily infos/provides} and {\ttfamily infos/placements} are different.
+For the meaning (semantics) of these clauses, please refer to \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/CONTRACT.ini}{\tt contract specification}. The only difference for filter plugins is that their {\ttfamily infos/provides} and {\ttfamily infos/placements} are different.
 
 The already mentioned {\ttfamily generate\+\_\+readme} will produce a list of Keys using the information in {\ttfamily R\+E\+A\+D\+M\+E.\+md}. It would look like (for the third key)\+:
 
 
 \begin{DoxyCode}
-\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/infos/licence"},
+\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/infos/licence"},
         \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"BSD"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \end{DoxyCode}
 
 
-In your plugin, specifically in your {\ttfamily elektra\+Plugin\+Get()} implementation, you have to return the contract whenever configuration below {\ttfamily system/elektra/modules/plugin} is requested\+:
+In your plugin, specifically in your {\ttfamily elektra\+Plugin\+Get()} implementation, you have to return the contract whenever configuration below {\ttfamily system\+:/elektra/modules/plugin} is requested\+:
 
 
 \begin{DoxyCode}
-\textcolor{keywordflow}{if} (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName}(parentKey), \textcolor{stringliteral}{"system/elektra/modules/plugin"}))
+\textcolor{keywordflow}{if} (!strcmp (\hyperlink{group__keyname_ga8e805c726a60da921d3736cda7813513}{keyName}(parentKey), \textcolor{stringliteral}{"system:/elektra/modules/plugin"}))
 \{
         KeySet *moduleConf = elektraPluginContract();
         \hyperlink{group__keyset_ga21eb9c3a14a604ee3a8bdc779232e7b7}{ksAppend}(returned, moduleConf);
@@ -132,30 +132,30 @@ In your plugin, specifically in your {\ttfamily elektra\+Plugin\+Get()} implemen
 \end{DoxyCode}
 
 
-The {\ttfamily elektra\+Plugin\+Contract()} is a method implemented by the plugin developer containing the parts of the contract not specified in {\ttfamily R\+E\+A\+D\+M\+E.\+md}. An example of this function (taken from the \hyperlink{autotoc_md835_src_plugins_yajl_README_md}{`yajl`} plugin)\+:
+The {\ttfamily elektra\+Plugin\+Contract()} is a method implemented by the plugin developer containing the parts of the contract not specified in {\ttfamily R\+E\+A\+D\+M\+E.\+md}. An example of this function (taken from the \hyperlink{autotoc_md777_src_plugins_yajl_README_md}{`yajl`} plugin)\+:
 
 
 \begin{DoxyCode}
 \textcolor{keyword}{static} \textcolor{keyword}{inline} KeySet *elektraYajlContract()
 \{
         \textcolor{keywordflow}{return} \hyperlink{group__keyset_ga671e1aaee3ae9dc13b4834a4ddbd2c3c}{ksNew} (30,
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"yajl plugin waits for your orders"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/exports"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/exports/get"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/exports"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/exports/get"},
                 KEY\_FUNC, elektraYajlGet,
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/exports/set"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/exports/set"},
                 KEY\_FUNC, elektraYajlSet,
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
 #include \textcolor{stringliteral}{"readme\_yourplugin.c"}
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/infos/version"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/infos/version"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, PLUGINVERSION, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/config"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/config/"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/config"}, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/config/"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"system"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
-        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/yajl/config/below"},
+        \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/yajl/config/below"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8ac66e4a49d09212b79f5754ca6db5bd2e}{KEY\_VALUE}, \textcolor{stringliteral}{"user"},
                 \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END}),
         \hyperlink{group__keyset_ga7a28fce3773b2c873c94ac80b8b4cd54}{KS\_END});
@@ -173,7 +173,7 @@ include\_directories ($\{CMAKE\_CURRENT\_BINARY\_DIR\})
 \end{DoxyCode}
 
 
-For every plugin you have to write a {\ttfamily C\+Make\+Lists.\+txt}. If your plugin has no dependencies, you can skip this section. The full documentation of {\ttfamily add\+\_\+plugin} is available \href{/home/jenkins/workspace/libelektra-release/scripts/cmake/Modules/LibAddPlugin.cmake}{\tt here}.
+For every plugin you have to write a {\ttfamily C\+Make\+Lists.\+txt}. If your plugin has no dependencies, you can skip this section. The full documentation of {\ttfamily add\+\_\+plugin} is available \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/scripts/cmake/Modules/LibAddPlugin.cmake}{\tt here}.
 
 In order to understand how to write the {\ttfamily C\+Make\+Lists.\+txt}, you need to know that the same file is included multiple times for different reasons.
 
@@ -244,9 +244,9 @@ This section will focus on an overview of the kind of code you would use to deve
 \item {\ttfamily 0}\+: The function was successful and the given keyset/configuration was {\bfseries not changed} ({\ttfamily E\+L\+E\+K\+T\+R\+A\+\_\+\+P\+L\+U\+G\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+N\+O\+\_\+\+U\+P\+D\+A\+TE}).
 \end{DoxyItemize}
 
-Any other return value indicates an error ({\ttfamily E\+L\+E\+K\+T\+R\+A\+\_\+\+P\+L\+U\+G\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+R\+R\+OR}). The function will take in a {\ttfamily Key}, usually called {\ttfamily parent\+Key} which contains a string containing the path to the file that is mounted. For instance, if you run the command {\ttfamily kdb mount /etc/linetest system/linetest line} then {\ttfamily key\+String(parent\+Key)} should be equal to {\ttfamily /etc/linetest}. At this point, you generally want to open the file so you can begin saving it into keys. Here is the trickier part to explain. Basically, at this point you will want to iterate through the file and create keys and store string values inside of them according to what your plugin is supposed to do. I will give a few examples of different plugins to better explain.
+Any other return value indicates an error ({\ttfamily E\+L\+E\+K\+T\+R\+A\+\_\+\+P\+L\+U\+G\+I\+N\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+E\+R\+R\+OR}). The function will take in a {\ttfamily Key}, usually called {\ttfamily parent\+Key} which contains a string containing the path to the file that is mounted. For instance, if you run the command {\ttfamily kdb mount /etc/linetest system\+:/linetest line} then {\ttfamily key\+String(parent\+Key)} should be equal to {\ttfamily /etc/linetest}. At this point, you generally want to open the file so you can begin saving it into keys. Here is the trickier part to explain. Basically, at this point you will want to iterate through the file and create keys and store string values inside of them according to what your plugin is supposed to do. I will give a few examples of different plugins to better explain.
 
-The line plugin was written to read files into a {\ttfamily Key\+Set} line by line using the newline character as a delimiter and naming the keys by their line number such as {\ttfamily \#1}, {\ttfamily \#2}, .. {\ttfamily \#\+\_\+22} for a file with 22 lines. So once I open the file given by {\ttfamily parent\+Key}, every time as I read a line I create a new key, let\textquotesingle{}s call it {\ttfamily new\+\_\+key} using {\ttfamily dup\+Key(parent\+Key)}. Then I set {\ttfamily new\+\_\+key}\textquotesingle{}s name to {\ttfamily line\+NN} (where NN is the line number) using {\ttfamily key\+Add\+Base\+Name} and store the string value of the line into the key using {\ttfamily key\+Set\+String}. Once the key is initialized, I append it to the {\ttfamily Key\+Set} that was passed into the {\ttfamily elektra\+Plugin\+Get} function, let\textquotesingle{}s call it {\ttfamily returned} for now, using {\ttfamily ks\+Append\+Key(returned, new\+\_\+key)}. Now the {\ttfamily Key\+Set} will contain {\ttfamily new\+\_\+key} with the name {\ttfamily \#N} properly saved where it should be according to the {\ttfamily kdb mount} command (in this case, {\ttfamily system/linetest/\#N}), and a string value equal to the contents of that line in the file. The line plugin repeats these steps as long as it hasn\textquotesingle{}t reached end of file, thus saving the whole file into a {\ttfamily Key\+Set} line by line.
+The line plugin was written to read files into a {\ttfamily Key\+Set} line by line using the newline character as a delimiter and naming the keys by their line number such as {\ttfamily \#1}, {\ttfamily \#2}, .. {\ttfamily \#\+\_\+22} for a file with 22 lines. So once I open the file given by {\ttfamily parent\+Key}, every time as I read a line I create a new key, let\textquotesingle{}s call it {\ttfamily new\+\_\+key} using {\ttfamily dup\+Key(parent\+Key)}. Then I set {\ttfamily new\+\_\+key}\textquotesingle{}s name to {\ttfamily line\+NN} (where NN is the line number) using {\ttfamily key\+Add\+Base\+Name} and store the string value of the line into the key using {\ttfamily key\+Set\+String}. Once the key is initialized, I append it to the {\ttfamily Key\+Set} that was passed into the {\ttfamily elektra\+Plugin\+Get} function, let\textquotesingle{}s call it {\ttfamily returned} for now, using {\ttfamily ks\+Append\+Key(returned, new\+\_\+key)}. Now the {\ttfamily Key\+Set} will contain {\ttfamily new\+\_\+key} with the name {\ttfamily \#N} properly saved where it should be according to the {\ttfamily kdb mount} command (in this case, {\ttfamily system\+:/linetest/\#N}), and a string value equal to the contents of that line in the file. The line plugin repeats these steps as long as it hasn\textquotesingle{}t reached end of file, thus saving the whole file into a {\ttfamily Key\+Set} line by line.
 
 The {\ttfamily simpleini} plugin works similarly, but it parses for {\ttfamily ini} files instead of just line-\/by-\/line. At their most simple level, {\ttfamily ini} files are in the format of {\ttfamily name=value} with each pair taking one line. So for this plugin, it makes a lot of sense to name each {\ttfamily Key} in the {\ttfamily Key\+Set} by the string to the left of the {\ttfamily =} sign and store the value into each key as a string. For instance, the name of the key would be {\ttfamily name} and {\ttfamily key\+Get\+String(name)} would return {\ttfamily value}.
 
@@ -338,7 +338,7 @@ The {\ttfamily elektra\+Plugin\+Check\+Conf} function is exported via the plugin
 
 
 \begin{DoxyCode}
-\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system/elektra/modules/"} ELEKTRA\_PLUGIN\_NAME \textcolor{stringliteral}{"/exports/checkconf"}, KEY\_FUNC, 
+\hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNew} (\textcolor{stringliteral}{"system:/elektra/modules/"} ELEKTRA\_PLUGIN\_NAME \textcolor{stringliteral}{"/exports/checkconf"}, KEY\_FUNC, 
       elektraLineCheckConf, \hyperlink{group__key_gga9b703ca49f48b482def322b77d3e6bc8aa8adb6fcb92dec58fb19410eacfdd403}{KEY\_END});
 \end{DoxyCode}
 

@@ -49,7 +49,10 @@ $(function() {
 <li>implementing a new namespace that gets merged</li>
 <li>merge specification files during installation</li>
 </ul>
-<p>Provide means that a single specification can satisfy every distribution and administrator.</p>
+<p>As found out during implementation of <a class="el" href="autotoc_md618.html#src_plugins_specload_README_md">specload</a>, only a very limited subset can be modified safely, e.g.:</p>
+<ul>
+<li>add/edit/remove <code>description</code>, <code>opt/help</code> and <code>comment</code></li>
+</ul>
 <ul>
 <li>Elektra wants to reduce fragmentation, and vendor specific changes obviously is a severe kind of fragmentation</li>
 <li>providing vendor overrides/fallbacks might be an excuse to not provide better typing or general overrides/fallbacks features which would avoid the need for a vendor overrides/fallbacks at all</li>

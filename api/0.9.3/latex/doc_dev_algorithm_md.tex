@@ -46,38 +46,38 @@ For example, a generator plugin in the backend (A) always emits following keys. 
 
 
 \begin{DoxyCode}
-user/sw/generator/akey (A)
-user/sw/generator/dir (A)
-user/sw/generator/dir/outside1 (A)
-user/sw/generator/dir/outside2 (A)
+user:/sw/generator/akey (A)
+user:/sw/generator/dir (A)
+user:/sw/generator/dir/outside1 (A)
+user:/sw/generator/dir/outside2 (A)
 \end{DoxyCode}
 
 
-It will still return these keys even if the plugin is not responsible for some of them anymore. This can happen if another backend B is mounted to {\ttfamily user/sw/generator/dir}. In the example it yields the following keys\+:
+It will still return these keys even if the plugin is not responsible for some of them anymore. This can happen if another backend B is mounted to {\ttfamily user\+:/sw/generator/dir}. In the example it yields the following keys\+:
 
 
 \begin{DoxyCode}
-user/sw/generator/dir (B)
-user/sw/generator/dir/new (B)
-user/sw/generator/dir/outside1 (B)
-user/sw/generator/outside (B)
+user:/sw/generator/dir (B)
+user:/sw/generator/dir/new (B)
+user:/sw/generator/dir/outside1 (B)
+user:/sw/generator/outside (B)
 \end{DoxyCode}
 
 
-In this situation {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} is responsible to pop all three keys at, and below, {\ttfamily user/sw/generator/dir} of backend (A) and the key {\ttfamily user/sw/generator/outside} of backend (B). The user will get the resulting key set\+:
+In this situation {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} is responsible to pop all three keys at, and below, {\ttfamily user\+:/sw/generator/dir} of backend (A) and the key {\ttfamily user\+:/sw/generator/outside} of backend (B). The user will get the resulting key set\+:
 
 
 \begin{DoxyCode}
-user/sw/generator/akey (A)
-user/sw/generator/dir (B)
-user/sw/generator/dir/new (B)
-user/sw/generator/dir/outside1 (B)
+user:/sw/generator/akey (A)
+user:/sw/generator/dir (B)
+user:/sw/generator/dir/new (B)
+user:/sw/generator/dir/outside1 (B)
 \end{DoxyCode}
 
 
-Note that the key exactly at the mount point comes from the backend mounted at {\ttfamily user/sw/generator/dir}.
+Note that the key exactly at the mount point comes from the backend mounted at {\ttfamily user\+:/sw/generator/dir}.
 
-{\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} already creates a {\ttfamily Split} object for the whole configuration tree. In this object, {\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} will append a list of all backends available. A specific {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} request usually includes only a part of the configuration. For example, the user is only interested in keys below {\ttfamily user/sw/apps/userapp}. All backends that cannot contribute to configuration below {\ttfamily user/sw/apps/userapp} will be omitted for that request. To achieve this, parts of the {\ttfamily Split} object are filtered out. After this step we know the list of backends involved. The {\ttfamily Split} object allocates a key set for each of these backends.
+{\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} already creates a {\ttfamily Split} object for the whole configuration tree. In this object, {\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} will append a list of all backends available. A specific {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} request usually includes only a part of the configuration. For example, the user is only interested in keys below {\ttfamily user\+:/sw/apps/userapp}. All backends that cannot contribute to configuration below {\ttfamily user\+:/sw/apps/userapp} will be omitted for that request. To achieve this, parts of the {\ttfamily Split} object are filtered out. After this step we know the list of backends involved. The {\ttfamily Split} object allocates a key set for each of these backends.
 
 Afterwards the first plugin of each backend is called to determine if an update is needed. If no update is needed, the algorithm has finished and returns zero.
 
@@ -102,7 +102,7 @@ The given goal is to keep the sequence of needed syscalls low. If no update is n
 
 This decision yields some advantages. Both the storage plugins and Elektra’s core can conform to C99. Because the resolver plugin is the very first in the chain of plugins, it is guaranteed that no useless work is done.
 
-Because Elektra provides self-\/contained configuration, {\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} has to retrieve settings in the {\itshape bootstrapping} process below {\ttfamily system/elektra} as explained in {\ttfamily bootstrapping}. Because of the new way to keep track of removed keys, the internally executed {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} creates a problem. Without countermeasures even the first {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} of a user requesting the configuration below {\ttfamily system/elektra} fails, because the resolver finds out that the configuration is already up to date. The configuration delivered by the user is empty at this point. As a result, the empty configuration will be appointed and returned to the user.
+Because Elektra provides self-\/contained configuration, {\ttfamily \hyperlink{group__kdb_ga6808defe5870f328dd17910aacbdc6ca}{kdb\+Open()}} has to retrieve settings in the {\itshape bootstrapping} process below {\ttfamily system\+:/elektra} as explained in {\ttfamily bootstrapping}. Because of the new way to keep track of removed keys, the internally executed {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} creates a problem. Without countermeasures even the first {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} of a user requesting the configuration below {\ttfamily system\+:/elektra} fails, because the resolver finds out that the configuration is already up to date. The configuration delivered by the user is empty at this point. As a result, the empty configuration will be appointed and returned to the user.
 
 A simple way to resolve this issue is to reload the default backend after the internal configuration was fetched. Reloading resets the timestamps and {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} works as expected.
 
@@ -125,7 +125,7 @@ The synopsis of the function is\+:
 \end{DoxyCode}
 
 
-The user passes the configuration using the {\ttfamily Key\+Set} {\ttfamily returned}. The key set will not be changed by {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}}. The {\ttfamily parent\+Key} provides a way to limit which part of the configuration is written out. For example, the {\ttfamily parent\+Key} {\ttfamily user/sw/org/app/\#0/current} will induce {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} to only modify the key databases below {\ttfamily user/sw/org/app} even if the {\ttfamily Key\+Set} {\ttfamily returned} also contains more configuration. Note that all backends with no keys in {\ttfamily returned} but that are below {\ttfamily parent\+Key} will completely wipe out their key database. The {\ttfamily K\+DB} handle contains the necessary data structures.
+The user passes the configuration using the {\ttfamily Key\+Set} {\ttfamily returned}. The key set will not be changed by {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}}. The {\ttfamily parent\+Key} provides a way to limit which part of the configuration is written out. For example, the {\ttfamily parent\+Key} {\ttfamily user\+:/sw/org/app/\#0/current} will induce {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} to only modify the key databases below {\ttfamily user\+:/sw/org/app} even if the {\ttfamily Key\+Set} {\ttfamily returned} also contains more configuration. Note that all backends with no keys in {\ttfamily returned} but that are below {\ttfamily parent\+Key} will completely wipe out their key database. The {\ttfamily K\+DB} handle contains the necessary data structures.
 
 As a first step, {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} {\itshape divides} the configuration passed in by the user to the key sets in the {\ttfamily Split} object. {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} searches for every key if the {\itshape sync flag} is checked. Then {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} decides if a key was removed from a backend by comparing the actual size of the key set with the size stored from the last {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} call. We see that it is necessary to call {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} first before invocations of {\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} are allowed.
 

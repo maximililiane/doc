@@ -1,4 +1,4 @@
-.TH "invoke.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "invoke.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -71,7 +71,7 @@ invoke.c \- Library for invoking exported plugin functions\&.
 .ti -1c
 .RI "int \fBelektraDeferredCall\fP (Plugin *handle, const char *elektraPluginFunctionName, KeySet *parameters)"
 .br
-.RI "Call a deferable function on a plugin handle\&. "
+.RI "Call a deferrable function on a plugin handle\&. "
 .ti -1c
 .RI "int \fBelektraDeferredCallAdd\fP (ElektraDeferredCallList *list, const char *name, KeySet *parameters)"
 .br

@@ -1,4 +1,4 @@
-.TH "trie.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "trie.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,7 @@ trie.c \- Interna of trie functionality\&.
 
 .in +1c
 .ti -1c
-.RI "Backend * \fBtrieLookup\fP (Trie *trie, const Key *key)"
+.RI "Backend * \fBtrieLookup\fP (Trie *trie, const char *name)"
 .br
 .RI "The Trie structure\&. "
 .ti -1c
@@ -78,7 +78,7 @@ Insert into trie\&.
 .RE
 .PP
 
-.SS "Backend* trieLookup (Trie * trie, const Key * key)"
+.SS "Backend* trieLookup (Trie * trie, const char * name)"
 
 .PP
 The Trie structure\&. Lookups a backend inside the trie\&.

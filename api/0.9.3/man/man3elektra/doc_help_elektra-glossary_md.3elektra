@@ -1,4 +1,4 @@
-.TH "doc_help_elektra-glossary_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_elektra-glossary_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -46,6 +46,12 @@ To \fBelektrify\fP an application: to change the application so that it uses Lib
 \fBContracts\fP: Contracts state the purpose, functionality and requirements of \fBplugins\fP\&.
 .IP "\(bu" 2
 \fBMounting\fP: To persistently and permanently include a \fBbackend\fP in the \fBglobal key database\fP\&. The \fBmountpoint\fP is the key where the backend is mounted to\&. All keys of the backend are below that key\&.
+.IP "\(bu" 2
+\fBKey name\fP: All keys in the KDB have a name\&. This name is the keys unique identifier and follows a particular structure\&. For more information take look at the \fBkeyname documentation\fP\&.
+.IP "\(bu" 2
+\fBKey name part\fP: Key names consist of a series parts (and a namespace)\&.
+.IP "\(bu" 2
+\fBKey base name\fP: The last part of a key name\&.
 .IP "\(bu" 2
 \fBNamespaces\fP: Allow us to have multiple keys for the same purpose and otherwise the same key name\&.
 .IP "\(bu" 2

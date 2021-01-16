@@ -1,4 +1,4 @@
-.TH "kdbextension.h" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "kdbextension.h" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -10,8 +10,6 @@ kdbextension.h \- Extension functionality\&.
 \fC#include <kdbease\&.h>\fP
 .br
 \fC#include <kdbmeta\&.h>\fP
-.br
-\fC#include <kdbproposal\&.h>\fP
 .br
 
 .SH "Detailed Description"

@@ -5,6 +5,8 @@
 Internal methods for Elektra.  
 
 
+{\ttfamily \#include \char`\"{}kdbprivate.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$kdb.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}kdbinternal.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$kdbassert.\+h$>$}\newline
 Include dependency graph for internal.\+c\+:
@@ -49,9 +51,7 @@ size\+\_\+t \hyperlink{internal_8c_afd676487565d083a6ad5a1381095acd8}{elektra\+S
 char $\ast$ \hyperlink{internal_8c_a1a64d23660e0724a517dad25409f69e0}{elektra\+Format} (const char $\ast$format,...)
 \begin{DoxyCompactList}\small\item\em Does string formatting in fresh allocated memory. \end{DoxyCompactList}\item 
 char $\ast$ \hyperlink{internal_8c_abf1d4e3e507c0422bf4cc29a9fe92679}{elektra\+V\+Format} (const char $\ast$format, va\+\_\+list arg\+\_\+list)
-\begin{DoxyCompactList}\small\item\em Does string formatting in fresh allocated memory. \end{DoxyCompactList}\item 
-int \hyperlink{internal_8c_a7126bbb84c75bb98c1e3641dcdf32c6b}{elektra\+Validate\+Key\+Name} (const char $\ast$name, size\+\_\+t size)
-\begin{DoxyCompactList}\small\item\em Validates whether the supplied keyname is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Does string formatting in fresh allocated memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -495,37 +495,6 @@ This function also works with \textbackslash{}0 characters in the buffer. The le
 {\em l} & the length of s \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{internal_8c_a7126bbb84c75bb98c1e3641dcdf32c6b}\label{internal_8c_a7126bbb84c75bb98c1e3641dcdf32c6b}} 
-\index{internal.\+c@{internal.\+c}!elektra\+Validate\+Key\+Name@{elektra\+Validate\+Key\+Name}}
-\index{elektra\+Validate\+Key\+Name@{elektra\+Validate\+Key\+Name}!internal.\+c@{internal.\+c}}
-\subsubsection{\texorpdfstring{elektra\+Validate\+Key\+Name()}{elektraValidateKeyName()}}
-{\footnotesize\ttfamily int elektra\+Validate\+Key\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
-
-
-
-Validates whether the supplied keyname is valid. 
-
-The function looks for tangling escape characters in the end and for a minimum length.
-
-Does not check for valid namespaces
-
-\begin{DoxyPrecond}{Precondition}
-size must be at least 2
-\end{DoxyPrecond}
-
-\begin{DoxyParams}{Parameters}
-{\em name} & the key name that is to be checked \\
-\hline
-{\em size} & a elektra\+Str\+Len of the key name \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyRetVals}{Return values}
-{\em true} & if the supplied keyname part is valid \\
-\hline
-{\em false} & if its invalid \\
-\hline
-\end{DoxyRetVals}
 \mbox{\Hypertarget{internal_8c_abf1d4e3e507c0422bf4cc29a9fe92679}\label{internal_8c_abf1d4e3e507c0422bf4cc29a9fe92679}} 
 \index{internal.\+c@{internal.\+c}!elektra\+V\+Format@{elektra\+V\+Format}}
 \index{elektra\+V\+Format@{elektra\+V\+Format}!internal.\+c@{internal.\+c}}

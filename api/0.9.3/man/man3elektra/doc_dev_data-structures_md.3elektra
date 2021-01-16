@@ -1,4 +1,4 @@
-.TH "doc_dev_data-structures_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_dev_data-structures_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -49,13 +49,13 @@ There are several ways to define consistency relations on key sets\&. For \fBstr
 .PP
 .PP
 .nf
-system
-system/elektra
-system/elektra/mountpoints
+system:/
+system:/elektra
+system:/elektra/mountpoints
 .fi
 .PP
 .PP
-would allow the key \fCsystem/elektra/mountpoints/tcl\fP to be added, but not the key \fCsystem/apps/abc\fP because \fCsystem/apps\fP is missing\&. File systems enforce this kind of consistency\&.
+would allow the key \fCsystem:/elektra/mountpoints/tcl\fP to be added, but not the key \fCsystem:/apps/abc\fP because \fCsystem:/apps\fP is missing\&. File systems enforce this kind of consistency\&.
 .PP
 These semantics are however not useful for configurations\&. Especially for user configurations often only some keys need to be overwritten\&. It is not a good idea to copy all parent keys to the users configuration\&. For this reason we use a less strict definition of consistency supporting such holes\&.
 .PP
@@ -63,13 +63,13 @@ We also evaluated a form of \fBweak consistency\fP\&. It avoids adding some unne
 .PP
 .PP
 .nf
-user/sw/apps/abc/current/bindings
-user/sw/apps/abc/current/bindings/key1
-user/sw/apps/abc/current/bindings/key2
+user:/sw/apps/abc/current/bindings
+user:/sw/apps/abc/current/bindings/key1
+user:/sw/apps/abc/current/bindings/key2
 .fi
 .PP
 .PP
-the weak consistency would allow inserting \fCuser/sw/apps/abc/current/bindings/key3\fP because it is directly below an existing key\&. It would also allow adding \fCuser/sw/apps/xyz/current\fP because it does not have any parent key\&. But it would not allow \fCuser/sw/apps/abc/current/bindings/dir/key1\fP to add\&. The worst-case complexity was found to be too expensive, and hence \fCKeySet\fP has \fBno consistency\fP check at all\&.
+the weak consistency would allow inserting \fCuser:/sw/apps/abc/current/bindings/key3\fP because it is directly below an existing key\&. It would also allow adding \fCuser:/sw/apps/xyz/current\fP because it does not have any parent key\&. But it would not allow \fCuser:/sw/apps/abc/current/bindings/dir/key1\fP to add\&. The worst-case complexity was found to be too expensive, and hence \fCKeySet\fP has \fBno consistency\fP check at all\&.
 .PP
 This means any key with a valid key name can be inserted into \fCKeySet\fP\&. The \fCKeySet\fP is changed so that it is now impossible to append keys without a name\&. \fCksAppendKey(ks, Key *toAppend)\fP takes ownership of the key \fCtoAppend\fP and will delete the key in that case\&. The caller does not have to free \fCtoAppend\fP: either it is in the key set or it is deleted\&.
 .PP

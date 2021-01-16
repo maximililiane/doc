@@ -1,4 +1,4 @@
-.TH "keytest" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "keytest" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,10 +26,6 @@ keytest \- Methods to do various tests on Keys\&.
 .RI "int \fBkeyIsDirectlyBelow\fP (const Key *key, const Key *check)"
 .br
 .RI "Check whether the key \fCcheck\fP is directly below the key \fCkey\fP\&. "
-.ti -1c
-.RI "int \fBkeyIsInactive\fP (const Key *key)"
-.br
-.RI "Check whether a key is inactive\&. "
 .ti -1c
 .RI "int \fBkeyIsBinary\fP (const Key *key)"
 .br
@@ -98,20 +94,8 @@ Given any Keys k1 and k2 constructed with \fBkeyNew()\fP, following equation hol
  Here are some more examples: 
 .PP
 .nf
-Key *k1 = keyNew("user/a", KEY_END);
-Key *k2 = keyNew("user/b", KEY_END);
-
-// keyCmp(k1,k2) < 0
-// keyCmp(k2,k1) > 0
-
-.fi
-.PP
-.PP
-And even more: 
-.PP
-.nf
-Key *k1 = keyNew("user/a", KEY_OWNER, "markus", KEY_END);
-Key *k2 = keyNew("user/a", KEY_OWNER, "max", KEY_END);
+Key *k1 = keyNew("user:/a", KEY_END);
+Key *k2 = keyNew("user:/b", KEY_END);
 
 // keyCmp(k1,k2) < 0
 // keyCmp(k2,k1) > 0
@@ -142,8 +126,8 @@ Do not strcmp the \fBkeyName()\fP yourself because the result differs from simpl
 Check if the key check is below the key key or not\&. Example: 
 .PP
 .nf
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 .fi
 .PP
@@ -153,8 +137,8 @@ returns true because check is below key
 Example: 
 .PP
 .nf
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 .fi
 .PP
@@ -226,14 +210,14 @@ Check whether the key \fCcheck\fP is directly below the key \fCkey\fP\&.
 .PP
 .nf
 Example:
-key user/sw/app
-check user/sw/app/key
+key user:/sw/app
+check user:/sw/app/key
 
 returns true because check is below key
 
 Example:
-key user/sw/app
-check user/sw/app/folder/key
+key user:/sw/app
+check user:/sw/app/folder/key
 
 does not return true, because there is only an indirect relation
 
@@ -259,28 +243,6 @@ does not return true, because there is only an indirect relation
 \fBSee also:\fP
 .RS 4
 \fBkeyIsBelow()\fP, \fBkeySetName()\fP, \fBkeyGetName()\fP 
-.RE
-.PP
-
-.SS "int keyIsInactive (const Key * key)"
-
-.PP
-Check whether a key is inactive\&. In Elektra terminology a hierarchy of keys is inactive if the rootkey's basename starts with '\&.'\&. So a key is also inactive if it is below an inactive key\&. For example, user/key/\&.hidden is inactive and so is user/\&.hidden/below\&.
-.PP
-Inactive keys should not have any meaning to applications, they are only a convention reserved for users and administrators\&. To automatically remove all inactive keys for an application, consider to use the hidden plugin\&.
-.PP
-\fBParameters:\fP
-.RS 4
-\fIkey\fP the key object to work with 
-.RE
-.PP
-\fBReturn values:\fP
-.RS 4
-\fI1\fP if the key is inactive 
-.br
-\fI0\fP if the key is active 
-.br
-\fI-1\fP on NULL pointer or when key has no name 
 .RE
 .PP
 

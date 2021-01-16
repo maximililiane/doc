@@ -1,4 +1,4 @@
-.TH "doc_tutorials_namespaces_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_namespaces_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,11 +18,11 @@ Now add the the key **/a** with the Value \fBValue 1\fP and the key **/b/c** wit
 .PP
 .nf
 kdb set /a 'Value 1'
-#> Using name user/a
-#> Create a new key user/a with string "Value 1"
+#> Using name user:/a
+#> Create a new key user:/a with string "Value 1"
 kdb set /b/c 'Value 2'
-#> Using name user/b/c
-#> Create a new key user/b/c with string "Value 2"
+#> Using name user:/b/c
+#> Create a new key user:/b/c with string "Value 2"
 .fi
 .PP
 .PP
@@ -67,13 +67,13 @@ But when we set the keys **/a** and **/b/c** before we didn't provide a namespac
 .PP
 .PP
 .nf
-kdb ls user | grep -E '(/a|/b/c)'
-#> user/a
-#> user/b/c
+kdb ls user:/ | grep -E '(/a|/b/c)'
+#> user:/a
+#> user:/b/c
 .fi
 .PP
 .PP
-When we don't provide a namespace Elektra assumes a default namespace, which should be \fBuser\fP for non-root users\&. So if you are a normal user the command \fCkdb set /b/c 'Value 2'\fP was synonymous to \fCkdb set user/b/c 'Value 2'\fP\&.
+When we don't provide a namespace Elektra assumes a default namespace, which should be \fBuser\fP for non-root users\&. So if you are a normal user the command \fCkdb set /b/c 'Value 2'\fP was synonymous to \fCkdb set user:/b/c 'Value 2'\fP\&.
 .PP
 At this point the key database should have this structure: 
 .PP
@@ -83,18 +83,18 @@ Another question you may ask yourself now is, what happens if we lookup a key wi
 .nf
 kdb get -v /b/c
 # STDOUT-REGEX: got \d+ keys
-#>  searching spec/b/c, found: <nothing>, options: KDB_O_CALLBACK
-#>  searching proc/b/c, found: <nothing>, options:
-#>  searching dir/b/c, found: <nothing>, options:
-#>  searching user/b/c, found: user/b/c, options:
-#> The resulting key name is user/b/c
+#>  searching spec:/b/c, found: <nothing>, options: KDB_O_CALLBACK
+#>  searching proc:/b/c, found: <nothing>, options:
+#>  searching dir:/b/c, found: <nothing>, options:
+#>  searching user:/b/c, found: user:/b/c, options:
+#> The resulting key name is user:/b/c
 #> Value 2
 .fi
 .PP
 .PP
 Here you see how Elektra searches all namespaces for matching keys in this order: \fBspec\fP, \fBproc\fP, \fBdir\fP, \fBuser\fP and finally \fBsystem\fP
 .PP
-If a key is found in a namespace, it masks the key in all subsequent namespaces, which is the reason why the system namespace isn't searched\&. Finally the virtual key **/b/c** gets resolved to the real key \fBuser/b/c\fP\&. Because of the way a key without a namespace is retrieved, we call keys, that start with '**/**' \fBcascading keys\fP\&. You can find out more about cascading lookups in the \fBcascading tutorial\fP\&.
+If a key is found in a namespace, it masks the key in all subsequent namespaces, which is the reason why the system namespace isn't searched\&. Finally the virtual key **/b/c** gets resolved to the real key \fBuser:/b/c\fP\&. Because of the way a key without a namespace is retrieved, we call keys, that start with '**/**' \fBcascading keys\fP\&. You can find out more about cascading lookups in the \fBcascading tutorial\fP\&.
 .PP
 Having namespaces enables both admins and users to set specific parts of the application's configuration, as you will see in the following example\&.
 .PP
@@ -118,15 +118,15 @@ Say we want to set \fCkdb\fP to be more verbose when it is used in the current d
 .PP
 .PP
 .nf
-kdb set "dir/sw/elektra/kdb/#0/%/verbose" 1
-#> Create a new key dir/sw/elektra/kdb/#0/%/verbose with string "1"
+kdb set "dir:/sw/elektra/kdb/#0/%/verbose" 1
+#> Create a new key dir:/sw/elektra/kdb/#0/%/verbose with string "1"
 .fi
 .PP
 .PP
 .RS 4
-The configuration for a directory is actually stored in this directory\&. By default the configuration is contained in a folder named \fC\&.dir\fP, as you can verify with \fCkdb file dir\fP (\fIkdb file\fP tells you the file where a key is stored in)\&.
+The configuration for a directory is actually stored in this directory\&. By default the configuration is contained in a folder named \fC\&.dir\fP, as you can verify with \fCkdb file dir:/\fP (\fIkdb file\fP tells you the file where a key is stored in)\&.
 .PP
-For the purpose of demonstration we chose to only manipulate the verbosity of kdb\&. Note that setting \fCdir/sw/elektra/kdb/#0/%/namespace\fP to \fCdir\fP can be handy if you want to work with configuration of an application in a certain directory\&. 
+For the purpose of demonstration we chose to only manipulate the verbosity of kdb\&. Note that setting \fCdir:/sw/elektra/kdb/#0/%/namespace\fP to \fCdir\fP can be handy if you want to work with configuration of an application in a certain directory\&. 
 .RE
 .PP
 .PP
@@ -136,12 +136,12 @@ If we now search for some key, \fCkdb\fP will behave just as if we have called i
 .nf
 kdb get /some/key
 # STDOUT-REGEX: got \d+ keys
-#> searching spec/some/key, found: <nothing>, options: KDB_O_CALLBACK
-#>     searching proc/some/key, found: <nothing>, options:
-#>     searching dir/some/key, found: <nothing>, options:
-#>     searching user/some/key, found: <nothing>, options:
-#>     searching system/some/key, found: <nothing>, options:
-#>     searching default of spec/some/key, found: <nothing>, options: KDB_O_NOCASCADING
+#> searching spec:/some/key, found: <nothing>, options: KDB_O_CALLBACK
+#>     searching proc:/some/key, found: <nothing>, options:
+#>     searching dir:/some/key, found: <nothing>, options:
+#>     searching user:/some/key, found: <nothing>, options:
+#>     searching system:/some/key, found: <nothing>, options:
+#>     searching default of spec:/some/key, found: <nothing>, options: KDB_O_NOCASCADING
 #> Did not find key
 .fi
 .PP
@@ -150,11 +150,11 @@ Verbosity is not always useful because it distracts from the essential\&. So we 
 .PP
 .PP
 .nf
-kdb mv -r "dir/sw/elektra/kdb/#0/%" "dir/sw/elektra/kdb/#0/debug"
-#> using common basename: dir/sw/elektra/kdb/#0
-#> key: dir/sw/elektra/kdb/#0/%/verbose will be renamed to: dir/sw/elektra/kdb/#0/debug/verbose
+kdb mv -r "dir:/sw/elektra/kdb/#0/%" "dir:/sw/elektra/kdb/#0/debug"
+#> using common basename: dir:/sw/elektra/kdb/#0
+#> key: dir:/sw/elektra/kdb/#0/%/verbose will be renamed to: dir:/sw/elektra/kdb/#0/debug/verbose
 #> Will write out:
-#> dir/sw/elektra/kdb/#0/debug/verbose
+#> dir:/sw/elektra/kdb/#0/debug/verbose
 .fi
 .PP
 .PP
@@ -164,11 +164,11 @@ We configured kdb only for the current directory\&. If we like this configuratio
 .PP
 .PP
 .nf
-sudo kdb mv -r "dir/sw/elektra/kdb" "system/sw/elektra/kdb"
+sudo kdb mv -r "dir:/sw/elektra/kdb" "system:/sw/elektra/kdb"
 #> using common basename: /sw/elektra/kdb
-#> key: dir/sw/elektra/kdb/#0/%/verbose will be renamed to: system/sw/elektra/kdb/#0/%/verbose
+#> key: dir:/sw/elektra/kdb/#0/%/verbose will be renamed to: system:/sw/elektra/kdb/#0/%/verbose
 #> Will write out:
-#> system/sw/elektra/kdb/#0/%/verbose
+#> system:/sw/elektra/kdb/#0/%/verbose
 .fi
 .PP
 .PP
@@ -187,7 +187,7 @@ When using cascading key the best key will be searched at run-time\&. If you are
 .PP
 .PP
 .nf
-kdb get "system/sw/elektra/kdb/#0/debug/verbose"
+kdb get "system:/sw/elektra/kdb/#0/debug/verbose"
 #> 1
 .fi
 .PP
@@ -196,8 +196,8 @@ Because of \fIcascading keys\fP a user can override the behavior of the \fIdebug
 .PP
 .PP
 .nf
-kdb set "user/sw/elektra/kdb/#0/debug/verbose" 0
-#> Create a new key user/sw/elektra/kdb/#0/debug/verbose with string "0"
+kdb set "user:/sw/elektra/kdb/#0/debug/verbose" 0
+#> Create a new key user:/sw/elektra/kdb/#0/debug/verbose with string "0"
 kdb get "/sw/elektra/kdb/#0/debug/verbose"
 #> 0
 .fi

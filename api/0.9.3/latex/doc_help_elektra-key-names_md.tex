@@ -8,10 +8,10 @@ Examples of valid system key names\+:
 
 
 \begin{DoxyCode}
-system
-system/hosts/hostname
-system/sw/apache/httpd/#0/current/num\_processes
-system/sw/apps/abc/#0/current/default-setting
+system:/
+system:/hosts/hostname
+system:/sw/apache/httpd/#0/current/num\_processes
+system:/sw/apps/abc/#0/current/default-setting
 \end{DoxyCode}
 
 
@@ -21,14 +21,14 @@ Examples of valid user key names\+:
 
 
 \begin{DoxyCode}
-user
-user/env/#1/LD\_LIBRARY\_PATH
-user/sw/apps/abc/#0/current/default-setting
-user/sw/kde/kicker/#0/current/preferred\_applications/#0
+user:/
+user:/env/#1/LD\_LIBRARY\_PATH
+user:/sw/apps/abc/#0/current/default-setting
+user:/sw/kde/kicker/#0/current/preferred\_applications/#0
 \end{DoxyCode}
 
 
-The slash ({\ttfamily /}) separates key names and structures them hierarchically. If two keys start with the same key names, but one key name continues after a slash, this key is {\bfseries below} the other and is called a {\itshape subkey}. For example {\ttfamily user/sw/apps/abc/current} is a subkey of the key {\ttfamily user/sw/apps}. The key is not directly below but, for example, {\ttfamily user/sw/apps/abc} is. Various functions in {\ttfamily keytest} implement ways to determine the relationship between two keys.
+The slash ({\ttfamily /}) separates key names and structures them hierarchically. If two keys start with the same key names, but one key name continues after a slash, this key is {\bfseries below} the other and is called a {\itshape subkey}. For example {\ttfamily user\+:/sw/apps/abc/current} is a subkey of the key {\ttfamily user\+:/sw/apps}. The key is not directly below but, for example, {\ttfamily user\+:/sw/apps/abc} is. Various functions in {\ttfamily keytest} implement ways to determine the relationship between two keys.
 
 For computers Elektra would work without any conventions, because it is possible to rename keys with plugins and link and transform any key-\/value to any other key-\/value. Obviously, for humans such chaos would be confusing and harder to use, thus we encourage everyone to use the following conventions\+:
 
@@ -56,14 +56,14 @@ As decided \href{https://github.com/ElektraInitiative/libelektra/issues/302}{\tt
 \item Avoid to have your applications root right under {\ttfamily system} or {\ttfamily user}. (rationale\+: it would make the hierarchy too flat.) See {\bfseries Application Base Name} above.
 \item Avoid the usage of characters other than {\ttfamily /}, a-\/z and 0-\/9. (rationale\+: it would allow too many similar, confusing names.) (exceptions\+: if the user or a technology, decide about parts of the key name, this restriction does not apply, e.\+g. if the wlan essid is used as part of the key name)
 \item The only way to separate names is using {\ttfamily /} (no A-\/Z, no {\ttfamily \+\_\+}, no whitespaces) (rationale\+: there are many different opinions about this topic and having a choice which separator to choose will certainly lead to inconsistencies)
-\item It is suggested to make your application look for default keys under {\ttfamily /sw/org/myapp/\#/\%/} where {\ttfamily \#} is a major version number, e.\+g. {\ttfamily \#3} for the 4th version and {\ttfamily \%} is a profile ({\ttfamily \%} for default profile). This way, from a sysadmin perspective, it will be possible to copy the {\ttfamily system/sw/myapp/\#3/\%/} tree to something like {\ttfamily system/sw/myapp/\#3/old/} and keep system clean and organized.
+\item It is suggested to make your application look for default keys under {\ttfamily /sw/org/myapp/\#/\%/} where {\ttfamily \#} is a major version number, e.\+g. {\ttfamily \#3} for the 4th version and {\ttfamily \%} is a profile ({\ttfamily \%} for default profile). This way, from a sysadmin perspective, it will be possible to copy the {\ttfamily system\+:/sw/myapp/\#3/\%/} tree to something like {\ttfamily system\+:/sw/myapp/\#3/old/} and keep system clean and organized.
 \end{DoxyItemize}
 
 
 \begin{DoxyItemize}
 \item \hyperlink{doc_tutorials_application-integration_md}{see application integration tutorial}
 \item \hyperlink{doc_tutorials_namespaces_md}{see namespaces tutorial}
-\item \href{/home/jenkins/workspace/libelektra-release/src/libs/elektra/keyname.c}{\tt key name source file} or \href{https://doc.libelektra.org/api/latest/html/group__keyname.html#details}{\tt its rendered A\+PI documentation}
+\item \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/libs/elektra/keyname.c}{\tt key name source file} or \href{https://doc.libelektra.org/api/latest/html/group__keyname.html#details}{\tt its rendered A\+PI documentation}
 \item \hyperlink{doc_help_elektra-namespaces_md}{elektra-\/namespaces(7)}
 \item \hyperlink{doc_help_elektra-cascading_md}{elektra-\/cascading(7)} 
 \end{DoxyItemize}

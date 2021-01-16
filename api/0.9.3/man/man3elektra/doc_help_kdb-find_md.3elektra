@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-find_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-find_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,26 +26,26 @@ This command will list the name of all keys that contain \fCregex\fP\&.
 .PP
 .PP
 ``` 
-.SH "Backup-and-Restore: user/tests/find"
+.SH "Backup-and-Restore: user:/tests/find"
 .PP
 .SH "We use the `dump` plugin, since some storage plugins, e\&.g\&. INI,"
 .PP
-.SH "create intermediate keys, such as `user/tests/find/tests/foo`"
+.SH "create intermediate keys, such as `user:/tests/find/tests/foo`"
 .PP
 .SH "for the following test\&."
 .PP
-sudo kdb mount find\&.ecf user/tests/find dump
+sudo kdb mount find\&.ecf user:/tests/find dump
 .SH "Create the keys we use for the examples"
 .PP
-kdb set user/tests/find/tests val1 kdb set user/tests/find/tests/foo/bar val2 kdb set user/tests/find/tests/fizz/buzz fizzbuzz kdb set user/tests/find/tostfizz val3 kdb set user/tests/find/tust/level lvl
+kdb set user:/tests/find/tests val1 kdb set user:/tests/find/tests/foo/bar val2 kdb set user:/tests/find/tests/fizz/buzz fizzbuzz kdb set user:/tests/find/tostfizz val3 kdb set user:/tests/find/tust/level lvl
 .SH "list all keys containing /tests/find/t[eo]"
 .PP
-kdb find '/tests/find/t[eo]' #> user/tests/find/tests #> user/tests/find/tests/fizz/buzz #> user/tests/find/tests/foo/bar #> user/tests/find/tostfizz
+kdb find '/tests/find/t[eo]' #> user:/tests/find/tests #> user:/tests/find/tests/fizz/buzz #> user:/tests/find/tests/foo/bar #> user:/tests/find/tostfizz
 .SH "list all keys containing fizz"
 .PP
-kdb find 'fizz' #> user/tests/find/tests/fizz/buzz #> user/tests/find/tostfizz
+kdb find 'fizz' #> user:/tests/find/tests/fizz/buzz #> user:/tests/find/tostfizz
 .PP
-kdb rm -r /tests/find sudo kdb umount user/tests/find ```
+kdb rm -r /tests/find sudo kdb umount user:/tests/find ```
 .SS "SEE ALSO"
 .IP "\(bu" 2
 If the user would also like to see the values of the keys below \fCpath\fP then you should consider the \fBkdb-export(1)\fP command\&.

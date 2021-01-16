@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-global-mount_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-global-mount_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,7 +15,7 @@ Plugins may be followed by a \fC,\fP separated list of \fCkeys=values\fP pairs w
 .PP
 This command allows a user to globally mount some plugins that will be part of every interaction with the global keydatabase\&.
 .PP
-This command writes into the \fC/etc\fP directory and as such it requires root permissions\&. Use \fCkdb file system/elektra/globalplugins\fP to find out where exactly it will write to\&.
+This command writes into the \fC/etc\fP directory and as such it requires root permissions\&. Use \fCkdb file system:/elektra/globalplugins\fP to find out where exactly it will write to\&.
 .PP
 .IP "\(bu" 2
 \fC-H\fP, \fC--help\fP: Show the man page\&.

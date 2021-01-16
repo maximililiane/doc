@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-set_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-set_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -43,15 +43,15 @@ To set a key to a negative value, \fC--\fP has to be used to stop option process
 .PP
 To set a Key to the value \fCHello World!\fP:
 .br
- \fCkdb set user/example/key 'Hello World!'\fP
+ \fCkdb set user:/example/key 'Hello World!'\fP
 .PP
 To create a new key with a null value:
 .br
- \fCkdb set user/example/key\fP
+ \fCkdb set user:/example/key\fP
 .PP
 To set a key to an empty value:
 .br
- \fCkdb set user/example/key ''\fP
+ \fCkdb set user:/example/key ''\fP
 .PP
 To set a key to a negative value:
 .br
@@ -59,11 +59,11 @@ To set a key to a negative value:
 .PP
 To create bookmarks:
 .br
- \fCkdb set user/sw/elektra/kdb/#0/current/bookmarks\fP
+ \fCkdb set user:/sw/elektra/kdb/#0/current/bookmarks\fP
 .PP
 Followed by:
 .br
- \fCkdb set user/sw/elektra/kdb/#0/current/bookmarks/kdb user/sw/elektra/kdb/#0/current\fP
+ \fCkdb set user:/sw/elektra/kdb/#0/current/bookmarks/kdb user:/sw/elektra/kdb/#0/current\fP
 .PP
 .IP "\(bu" 2
 \fBkdb(1)\fP for how to configure the kdb utility and use the bookmarks\&.

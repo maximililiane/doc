@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-global-umount_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-global-umount_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,7 +19,7 @@ Unmount a global plugin from the key database\&.
 .PP
 .PP
 .nf
-# Backup-and-Restore: system/elektra/globalplugins
+if [ -f "$(kdb file system:/elektra/globalplugins)" ]; then mv "$(kdb file system:/elektra/globalplugins)" "globalplugins\&.bak"; else touch "globalplugins\&.rm"; fi
 
 sudo kdb global-mount tracer
 
@@ -36,6 +36,8 @@ sudo kdb global-umount spec
 
 sudo kdb global-mount
 #>
+
+if [ -f "globalplugins\&.rm" ]; then rm "$(kdb file system:/elektra/globalplugins)" "globalplugins\&.rm"; else mv "globalplugins\&.bak" "$(kdb file system:/elektra/globalplugins)"; fi
 .fi
 .PP
 .PP

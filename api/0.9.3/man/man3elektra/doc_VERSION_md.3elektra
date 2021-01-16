@@ -1,4 +1,4 @@
-.TH "doc_VERSION_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_VERSION_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,10 +9,10 @@ The version can also be retrieved at run-time from KDB:
 .PP
 .PP
 .nf
-system/elektra/version/constants/KDB_VERSION
-system/elektra/version/constants/KDB_VERSION_MAJOR
-system/elektra/version/constants/KDB_VERSION_MINOR
-system/elektra/version/constants/KDB_VERSION_PATCH
+system:/elektra/version/constants/KDB_VERSION
+system:/elektra/version/constants/KDB_VERSION_MAJOR
+system:/elektra/version/constants/KDB_VERSION_MINOR
+system:/elektra/version/constants/KDB_VERSION_PATCH
 .fi
 .PP
 .PP
@@ -84,4 +84,4 @@ Bindings are in general tied to Elektra's version number except for the patch le
 .PP
 The patch level can be chosen by bindings as wanted\&. Using the binding \fCx\&.y\&.z\fP does not mean that Elektra \fCx\&.y\&.z\fP will be used on the target system\&. Please read the changelog of the binding maintainers to know about which bug fixes are included\&.
 .PP
-The patch level might also be used to fix bugs within bindings\&. This means that applications can only introspect the patch level of Elektra by getting \fCsystem/elektra/version/constants/KDB_VERSION_PATCH\fP but not by static patch levels the binding might provide\&. This should be no problem, as the patch level is supposed to not change the behavior\&. 
+The patch level might also be used to fix bugs within bindings\&. This means that applications can only introspect the patch level of Elektra by getting \fCsystem:/elektra/version/constants/KDB_VERSION_PATCH\fP but not by static patch levels the binding might provide\&. This should be no problem, as the patch level is supposed to not change the behavior\&. 

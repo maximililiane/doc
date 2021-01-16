@@ -69,7 +69,7 @@ Conflicts occur when a key has a different value in all three key sets or when o
 To complete a simple merge of three Key\+Sets\+:~\newline
 
 
-````ssh kdb set user/base \char`\"{}\+A\char`\"{} \#$>$ Create a new key user/base with string \char`\"{}\+A\char`\"{} kdb set user/their \char`\"{}\+A\char`\"{} \#$>$ Create a new key user/their with string \char`\"{}\+A\char`\"{} kdb set user/our \char`\"{}\+B\char`\"{} \#$>$ Create a new key user/our with string \char`\"{}\+B\char`\"{} kdb cmerge user/our user/their user/base user/result kdb get user/result \#$>$B
+````ssh kdb set user\+:/base \char`\"{}\+A\char`\"{} \#$>$ Create a new key user\+:/base with string \char`\"{}\+A\char`\"{} kdb set user\+:/their \char`\"{}\+A\char`\"{} \#$>$ Create a new key user\+:/their with string \char`\"{}\+A\char`\"{} kdb set user\+:/our \char`\"{}\+B\char`\"{} \#$>$ Create a new key user\+:/our with string \char`\"{}\+B\char`\"{} kdb cmerge user\+:/our user\+:/their user\+:/base user\+:/result kdb get user\+:/result \#$>$B
 
 ```~\newline
 

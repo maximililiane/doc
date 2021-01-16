@@ -73,8 +73,8 @@ $(function() {
 <li><code>/sw/elektra/kdb/#0/current/editor</code>: The default editor, if no <code>-e</code> option is given. Defaults to <code>/usr/bin/sensible-editor</code>, <code>/usr/bin/editor</code> or <code>/usr/bin/vi</code> if the key does not exist.</li>
 <li><code>/sw/elektra/kdb/#0/current/namespace</code>: Specifies which default namespace should be used when setting a cascading name. By default the namespace is user, except <code>kdb</code> is used as root, then <code>system</code> is the default (<code>validate</code> strategy only).</li>
 </ul>
-<p>To change the configuration in KDB below <code>user/ini</code> with <code>/usr/bin/vim</code>, you would use:<br />
- <code>kdb editor -e /usr/bin/vim user/ini</code></p>
+<p>To change the configuration in KDB below <code>user:/ini</code> with <code>/usr/bin/vim</code>, you would use:<br />
+ <code>kdb editor -e /usr/bin/vim user:/ini</code></p>
 <p>Or set a new editor as default using:<br />
  <code>kdb set /sw/elektra/kdb/#0/current/editor /usr/bin/nano</code></p>
 <p>To change the configuration in KDB below <code>user</code> in xml format, you would use:<br />

@@ -55,7 +55,7 @@ $(function() {
 </ul>
 <p>This command allows a user to persistently mount a new <em>backend</em>. Mounting in Elektra allows the user to mount a file into the current key database like a user may mount a partition into the current file system. This functionality is key to Elektra as it allows users to build a global key database comprised of many different configuration files.</p>
 <p>A backend acts as a worker to allow Elektra to interpret configuration files as keys in the central key database such that any edits to the keys are reflected in the file and vice versa. Additionally, the user can use this command to list the currently mounted backends by running the command with no arguments. More about mounting is explained in <a class="el" href="doc_help_elektra-mounting_md.html">elektra-mounting(7)</a>.</p>
-<p>This command writes into the <code>/etc</code> directory to make the mounting persistent. As such it requires root permissions. Use <code>kdb file system/elektra/mountpoints</code> to find out where exactly it will write to.</p>
+<p>This command writes into the <code>/etc</code> directory to make the mounting persistent. As such it requires root permissions. Use <code>kdb file system:/elektra/mountpoints</code> to find out where exactly it will write to.</p>
 <p>Absolute paths are still relative to their namespace (see <code>kdb plugin-info resolver</code>). Only system+spec mount points are actually absolute. Read <a class="el" href="doc_help_elektra-namespaces_md.html">elektra-namespaces(7)</a> for further information.</p>
 <p>For cascading mount points (starting with <code>/</code>) a mount point for the namespace <code>dir</code>, <code>user</code> and <code>system</code> is created. Each of this mount point uses a different configuration file, either below current directory, below home directory or anywhere in the system. Use <code>kdb file &lt;path&gt;</code> to determine where the file(s) are.</p>
 <ul>
@@ -85,15 +85,15 @@ $(function() {
 <p>To list the currently mounted backends:<br />
  <code>kdb mount</code></p>
 <p>To mount a system configuration file using the ini format:<br />
- <code>kdb mount /etc/configuration.ini system/example ini</code></p>
+ <code>kdb mount /etc/configuration.ini system:/example ini</code></p>
 <p>Print a null-terminated output of paths and backend names:<br />
  <code>kdb mount -02 | xargs -0n 2 echo</code></p>
 <p>To mount the /etc/file system file with two plugins with a respective configuration option each:<br />
- <code>kdb mount /etc/file system/file plugin1 plugin1config=config1 plugin2 plugin2config=config2</code></p>
+ <code>kdb mount /etc/file system:/file plugin1 plugin1config=config1 plugin2 plugin2config=config2</code></p>
 <p>To mount the /etc/file system file with two plugins and setting both to be verbose:<br />
- <code>kdb mount -c verbose=1 /etc/file system/file plugin1 plugin2</code></p>
+ <code>kdb mount -c verbose=1 /etc/file system:/file plugin1 plugin2</code></p>
 <p>To recode and rename a configuration file using Elektra:<br />
- <code>kdb mount recode.txt dir/recode ni rename cut=path iconv to=utf8,from=latin1</code></p>
+ <code>kdb mount recode.txt dir:/recode ni rename cut=path iconv to=utf8,from=latin1</code></p>
 <ul>
 <li><a class="el" href="doc_help_elektra-glossary_md.html">elektra-glossary(7)</a>.</li>
 <li><a class="el" href="doc_help_kdb-spec-mount_md.html">kdb-spec-mount(1)</a>.</li>

@@ -83,7 +83,7 @@ $(function() {
 </li>
 <li>You can now access the client on: <a href="http://localhost:33334">http://localhost:33334</a></li>
 </ul>
-<p>If you do not want to configure multiple instances, you can set the <code>INSTANCE</code> environment variable to the server you want to configure. You can also set <code>user/sw/elektra/web/#0/current/instance</code> to the host. Make sure to enter a full HTTP URL, e.g. <code><a href="http://localhost:33333">http://localhost:33333</a></code>.</p>
+<p>If you do not want to configure multiple instances, you can set the <code>INSTANCE</code> environment variable to the server you want to configure. You can also set <code>user:/sw/elektra/web/#0/current/instance</code> to the host. Make sure to enter a full HTTP URL, e.g. <code><a href="http://localhost:33333">http://localhost:33333</a></code>.</p>
 <p>If this configuration option is set, elektra-web will load the configuration page for that instance instead of the main overview page.</p>
 <p>If you want to host elektra-web with the client and elektrad on the same instance, after starting elektrad via <code>kdb run-elektrad</code>, you can run start the client as follows:</p>
 <div class="fragment"><div class="line">INSTANCE=&quot;http://localhost:33333&quot; kdb run-web</div></div><!-- fragment --><p>It is also possible to set visibility by prefixing the host with <code>VISIBILITY@</code>.</p>
@@ -125,15 +125,15 @@ $(function() {
 <p>Now the server is runing on <a href="http://localhost:33333">http://localhost:33333</a>. After that you can test API with help of Postman or other tool, which allows to send REST API requests.</p>
 <p>Additional note. It is recommended to install the elektrad tool than starting the server manually. When Elektra is installed, the <code>kdb</code> command together with its tools is installed globally. For instance, whenever you would like to write any shell script, which has to start a REST API server, you can just add the following line <code>kdb run-elektrad</code> inside your file and save it. After that, the created shell script can be executed from any directory.</p>
 <p>Examples:</p>
-<p>let's create the new key-value pair <code>user/test</code> and set its value to 5. You can do it next way:</p>
+<p>let's create the new key-value pair <code>user:/test</code> and set its value to 5. You can do it next way:</p>
 <ul>
-<li>through the command terminal <div class="fragment"><div class="line">kdb set user/test 5</div></div><!-- fragment --></li>
+<li>through the command terminal <div class="fragment"><div class="line">kdb set user:/test 5</div></div><!-- fragment --></li>
 <li>through the rest api using curl <div class="fragment"><div class="line">curl -X PUT -H &quot;Content-Type: text/plain&quot; --data &quot;5&quot; http://localhost:33333/kdb/user/test</div></div><!-- fragment --></li>
 </ul>
-<p>The output of the commandline tool will be: <code>Set string to "5"</code>. If the specified key didn't exist before, then the output will be <code>Create a new key user/test with string "5"</code>. Elektrad will respond with code <code>200</code>.</p>
+<p>The output of the commandline tool will be: <code>Set string to "5"</code>. If the specified key didn't exist before, then the output will be <code>Create a new key user:/test with string "5"</code>. Elektrad will respond with code <code>200</code>.</p>
 <p>Now, the command</p>
-<div class="fragment"><div class="line">curl http://localhost:33333/kdb/user/test</div></div><!-- fragment --><p>will return us the value of the specified key <code>user/test</code>, which is stored in the database right now</p>
-<div class="fragment"><div class="line">{</div><div class="line">    &quot;exists&quot;: true,</div><div class="line">    &quot;name&quot;: &quot;test&quot;,</div><div class="line">    &quot;path&quot;: &quot;user/test&quot;,</div><div class="line">    &quot;ls&quot;: [</div><div class="line">        &quot;user/test&quot;</div><div class="line">    ],</div><div class="line">    &quot;value&quot;: &quot;5&quot;,</div><div class="line">    &quot;meta&quot;: &quot;&quot;</div><div class="line">}</div></div><!-- fragment --><p>Currently, webd does not support authentication. The best way to work around this is to use a reverse proxy (e.g. <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/">nginx reverse proxy</a>).</p>
+<div class="fragment"><div class="line">curl http://localhost:33333/kdb/user/test</div></div><!-- fragment --><p>will return us the value of the specified key <code>user:/test</code>, which is stored in the database right now</p>
+<div class="fragment"><div class="line">{</div><div class="line">    &quot;exists&quot;: true,</div><div class="line">    &quot;name&quot;: &quot;test&quot;,</div><div class="line">    &quot;path&quot;: &quot;user:/test&quot;,</div><div class="line">    &quot;ls&quot;: [</div><div class="line">        &quot;user:/test&quot;</div><div class="line">    ],</div><div class="line">    &quot;value&quot;: &quot;5&quot;,</div><div class="line">    &quot;meta&quot;: &quot;&quot;</div><div class="line">}</div></div><!-- fragment --><p>Currently, webd does not support authentication. The best way to work around this is to use a reverse proxy (e.g. <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/">nginx reverse proxy</a>).</p>
 <p>Once you set up a reverse proxy on your web server, you can use it to authenticate users, e.g. by <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-nginx-on-ubuntu-14-04">username/password auth</a></p>
 <p><code>elektrad/</code> - contains the daemon to interact with a single elektra instance <code>webd/</code> - contains a daemon to serve the client and interact with multiple elektra instances</p>
 <p><code>client/</code> - contains the elektra-web client (Web UI)</p>

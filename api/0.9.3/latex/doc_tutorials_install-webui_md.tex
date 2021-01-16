@@ -53,7 +53,7 @@ To build Elektra with the elektra-\/web tool\+:
 \item You can now access the client on\+: \href{http://localhost:33334}{\tt http\+://localhost\+:33334}
 \end{DoxyItemize}
 
-If you do not want to configure multiple instances, you can set the {\ttfamily I\+N\+S\+T\+A\+N\+CE} environment variable to the server you want to configure. You can also set {\ttfamily user/sw/elektra/web/\#0/current/instance} to the host. Make sure to enter a full H\+T\+TP U\+RL, e.\+g. {\ttfamily \href{http://localhost:33333}{\tt http\+://localhost\+:33333}}.
+If you do not want to configure multiple instances, you can set the {\ttfamily I\+N\+S\+T\+A\+N\+CE} environment variable to the server you want to configure. You can also set {\ttfamily user\+:/sw/elektra/web/\#0/current/instance} to the host. Make sure to enter a full H\+T\+TP U\+RL, e.\+g. {\ttfamily \href{http://localhost:33333}{\tt http\+://localhost\+:33333}}.
 
 If this configuration option is set, elektra-\/web will load the configuration page for that instance instead of the main overview page.
 
@@ -132,13 +132,13 @@ Additional note. It is recommended to install the elektrad tool than starting th
 
 Examples\+:
 
-let\textquotesingle{}s create the new key-\/value pair {\ttfamily user/test} and set its value to 5. You can do it next way\+:
+let\textquotesingle{}s create the new key-\/value pair {\ttfamily user\+:/test} and set its value to 5. You can do it next way\+:
 
 
 \begin{DoxyItemize}
 \item through the command terminal 
 \begin{DoxyCode}
-kdb set user/test 5
+kdb set user:/test 5
 \end{DoxyCode}
 
 \item through the rest api using curl 
@@ -148,7 +148,7 @@ curl -X PUT -H "Content-Type: text/plain" --data "5" http://localhost:33333/kdb/
 
 \end{DoxyItemize}
 
-The output of the commandline tool will be\+: {\ttfamily Set string to \char`\"{}5\char`\"{}}. If the specified key didn\textquotesingle{}t exist before, then the output will be {\ttfamily Create a new key user/test with string \char`\"{}5\char`\"{}}. Elektrad will respond with code {\ttfamily 200}.
+The output of the commandline tool will be\+: {\ttfamily Set string to \char`\"{}5\char`\"{}}. If the specified key didn\textquotesingle{}t exist before, then the output will be {\ttfamily Create a new key user\+:/test with string \char`\"{}5\char`\"{}}. Elektrad will respond with code {\ttfamily 200}.
 
 Now, the command
 
@@ -158,16 +158,16 @@ curl http://localhost:33333/kdb/user/test
 \end{DoxyCode}
 
 
-will return us the value of the specified key {\ttfamily user/test}, which is stored in the database right now
+will return us the value of the specified key {\ttfamily user\+:/test}, which is stored in the database right now
 
 
 \begin{DoxyCode}
 \{
     "exists": true,
     "name": "test",
-    "path": "user/test",
+    "path": "user:/test",
     "ls": [
-        "user/test"
+        "user:/test"
     ],
     "value": "5",
     "meta": ""

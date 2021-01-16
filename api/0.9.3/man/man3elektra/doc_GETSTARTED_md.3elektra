@@ -1,4 +1,4 @@
-.TH "doc_GETSTARTED_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_GETSTARTED_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -77,11 +77,18 @@ mkdir build  && cd build  #create and navigate to the build directory
 cmake \&.\&.  # watch output to see if everything needed is included
 #  optionally run "ccmake \&.\&." to get an overview of the available build settings (needs cmake-curses-gui)
 cmake --build build -- -j5
-cmake --build build --target run_nokdbtests #optional: run tests
 .fi
 .PP
 .PP
-With these commands you will be able to run the 'Hello World!' example but usually you will need to use some of the \fBplugins\fP, tools and bindings of Elektra\&. Please take a look to the more detailed \fBcompiling documentation\fP\&. After you completed building Elektra on your own, you can execute these commands to install Elektra (please check the \fBinstallation documentation\fP if you are using Debian):
+Optionally you can also run tests, see \fBhere for more information\fP:
+.PP
+.PP
+.nf
+cmake --build build --target run_nokdbtests
+.fi
+.PP
+.PP
+With these commands you will be able to run the 'Hello World!' example but usually you will need to use some of the \fBplugins\fP, tools and bindings of Elektra\&. Please take a look at the more detailed \fBcompiling documentation\fP\&. After you completed building Elektra on your own, you can execute these commands to install Elektra (please check the \fBinstallation documentation\fP for the many available packages):
 .PP
 .PP
 .nf
@@ -92,9 +99,17 @@ sudo ldconfig #optional: check installation documentation for more information
 .PP
 \fBInstallation documentation\fP contains further information about available packages\&.
 .PP
+Optionally you can also run tests to verify the installed Elektra, see \fBhere for more information\fP:
+.PP
+.PP
+.nf
+kdb run_nokdbtests
+.fi
+.PP
+.PP
 .IP "\(bu" 2
 Hello World!
 .PP
-Start with your very first Elektra application and follow these steps: \fBHello World!\fP 
+Start with your very first Elektra application in C and follow these steps: \fBHello World!\fP 
 .PP
 

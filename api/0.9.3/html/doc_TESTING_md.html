@@ -63,7 +63,7 @@ $(function() {
 <li><p class="startli">To give your user the permissions to the relevant paths execute the lines below once as root.</p>
 <p class="startli"><b>Warning: Changing permissions on the wrong paths can be harmful! Please make sure that the paths are correct.</b> In doubt make sure that you have a backup of the affected directories.</p>
 <p class="startli">First load the required information and verify the paths:</p>
-<p class="startli">``` kdb mount-info echo <code>kdb sget system/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX .</code>/<code>kdb sget system/info/elektra/constants/cmake/KDB_DB_SPEC .</code> echo <code>kdb sget system/info/elektra/constants/cmake/KDB_DB_SYSTEM .</code> </p><div class="fragment"><div class="line">Then change the permissions:</div></div><!-- fragment --><p> chown -R <code>whoami</code> <code>kdb sget system/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX .</code>/<code>kdb sget system/info/elektra/constants/cmake/KDB_DB_SPEC .</code> chown -R <code>whoami</code> <code>kdb sget system/info/elektra/constants/cmake/KDB_DB_SYSTEM .</code> ```</p>
+<p class="startli">``` kdb mount-info echo <code>kdb sget system:/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX .</code>/<code>kdb sget system:/info/elektra/constants/cmake/KDB_DB_SPEC .</code> echo <code>kdb sget system:/info/elektra/constants/cmake/KDB_DB_SYSTEM .</code> </p><div class="fragment"><div class="line">Then change the permissions:</div></div><!-- fragment --><p> chown -R <code>whoami</code> <code>kdb sget system:/info/elektra/constants/cmake/CMAKE_INSTALL_PREFIX .</code>/<code>kdb sget system:/info/elektra/constants/cmake/KDB_DB_SPEC .</code> chown -R <code>whoami</code> <code>kdb sget system:/info/elektra/constants/cmake/KDB_DB_SYSTEM .</code> ```</p>
 <p class="startli">After that all test cases should run successfully as described above.</p>
 </li>
 <li>Compile Elektra so that system paths are not actual system paths, e.g. to write everything into the home directory (<code>~</code>) use cmake options: <code>-DKDB_DB_SYSTEM="~/.config/kdb/system" -DKDB_DB_SPEC="~/.config/kdb/spec"</code> (for an example of a full CMake invocation see <code>scripts/configure-home</code>)</li>
@@ -104,7 +104,7 @@ $(function() {
 <li>should not run, if <code>ENABLE_KDB_TESTING</code> is OFF.</li>
 <li>should only write below<ul>
 <li><code>/tests/&lt;testname&gt;</code> (e.g. <code>/tests/ruby</code>) and</li>
-<li><code>system/elektra</code> (e.g. for mounts or globalplugins).</li>
+<li><code>system:/elektra</code> (e.g. for mounts or globalplugins).</li>
 </ul>
 </li>
 <li>Before executing tests, no keys must be present below <code>/tests</code>. The test cases need to clean up everything they wrote. (Including temporary files)</li>
@@ -149,10 +149,10 @@ $(function() {
 <p>The more elegant way to specify script tests are via the so called Shell Recorder using Markdown Syntax.</p>
 <p>See here.</p>
 <p>We assume that your current working directory is a newly created build directory. First compile Elektra with afl (~e is source-dir of Elektra):</p>
-<div class="fragment"><div class="line">~e/scripts/configure-debian -DCMAKE_C_COMPILER=/usr/src/afl/afl-2.52b/afl-gcc -DCMAKE_CXX_COMPILER=/usr/src/afl/afl-2.52b/afl-g++ ~e</div></div><!-- fragment --><p>Copy some import files to <code>testcase_dir</code>, for example:</p>
-<div class="fragment"><div class="line">mkdir -p testcase_dir</div><div class="line">cp ~e/src/plugins/ini/ini/* testcase_dir</div></div><!-- fragment --><p>Fewer files is better. Then run, for example:</p>
-<div class="fragment"><div class="line">LD_LIBRARY_PATH=`pwd`/lib /usr/src/afl/afl-2.52b/afl-fuzz -i testcase_dir -o findings_dir bin/kdb import user/tests ini</div></div><!-- fragment --><p>Check if something is happening with:</p>
-<div class="fragment"><div class="line">watch kdb export user/tests</div></div><!-- fragment --><p>To enable sanitize checks use <code>ENABLE_ASAN</code> via cmake.</p>
+<div class="fragment"><div class="line">~e/scripts/dev/configure-debian -DCMAKE_C_COMPILER=/usr/src/afl/AFL-2.57b/afl-gcc -DCMAKE_CXX_COMPILER=/usr/src/afl/AFL-2.57b/afl-g++ ~e</div><div class="line">make -j 5</div></div><!-- fragment --><p>Copy some import files to <code>testcase_dir</code>, for example:</p>
+<div class="fragment"><div class="line">mkdir -p testcase_dir</div><div class="line">cp ~e/src/plugins/toml/toml/* testcase_dir</div></div><!-- fragment --><p>Fewer files is better. Then run, for example:</p>
+<div class="fragment"><div class="line">LD_LIBRARY_PATH=`pwd`/lib /usr/src/afl/AFL-2.57b/afl-fuzz -i testcase_dir -o findings_dir bin/kdb import user:/tests toml</div></div><!-- fragment --><p>Check if something is happening with:</p>
+<div class="fragment"><div class="line">watch kdb export user:/tests</div></div><!-- fragment --><p>To enable sanitize checks use <code>ENABLE_ASAN</code> via cmake.</p>
 <p>Then, to use ASAN, run <code>run_asan</code> in the build directory, which simply does:</p>
 <div class="fragment"><div class="line">ASAN_OPTIONS=symbolize=1 ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer) make run_all</div></div><!-- fragment --><p>It could also happen that you need to preload ASAN library, e.g.:</p>
 <div class="fragment"><div class="line">LD_PRELOAD=/usr/lib/clang/3.8.0/lib/linux/libclang_rt.asan-x86_64.so run_asan</div></div><!-- fragment --><p>or on Debian:</p>
@@ -178,7 +178,7 @@ $(function() {
 <div class="fragment"><div class="line">make</div></div><!-- fragment --><ol type="1">
 <li>Run the <code>oclint</code> command specifying the files you want to analyze</li>
 </ol>
-<div class="fragment"><div class="line">cd ..</div><div class="line">oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/ini/*.c</div></div><!-- fragment --><p><a href="http://clang-analyzer.llvm.org/scan-build.html">scan-build</a> is a tool that is usually bundled along with LLVM/Clang and is also primarily intended for C and C++ code. On macOS you have to install the package <code>llvm</code> with homebrew, then you'll find the tool in the folder <code>/usr/local/opt/llvm/bin/</code>.</p>
+<div class="fragment"><div class="line">cd ..</div><div class="line">oclint -p build -no-analytics -enable-global-analysis -enable-clang-static-analyzer src/plugins/toml/*.c</div></div><!-- fragment --><p><a href="http://clang-analyzer.llvm.org/scan-build.html">scan-build</a> is a tool that is usually bundled along with LLVM/Clang and is also primarily intended for C and C++ code. On macOS you have to install the package <code>llvm</code> with homebrew, then you'll find the tool in the folder <code>/usr/local/opt/llvm/bin/</code>.</p>
 <p>To use it, change the C compiler and the C++ compiler to the LLVM analyzer. To do this, you can configure the project from scratch and prefix the cmake command with <code>scan-build</code>. Alternatively, set the c compiler to <code>ccc-analyzer</code> and the C++ compiler to <code>c++-analyzer</code> (bundled with LLVM/Clang).</p>
 <p>Then you can build the project with <code>make</code> like usual, prefixing the command with <code>scan-build</code>. The <code>-o</code> option specifies where the html results get stored. Ensure you build the project from scratch, otherwise the analyzation might be incomplete.</p>
 <div class="fragment"><div class="line">scan-build -o ./scanbuild_result make -j 4</div></div><!-- fragment --><p>Afterwards, the report can be viewed by using the tool <code>scan-view</code>, also found in the llvm folder. The report is created in the folder specified above, along with the current date of the analyzation, for instance:</p>

@@ -77,7 +77,7 @@ Key *parentKey = \hyperlink{group__key_gad23c65b44bf48d773759e1f9a4d43b89}{keyNe
 \item {\ttfamily org} is a U\+R\+L/organization name to avoid name clashes with other application names. Use only one part of the U\+R\+L/organization, so e.\+g. {\ttfamily kde} is enough.
 \item {\ttfamily myapp} is the name of the most specific component that has its own configuration
 \item {\ttfamily \#0} is the major version number of the configuration (increment if you need to introduce incompatible changes).
-\item {\ttfamily current} is the \hyperlink{autotoc_md538_src_plugins_profile_README_md}{profile} to use. Administrators need it if they want to start up applications with different configurations.
+\item {\ttfamily current} is the \hyperlink{autotoc_md502_src_plugins_profile_README_md}{profile} to use. Administrators need it if they want to start up applications with different configurations.
 \end{DoxyItemize}
 \item {\ttfamily K\+E\+Y\+\_\+\+E\+ND} as C needs a proper termination of variable length arguments.
 \end{DoxyItemize}
@@ -184,7 +184,7 @@ You can use those features like following\+:
 
 \begin{DoxyCode}
 kdb set /overrides/test "example override"
-sudo kdb meta-set spec/test override/#0 /overrides/test
+sudo kdb meta-set spec:/test override/#0 /overrides/test
 \end{DoxyCode}
 
 
@@ -206,7 +206,7 @@ So we specify\+:
 
 
 \begin{DoxyCode}
-kdb meta-set spec/sw/org/myapp/#0/current/section/subsection/key \(\backslash\)
+kdb meta-set spec:/sw/org/myapp/#0/current/section/subsection/key \(\backslash\)
     "fallback/#0" /sw/otherorg/otherapp/#0/current/section/subsection/key
 \end{DoxyCode}
 
@@ -230,8 +230,8 @@ Particularly a {\itshape Specfile} contains metadata that defines
 
 
 \begin{DoxyCode}
-sudo kdb mount tutorial.ecf spec/sw/org/myapp/#0/current"
-cat << HERE | kdb import spec/sw/org/myapp/#0/current ni  \(\backslash\)
+sudo kdb mount tutorial.ecf spec:/sw/org/myapp/#0/current"
+cat << HERE | kdb import spec:/sw/org/myapp/#0/current ni  \(\backslash\)
 []                                         \(\backslash\)
  mountpoint = my-config-file.ini           \(\backslash\)
  infos/plugins = ini validation            \(\backslash\)
@@ -240,7 +240,7 @@ cat << HERE | kdb import spec/sw/org/myapp/#0/current ni  \(\backslash\)
 fallback/#0=/sw/otherorg/otherapp/#0/current/section/subsection/key  \(\backslash\)
 description = A description of the key     \(\backslash\)
 HERE
-kdb meta-ls spec/sw/org/myapp/#0/current # verify if specification is present now
+kdb meta-ls spec:/sw/org/myapp/#0/current # verify if specification is present now
 #> infos/plugins
 #> mountpoint
 \end{DoxyCode}
@@ -256,7 +256,7 @@ kdb spec-mount /sw/org/myapp/#0/current
 
 Then the configuration of our application will be in my-\/config-\/file.\+ini (because of {\ttfamily mountpoint} in the specification) and it will use the I\+NI format (because of {\ttfamily infos/plugins} in the specification). {\ttfamily section/subsection/key} contains the specification of what we already specified imperatively before.
 
-For a description which metadata is available, have a look in \href{/home/jenkins/workspace/libelektra-release/doc/METADATA.ini}{\tt M\+E\+T\+A\+D\+A\+T\+A.\+ini}.
+For a description which metadata is available, have a look in \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/doc/METADATA.ini}{\tt M\+E\+T\+A\+D\+A\+T\+A.\+ini}.
 
 Elektra does not hard code any configuration data in your application. Using the {\ttfamily default} specification, we even can startup applications without any configuration file {\itshape at all} and still do not have anything hard coded in the applications binary. Furthermore, by using cascading keys for {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}} and {\ttfamily \hyperlink{group__keyset_ga60f1ddcf23272f2b29b90e92ebe9b56f}{ks\+Lookup()}} Elektra gives you the possibility to specify how to retrieve configuration data. In this specification you can define to consider or prefer configuration data from other applications or shared places. Doing so, we can achieve configuration integration.
 

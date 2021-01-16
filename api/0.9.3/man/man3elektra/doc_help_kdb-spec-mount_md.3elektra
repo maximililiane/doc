@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-spec-mount_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-spec-mount_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,7 +8,7 @@ doc_help_kdb-spec-mount_mdkdb-spec-mount(1) - Mount a spec file to the key datab
 .IP "\(bu" 2
 \fCmountpoint\fP is where in the key database the new backend should be mounted to\&. It must be a cascading mount point, i\&.e\&., \fCmountpoint\fP must start with \fC/\fP\&.
 .IP "\(bu" 2
-\fCplugin\fP are extra Elektra plugins to be used (next to the one specified in \fCspec/<mountpoint>\fP)\&.
+\fCplugin\fP are extra Elektra plugins to be used (next to the one specified in \fCspec:/<mountpoint>\fP)\&.
 .IP "\(bu" 2
 Plugins may be followed by a \fC,\fP separated list of \fCkeys=values\fP pairs which will be used as plugin configuration\&.
 .PP
@@ -19,7 +19,7 @@ This command allows a user to mount a new \fIbackend\fP described by a previousl
 .PP
 .PP
 .nf
-sudo kdb mount /path/to/some-spec-file\&.ini spec/example/mountpoint ni
+sudo kdb mount /path/to/some-spec-file\&.ini spec:/example/mountpoint ni
 .fi
 .PP
 .PP
@@ -39,14 +39,14 @@ For example:
 .PP
 .PP
 .nf
-kdb meta-get spec/example/mountpoint mountpoint  # verify that we have a mountpoint here
+kdb meta-get spec:/example/mountpoint mountpoint  # verify that we have a mountpoint here
 sudo kdb spec-mount /example/mountpoint  # mounts /example/mountpoint according to
                                          # the specification as found at
-                                         # spec/example/mountpoint
+                                         # spec:/example/mountpoint
 .fi
 .PP
 .PP
-This command writes into the \fC/etc\fP directory and as such it requires root permissions\&. Use \fCkdb file system/elektra/mountpoints\fP to find out where exactly it will write to\&.
+This command writes into the \fC/etc\fP directory and as such it requires root permissions\&. Use \fCkdb file system:/elektra/mountpoints\fP to find out where exactly it will write to\&.
 .PP
 Note that many specifications have globs like \fC_\fP and \fC#\fP\&. They will only work if the \fCspec\fP plugin is present:
 .PP
@@ -86,7 +86,7 @@ kdb global-mount
 \fC/sw/elektra/kdb/#0/current/plugins\fP: It contains a space-separated list of plugins and their configs which are added automatically (by default sync)\&. The plugin-configuration syntax is as described above in the \fCsynopsis\fP\&.
 .PP
 .PP
-To mount /example as described in \fCspec/example\fP:
+To mount /example as described in \fCspec:/example\fP:
 .br
  \fCsudo kdb spec-mount /example\fP
 .PP

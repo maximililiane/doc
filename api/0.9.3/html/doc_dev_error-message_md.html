@@ -54,13 +54,13 @@ $(function() {
 <li>Never use exclamation marks at the end of sentences.</li>
 <li>If it is unclear where embedded strings in error messages start and end ("%s"-strings), surround them by single quotes '. Sentences containing a variable string and end with <code>Reason: s</code> do not need extra quotes because it is clear where they start and end.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1624"></a>
+<h1><a class="anchor" id="autotoc_md1596"></a>
 Examples</h1>
 <p>Actual reason might be in errno or an exception</p>
 <ul>
 <li><code>"The configuration file %s contains invalid syntax at line %s. Reason: %s", file.path(), line, e.what()</code> Result: <code>The configuration file /etc/conf/file.csv contains invalid syntax at line 6. Reason: Missing column</code></li>
 <li><code>"Could not rename file %s. Reason: %s" file.path(), e.what()</code> Result: <code>Could not rename file /etc/conf/file.yml. Reason: File is not existent</code></li>
-<li>`"The key %s contained the value '%s', but only 'unmounted' is supported for non-global clauses at the moment", keyName(key), keyString(key)<code> Result:</code>The key user/my/key contained the value 'mounted', but only 'unmounted' is supported for non-global clauses at the moment` </li>
+<li>`"The key %s contained the value '%s', but only 'unmounted' is supported for non-global clauses at the moment", keyName(key), keyString(key)<code> Result:</code>The key user:/my/key contained the value 'mounted', but only 'unmounted' is supported for non-global clauses at the moment` </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->

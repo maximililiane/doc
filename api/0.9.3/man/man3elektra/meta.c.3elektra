@@ -1,4 +1,4 @@
-.TH "meta.c" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "meta.c" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,8 +16,6 @@ meta.c \- Methods for metadata manipulation\&.
 \fC#include <kdbmeta\&.h>\fP
 .br
 \fC#include <kdbprivate\&.h>\fP
-.br
-\fC#include <kdbproposal\&.h>\fP
 .br
 \fC#include <kdbtypes\&.h>\fP
 .br
@@ -42,58 +40,6 @@ meta.c \- Methods for metadata manipulation\&.
 .br
 .RI "Set a comment for a key\&. "
 .ti -1c
-.RI "uid_t \fBkeyGetUID\fP (const Key *key)"
-.br
-.RI "Get the user ID of a key\&. "
-.ti -1c
-.RI "int \fBkeySetUID\fP (Key *key, uid_t uid)"
-.br
-.RI "Set the user ID of a key\&. "
-.ti -1c
-.RI "gid_t \fBkeyGetGID\fP (const Key *key)"
-.br
-.RI "Get the group ID of a key\&. "
-.ti -1c
-.RI "int \fBkeySetGID\fP (Key *key, gid_t gid)"
-.br
-.RI "Set the group ID of a key\&. "
-.ti -1c
-.RI "int \fBkeySetDir\fP (Key *key)"
-.br
-.RI "Set mode so that key will be recognized as directory\&. "
-.ti -1c
-.RI "mode_t \fBkeyGetMode\fP (const Key *key)"
-.br
-.RI "Return the key mode permissions\&. "
-.ti -1c
-.RI "int \fBkeySetMode\fP (Key *key, mode_t mode)"
-.br
-.RI "Set the key mode permissions\&. "
-.ti -1c
-.RI "time_t \fBkeyGetATime\fP (const Key *key)"
-.br
-.RI "Get last time the key data was read from disk\&. "
-.ti -1c
-.RI "int \fBkeySetATime\fP (Key *key, time_t atime)"
-.br
-.RI "Update the atime information for a key\&. "
-.ti -1c
-.RI "time_t \fBkeyGetMTime\fP (const Key *key)"
-.br
-.RI "Get last modification time of the key on disk\&. "
-.ti -1c
-.RI "int \fBkeySetMTime\fP (Key *key, time_t mtime)"
-.br
-.RI "Update the mtime information for a key\&. "
-.ti -1c
-.RI "time_t \fBkeyGetCTime\fP (const Key *key)"
-.br
-.RI "Get last time the key metadata was changed from disk\&. "
-.ti -1c
-.RI "int \fBkeySetCTime\fP (Key *key, time_t ctime)"
-.br
-.RI "Update the ctime information for a key\&. "
-.ti -1c
 .RI "int \fBelektraKeyCmpOrder\fP (const Key *ka, const Key *kb)"
 .br
 .RI "Compare the order metadata of two keys\&. "
@@ -102,7 +48,7 @@ meta.c \- Methods for metadata manipulation\&.
 .br
 .RI "creates an metadata array or appends another element to an existing metadata array e\&.g\&. "
 .ti -1c
-.RI "KeySet * \fBelektraMetaArrayToKS\fP (const Key *key, const char *metaName)"
+.RI "KeySet * \fBelektraMetaArrayToKS\fP (Key *key, const char *metaName)"
 .br
 .RI "Create a \fCKeySet\fP from a metakey array\&. "
 .ti -1c

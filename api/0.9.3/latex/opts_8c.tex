@@ -19,7 +19,7 @@ Include dependency graph for opts.\+c\+:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-char $\ast$ \hyperlink{opts_8c_a161f57de445030a5b069e73d0d9cc547}{generate\+Usage\+Line} (const char $\ast$progname, const Key $\ast$command, const Key $\ast$command\+Args)
+char $\ast$ \hyperlink{opts_8c_ac86da6aa4782c9946c0220a527ada996}{generate\+Usage\+Line} (const char $\ast$progname, Key $\ast$command, const Key $\ast$command\+Args)
 \begin{DoxyCompactList}\small\item\em Generate usage line for help message from options\+Spec. \end{DoxyCompactList}\item 
 int \hyperlink{opts_8c_a9b60d56d97c918867960f19c19ab4058}{elektra\+Get\+Opts} (Key\+Set $\ast$ks, int argc, const char $\ast$$\ast$argv, const char $\ast$$\ast$envp, Key $\ast$parent\+Key)
 \begin{DoxyCompactList}\small\item\em This functions parses a specification of program options, together with a list of arguments and environment variables to extract the option values. \end{DoxyCompactList}\item 
@@ -92,7 +92,7 @@ The basic usage of this function is as follows\+:
 \hline
 {\em envp} & A list of environment variables. This needs to be a null-\/terminated list of strings of the format \textquotesingle{}K\+EY=V\+A\+L\+UE\textquotesingle{}. \\
 \hline
-{\em parent\+Key} & The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.\+e. \textquotesingle{}user/test/parent\textquotesingle{} will be translated into \textquotesingle{}spec/test/parent\textquotesingle{}, before checking against spec keys.\\
+{\em parent\+Key} & The parent key below which the function while search for option specifications. Also used for error reporting. The key will be translated into the spec namespace automatically, i.\+e. \textquotesingle{}user\+:/test/parent\textquotesingle{} will be translated into \textquotesingle{}spec\+:/test/parent\textquotesingle{}, before checking against spec keys.\\
 \hline
 \end{DoxyParams}
 
@@ -150,11 +150,11 @@ Extracts the help message from the {\ttfamily error\+Key} used in \hyperlink{opt
 \begin{DoxyReturn}{Returns}
 The full help message extracted from {\ttfamily error\+Key}, or N\+U\+LL if no help message was found. The returned string has to be freed with \hyperlink{internal_8c_a7f572149d2e0bfe18023a6ac969f195c}{elektra\+Free()}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{opts_8c_a161f57de445030a5b069e73d0d9cc547}\label{opts_8c_a161f57de445030a5b069e73d0d9cc547}} 
+\mbox{\Hypertarget{opts_8c_ac86da6aa4782c9946c0220a527ada996}\label{opts_8c_ac86da6aa4782c9946c0220a527ada996}} 
 \index{opts.\+c@{opts.\+c}!generate\+Usage\+Line@{generate\+Usage\+Line}}
 \index{generate\+Usage\+Line@{generate\+Usage\+Line}!opts.\+c@{opts.\+c}}
 \subsubsection{\texorpdfstring{generate\+Usage\+Line()}{generateUsageLine()}}
-{\footnotesize\ttfamily char $\ast$ generate\+Usage\+Line (\begin{DoxyParamCaption}\item[{const char $\ast$}]{progname,  }\item[{const Key $\ast$}]{command,  }\item[{const Key $\ast$}]{command\+Args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily char $\ast$ generate\+Usage\+Line (\begin{DoxyParamCaption}\item[{const char $\ast$}]{progname,  }\item[{Key $\ast$}]{command,  }\item[{const Key $\ast$}]{command\+Args }\end{DoxyParamCaption})}
 
 
 

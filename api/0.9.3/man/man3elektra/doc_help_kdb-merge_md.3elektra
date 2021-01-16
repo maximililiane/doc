@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-merge_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-merge_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -85,17 +85,17 @@ Conflicts occur when a Key has a different value in all three KeySets\&.
 .PP
 To complete a simple merge of three KeySets:
 .br
- \fCkdb merge user/ours user/theirs user/base user/result\fP
+ \fCkdb merge user:/ours user:/theirs user:/base user:/result\fP
 .br
 .PP
 To complete a merge whilst using the \fCours\fP version of the KeySet to resolve conflicts:
 .br
- \fCkdb merge -s ours user/ours user/theirs user/base user/result\fP
+ \fCkdb merge -s ours user:/ours user:/theirs user:/base user:/result\fP
 .br
 .PP
 To complete a three-way merge and overwrite all current keys in the \fCresultpath\fP:
 .br
- \fCkdb merge -s cut user/ours user/theirs user/base user/result\fP
+ \fCkdb merge -s cut user:/ours user:/theirs user:/base user:/result\fP
 .br
 .PP
 .IP "\(bu" 2

@@ -1,4 +1,4 @@
-.TH "doc_decisions_bootstrap_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_decisions_bootstrap_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,7 +6,7 @@ doc_decisions_bootstrap_mdBootstrap
  \- Currently the default backend (default\&.ecf) will also be used for bootstrapping\&. There are two problems with this approach:
 .PP
 .IP "1." 4
-Thus the default backend first will be read with parentKey \fCsystem/elektra\fP and later with parentKey \fCsystem\fP, it needs to store absolute paths and thus won't work with the current INI plugin
+Thus the default backend first will be read with parentKey \fCsystem:/elektra\fP and later with parentKey \fCsystem:/\fP, it needs to store absolute paths and thus won't work with most of the plugins (except dump)\&.
 .IP "2." 4
 When \fCsystem\fP is large without mount points, everything is reread twice during bootstrapping\&.
 .PP
@@ -24,7 +24,7 @@ Bootstrap should be fast and not unnecessarily read large files
 .PP
 .PP
 .IP "\(bu" 2
-Implement a hack so that \fCsystem/elektra\fP is actually read as \fCsystem\fP\&. (Will not solve problem 2\&.)
+Implement a hack so that \fCsystem:/elektra\fP is actually read as \fCsystem:/\fP\&. (Will not solve problem 2\&.)
 .IP "  \(bu" 4
 Its a hack\&.
 .IP "  \(bu" 4
@@ -44,13 +44,9 @@ Split up the concepts of default (\fCdefault\&.ecf\fP) and bootstrap (\fCelektra
 Algorithm:
 .PP
 .IP "1." 4
-try to get system/elektra using the file elektra\&.ecf (KDB_DB_INIT)
+try to get system:/elektra using the file elektra\&.ecf (KDB_DB_INIT)
 .IP "2." 4
-if it works, mount the init backend to system/elektra (non-fallback mode)
-.IP "3." 4
-if it fails (== 0 or == -1), try default\&.ecf as fallback
-.IP "4." 4
-if the fallback works (i\&.e\&. keys are present in system/elektra), mount the default backend to system/elektra (fallback mode)
+if it works, mount the init backend to system:/elektra
 .PP
 .PP
 .IP "\(bu" 2
@@ -62,8 +58,6 @@ People can decide if and how to migrate
 .PP
 .PP
 .IP "\(bu" 2
-Fallback mode should be removed with 1\&.0
-.IP "\(bu" 2
 added scripts/upgrade-bootstrap
 .PP
 .PP
@@ -72,6 +66,6 @@ to upgrade to new system, either:
 .IP "\(bu" 2
 touch /etc/kdb/elektra\&.ecf (loses old mount points)
 .IP "\(bu" 2
-or do kdb export system/elektra/mountpoints, kdb rm -r system/elektra/mountpoints, kdb import system/elektra/mountpoints 
+or do kdb export system:/elektra/mountpoints, kdb rm -r system:/elektra/mountpoints, kdb import system:/elektra/mountpoints 
 .PP
 

@@ -1,4 +1,4 @@
-.TH "doc_tutorials_install-webui_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_tutorials_install-webui_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -71,7 +71,7 @@ Install and start the client (connects to the elektrad instance):
 You can now access the client on: \fChttp://localhost:33334\fP
 .PP
 .PP
-If you do not want to configure multiple instances, you can set the \fCINSTANCE\fP environment variable to the server you want to configure\&. You can also set \fCuser/sw/elektra/web/#0/current/instance\fP to the host\&. Make sure to enter a full HTTP URL, e\&.g\&. \fChttp://localhost:33333\fP\&.
+If you do not want to configure multiple instances, you can set the \fCINSTANCE\fP environment variable to the server you want to configure\&. You can also set \fCuser:/sw/elektra/web/#0/current/instance\fP to the host\&. Make sure to enter a full HTTP URL, e\&.g\&. \fChttp://localhost:33333\fP\&.
 .PP
 If this configuration option is set, elektra-web will load the configuration page for that instance instead of the main overview page\&.
 .PP
@@ -154,13 +154,13 @@ Additional note\&. It is recommended to install the elektrad tool than starting 
 .PP
 Examples:
 .PP
-let's create the new key-value pair \fCuser/test\fP and set its value to 5\&. You can do it next way:
+let's create the new key-value pair \fCuser:/test\fP and set its value to 5\&. You can do it next way:
 .PP
 .IP "\(bu" 2
 through the command terminal 
 .PP
 .nf
-kdb set user/test 5
+kdb set user:/test 5
 
 .fi
 .PP
@@ -176,7 +176,7 @@ curl -X PUT -H "Content-Type: text/plain" --data "5" http://localhost:33333/kdb/
 
 .PP
 .PP
-The output of the commandline tool will be: \fCSet string to '5'\fP\&. If the specified key didn't exist before, then the output will be \fCCreate a new key user/test with string '5'\fP\&. Elektrad will respond with code \fC200\fP\&.
+The output of the commandline tool will be: \fCSet string to '5'\fP\&. If the specified key didn't exist before, then the output will be \fCCreate a new key user:/test with string '5'\fP\&. Elektrad will respond with code \fC200\fP\&.
 .PP
 Now, the command
 .PP
@@ -186,16 +186,16 @@ curl http://localhost:33333/kdb/user/test
 .fi
 .PP
 .PP
-will return us the value of the specified key \fCuser/test\fP, which is stored in the database right now
+will return us the value of the specified key \fCuser:/test\fP, which is stored in the database right now
 .PP
 .PP
 .nf
 {
     "exists": true,
     "name": "test",
-    "path": "user/test",
+    "path": "user:/test",
     "ls": [
-        "user/test"
+        "user:/test"
     ],
     "value": "5",
     "meta": ""

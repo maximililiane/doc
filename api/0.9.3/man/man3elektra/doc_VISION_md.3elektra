@@ -1,4 +1,4 @@
-.TH "doc_VISION_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_VISION_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,7 +15,7 @@ Either by either invoking \fBcommand-line tools\fP:
 .PP
 .PP
 .nf
-kdb set system/sw/samba/#0/current/global/workgroup MYGROUP
+kdb set system:/sw/samba/#0/current/global/workgroup MYGROUP
 .fi
 .PP
 .PP
@@ -23,7 +23,7 @@ Also by importing an INI file with the information:
 .PP
 .PP
 .nf
-kdb import system/sw/samba/#0/current ini << HERE
+kdb import system:/sw/samba/#0/current ini << HERE
 [global]
 workgroup=MYGROUP
 HERE
@@ -39,7 +39,7 @@ Or using some compiled language like C (shown code uses the \fBhigh-level API\fP
 int main ()
 {
         ElektraError* error;
-        Elektra * elektra = elektraOpen ("system/sw/samba/#0/current", 0, &error);
+        Elektra * elektra = elektraOpen ("system:/sw/samba/#0/current", 0, &error);
         elektraSetString (elektra, "global/workgroup", "MYGROUP", &error);
         elektraClose (elektra);
 }
@@ -53,7 +53,7 @@ Or using some interpreted language like Python (shown code uses the \fBPython bi
 import kdb
 k = kdb\&.KDB()
 ks = kdb\&.KeySet()
-s = "system/sw/samba/#0/current"
+s = "system:/sw/samba/#0/current"
 k\&.get (ks, s)
 ks\&.append(kdb\&.Key(s+"/global/workgroup", kdb\&.KEY_VALUE, "MYGROUP"))
 k\&.set (ks, s)
@@ -66,7 +66,7 @@ Key-value access in \fCpuppet-libelektra\fP:
 .PP
 .PP
 .nf
-kdbkey {'system/sw/samba/#0/current/global/workgroup':
+kdbkey {'system:/sw/samba/#0/current/global/workgroup':
         ensure => 'present',
         value => 'MYGROUP'
 }
@@ -77,7 +77,7 @@ Key-value access in Chef:
 .PP
 .PP
 .nf
-kdbset 'system/sw/samba/#0/current/global/workgroup' do
+kdbset 'system:/sw/samba/#0/current/global/workgroup' do
         value 'MYGROUP'
         action :create
 end
@@ -94,12 +94,12 @@ Key-value access in Ansible:
   tasks:
     - name: set workgroup
       elektra:
-        key: "system/sw/samba/#0/current/global/workgroup"
+        key: "system:/sw/samba/#0/current/global/workgroup"
         value: "MYGROUP"
 .fi
 .PP
 .PP
-In all these examples, we have set \fCsystem/sw/samba/#0/current/global/workgroup\fP to \fCMYGROUP\fP\&.
+In all these examples, we have set \fCsystem:/sw/samba/#0/current/global/workgroup\fP to \fCMYGROUP\fP\&.
 .PP
 Different to other solutions, in Elektra \fBapplications itself can be integrated\fP, too\&. In Samba we would simply replace the configuration file parser with code like (\fClow-level C code\fP, no error-handling and no cleanup):
 .PP
@@ -111,7 +111,7 @@ Different to other solutions, in Elektra \fBapplications itself can be integrate
 int main (void)
 {
         KeySet * myConfig = ksNew (0, KS_END);
-        Key * key = keyNew ("/sw/samba/#0/current", KEY_CASCADING_NAME, KEY_END);
+        Key * key = keyNew ("/sw/samba/#0/current", KEY_END);
         KDB * handle = kdbOpen (key);
         kdbGet (handle, myConfig, key);
 
@@ -131,7 +131,7 @@ Elektra uses the same configuration to configure itself, so every way shown abov
 .PP
 .PP
 .nf
-kdb mount /etc/samba/smb\&.conf system/sw/samba/#0/current ini
+kdb mount /etc/samba/smb\&.conf system:/sw/samba/#0/current ini
 .fi
 .PP
 .PP
@@ -141,12 +141,12 @@ Mounting in puppet-libelektra:
 .PP
 .PP
 .nf
-kdbmount {'system/sw/samba/#0/current':
+kdbmount {'system:/sw/samba/#0/current':
         ensure => 'present',
         file => '/etc/samba/smb\&.conf',
         plugins => 'ini'
 }
-kdbkey {'system/sw/samba/global/log level':
+kdbkey {'system:/sw/samba/global/log level':
         ensure => 'absent'
 }
 .fi
@@ -162,7 +162,7 @@ Mounting in Ansible:
   tasks:
     - name: set workgroup
     elektra:
-      mountpoint: system/sw/samba
+      mountpoint: system:/sw/samba
       file: /etc/samba/smb\&.conf
       plugins: ini
 .fi
@@ -187,7 +187,7 @@ Key-value specifications in \fCpuppet-libelektra\fP:
 .PP
 .PP
 .nf
-kdbkey {'system/sw/samba/#0/current/global/workgroup':
+kdbkey {'system:/sw/samba/#0/current/global/workgroup':
         ensure => 'present',
         check => {
                 'type' => 'string',
@@ -202,7 +202,7 @@ kdbkey {'system/sw/samba/#0/current/global/workgroup':
 .fi
 .PP
 .PP
-Note, that the specification (in both examples above) actually lands up in \fCspec/sw/samba/#0/current/global/workgroup\fP\&. The unique path to the configuration setting is \fC/sw/samba/#0/current/global/workgroup\fP, but the specification gets written to the \fBnamespace\fP \fCspec\fP, while the system-configuration gets written to the namespace \fCsystem\fP\&.
+Note, that the specification (in both examples above) actually lands up in \fCspec:/sw/samba/#0/current/global/workgroup\fP\&. The unique path to the configuration setting is \fC/sw/samba/#0/current/global/workgroup\fP, but the specification gets written to the \fBnamespace\fP \fCspec\fP, while the system-configuration gets written to the namespace \fCsystem\fP\&.
 .PP
 Here we have shown how Elektra can be used to configure systems more easily\&. Both application developers and administrators can save time\&.
 .PP

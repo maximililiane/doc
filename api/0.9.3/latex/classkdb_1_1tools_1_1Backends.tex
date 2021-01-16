@@ -19,12 +19,12 @@ static \hyperlink{structkdb_1_1tools_1_1BackendInfo}{Backend\+Info} \hyperlink{c
 static bool \hyperlink{classkdb_1_1tools_1_1Backends_aca36f903059e3df0f2ded569d6d8df8c}{umount} (std\+::string const \&backend, \hyperlink{classkdb_1_1KeySet}{Key\+Set} \&mount\+Conf)
 \begin{DoxyCompactList}\small\item\em Unmount a backend by given mount\+Path. \end{DoxyCompactList}\item 
 static std\+::string \hyperlink{classkdb_1_1tools_1_1Backends_a76af9122c56426f4d0119e44719c7309}{get\+Base\+Path} (std\+::string name)
-\begin{DoxyCompactList}\small\item\em returns the base path of a mounted backend below system/elektra/mountpoints \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em returns the base path of a mounted backend below system\+:/elektra/mountpoints \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classkdb_1_1tools_1_1Backends_ac867850accaab4fda286f763cacc3926}\label{classkdb_1_1tools_1_1Backends_ac867850accaab4fda286f763cacc3926}} 
-static const char $\ast$ \hyperlink{classkdb_1_1tools_1_1Backends_ac867850accaab4fda286f763cacc3926}{mountpoints\+Path} = \char`\"{}system/elektra/mountpoints\char`\"{}
+static const char $\ast$ \hyperlink{classkdb_1_1tools_1_1Backends_ac867850accaab4fda286f763cacc3926}{mountpoints\+Path} = \char`\"{}system\+:/elektra/mountpoints\char`\"{}
 \begin{DoxyCompactList}\small\item\em Below this path is the mount\+Conf. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -83,7 +83,7 @@ an vector of information about mounted backends
 
 
 
-returns the base path of a mounted backend below system/elektra/mountpoints 
+returns the base path of a mounted backend below system\+:/elektra/mountpoints 
 
 
 \begin{DoxyParams}{Parameters}

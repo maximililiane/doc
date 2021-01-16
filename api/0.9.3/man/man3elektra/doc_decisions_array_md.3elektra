@@ -1,4 +1,4 @@
-.TH "doc_decisions_array_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_decisions_array_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -23,7 +23,9 @@ use value and not the metadata \fCarray\fP, problem: is ambiguous
 use metadata on all children
 .PP
 .PP
-Store length in metadata \fCarray\fP of key, or keep metadata \fCarray\fP empty if empty array\&. For example (\fCni syntax\fP, sections used for metadata):
+Store length in metadata \fCarray\fP of key, or keep metadata \fCarray\fP empty if empty array\&. Only children that have \fC#\fP syntax are allowed in a valid array\&. The index start with \fC#0\fP\&. Both \fCkeyAddName('#12')\fP or \fCkeyAddBaseName('#_12')\fP is allowed to add the 13th index\&.
+.PP
+For example (\fCni syntax\fP, sections used for metadata):
 .PP
 .PP
 .nf
@@ -40,7 +42,7 @@ myarray/#5 = value5
 .PP
 It is not allowed to have anything else than \fC#5\fP in the metadata \fCarray\fP, e\&.g\&. even \fC#4\fP would be a malformed array\&.
 .PP
-The metadata \fCarray\fP preferable should be in \fCspec\fP (specified configuration)\&. Then the \fCspec\fP plugin will add the \fCarray\fP marker with the correct length\&. This needs to be happen early, so that plugins can rely on having correct arrays\&.
+With the metadata \fCarray\fP in \fCspec:/\fP the \fCspec\fP plugin will add the \fCarray\fP marker with the correct length\&. This needs to be happen early, so that plugins can rely on having correct arrays\&.
 .PP
 For example:
 .PP
@@ -74,16 +76,16 @@ system:/myarray  # <- not found in cascading lookup, as user:/myarray exists
 .fi
 .PP
 .PP
-Guarantees we want from the spec plugin:
+The \fCspec\fP plugin should check if it is a valid array, i\&.e\&.:
 .PP
 .IP "\(bu" 2
-that the parent key always contain \fCarray\fP\&.
+that the parent key always contains the metadata \fCarray\fP,
 .IP "\(bu" 2
-that the correct length is in \fCarray\fP
+that the correct length is in \fCarray\fP,
 .IP "\(bu" 2
-that the array only contains \fC#\fP children
+that the array only contains \fC#\fP children, and
 .IP "\(bu" 2
-that the children are numbered from 0 to n, without holes
+that the children are numbered from \fC#0\fP to \fC#n\fP, without holes\&.
 .PP
 .PP
 .IP "\(bu" 2
@@ -102,12 +104,21 @@ metadata library needs to be adapted
 spec plugin needs to be fixed, a lot of work needed there\&. Most amount of work is to detect misstructured nested arrays (\fC#\fP intermixed with non \fC#\fP keys) which is a possibility also in all the alternatives of this decision\&.
 .IP "\(bu" 2
 A \fCuser:/\fP or \fCdir:/\fP key can change the semantics of a \fCsystem:/\fP array, if not avoided by \fCspec\fP\&.
+.IP "\(bu" 2
+user-facing documentation should contain a note like: 'Mixing array and non-array keys in arrays is not supported\&.
+  In many cases the trivial solution is to move the array part into a separate child-key\&.'
 .PP
 .PP
 .IP "\(bu" 2
 \fBGlobal Plugins\fP
 .IP "\(bu" 2
 \fBGlobal Validation\fP
+.IP "\(bu" 2
+\fBBase Names\fP
+.IP "\(bu" 2
+\fBMetadata in Spec Namespace\fP
+.IP "\(bu" 2
+\fBSpec Expressiveness\fP
 .PP
 .PP
 https://github.com/ElektraInitiative/libelektra/issues/182 

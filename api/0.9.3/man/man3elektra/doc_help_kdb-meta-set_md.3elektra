@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-meta-set_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-meta-set_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,11 +35,11 @@ For cascading keys, the namespace will default to \fCspec\fP, because that is th
 \fC/sw/elektra/kdb/#0/current/namespace\fP: Specifies which default namespace should be used when setting a cascading name\&. By default the namespace is \fCuser\fP, except \fCkdb\fP is used as root, then \fCsystem\fP is the default\&.
 .PP
 .PP
-To set a metakey called \fCdescription\fP associated with the key \fCuser/example/key\fP to the value \fCHello World!\fP:
+To set a metakey called \fCdescription\fP associated with the key \fCuser:/example/key\fP to the value \fCHello World!\fP:
 .br
- \fCkdb meta-set spec/example/key description 'Hello World!'\fP
+ \fCkdb meta-set spec:/example/key description 'Hello World!'\fP
 .PP
-To create a new key \fCspec/example/newkey\fP with a null value (if it did not exist before) and a metakey \fCnamespace/#0\fP associated with it to the value \fCsystem\fP:
+To create a new key \fCspec:/example/newkey\fP with a null value (if it did not exist before) and a metakey \fCnamespace/#0\fP associated with it to the value \fCsystem\fP:
 .br
  \fCkdb meta-set /example/newkey 'namespace/#0' system\fP
 .PP
@@ -48,7 +48,7 @@ To create an override link for a \fC/test\fP key:
 .PP
 .nf
 kdb set /overrides/test "example override"
-sudo kdb meta-set spec/test override/#0 /overrides/test
+sudo kdb meta-set spec:/test override/#0 /overrides/test
 .fi
 .PP
 .PP
@@ -56,7 +56,7 @@ To remove it:
 .PP
 .PP
 .nf
-sudo kdb meta-set spec/test override/#0
+sudo kdb meta-set spec:/test override/#0
 .fi
 .PP
 .PP

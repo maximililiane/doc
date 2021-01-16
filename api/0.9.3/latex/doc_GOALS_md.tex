@@ -71,34 +71,34 @@ Accessing configuration settings has impact on bootup and startup-\/time of appl
 
 \begin{quote}
 Only pay for what you need. \end{quote}
-\hypertarget{doc_GOALS_md_autotoc_md1663}{}\section{Users}\label{doc_GOALS_md_autotoc_md1663}
-These goals are about Elektra\textquotesingle{}s users, again in order of importance. Again, lower goals need to be ignored if goals are in conflict.\hypertarget{doc_GOALS_md_autotoc_md1664}{}\subsection{1. Application Developers}\label{doc_GOALS_md_autotoc_md1664}
+\hypertarget{doc_GOALS_md_autotoc_md1635}{}\section{Users}\label{doc_GOALS_md_autotoc_md1635}
+These goals are about Elektra\textquotesingle{}s users, again in order of importance. Again, lower goals need to be ignored if goals are in conflict.\hypertarget{doc_GOALS_md_autotoc_md1636}{}\subsection{1. Application Developers}\label{doc_GOALS_md_autotoc_md1636}
 Elektra must be easy and robust for application developers to store any configuration settings referable by keys they need to store. After writing configuration settings ({\ttfamily kdb\+Set}) and reading them again ({\ttfamily kdb\+Get}) they get the same Key\+Set (aka \char`\"{}round-\/trip\char`\"{}).
 
 \begin{quote}
 This means, they must be able to store keys with any name, any string or any binary data as needed for their purpose. \end{quote}
-\hypertarget{doc_GOALS_md_autotoc_md1665}{}\subsection{2. Administrators}\label{doc_GOALS_md_autotoc_md1665}
+\hypertarget{doc_GOALS_md_autotoc_md1637}{}\subsection{2. Administrators}\label{doc_GOALS_md_autotoc_md1637}
 Administrators should be empowered by good error messages and validation capabilities. Furthermore, they should be able to use their favorite tools and configuration file formats.
 
 \begin{quote}
 There are principal limitations of nearly all configuration file formats, so Elektra cannot enable that any configuration file format can be used with any application. If maintainers or administrators want to change the configuration file format of some application, they need to carefully test if it works. \end{quote}
-\hypertarget{doc_GOALS_md_autotoc_md1666}{}\subsection{3. Maintainers}\label{doc_GOALS_md_autotoc_md1666}
+\hypertarget{doc_GOALS_md_autotoc_md1638}{}\subsection{3. Maintainers}\label{doc_GOALS_md_autotoc_md1638}
 Elektra must be available everywhere and flexible enough, so that maintainers can integrate different applications by specifying and mounting.
 
 \begin{quote}
 There might be some restrictions that some applications require some plugins to be mounted for their configuration settings. \end{quote}
-\hypertarget{doc_GOALS_md_autotoc_md1667}{}\subsection{4. Possibility to Represent any Configuration File Format}\label{doc_GOALS_md_autotoc_md1667}
+\hypertarget{doc_GOALS_md_autotoc_md1639}{}\subsection{4. Possibility to Represent any Configuration File Format}\label{doc_GOALS_md_autotoc_md1639}
 Elektra must be powerful and flexible enough to be able to represent any configuration file format. We support the development of fully-\/conforming parsers and emitters.
 
 \begin{quote}
 This means, that given a correctly written storage plugin, a Key\+Set can be found that represents the configuration settings, its metadata and the hierarchical structure of the configuration file. \end{quote}
-\hypertarget{doc_GOALS_md_autotoc_md1668}{}\section{Non-\/\+Goals\+:}\label{doc_GOALS_md_autotoc_md1668}
+\hypertarget{doc_GOALS_md_autotoc_md1640}{}\section{Non-\/\+Goals\+:}\label{doc_GOALS_md_autotoc_md1640}
 
 \begin{DoxyItemize}
 \item Support semantics that do not fit into the Key\+Set (key-\/value pairs) with an {\ttfamily \hyperlink{group__kdb_ga28e385fd9cb7ccfe0b2f1ed2f62453a1}{kdb\+Get()}}/{\ttfamily \hyperlink{group__kdb_ga11436b058408f83d303ca5e996832bcf}{kdb\+Set()}} interface.
 \item Support for non-\/configuration issues, e.\+g., storing key-\/value data unrelated to configuration settings.
 \item Elektra is not a distributed configuration management tool\+: use your favorite configuration management tool on top or a distributed file system below Elektra.
-\end{DoxyItemize}\hypertarget{doc_GOALS_md_autotoc_md1669}{}\subsection{Further Readings}\label{doc_GOALS_md_autotoc_md1669}
+\end{DoxyItemize}\hypertarget{doc_GOALS_md_autotoc_md1641}{}\subsection{Further Readings}\label{doc_GOALS_md_autotoc_md1641}
 
 \begin{DoxyItemize}
 \item Continue reading\+: \hyperlink{doc_WHO_md}{Who uses Elektra?} 

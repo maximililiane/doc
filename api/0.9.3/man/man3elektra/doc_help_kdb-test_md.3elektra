@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-test_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-test_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -29,14 +29,14 @@ The following tests are available: basic string umlauts binary naming meta
 \fC-C\fP, \fC--color <when>\fP: Print never/auto(default)/always colored output\&.
 .PP
 .PP
-To run all tests below the \fCuser/example/tests\fP key:
+To run all tests below the \fCuser:/example/tests\fP key:
 .br
- \fCkdb test user/example/tests\fP
+ \fCkdb test user:/example/tests\fP
 .br
 .PP
 To run the \fCbinary\fP and \fCnaming\fP tests:
 .br
- \fCkdb test user/example/tests binary naming\fP
+ \fCkdb test user:/example/tests binary naming\fP
 .br
 .PP
 .IP "\(bu" 2

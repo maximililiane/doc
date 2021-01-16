@@ -1,4 +1,4 @@
-.TH "doc_decisions_holes_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_decisions_holes_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,7 +35,7 @@ prohibit non-leaves values
 .PP
 Support holes and values for non-leaves in a KeySet if the underlying format allows it\&.
 .PP
-If the underlying format does not support it and there is also not an obvious way how to circumvent it -- e\&.g\&., JSON which does not have comments -- holes and values in non-leaves are not supported\&.
+If the underlying format does not support it and there is also not an obvious way how to circumvent it -- e\&.g\&., JSON which does not have comments -- holes and values in non-leaves can be supported with key names starting with ®elektra\&.
 .PP
 .IP "\(bu" 2
 It fits very good to the idea of key-value\&.

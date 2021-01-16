@@ -1,4 +1,4 @@
-.TH "doc_README_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_README_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -29,6 +29,8 @@ doc_README_mdDocumentation Index
 \fBCompile\fP: If you want to compile Elektra from source please take a look at this document\&.
 .IP "\(bu" 2
 \fBHelp\fP: This folder contains our man pages in Markdown format\&. The folder \fBman\fP contains these man pages in roff format, which you can read using the Unix utility \fC\fCman\fP\fP if you already installed Elektra\&.
+.IP "\(bu" 2
+\fBKeynames\fP: This document describes how Elektra's keynames work\&.
 .PP
 .PP
 .IP "\(bu" 2

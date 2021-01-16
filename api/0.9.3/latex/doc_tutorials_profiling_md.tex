@@ -16,7 +16,7 @@ Since we want to improve the readability of the Callgrind output we choose a bui
 
 . We use {\ttfamily Debug} here, which should provide the most detailed profiling information.
 
-For this tutorial we decided to profile the ../../src/plugins/yajl/\+R\+E\+A\+D\+ME.md \char`\"{}\+Y\+A\+J\+L\char`\"{} plugin. Since Elektra loads plugin code via {\ttfamily dlopen} and Callgrind \href{https://stackoverflow.com/questions/16719395}{\tt does not support the function {\ttfamily dlclose} properly} we remove the {\ttfamily dlclose} calls in the file \href{/home/jenkins/workspace/libelektra-release/src/libs/loader/dl.c}{\tt {\ttfamily dl.\+c}} temporarily. At the time of writing one option to do that is deleting
+For this tutorial we decided to profile the ../../src/plugins/yajl/\+R\+E\+A\+D\+ME.md \char`\"{}\+Y\+A\+J\+L\char`\"{} plugin. Since Elektra loads plugin code via {\ttfamily dlopen} and Callgrind \href{https://stackoverflow.com/questions/16719395}{\tt does not support the function {\ttfamily dlclose} properly} we remove the {\ttfamily dlclose} calls in the file \href{/home/jenkins/workspace/libelektra-release-pipeline-testing/src/libs/loader/dl.c}{\tt {\ttfamily dl.\+c}} temporarily. At the time of writing one option to do that is deleting
 
 
 \begin{DoxyItemize}
@@ -149,7 +149,7 @@ We will analyze the ../../src/plugins/yajl/\+R\+E\+A\+D\+ME.md \char`\"{}\+Y\+A\
 
 \begin{DoxyCode}
 …
--- Include Plugin yajl
+-- Include plugin yajl
 …
 \end{DoxyCode}
 

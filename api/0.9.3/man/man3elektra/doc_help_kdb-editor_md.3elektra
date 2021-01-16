@@ -1,4 +1,4 @@
-.TH "doc_help_kdb-editor_md" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "doc_help_kdb-editor_md" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -57,9 +57,9 @@ The other strategies are implemented by the merge framework and are documented i
 \fC/sw/elektra/kdb/#0/current/namespace\fP: Specifies which default namespace should be used when setting a cascading name\&. By default the namespace is user, except \fCkdb\fP is used as root, then \fCsystem\fP is the default (\fCvalidate\fP strategy only)\&.
 .PP
 .PP
-To change the configuration in KDB below \fCuser/ini\fP with \fC/usr/bin/vim\fP, you would use:
+To change the configuration in KDB below \fCuser:/ini\fP with \fC/usr/bin/vim\fP, you would use:
 .br
- \fCkdb editor -e /usr/bin/vim user/ini\fP
+ \fCkdb editor -e /usr/bin/vim user:/ini\fP
 .PP
 Or set a new editor as default using:
 .br

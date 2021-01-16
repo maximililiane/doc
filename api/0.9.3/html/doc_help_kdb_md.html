@@ -52,11 +52,11 @@ $(function() {
 <p>External commands can be listed via:<br />
  <code>kdb list-tools</code></p>
 <p>Only a few commands are enough for daily use. We can retrieve a key by:<br />
- <code>kdb get user/key</code></p>
+ <code>kdb get user:/key</code></p>
 <p>We store a key permanently with a value given by:<br />
- <code>kdb set user/key value</code></p>
+ <code>kdb set user:/key value</code></p>
 <p>We list all available keys arranged below a key by:<br />
- <code>kdb ls user/key</code></p>
+ <code>kdb ls user:/key</code></p>
 <p>Documentation of plugins is available using the <a class="el" href="doc_help_kdb-plugin-info_md.html">kdb-plugin-info(1)</a> tool:<br />
  <code>kdb plugin-info</code></p>
 <p>Run <code>kdb plugin-list</code> for a list of plugins:<br />
@@ -99,7 +99,7 @@ $(function() {
 <p>It will read its format configuration from <code>/sw/elektra/kdb/#0/admin/format</code>.</p>
 <p>If you want different configuration per user or directories, you should prefer to use the <code>user</code> and <code>dir</code> namespaces. Then the correct configuration will be chosen automatically according to the current user or current working directory.</p>
 <p>Sometimes it is useful to start with default options, for example it is not possible to invert the <code>-q</code> option. In such situations one can simply select a non-existing profile, then <code>-q</code> works as usual:<br />
- <code>kdb mount -p nonexist -q /abc dir/abc</code></p>
+ <code>kdb mount -p nonexist -q /abc dir:/abc</code></p>
 <p>If <code>%</code> is used as profile name for <code>-p</code>, the <code>kdb</code> tools disables reading from <code>KDB</code> for their own configuration settings. Then, they only use command-line arguments.</p>
 <p>To explicitly state the default behavior, we use:<br />
  <code>-p current</code></p>
@@ -115,7 +115,7 @@ $(function() {
 <p>For every key found there, a new bookmark will be introduced.</p>
 <p>Bookmarks can be used to start key names by using <code>+</code> (plus) as first character. The string until the first <code>/</code> will be considered as bookmark.</p>
 <p>For example, if you set the bookmark kdb:</p>
-<div class="fragment"><div class="line">kdb set user/sw/elektra/kdb/#0/current/bookmarks</div><div class="line">kdb set user/sw/elektra/kdb/#0/current/bookmarks/kdb user/sw/elektra/kdb/#0/current</div></div><!-- fragment --><p>You are able to use:</p>
+<div class="fragment"><div class="line">kdb set user:/sw/elektra/kdb/#0/current/bookmarks</div><div class="line">kdb set user:/sw/elektra/kdb/#0/current/bookmarks/kdb user:/sw/elektra/kdb/#0/current</div></div><!-- fragment --><p>You are able to use:</p>
 <div class="fragment"><div class="line">kdb ls +kdb/bookmarks</div><div class="line">kdb get +kdb/format</div></div><!-- fragment --><ul>
 <li>0: successful.</li>
 <li>1: Invalid options passed.</li>

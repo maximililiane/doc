@@ -1,4 +1,4 @@
-.TH "highlevel" 3elektra "Fri Oct 30 2020" "Version 0.9.3" "Elektra" \" -*- nroff -*-
+.TH "highlevel" 3elektra "Sat Jan 16 2021" "Version 0.9.3" "Elektra" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -1004,7 +1004,7 @@ the unsigned short stored at the given array element
 .SS "Key * elektraHelpKey (Elektra * elektra)"
 
 .PP
-This function is only intended for use with code-generation\&. It looks for the key proc/elektra/gopts/help (absolute name) created by gopts, and returns it if found\&.
+This function is only intended for use with code-generation\&. It looks for the key proc:/elektra/gopts/help (absolute name) created by gopts, and returns it if found\&.
 .PP
 \fBParameters:\fP
 .RS 4
